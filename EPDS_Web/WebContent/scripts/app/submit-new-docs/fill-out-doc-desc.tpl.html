@@ -1,0 +1,43 @@
+<style>
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+
+<!-- Modal content-->
+<div class="modal-content" disableBackBtn>
+	<div class="modal-header modal-header-primary">
+		<h4 class="modal-title">{{headerText.doc_Type_Desc}}</h4>
+	</div>
+	<div class="modal-body custom-modal-bg-color">
+	 <form name="mainForm" data-ng-fab-form-options="customFormOptions">
+		<div>
+		<span><strong>Please briefly describe the document you are filing (e.g., objection to agency's 5 day letter, request for an extension).</strong></span>
+        <input type="text" 
+        class="form-control" 
+        data-ng-model="docTypeDescFiller" 
+        name="docTypeDescExt" 
+         data-ng-change="onInputChange(docTypeDescFiller)"
+		data-ng-pattern="regEx.typeOfDoc"
+		data-validation-msg-pattern="Invalid input format. Allowed characters are a-z, A-Z, 0-9,."
+		maxlength="250"
+		data-validation-msg-required="Please enter document description"
+         required >
+		<span data-ng-class="{'btn-warning': docTypeDescFiller.length >= 120, 
+			'btn-danger': docTypeDescFiller.length >= 250 }">
+			{{ 250 - docTypeDescFiller.length }} characters remaining</span>
+		</div>
+		</form>
+	</div>
+	<div class="modal-footer custom-modal-bg-color">
+		
+		<button  class="btn btn-success spacing-between-elements" 
+				data-ng-click="OK(docTypeDescFiller)"  
+				data-ng-disabled="docTypeDescFiller.length < 1 || docTypeDescFiller.length >= 250 || mainForm.$invalid || mainForm.$pending"
+				value="OK">OK</button>&nbsp;&nbsp; 
+				
+		<button  class="btn btn-danger spacing-between-elements" 
+				data-ng-click="cancel(docTypeDescFiller)" 
+				value="Cancel">Cancel</button>
+	</div>
+</div>

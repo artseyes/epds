@@ -1,0 +1,29 @@
+<div>
+	<a data-expand-collapse href="javascript:void(0)"
+		data-ng-show="protest.children_Protest_InfoList.length > 0"
+		id="{{protest.b_No}}" class="{{protest.b_No}}_sublist"> <i
+		class="glyphicon glyphicon-minus-sign"></i></a> <a
+		href="{{path}}/{{protest.role}}/{{protest.a_No}}">
+		{{protest.b_No}}</a> <span> {{protest.supplemental_B_Nos | sort}} </span>
+	<ul
+		data-ng-repeat='childProtestInfo in protest.children_Protest_InfoList'
+		class="supplemental-protest-list_{{protest.b_No}} hide-all-supp-protests">
+		<li class="list-unstyled">
+		<!-- <a data-expand-collapse
+			href="javascript:void(0)" id="{{childProtestInfo.b_No}}"
+			data-ng-show="childProtestInfo.supplemental_B_Nos.length > 0"
+			class="{{childProtestInfo.b_No}}_sublist"> <i
+				class="glyphicon glyphicon-plus-sign"></i></a> --> <a
+			href="{{path}}/{{childProtestInfo.role}}/{{childProtestInfo.a_No}}">
+				{{childProtestInfo.company_Name}} ,&nbsp;{{childProtestInfo.b_No}} </a>
+				
+				<span>{{childProtestInfo.supplemental_B_Nos | sort }} </span>
+			<!-- <ul
+				class="supplemental-protest-list_{{childProtestInfo.b_No}} hide-all-supp-protests"
+				style="display: none">
+				<li class="list-unstyled"><span>{{childProtestInfo.supplemental_B_Nos}}</span>
+				</li>
+			</ul> -->
+		</li>
+	</ul>
+</div>

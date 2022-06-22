@@ -1,0 +1,340 @@
+<div>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>{{typeOfProtestFiling}}</h1>
+
+            <ol class="breadcrumb" data-ng-show="role != 'GAO ADMIN'">
+                <li><a href="dashboard"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li><a href="case-docketsheet/{{urlEncodedANum}}">Case
+                    Docket Sheet</a></li>
+                <li class="active">{{typeOfProtestFiling}}</li>
+            </ol>
+            <ol class="breadcrumb" data-ng-show="role == 'GAO ADMIN'">
+                <li><a href="admin-dashboard/unassigned"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li><a
+                        href="admin-case-docketsheet/{{urlEncodedANum}}">Case
+                    Docket Sheet</a></li>
+                <li class="active">{{typeOfProtestFiling}}</li>
+            </ol>
+
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div>
+                        <table class="table table-bordered" role="presentation">
+                            <tbody>
+                            <tr>
+                                <td><strong>Party</strong></td>
+                                <td>&nbsp;{{protestInfo.company_Name}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CBCA Number</strong></td>
+                                <td>&nbsp;{{protestInfo.b_No}}</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Agency</strong></td>
+                                <td>&nbsp;{{protestInfo.agency_Name}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Solicitation Number</strong></td>
+                                <td>&nbsp;{{protestInfo.solicitation_No}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="loginbox" style="margin-top: 50px;"
+                     class="mainbox col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title"></div>
+
+                        </div>
+
+                        <div style="padding-top: 30px" class="panel-body">
+                            <div class="well well-lg" data-ng-show="typeOfProtest == 'entitlement'">
+                                Pursuant to 4 C.F.R. &#167; 21.8(e), if the agency decides to take corrective action
+                                in response to a protest, the protester may request that CBCA recommend that the agency
+                                pay the protester the reasonable costs
+                                of filing and pursuing the protest,
+                                including attorneys&#8217; fees and consultant and expert witness fees.
+
+                            </div>
+                            <div class="well well-lg" data-ng-show="typeOfProtest == 'cost-claim'">
+                                Pursuant to 4 C.F.R. &#167; 21.8(f), if CBCA recommends that the agency pay the protester
+                                the costs of filing and pursuing
+                                a protest and/or of bid or proposal preparation and the parties cannot reach agreement
+                                on the amount of costs,
+                                the protester may request that CBCA recommend the amount of costs that the protester
+                                should be reimbursed.
+                            </div>
+
+                            <form class="form-horizontal" role="form"
+                                  enctype="multipart/form-data" name="protestInfoForm">
+
+                                <div class="form-group col-sm-12 col-lg-12 col-md-12"
+                                     data-ng-show="protestInfo.roleId == '7' && typeOfProtest == 'reconsideration'">
+                                    <label for="selectFiler" class="requiredInputs" aria-label="Select Filer required">Select Filer </label>
+                                    <div>
+                                        <div>
+                                            <select id="selectFiler"
+                                                    data-ng-options="option as option.label for option in requestForRecon"
+                                                    data-ng-model="selectedFiler"
+                                                    class="form-control">
+                                                <option value="">Please Select Filer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12 col-lg-12 col-md-12" data-ng-show="protestInfo.roleId == '7'
+																									&& typeOfProtest == 'reconsideration' 
+																									&& selectedFiler.label == 'INTERVENOR'">
+                                    <label for="selectcompany" class="requiredInputs" aria-label="Select Intervenor Company Name required">
+                                        Select Intervenor Company Name</label>
+                                    <div>
+                                        <div>
+                                            <select id="selectcompany"
+                                                    data-ng-options="option as option for option in intervenorCompNameList"
+                                                    data-ng-model="selectedIntervenorComp"
+                                                    class="form-control">
+                                                <option value="">Select Intervenor Company Name</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12 col-lg-12 col-md-12" data-ng-show="protestInfo.roleId == '7'
+																							&& typeOfProtest == 'reconsideration' 
+																							&& selectedFiler.label == 'AGENCY'">
+                                    <label for="agencyname" class="requiredInputs" aria-label="Select Agency Name required">
+                                        Select Agency Name</label>
+                                    <div>
+                                        <div>
+                                            <select id="agencyname"
+                                                    data-ng-options="option as option for option in agencyNameList"
+                                                    data-ng-model="selectedAgencyName"
+                                                    class="form-control">
+                                                <option value="">Select Agency Name</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+                                                aria-label="Upload {{typeOfProtestFiling}} Document, {{uploadDocMessage}}, required">
+                                            Upload {{typeOfProtestFiling | titleCase}} Document ({{uploadDocMessage}})
+                                        </legend>
+                                        <div class="col-sm-12 col-lg-12 col-md-12"
+                                             data-flow-init="{
+											       					target: '/epds/upload-epds-documents',
+											       					singleFile: true,
+											       					}"
+                                             data-flow-file-added="assignSingleFileUploadFlowInstaceToScope( $file, $event, $flow )"
+                                             data-flow-complete="protestDocumentIsUploadedToServer($file, $event, $flow)">
+
+                                            <input type="button" data-flow-btn class="btn btn-info" value="Add File"
+                                                   data-ng-show="$flow.files.length == 0">
+                                            <input type="button" class="btn btn-warning" value="Cancel"
+                                                   data-ng-click="cancelPrimaryDocument($flow)"
+                                                   data-ng-show="!hideCancelButton">
+
+                                            <table class="table table-hover table-bordered table-striped"
+                                                   aria-label="List of documents to upload"
+                                                   id="protest-table" data-flow-transfers>
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Size</th>
+                                                    <th scope="col">Progress</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr data-ng-repeat="file in transfers">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{file.name}}</td>
+                                                    <td>{{file.size}}</td>
+                                                    <td>
+                                                        <div class="progress progress-striped"
+                                                             data-ng-class="{active: file.isUploading()}">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 aria-valuenow="{{file.progress() * 100}}"
+                                                                 aria-valuemin="0" aria-valuemax="100"
+                                                                 data-ng-style="{width: (file.progress() * 100) + '%'}">
+																<span class="sr-only">{{file.progress()}}%
+																	Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group" id="add-more-yes-or-no"
+                                     data-ng-show="protestDocumentAdded">
+                                    <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                            Do you want to Upload Associated Documents?
+                                        </legend>
+                                        <div class="col-sm-12 col-lg-12 col-md-12">
+                                            <label>
+                                                <input type="radio" name="attachAssociatedDoc"
+                                                       data-ng-model="form.attachAssociatedDoc" value="Y">
+                                                Yes
+                                            </label>
+                                            <label style="margin-left: 100px;">
+                                                <input type="radio" name="attachAssociatedDoc"
+                                                       data-ng-model="form.attachAssociatedDoc" value="N"
+                                                       data-validation-msg-required="Please choose one "
+                                                       data-ng-required="form.attachAssociatedDoc == null && protestDocumentAdded">
+                                                No
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="form-group" data-ng-show="form.attachAssociatedDoc == 'Y'">
+                                    <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+                                                aria-label="Upload Associated Documents, {{uploadDocMessage}}, required">
+                                            Upload Associated Documents ({{uploadDocMessage}})
+                                        </legend>
+                                        <div class="col-sm-12 col-lg-12 col-md-12" data-flow-init
+                                             data-flow-file-added="assignMultipleFileUploadFlowInstaceToScope( $file, $event, $flow)"
+                                             data-flow-complete="associatedDocumentsIsUploadedToServer($file, $event, $flow)">
+
+                                            <input type="button" data-flow-btn class="btn btn-info" value="Add Files">
+                                            <input type="button" class="btn btn-warning" value="Cancel"
+                                                   data-ng-click="cancelAssociatedDocuments($flow)"
+                                                   data-ng-show="!hideCancelButton">
+
+                                            <table class="table table-hover table-bordered table-striped"
+                                                   aria-label="List of associated documents to upload"
+                                                   id="associated-documents-table" data-flow-transfers>
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Size</th>
+                                                    <th scope="col">Progress</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr data-ng-repeat="file in transfers | orderBy: 'name'">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{file.name}}</td>
+                                                    <td>{{file.size}}</td>
+                                                    <td>
+                                                        <div class="progress progress-striped"
+                                                             data-ng-class="{active: file.isUploading()}">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 aria-valuenow="{{file.progress() * 100}}"
+                                                                 aria-valuemin="0" aria-valuemax="100"
+                                                                 data-ng-style="{width: (file.progress() * 100) + '%'}">
+																<span class="sr-only">{{file.progress()}}%
+																	Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <input type="button" class="btn btn-danger"
+                                                                   aria-label="{{file.name}}"
+                                                                   value="Remove" data-ng-click="file.cancel()"
+                                                                   data-ng-show="file.error || !file.isComplete()"/>
+                                                            <input type="button" class="btn btn-info"
+                                                                   aria-label="{{file.name}}"
+                                                                   value="Retry" data-ng-click="file.retry()"
+                                                                   data-ng-show="file.error"/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="alert alert-danger" style="margin-top: 100px;"
+                                     data-ng-show="fileUploadErrors.length > 0">
+
+                                    <p>The following files were removed from the upload queue. </p>
+                                    <hr>
+                                    <ol>
+                                        <li>
+                                            <ul class="animated fadeInRight">
+                                                <li data-ng-repeat="errors in fileUploadErrors track by $index"><i>{{errors.fileError}}</i>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="form-group">
+                                    <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                            {{docConfidentialLabel}}
+                                        </legend>
+                                        <div class="col-sm-10 col-lg-9 col-md-9" style="margin-left: 200px;">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="isDocConfidential"
+                                                       data-ng-model="form.isDocConfidential" value="Y">
+                                                Yes
+                                            </label>
+                                            <label class="radio-inline" style="margin-left: 100px;">
+                                                <input type="radio" name="isDocConfidential" value="N"
+                                                       data-validate-on="blur"
+                                                       data-ng-model="form.isDocConfidential"
+                                                       data-validation-msg-required="Please choose one  "
+                                                       data-ng-required="form.isDocConfidential == null">
+                                                No
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comments" class="col-sm-12 col-lg-12 col-md-12">Comments</label>
+                                    <div class="col-sm-12 col-lg-12 col-md-12">
+										<textarea id="comments" name="comments" class="form-control input-lg"
+                                                  data-ng-trim="true"
+                                                  data-ng-model="form.comments"
+                                                  maxlength="251" data-char-limit="251"></textarea>
+                                        <span data-ng-class="{'btn-warning': form.comments.length >= 120,
+														'btn-danger': form.comments.length > 250 }">
+														{{ 251 - form.comments.length }} characters remaining</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+                                    <div class="col-sm-10 col-lg-9 col-md-9">
+                                        <input type="submit" value="Submit" class="btn btn-success"
+                                               data-ng-click="registerProtestInfo(protestInfoForm.$valid,form.attachAssociatedDoc,selectedFiler)"
+                                               data-ng-disabled="protestInfoForm.$invalid || !protestInfoForm.$dirty ||
+                                                    !(singleFileUpload && singleFileUpload.files.length > 0) ||
+                                                    !(form.attachAssociatedDoc == 'N' || multipleFileUpload && multipleFileUpload.files.length > 0)">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" value="${typeOfProtest}" id="typeOfProtest">
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->

@@ -1,0 +1,252 @@
+<!-- Right side column. Contains the navbar and content of the page -->
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>Parties</h1>
+		
+		<ol class="breadcrumb" data-ng-show="role != 'GAO ADMIN'">
+				<li><a href="dashboard" id="focus_start"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+				<li><a href="case-docketsheet/{{urlEncodedANum}}">Case Docket Sheet</a></li>
+				<li class="active">Parties</li>
+			</ol>
+			<ol class="breadcrumb" data-ng-show="role == 'GAO ADMIN'">
+				<li><a href="admin-dashboard/unassigned"><i class="fa fa-dashboard"></i>
+						Dashboard</a></li>
+				<li><a href="admin-case-docketsheet/{{urlEncodedANum}}">Case
+						Docket Sheet</a></li>
+				<li class="active">Parties</li>
+			</ol>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		
+		<div id="headerInfo">
+		 <headers-info protest-info="protestInfo" attorney-info="attorneyInfo"></headers-info>
+		 
+		 </div>
+          
+          
+		<div class="box-body table-responsive col-lg-12 col-md-12 col-sm-12"
+			id="partiesView">
+			<div>
+				<button class="btn-info pull-right" data-ng-show="(role == 'GAO ADMIN')" data-ng-click="addIntervenor()" style="margin-bottom:  10px;">Add
+					Intervenor</button>
+			</div>
+			<table id="view_ManageParties"
+				   aria-label="Party Information"
+				   class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Party</th>
+						<th scope="col">Information</th>
+					</tr>
+				</thead>
+				<tbody>
+								<!-- Protester -->
+
+					<!-- diplay protester parties list code starts  -->
+					<tr>
+						<td>
+							<div>
+								<strong>PROTESTER&nbsp;&nbsp;(&nbsp;{{protestInfo.company_Name}}&nbsp;)</strong>  
+								
+								<button name="editProtester"
+										class="btn btn-sm btn-info pull-right editButton"
+										id="editProtester"
+										aria-label="Edit Protester Information"
+										data-ng-click="editPartyInfo('protester',protestInfo)"
+										data-ng-show="(role == 'GAO ADMIN')">
+										<i class="fa fa-edit"></i> Edit
+							   </button>
+								
+								<br> <span>{{protestInfo.company_address1}}&nbsp;<br>
+										<span data-ng-if="protestInfo.company_address1">{{protestInfo.company_address2}}&nbsp;<br></span>
+									&nbsp;{{protestInfo.company_City}}&nbsp;{{protestInfo.company_State}}&nbsp;&nbsp;{{protestInfo.company_Zipcode}}<br>
+									&nbsp;{{protestInfo.company_Country}}
+								</span>
+							</div>
+						</td>
+						<td>
+						<parties-info 
+							protest-info="protestInfo"
+							parties-list ="protester_parties_list"
+							is-view-only="isViewOnly"
+							user-role="role"
+							is-orphan-intervenor="N"
+							party-type = "P"
+							logged-in-user-info="loggedInUserInfo"
+							template-url="scripts/app/parties/vendorPartiesInfo.tpl.html">
+						</parties-info>
+						</td>
+					</tr>
+					<!-- display protester parties list code ends  -->
+					
+					
+					
+					
+								<!-- Intervenor -->					
+					
+					<!-- diplay intervenor parties list code starts  -->
+					<tr data-ng-repeat="intervenorInfo in listOfIntervenorList">
+					<td style="word-wrap: break-word;min-width: 20px;max-width: 20px;white-space:normal;">
+						<div>
+							<strong>INTERVENOR &nbsp;&nbsp;(&nbsp;{{intervenorInfo[0].intervenor_Company_Name}}&nbsp;)</strong>
+							<button name="editProtester"
+										class="btn btn-sm btn-info pull-right editButton"
+										id="editProtester"
+										aria-label="Edit Intervenor Information"
+										data-ng-click="editPartyInfo('intervenor',intervenorInfo)"
+										data-ng-show="(role == 'GAO ADMIN')">
+										<i class="fa fa-edit"></i>&nbsp; Edit
+							   </button>
+							<br> 
+							{{intervenorInfo[0].intervenor_Company_Address}}
+							
+							<!-- Remove Intervenor Access -->
+						<button name="removeIntervenor"
+								class="btn btn-sm btn-danger pull-right deleteButton"
+								id="removeIntervenor"
+								data-ng-click="removeIntervenorAccessFromThisCase(intervenorInfo)"
+								data-ng-show="(role == 'GAO ADMIN')">
+								<i class="fa fa-times"></i>&nbsp; Remove Access
+						</button>
+						</div>
+					</td>
+					
+					<td>
+					
+					<parties-info 
+							protest-info="protestInfo"
+							parties-list ="intervenorInfo"
+							is-view-only="isViewOnly"
+							user-role="role"
+							is-orphan-intervenor="N"
+							logged-in-user-info="loggedInUserInfo"
+							party-type = "I"
+							intervenor-company-name = "intervenorInfo[0].intervenor_Company_Name"
+							intervenor-company-addr = "intervenorInfo[0].intervenor_Company_Address"
+							template-url="scripts/app/parties/vendorPartiesInfo.tpl.html">
+					</parties-info>
+					</td>
+					</tr>
+					
+					<!-- display intervenor parties list code ends  -->
+					
+					<!-- diplay orphan intervenor names  -->
+					<tr data-ng-repeat="orphanIntervenorInfo in orphanIntComDetailList" data-ng-show="orphanIntComDetailList.length > 0">
+					<td style="word-wrap: break-word;min-width: 20px;max-width: 20px;white-space:normal;">
+						<div>
+							<strong>INTERVENOR &nbsp;&nbsp;(&nbsp;{{orphanIntervenorInfo.companyName}}&nbsp;)</strong>
+							<button name="editintervenor"
+										class="btn btn-sm btn-info pull-right editButton"
+										id="editintervenor"
+										aria-label="Edit Intervenor Information"
+										data-ng-click="editPartyInfo('intervenor',orphanIntervenorInfo)"
+										data-ng-show="(role == 'GAO ADMIN')">
+										<i class="fa fa-edit"></i>&nbsp; Edit
+							   </button>
+							<br> 
+							{{orphanIntervenorInfo.companyAddress}}
+							
+							<!-- Remove Intervenor Access -->
+						<button name="removeIntervenor"
+								class="btn btn-sm btn-danger pull-right deleteButton"
+								id="removeIntervenor"
+								data-ng-click="removeIntervenorAccessFromThisCase(orphanIntervenorInfo)"
+								data-ng-show="(role == 'GAO ADMIN')">
+								<i class="fa fa-times"></i>&nbsp; Remove Access
+						</button>
+						
+						</div>
+					</td>
+					<td>
+					<parties-info 
+							protest-info="protestInfo"
+							is-view-only="isViewOnly"
+							user-role="role"
+							is-orphan-intervenor="Y"
+							logged-in-user-info="loggedInUserInfo"
+							intervenor-company-name = "orphanIntervenorInfo.companyName"
+							intervenor-company-addr = "orphanIntervenorInfo.companyAddress"
+							party-type = "I"
+							template-url="scripts/app/parties/vendorPartiesInfo.tpl.html">
+					</parties-info>
+					</td>
+					</tr>
+					
+					<!-- diplay intervenor company names list code ends  -->
+
+
+
+									<!-- Agency Representatives -->
+
+					<!-- display Agency parties list code starts  -->
+					<tr>
+					<td style="word-wrap: break-word;min-width: 20px;max-width: 20px;white-space:normal;">
+					<strong>{{protestInfo.agency_Name}}</strong>
+					
+					<div  data-ng-show = "canPrimaryAgencyAddAgencyBtnBeDisplayed">
+											
+											
+											
+					  <!-- Button for adding Agency Representative: display only for Agency Admin or CBCA Admin -->
+					
+						<button name="addRep" class="btn btn-sm btn-primary"
+							id="addRep"
+							data-ng-click="addPartiesToTheCase('Assign Agency Representative','A','Y','Y')">
+							<i  class="fa fa-plus"></i> Add Agency Representative
+						</button>
+					</div>
+					</td>
+					<td>
+					
+					<parties-info 
+							protest-info="protestInfo"
+							parties-list ="primary_agency_list"
+							is-view-only="isViewOnly"
+							user-role="role"
+							logged-in-user-info="loggedInUserInfo"
+							is-orphan-intervenor="N"
+							party-type = "A"
+							template-url="scripts/app/parties/agencyPartiesInfo.tpl.html">
+					</parties-info>
+					</td>
+					</tr>
+					<!-- diplay Agency parties list code ends  -->
+					
+					<!-- display Agency parties list code starts  -->
+					<tr>
+					
+					<td style="word-wrap: break-word;min-width: 20px;max-width: 20px;white-space:normal;">
+					<strong>{{secondary_agency_list[0].firm_Name}}<span data-ng-if="secondary_agency_list.length > 0">&nbsp;&nbsp;(Secondary Agency)</span></strong>
+					
+						<!-- Button for adding Secondary Agency Representative -->
+						<button data-ng-if = "canSecAgencyAddAgencyBtnBeDisplayed" name="addRep" 
+						    class="btn btn-sm btn-primary pull-left"
+							id="addRep"
+							data-ng-click="addPartiesToTheCase('Assign Agency Representative','SA','Y','Y')">
+							<i  class="fa fa-plus"></i> Add Secondary Agency
+						</button>
+						
+					</td>
+					<td>
+					<parties-info 
+							protest-info="protestInfo"
+							parties-list ="secondary_agency_list"
+							is-view-only="isViewOnly"
+							user-role="role"
+							logged-in-user-info="loggedInUserInfo"
+							is-orphan-intervenor="N"
+							party-type = "SA"
+							template-url="scripts/app/parties/agencyPartiesInfo.tpl.html">
+					</parties-info>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<!-- /.content -->
+</aside>
+<!-- /.right-side -->

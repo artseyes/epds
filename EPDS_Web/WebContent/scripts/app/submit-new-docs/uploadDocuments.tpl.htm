@@ -1,0 +1,272 @@
+<fieldset class="box box-primary">
+    <legend class="visually-hidden">{{docInfo.headerText}}</legend>
+    <div class="box-header with-border">
+        <h3 class="box-title">{{docInfo.headerText}}</h3>
+        <div class="box-tools pull-right"></div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="submitnewDocForm" role="form"
+                      enctype="multipart/form-data">
+
+                    <div class="form-group" data-ng-if="docInfo.docTypeId == '160' || docInfo.docTypeId == '161'">
+                        <label class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Type
+                            of document </label>
+                        <div class="col-sm-12 col-lg-12 col-md-12" id="tiera">
+                            <div>
+                                <select
+                                        data-ng-options="doc_Info as doc_Info.doc_Type_Desc for doc_Info in doc_InfoList | orderBy: 'filing_Order' track by doc_Info.doc_Type_Id "
+                                        data-ng-model="selectedOption" class="form-control"
+                                        data-ng-change="onSelectChange(selectedOption)">
+                                    <!-- <option value="">Please Select Document Type</option> -->
+                                </select>
+                            </div>
+
+                            <div data-ng-show="showGenerateDocTempButton">
+                                <input name="generateDocument" class="btn btn-success"
+                                       type="button" id="generateDocument"
+                                       data-ng-click="generateTemplateBasedOnDocumentType(selectedOption)"
+                                       style="margin-left: 0px; margin-top: 10px;"
+                                       value="{{generateTempBtnText}}"/>
+                            </div>
+
+                            <div
+                                    data-ng-show="showGenerateDocTempButton
+												&& !deleteTempPdfFile 
+												&& htmlContent != null">
+
+                                <!-- Download Temp Pdf -->
+                                <a href="javascript:void(0)"
+                                   data-ng-click="downloadTempPdf(selectedOption)"> <i
+                                        class="fa fa-file-pdf-o fg-text-red"></i>
+                                    &nbsp;&nbsp;{{selectedOption.doc_Type_Desc | camelCase}}.pdf
+                                </a>
+
+                                <!-- Delete Temp Pdf -->
+                                <a href="javascript:void(0)" data-ng-click="deleteTempPdf()"
+                                   data-uib-popover="delete file"
+                                   data-popover-trigger="'mouseenter'"
+                                   data-popover-placement="right"> <i class="fa fa-remove fg-text-red"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div data-ng-show="showGenerateDocTempButton && (generateTempBtnText != 'Edit Template')">
+                        <h4><strong>OR</strong></h4>
+                        <hr>
+                    </div>
+                    <div class="form-group" data-ng-show="generateTempBtnText != 'Edit Template'">
+						<fieldset class="col-sm-12 col-lg-12 col-md-12">
+							<legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+									aria-label="Upload Document, {{uploadDocMessage}}, required">
+								Upload Document ({{uploadDocMessage}})
+							</legend>
+							<div class="col-sm-12 col-lg-12 col-md-12"
+								 data-flow-init="{
+					       					target: '/epds/upload-epds-documents',
+					       					singleFile: true,
+					       					}"
+								 data-flow-file-added="assignSingleFileUploadFlowInstaceToScope( $file, $event, $flow )"
+								 data-flow-complete="primaryDocumentIsUploadedToServer($file, $event, $flow)"
+								 data-flow-files-added="primaryDocAdded( $files, $event, $flow)"
+								 data-flow-error="fileUploadError( $file, $message, $flow )"
+								 data-flow-file-retry="fileUploadRetry( $file, $flow )"
+								 data-flow-file-success="fileUploadSuccess( $file, $message, $flow )"
+								 data-flow-upload-started="fileUploadStarted( $file, $message, $flow )">
+
+								<input type="button" data-flow-btn class="btn btn-info" value="Add File"
+									   data-ng-show="$flow.files.length == 0">
+								<input type="button" class="btn btn-warning" value="Cancel"
+									   data-ng-click="cancelPrimaryDocument($flow)"
+									   data-ng-show="!hideCancelButton && !fileUploadInProgress">
+
+								<table class="table table-hover table-bordered table-striped"
+									   aria-label="List of documents to upload"
+									   id="primary-document-table" data-flow-transfers>
+									<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Size</th>
+										<th scope="col">Progress</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr data-ng-repeat="file in transfers">
+										<td>{{$index+1}}</td>
+										<td>{{file.name}}</td>
+										<td>{{file.size}}</td>
+										<td>
+											<div class="progress progress-striped"
+												 data-ng-class="{active: file.isUploading()}">
+												<div class="progress-bar" role="progressbar"
+													 aria-valuenow="{{file.progress() * 100}}" aria-valuemin="0"
+													 aria-valuemax="100"
+													 data-ng-style="{width: (file.progress() * 100) + '%'}">
+													<span class="sr-only">{{file.progress()}}% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="btn-group">
+												<input type="button" class="btn btn-danger"
+													   aria-label="{{file.name}}"
+													   value="Remove" data-ng-click="file.cancel()"
+													   data-ng-show="file.error || !file.isComplete()"/>
+												<input type="button" class="btn btn-info"
+													   aria-label="{{file.name}}"
+													   value="Retry" data-ng-click="file.retry()"
+													   data-ng-show="file.error"/>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</fieldset>
+                    </div>
+
+                    <div class="form-group" id="add-more-yes-or-no"
+                         data-ng-show="primaryDocumentAdded
+					&& requestType != 'replaceDoc'
+					&& docInfo.docTypeId != '160'
+					&& docInfo.docTypeId != '161'
+					&& docInfo.docTypeId != '0'">
+						<fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+							<legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs" style="margin-top: 10px;">
+								Do you want to Upload Associated Documents?
+							</legend>
+							<div class="col-sm-12 col-md-12 col-lg-12">
+								<label>
+									<input type="radio" name="attachAssociatedDoc"
+											   data-ng-model="form.attachAssociatedDoc" value="Y"\>
+									Yes
+								</label>
+								<label style="margin-left: 100px;">
+									<input type="radio" name="attachAssociatedDoc"
+										data-ng-model="form.attachAssociatedDoc"
+										value="N"
+										data-validation-msg-required="Please choose one "
+										data-ng-required="form.attachAssociatedDoc == null && protestDocumentAdded">
+									No
+								</label>
+							</div>
+						</fieldset>
+                    </div>
+
+                    <div class="form-group"
+                         data-ng-show="form.attachAssociatedDoc == 'Y'">
+						<fieldset class="col-sm-12 col-lg-12 col-md-12">
+							<legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+									aria-label="Upload Associated Documents, {{uploadDocMessage}}, required">
+								Upload Associated Documents ({{uploadDocMessage}})
+							</legend>
+							<div class="col-sm-12 col-lg-12 col-md-12" data-flow-init
+								 data-flow-file-added="assignMultipleFileUploadFlowInstaceToScope( $file, $event, $flow )"
+								 data-flow-complete="associatedDocumentsIsUploadedToServer($file, $event, $flow)"
+								 data-flow-files-added="associatedDocumentsAreAdded( $files, $event, $flow)"
+								 data-flow-error="fileUploadError( $file, $message, $flow )"
+								 data-flow-file-retry="fileUploadRetry( $file, $flow )"
+								 data-flow-file-success="fileUploadSuccess( $file, $message, $flow )"
+								 data-flow-upload-started="fileUploadStarted( $file, $message, $flow )">
+
+								<input type="button" data-flow-btn class="btn btn-info" value="Add Files">
+								<input type="button" class="btn btn-warning" value="Cancel"
+									   data-ng-click="cancelAssociatedDocuments($flow)"
+									   data-ng-show="!hideCancelButton && !fileUploadInProgress">
+
+								<table class="table table-hover table-bordered table-striped"
+									   aria-label="List of associated documents to upload"
+									   id="associated-documents-table" data-flow-transfers>
+									<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Size</th>
+										<th scope="col">Progress</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr data-ng-repeat="file in transfers | orderBy: 'name'">
+										<td>{{$index+1}}</td>
+										<td>{{file.name}}</td>
+										<td>{{file.size}}</td>
+										<td>
+											<div class="progress progress-striped"
+												 data-ng-class="{active: file.isUploading()}">
+												<div class="progress-bar" role="progressbar"
+													 aria-valuenow="{{file.progress() * 100}}" aria-valuemin="0"
+													 aria-valuemax="100"
+													 data-ng-style="{width: (file.progress() * 100) + '%'}">
+													<span class="sr-only">{{file.progress()}}% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="btn-group">
+												<input type="button" class="btn btn-danger"
+													   aria-label="{{file.name}}"
+													   value="Remove" data-ng-click="file.cancel()"
+													   data-ng-show="file.error || !file.isComplete()"/>
+												<input type="button" class="btn btn-info"
+													   aria-label="{{file.name}}"
+													   value="Retry" data-ng-click="file.retry()"
+													   data-ng-show="file.error"/>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</fieldset>
+                    </div>
+                    <div class="alert alert-danger" style="margin-top: 100px;"
+                         data-ng-show="fileUploadErrors.length > 0">
+
+                        <p>The following files were removed from the upload queue.</p>
+                        <hr>
+                        <ol>
+                            <li>
+                                <ul class="animated fadeInRight">
+                                    <li data-ng-repeat="errors in fileUploadErrors track by $index"><i>{{errors.fileError}}</i>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;"
+                         data-ng-show="requestType != 'replaceDoc'">
+                        <label for="comments" class="col-sm-12 col-lg-12 col-md-12">Comments:</label>
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+							<textarea id="comments" name="comments" class="form-control"
+                                      data-ng-trim="true" data-ng-model="form.comments"
+                                      data-ng-pattern="regEx.comments"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+                        <div class="col-sm-10 col-lg-9 col-md-9">
+                            <input type="submit" value="Submit"
+                                   data-ng-click="submitRequest(docInfo,form.attachAssociatedDoc,form.comments,submitnewDocForm)"
+                                   class="btn btn-success" style="margin-top: 10px;"
+							data-ng-disabled="generateTempBtnText != 'Edit Template' &&
+                                                    (!(singleFileUpload && singleFileUpload.files.length > 0) ||
+                                                    !(form.attachAssociatedDoc == 'N' || multipleFileUpload && multipleFileUpload.files.length > 0))">
+
+							<input type="button" data-ng-show="showCancelBtn == 'Y'" value="Cancel"
+                                data-ng-click="cancel()" class="btn btn-danger"
+                                style="margin-top: 10px;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.box-body -->
+</fieldset>

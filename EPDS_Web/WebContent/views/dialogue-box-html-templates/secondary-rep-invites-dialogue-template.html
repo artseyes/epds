@@ -1,0 +1,58 @@
+<style>
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+
+<!-- Modal -->
+      <div class="modal-content" modaldraggable disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="fa fa-reply"></i> Invitation
+            </h4>
+         </div>
+         <div class="modal-body">
+            <div>You have been invited to join </div>
+				<table id="invitationRequests" class="table table-bordered table-striped"
+					   aria-label="Accept invitation">
+					<thead>
+						<tr>
+							<th scope="col">Case #</th>
+							<th scope="col">Protester</th>
+							<th scope="col">Do you accept this invitation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="primaryInfo in primaryRepInvitationList">
+							<td>
+							<span data-ng-show="primaryInfo.b_No != null">{{primaryInfo.b_No}}
+								<span>{{primaryInfo.consolidateBNumbers}}</span>
+							</span>
+							<span data-ng-show="primaryInfo.b_No == null">{{primaryInfo.a_No}}</span>
+							</td>
+							<td>{{primaryInfo.protesterCompanyName}}</td>
+							<td>
+							<div class="buttoncls">
+							<button class="btn btn-success" data-ng-click="respondToPrimaryInvites($index,'Y',primaryInfo.a_No,primaryInfo.protesterCompanyName)" id = "{{$index}} " value="{{$index}}">Yes</button>&nbsp;&nbsp;
+							<button class="btn btn-danger" data-ng-click="respondToPrimaryInvites($index,'N',primaryInfo.a_No,primaryInfo.protesterCompanyName)" id = "{{$index}}" value="{{$index}}">No</button>
+							</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+         </div>
+      </div><!-- /.modal-content -->

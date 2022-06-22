@@ -1,0 +1,154 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html>
+<html data-ng-app="mainApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Document Info View</title>
+<!-- styles -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../styles/custom.css">
+<script type="text/javascript" src="../vendor/angular/angular.js"></script>
+<script type="text/javascript" src="../vendor/angular/angular-route.js"></script>
+<script type="text/javascript" src="../data.json"></script>
+<script type="text/javascript" src="../script.js"></script>
+<script type="text/javascript" src="../filters/angular-filter.min.js"></script>
+<script type="text/javascript" src="../scripts/angular-local-storage.js"></script>
+<script type="text/javascript" src="../scripts/angular-cookies.js"></script>
+
+<style>
+.table th, .table td {
+	border-top: none !important;
+}
+
+</style>
+
+</head>
+<body class="skin-blue">
+	<header class="header">
+		<a href="javascript:void(0)" class="logo"> <img
+			src="../img/GAO_logo.png">
+		</a>
+		<nav class="navbar navbar-static-top" role="navigation"></nav>
+	</header>
+
+	<div class="wrapper row-offcanvas row-offcanvas-left"
+		data-ng-controller="fileInfoViewController">
+		<aside class="content-wrapper">
+			<section class="content-header">
+				<h1>Document View</h1>
+			</section>
+			<section class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<span>Case Information</span>
+							</div>
+
+							<!-- /.box-header -->
+							<div class="panel-body">
+								<table class="table" role="presentation">
+									<tbody>
+										<tr>
+											<td><strong>Protester</strong></td>
+											<td>&nbsp;{{protestInfo.company_Name}}</td>
+										</tr>
+										<tr>
+											<td><strong>B-Number</strong></td>
+											<td>&nbsp;{{protestInfo.b_No}}</td>
+										</tr>
+
+										<tr>
+											<td><strong>Agency</strong></td>
+											<td>&nbsp;{{protestInfo.agency_Name}}</td>
+										</tr>
+										<tr>
+											<td><strong>Contract Number</strong></td>
+											<td>&nbsp;{{protestInfo.solicitation_No}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-lg-8 col-sm-8 ">
+						<div class="panel panel-success">
+							<div class="panel-heading with-border">
+								<span>{{type_Of_Doc}}</span>
+							</div>
+							<!-- /.box-header -->
+							<div class="panel-body">
+								<table class="table" role="presentation">
+									<tbody>
+										<tr>
+											<td>Primary Document</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr data-ng-repeat="file_Info in fileInfoList | filterBy: ['file_identifier']: 'P'">
+											<td></td>
+											<td></td>
+											<td>
+											&nbsp;&nbsp; <a href="../..{{getRelativePathFromServerFilePath(file_Info.file_Path)}}">
+																		{{getFileName(file_Info.file_Path)}}</a>		
+											</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>Associated Documents</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr data-ng-repeat="file_Info in fileInfoList | filterBy: ['file_identifier']: 'A'">
+											<td></td>
+											<td></td>
+											<td>
+											&nbsp;&nbsp; <a href="../..{{getRelativePathFromServerFilePath(file_Info.file_Path)}}">
+																		{{getFileName(file_Info.file_Path)}}</a>			
+											</td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+							<div class="panel-footer col-sm-12">
+								<table class="table" role="presentation">
+									<tbody>
+										<tr>
+											<td><strong>Protected</strong></td>
+											<td></td>
+											<td><span><strong>&nbsp;{{fileInfoList[0].is_Confidential}}&nbsp;</strong></span>
+											</td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- box-footer -->
+						</div>
+						<!-- /.box -->
+					</div>
+				</div>
+				</div>
+		</section>
+		<!-- /.content -->
+		</aside>
+		<!-- /.right-side -->
+	</div>
+</body>
+</html>

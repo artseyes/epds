@@ -1,0 +1,14 @@
+<div class="modal-content">
+	<div class="modal-header modal-header-danger">
+		<h4>
+			<i class="glyphicon glyphicon-info-sign">
+			</i>&nbsp;&nbsp;Error
+		</h4>
+	</div>
+	<div class="modal-body">
+		<p>The system is experiencing technical difficulties, please try again in a moment.&nbsp;&nbsp;If the issue persists, please contact CBCA at 202-512-5436 or protests@cbca.gov.</p>
+		<div data-ng-if="vm.error">
+		<pre>{{vm.error | json}}</pre>
+		</div>
+	</div>
+</div>

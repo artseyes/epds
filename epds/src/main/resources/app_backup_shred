@@ -1,0 +1,18 @@
+
+backupDir="/app/backups"
+
+# Get list of all files in directory structure older than 120 mins
+listoffiles=`find $backupDir -depth -type f -mmin +120`
+# Then loop over and shred each file
+for i in $listoffiles; do
+  ~/bin/epds_shred "$i"
+done
+#Once clean up is done delete all empty directories
+listofemptydirs=`gfind $backupDir -depth -type d -empty | grep -v "/app/backups$"`
+while [ -n "$listofemptydirs" ]; do
+  # Then loop over and shred each file
+  for i in $listofemptydirs; do
+    ~/bin/epds_shred "$i"
+  done
+  listofemptydirs=`gfind $backupDir -depth -type d -empty | grep -v "/app/backups$"`
+done

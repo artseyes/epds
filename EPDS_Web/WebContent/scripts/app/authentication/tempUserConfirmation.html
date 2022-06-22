@@ -1,0 +1,155 @@
+<div class="modal-content">
+    <div class="modal-header modal-header-info">
+        <h4 class="modal-title">
+            <i class="glyphicon glyphicon-thumbs-up"></i> <span>{{headerText}}</span>
+        </h4>
+    </div>
+
+    <div class="modal-body">
+        <form id="register-form" data-ng-fab-form-options="customFormOptions"
+              name="registrationForm">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <div data-ng-show="role != '8'">
+                        <div class="form-group">
+                            <label for="password" class="requiredInputs">New Password</label>
+							<input id="password" name="password" type="password" class="form-control"
+                                data-ng-model-options="{ updateOn: 'blur' }"
+                                data-ng-focus="showSuggestions = true"
+                                data-ng-blur="showSuggestions = false"
+                                data-ng-model="form.password"
+                                data-validation-msg-required="Password is not valid"
+                                password
+                                required>
+                            <!-- complex-password  -->
+                        </div>
+                        <div class="divPwComplexityRequirements"
+                             ng-show="showSuggestions && listOfErrorMessages.length == null"><br>
+                            <em>Your password must include at least 12, but no more than 24 alphanumeric and special
+                                characters with no spaces, including at least:</em><br>
+                            <ul id="ulPwComplexityRequirements" class="animated fadeInRight"
+                                title="password complexity requirements">
+                                <li id="liHasLength"><i>12-24 characters</i></li>
+                                <li id="liHasNumber"><i>One number</i></li>
+                                <li id="liHasUpper"><i>One uppercase letter</i></li>
+                                <li id="liHasLower"><i>One lowercase letter</i></li>
+                                <li id="liHasSpecialChar">One special character ! # $ - % = + : ; ? ~ *</li>
+                                <li style="display: none;" id="liHasWhiteSpace"><i>No spaces</i></li>
+                                <li style="color: Black;">Dictionary words may not be used in passwords</li>
+                                <li style="color: Black;">The previous 10 passwords may not be re-used</li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-danger" ng-show="listOfErrorMessages.length >= 0">
+                            <ul class="animated fadeInRight">
+                                <li data-ng-repeat="errors in listOfErrorMessages"><i>{{errors}}</i></li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password" class="requiredInputs">Confirm Password</label>
+							<input id="confirm_password" type="password" class="form-control"
+                                data-ng-model="form.retypepassword"
+                                data-ng-disabled="registrationForm.password.$pending || registrationForm.password.$invalid"
+                                data-ng-fab-match="form.password" data-validate-on="blur" required>
+                            <!-- data-ng-paste="$event.preventDefault()" -->
+                        </div>
+                    </div>
+                    <div data-ng-show="role != '1' && role != '8'">
+
+                        <div class="alert alert-info">
+                            <strong>Warning!</strong>
+                            <p>
+                                Please select and answer three distinct questions from the selections below. This
+                                information will be used to validate your identity if you forget your password.
+                                Each question may only be used once. For additional assistance, select the
+                                <a id="btnHelpSecurityInfo3" class="BlackButton" style="color: #696969"
+                                   data-ng-click="securityQuestionHelp()">Help ?</a> above.
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sq1" class="requiredInputs">Security Question 1</label>
+                            <select id="sq1" class="form-control"
+                                    data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id "
+                                    data-ng-model="selectedOption1"
+                                    data-ng-change="onQuestion1Selected(selectedOption1,selectedOption2,selectedOption3)"></select>
+                        </div>
+                        <div class="form-group">
+							<label for="sq1a">Answer 1</label>
+                            <input id="sq1a" type="text"
+                                   data-ng-model="form.answer1"
+                                   class="form-control"
+                                   data-lowercase
+                                   placeholder="" data-ng-required="role != '1' && role != '8'">
+                        </div>
+                        <div class="form-group">
+                            <label for="sq2" class="requiredInputs">Security Question 2</label>
+                            <select id="sq2" class="form-control"
+                                    data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id "
+                                    data-ng-model="selectedOption2"
+                                    data-ng-change="onQuestion2Selected(selectedOption1,selectedOption2,selectedOption3)"></select>
+                        </div>
+                        <div class="form-group">
+							<label for="sq2a">Answer 2</label>
+                            <input id="sq2a" type="text" class="form-control"
+                                   data-ng-model="form.answer2"
+                                   data-lowercase
+                                   placeholder=" " data-ng-required="role != '1' && role != '8'">
+                        </div>
+                        <div class="form-group">
+                            <label for="sq3" class="requiredInputs">Security Question 3</label>
+                            <select id="sq3" class="form-control"
+                                    data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id"
+                                    data-ng-model="selectedOption3"
+                                    data-ng-change="onQuestion3Selected(selectedOption1,selectedOption2,selectedOption3)"></select>
+                        </div>
+                        <div class="form-group">
+							<label for="sq3a">Answer 3</label>
+                            <input id="sq3a" type="text" class="form-control"
+                                   data-ng-model="form.answer3"
+                                   placeholder=" " data-lowercase data-ng-required="role != '1' && role != '8'">
+                        </div>
+                    </div>
+                    <div data-ng-show="role == '8'">
+                        <div class="form-group">
+                            <label>Security Question</label>
+                            <pre>{{Question.id}}</pre>
+                        </div>
+                        <div class="form-group">
+							<label for="verifyAnswer">Verify Answer</label>
+                            <input type="text" class="form-control"
+                                   data-ng-model="secAnswer"
+                                   id="verifyAnswer"
+                                   placeholder=" " data-ng-required="role == '8'">
+                            <input type="hidden" data-ng-model="numberOfAttempts">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+
+        <div class="box-footer text-center" data-ng-show="role != '8'">
+            <input type="button"
+                   class="btn btn-sm  btn-success"
+                   value="Update Info"
+                   ng-disabled="registrationForm.$invalid || registrationForm.$pending"
+                   data-ng-click="updateInfo(form,selectedOption1,selectedOption2,selectedOption3)"/>
+
+            <input type="button" class="btn btn-danger btn-sm" data-ng-click="cancel()" id="Cancel" value="Cancel"/>
+        </div>
+        <div class="box-footer text-center" data-ng-show="role == '8'">
+            <input
+                    type="button"
+                    class="btn btn-sm  btn-success"
+                    ng-disabled="registrationForm.$invalid || registrationForm.$pending"
+                    value="Submit"
+                    data-ng-click="checkifThisAnswerIsCorrect(Question.ques,secAnswer,numberOfAttempts)"/>
+
+            <input type="button" class="btn btn-danger btn-sm" data-ng-click="cancel()" id="Cancel" value="Cancel"/>
+        </div>
+    </div>
+</div>
+<!-- /.modal-content -->
+

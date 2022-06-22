@@ -1,0 +1,165 @@
+<aside class="right-side">
+	<section class="content-header">
+		<h1>{{headerText}}</h1>
+		<ol class="breadcrumb">
+			<li><a href="dashboard"><i class="fa fa-dashboard"></i>
+					Dashboard</a></li>
+			<li class="active">{{headerText}}</li>
+		</ol>
+	</section>
+	<section class="content" id="searchProtestInfo" style="display: none">
+		<div class="row">
+			<div class="col-sm-6 search-form"
+				data-ng-show="!showProtestInfo && !submitRequestToIntervene && !showAgencyRepCases">
+				<div class="input-group">
+
+					<label for="bnumber" class="visually-hidden">Enter CBCA Number</label>
+					<input type="text" class="form-control input-sm"
+						data-ng-change="onchange(b_No)" data-ng-model="b_No"
+						id="bnumber">
+					<div class="input-group-btn">
+						<button name="search" class="btn btn-sm btn-primary"
+							id="search-b-No" data-ng-click="searchProtestInfo(b_No)">
+							<i class="fa fa-search"></i> Search
+						</button>
+
+					</div>
+				</div>
+
+
+				<div class="panel panel-info"
+					data-ng-show="role == 'AGENCY ATTORNEY'">
+					<div class="panel-body">
+						<strong>Please enter the B-number in the box above. If
+							you do not know the B-number for the case you would like to join,
+							please select the search button and a complete list of your agency's
+							open cases will be retrieved.</strong>
+					</div>
+				</div>
+				<div data-ng-show="role != 'AGENCY ATTORNEY'">
+					In order to intervene in a bid protest, you must know the B-number
+					assigned to the case by CBCA. To find the B-number assigned to a
+					case, please check CBCA's docket, where you can search for cases by
+					agency, solicitation number, or protester. CBCA's docket is
+					accessible <a href="http://cbca.gov/legal/bid-protests/search"
+						target-blank>here</a>.
+				</div>
+				<br> <br>
+				<div data-ng-show="role != 'AGENCY ATTORNEY'">
+					<p>
+					<strong>
+					Note:  Intervenor means an awardee if the award has been made or, if no award has been made, all bidders or offerors 
+					who appear to have a substantial prospect of receiving an 
+					award if the protest is denied.  
+					To intervene in a case, you will be required to upload a document explaining how you satisfy the above requirements.
+					</strong>
+					</p>
+				</div>
+			</div>
+
+			<button name="resetScreen" class="btn btn-sm btn-primary"
+				data-ng-hide="!showProtestInfo && !submitRequestToIntervene && !showAgencyRepCases"
+				id="resetScreen" data-ng-click="resetScreen()">
+				<i class="fa fa-search"></i> Return to Search
+			</button>
+
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+				<table id="protestInfo" class="table table-bordered" data-ng-show="showProtestInfo" role="presentation">
+					<tbody>
+						<tr>
+							<td><strong>B# </strong></td>
+							<td style="text-align: right;">
+								<div class="b_No">
+									{{protestInfo.b_No}} 
+									<span data-ng-if="protestInfo.supplemental_B_Nos">
+											{{protestInfo.supplemental_B_Nos | sort}}
+										
+									</span> 
+									
+									<span data-ng-repeat='childProtestInfo in protestInfo.listOf_ConsolidatedProtest_Info'>
+										
+										<span data-ng-if="$index == 0">
+											;&nbsp;&nbsp;{{childProtestInfo.b_No}} 
+											<span data-ng-if="childProtestInfo.supplemental_B_Nos">
+											{{childProtestInfo.supplemental_B_Nos | sort}}
+											</span> 
+										</span> 
+										<span data-ng-if="$index > 0">
+											;&nbsp;&nbsp;{{childProtestInfo.b_No}}
+									   <span data-ng-if="childProtestInfo.supplemental_B_Nos">
+											{{childProtestInfo.supplemental_B_Nos | sort}}
+										</span> 
+									   </span>
+
+									</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><strong>Protester</strong></td>
+							<td style="text-align: right;"><div id='protesterName'>
+									{{protestInfo.company_Name | uppercase}} <span
+										data-ng-repeat='childProtestInfo in protestInfo.listOf_ConsolidatedProtest_Info'>
+										<span data-ng-if="$index == 0">
+											;&nbsp;&nbsp;{{childProtestInfo.company_Name | uppercase}} </span> <span
+										data-ng-if="$index > 0">
+											;&nbsp;&nbsp;{{childProtestInfo.company_Name | uppercase}} </span>
+
+									</span>
+								</div></td>
+						</tr>
+						<tr>
+							<td><strong>Agency</strong></td>
+							<td style="text-align: right;"><div id='agencyName'>{{agencyName}}</div></td>
+						</tr>
+						<tr>
+							<td><strong>Contract Number </strong></td>
+							<td style="text-align: right;"><div id='solicitationNumber'>{{protestInfo.solicitation_No}}</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row" id="submitNewDocForm"
+			style="margin-top: 20px; display: none"
+			data-ng-show="showSubmitNewDoc">
+			<div class="col-md-12">
+				<submit-new-doc doc-info="docInfo" role="role"
+					request-type="requestType" show-cancel-btn="Y" cancel="cancel()"></submit-new-doc>
+			</div>
+		</div>
+
+		<div class="row" id="interveneRequestForm" style="display: none">
+
+			<request-to-intervene-form class="col-md-6"
+				protest-information="protestInformation" cancel="cancel()"
+				data-ng-show="submitRequestToIntervene"></request-to-intervene-form>
+
+
+		</div>
+
+		<div class="row" id="caseAccessList" style="display: none">
+
+			<agency-rep-access-list class="col-md-12 col-lg-12 col-sm-12"
+				protest-info-list="agencyProtestInfoList" role="role"
+				submit-notice-of-appearance="submitNoticeOfAppearance(uid)"
+				redirect="redirect()" show-agency-cases="{{showAgencyRepCases}}"
+				data-ng-show="showAgencyRepCases && !showProtestInfo 
+						&& role == 'AGENCY ATTORNEY'"></agency-rep-access-list>
+
+
+			<agency-rep-access-list class="col-md-12 col-lg-12 col-sm-12"
+				protest-info-list="agencyProtestInfoList" role="role"
+				submit-notice-of-appearance="submitRequestToInterveneForm(uid)"
+				redirect="redirect()" show-agency-cases="{{showAgencyRepCases}}"
+				data-ng-show="showAgencyRepCases && !showProtestInfo && role == 'INTERVENOR'"></agency-rep-access-list>
+
+
+		</div>
+
+
+	</section>
+</aside>
+<!-- /.right-side -->

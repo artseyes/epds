@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:tns="http://fms.treas.gov/services/tcsonline" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cns="http://fms.treas.gov/services/common" version="1.0" targetNamespace="http://fms.treas.gov/services/tcsonline">
+
+    
+<!-- VERSION: 2.1 03/12/2018 -->
+
+    
+<xs:import namespace="http://fms.treas.gov/services/common"
+           schemaLocation="TCSOnlineService_xsd3.xsd"/>
+    
+<xs:include schemaLocation="TCSOnlineService_xsd5.xsd"/>
+
+    
+<xs:element name="closeAuthorization" type="tns:CloseAuthorization"/>
+    
+<xs:element name="closeAuthorizationResponse" type="tns:CloseAuthorizationResponseType"/>
+
+    
+<!-- Close an Authorization -->
+    
+<xs:complexType name="CloseAuthorization">
+        
+<xs:sequence>
+            
+<xs:element name="closeAuthorizationRequest" type="tns:CloseAuthorizationRequest" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    
+<xs:complexType name="CloseAuthorizationRequest">
+        
+<xs:sequence>
+            
+<xs:element name="auth_paygov_tracking_id" type="cns:paygov_tracking_id"/>
+            
+<xs:element name="payment_type" type="tns:CloseAuthorizationPaymentType"/>
+            
+<xs:element name="tcs_app_id" type="cns:TCSApplicationID"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+<xs:complexType name="CloseAuthorizationResponseType">
+        
+<xs:sequence>
+            
+<xs:element name="closeAuthorizationResponse" type="tns:CloseAuthorizationResponse" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    
+<xs:complexType name="CloseAuthorizationResponse">
+        
+<xs:sequence>
+            
+<xs:element name="auth_paygov_tracking_id" type="cns:paygov_tracking_id"/>
+            
+<xs:element name="auth_status" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    
+<xs:simpleType name="CloseAuthorizationPaymentType">
+        
+<xs:annotation>
+            
+<xs:documentation>Payment type for the transaction</xs:documentation>
+        </xs:annotation>
+        
+<xs:restriction base="xs:string">
+            
+<xs:enumeration value="PAYPAL"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

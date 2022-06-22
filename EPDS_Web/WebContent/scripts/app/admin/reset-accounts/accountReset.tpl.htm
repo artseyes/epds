@@ -1,0 +1,23 @@
+<!-- <div class="modal fade"> -->
+	<!-- <div class="modal-dialog"> -->
+		<div class="modal-content">
+			<div class="modal-header modal-header-warning">
+				<h4>
+					<i class="glyphicon glyphicon-warning-sign"> </i>&nbsp;&nbsp;{{modalTitle}}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form" name="resetform">
+					<label for="email" class="requiredInputs">Email address</label>
+					<input type="email" class="form-control" data-ng-model-options="{ updateOn: 'blur' }"
+						   data-ng-model="form.email" id="email" lowercase required>
+				</form>
+			</div>
+			<div class="modal-footer">
+			<button type="button" ng-click="reset(form.email)" data-ng-disabled="resetform.$invalid || !resetform.$dirty"
+				class="btn btn-success">{{btnLabel}}</button>
+			<button type="button" ng-click="cancel()" class="btn btn-warning">Cancel</button>
+		</div>
+		</div>
+	<!-- </div> -->
+<!-- </div> -->

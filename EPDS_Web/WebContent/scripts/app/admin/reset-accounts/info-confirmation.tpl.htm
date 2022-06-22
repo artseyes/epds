@@ -1,0 +1,23 @@
+
+<div class="modal-content">
+	<div class="modal-header modal-header-warning">
+
+		<h4>
+			<i class="glyphicon glyphicon-warning-sign">
+			</i>&nbsp;&nbsp;Confirmation
+		</h4>
+	</div>
+	<div class="modal-body">
+		<p>You are about to {{modalText}} the account of
+		<strong>{{userInfo.firstName}}&nbsp;{{userInfo.lastName}}</strong>
+		from 
+		<strong>{{userInfo.nameOfFirm}}</strong>&nbsp;.
+		&nbsp;&nbsp;Do you want to proceed&nbsp;?
+		</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" ng-click="confirm(userInfo.user_id)"
+			class="btn btn-success">OK</button>
+		<button type="button" ng-click="cancel('confirmInfo')" class="btn btn-warning">Cancel</button>
+	</div>
+</div>

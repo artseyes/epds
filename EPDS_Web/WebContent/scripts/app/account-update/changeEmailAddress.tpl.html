@@ -1,0 +1,68 @@
+<div class="modal-content">
+	<div class="modal-header modal-header-info">
+		<h4 class="modal-title">
+			<i class="glyphicon glyphicon-thumbs-up"></i> <span>Update User Name</span>
+		</h4>
+	</div>
+
+	<div class="modal-body">
+			<form id="register-form" data-ng-fab-form-options="customFormOptions"
+		      name="registrationForm">
+				<div class="panel panel-primary">
+					<div class="panel-body">
+					
+							 <div class="form-group">
+					              <label for="email" class="requiredInputs">New Email</label> 
+					              <input type="email" name="email"
+					                id="email" class="form-control input-sm"
+					                data-uib-popover="{{fieldText.emailToolTip}}"
+					                data-popover-trigger="'focus'" data-ng-model="form.email"
+					                data-popover-placement="right"
+					                data-ng-model-options="{ updateOn: 'blur' }"
+					                data-ng-pattern="regex.email"
+					                data-validation-msg-required="Please enter email address" 
+					                data-validation-msg-authorized="Please enter an email with .gov or .mil"
+					                lowercase email 
+					                role ="role" 
+					                required  uniqueid
+					                maxlength="{{regex.email_max}}">
+					                 <span class="help-inline" style="color: red;">{{emailError}}</span>
+					            </div>
+					
+					
+							<div class="form-group">
+								<label for="oldPassword" class="requiredInputs" >Current Password</label>
+								<input
+									id="oldPassword"
+									type="password" 
+									class="form-control"
+									data-validate-on="blur"
+									data-ng-model="form.oldPassword"
+		                         	data-validation-msg-required="Password is not valid"
+		                         	data-validation-msg-oldpassword="Old password doesn't match"
+		                         	oldpassword
+		                            required>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			
+				<div class="box-footer text-center">
+		              <input type="button" 
+		              		 class="btn btn-sm  btn-success" 
+		              		 value="Update Info" 
+		              		 ng-disabled="registrationForm.$invalid || registrationForm.$pending"
+		              		 data-ng-click="changeEmail(form)"/>
+		              <input type="button" 
+		              		 class="btn btn-sm  btn-warning" 
+		              		 value="Cancel" 
+		              		 data-ng-click="cancel()"/>		 
+		            </div>
+		            
+			</div>
+</div>
+<!-- /.modal-content -->
+

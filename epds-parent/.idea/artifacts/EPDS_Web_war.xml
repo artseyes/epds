@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EPDS_Web:war">
+    <output-path>$PROJECT_DIR$/../EPDS_Web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>EPDS_Web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="EPDS_Web.war">
+      <element id="artifact" artifact-name="EPDS_Web:war exploded" />
+    </root>
+  </artifact>
+</component>

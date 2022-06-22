@@ -1,0 +1,95 @@
+<div class="modal-content">
+	<div class="modal-header modal-header-info">
+		<h4 class="modal-title">
+			<i class="glyphicon glyphicon-thumbs-up"></i> <span>Change Security Questions</span>
+		</h4>
+	</div>
+
+	<div class="modal-body">
+			<form id="register-form" data-ng-fab-form-options="customFormOptions"
+		      name="registrationForm">
+				<div class="panel panel-primary">
+					<div class="panel-body">
+							<div>
+								
+								<div class="alert alert-info">
+								  <strong>Warning!</strong> 
+								  <p>
+								   Please select and answer three distinct questions from the selections below. This
+					               information will be used to validate your identity if you forget your password.
+					               Each question may only be used once.  For additional assistance, select the
+					              <a id="btnHelpSecurityInfo3" class="BlackButton" style="color: #696969" data-ng-click="securityQuestionHelp()">Help ?</a> above.
+								  </p>
+								</div>
+								
+							<div class="form-group">
+								<label for="secQues1" class="requiredInputs">Security Question 1</label> 
+								<select 
+									id="secQues1"
+									data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id "
+									data-ng-model="selectedOption1"
+									data-ng-change= "onQuestion1Selected(selectedOption1,selectedOption2,selectedOption3)"
+									class="form-control"></select>
+							</div>
+							<div class="form-group">
+								<input type="text" 
+								data-ng-model="form.answer1"
+								class="form-control" id="inputError"
+								data-lowercase
+									placeholder="" required>
+							</div>
+							<div class="form-group">
+								<label for="secQues2" class="requiredInputs">Security Question 2</label> 
+								<select 
+									id="secQues2"
+									data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id "
+									data-ng-model="selectedOption2"
+									data-ng-change= "onQuestion2Selected(selectedOption1,selectedOption2,selectedOption3)"
+									class="form-control"></select>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" 
+									data-ng-model="form.answer2"
+									data-lowercase
+									id="answer2"
+									placeholder=" " required>
+							</div>
+							<div class="form-group">
+								<label for="secQues3" class="requiredInputs">Security Question 3</label> 
+								<select 
+									id="secQues3"
+									data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id"
+									data-ng-model="selectedOption3"
+									data-ng-change= "onQuestion3Selected(selectedOption1,selectedOption2,selectedOption3)"
+									class="form-control"></select>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" 
+								data-ng-model="form.answer3"
+								data-lowercase
+								id="answer3"
+									placeholder=" " required>
+							</div>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			
+				<div class="box-footer text-center">
+		              <input type="button" 
+		              		 class="btn btn-sm  btn-success" 
+		              		 value="Update Info" 
+		              		 ng-disabled="registrationForm.$invalid || registrationForm.$pending"
+		              		 data-ng-click="changeSecQuestions(form,selectedOption1,selectedOption2,selectedOption3)"/>
+		              		 
+		         <input type="button" 
+		              		 class="btn btn-sm  btn-warning" 
+		              		 value="Cancel" 
+		              		 data-ng-click="cancel()"/>	
+		            </div>
+			</div>
+</div>
+<!-- /.modal-content -->

@@ -1,0 +1,54 @@
+<div style="width: 155px;">
+	<a data-expand-collapse href="javascript:void(0)"
+		data-ng-show="protest.children_Protest_InfoList.length > 0"
+		id="{{protest.b_No}}" class="{{protest.b_No}}_sublist"
+	    aria-label="Open/Close list of consolidated cases, defaults open.">
+			<i class="glyphicon glyphicon-minus-sign"></i>
+	</a>
+	 
+	 <!-- href="/case-docketsheet/{{protest.a_No}}" -->
+	 <a data-ng-show="disableCaseDocket != 'Y'" href="javascript:void(0)"
+		title="link to {{protest.b_No || 'Pending'}} / {{protest.a_No}} case docketsheet"
+		data-ng-click ="redirectToCaseDocket(protest,
+											path,
+											protest.role,
+											protest.a_No,
+											protest.caseAccessRequestStatus,
+											protest.deniedIndicatingDocTypeId,
+											protest.deniedDate)" >
+		{{protest.b_No || 'Pending'}}
+     </a>
+     <span data-ng-show="disableCaseDocket == 'Y'"
+		title="{{protest.b_No || 'Pending'}} / {{protest.a_No}}">
+		{{protest.b_No || 'Pending'}}</span>
+
+     <span title="{{protest.supplemental_A_Nos}}"> {{protest.supplemental_B_Nos}} </span>
+
+	<ul data-ng-repeat='childProtestInfo in protest.children_Protest_InfoList'
+		id = "supplemental-protest-list_{{protest.b_No}}" class="supplemental-protest-list_{{protest.b_No}} hide-all-supp-protests">
+		<li class="list-unstyled">
+			<a data-ng-show="disableCaseDocket != 'Y'" href="javascript:void(0)"
+				title="link to {{childProtestInfo.b_No}} / {{childProtestInfo.a_No}} case docketsheet"
+				data-ng-click =" redirectToCaseDocket(
+												protest,
+												path,
+												childProtestInfo.role,
+												childProtestInfo.a_No,
+												childProtestInfo.caseAccessRequestStatus,
+												childProtestInfo.deniedIndicatingDocTypeId,
+												childProtestInfo.deniedDate)"
+												data-uib-popover="{{childProtestInfo.company_Name}}, {{childProtestInfo.b_No}}, {{childProtestInfo.a_No}}"
+												data-popover-trigger="'mouseenter'"
+												data-popover-placement="right" >
+					{{childProtestInfo.company_Name | truncate: 4: '..'}},&nbsp;{{childProtestInfo.b_No | truncate: 10: '..'}}
+			</a>
+			<span data-ng-show="disableCaseDocket == 'Y'"
+				data-uib-popover="{{childProtestInfo.company_Name}}, {{childProtestInfo.b_No}}, {{childProtestInfo.a_No}}"
+				data-popover-trigger="'mouseenter'"
+				data-popover-placement="right">
+				{{childProtestInfo.company_Name | truncate: 4: '..'}},&nbsp;{{childProtestInfo.b_No}} </span>
+
+			<span title="{{childProtestInfo.supplemental_A_Nos}}">{{childProtestInfo.supplemental_B_Nos}}</span>
+		</li>
+	</ul>
+</div>

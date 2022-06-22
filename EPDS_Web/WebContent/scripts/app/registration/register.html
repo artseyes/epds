@@ -1,0 +1,267 @@
+<!--<body class="skin-blue  pace-done hold-transition register-page">-->
+<div class="wrapper">
+    <div class="login-content">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-box" id="login-box" style="width: 450px;">
+                <div class="header">{{fieldText.headerText}}</div>
+                <form id="register-form" data-ng-fab-form-options="customFormOptions"
+                      name="registrationForm"
+                      data-ng-submit="registerUserInfo(form,tier1SelectedOption,tier2SelectedOption)">
+                    <div class="body bg-gray">
+
+                        <fieldset class="panel panel-primary">
+                            <legend class="visually-hidden">{{fieldText.contactInfo}}</legend>
+                            <div class="panel-heading">{{fieldText.contactInfo}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="email" class="requiredInputs">Email</label>
+                                    <input
+                                            type="email" name="email" id="email"
+                                            class="form-control input-sm"
+                                            data-uib-popover="{{fieldText.emailToolTip}}"
+                                            data-popover-trigger="'focus'" data-ng-model="form.email"
+                                            data-popover-placement="right"
+                                            data-ng-model-options="{ updateOn: 'blur' }"
+                                            data-ng-pattern="regex.email"
+                                            data-validation-msg-required="Please enter email address"
+                                            lowercase email required uniqueid authorized
+                                            maxlength="{{regex.email_max}}">
+                                    <span class="help-inline" style="color: red;">{{emailError}}</span>
+                                </div>
+                                <!-- authorized -->
+                                <!-- data-validation-msg-authorized="Please enter an email with .gov or .mil" -->
+
+                                <div class="form-group">
+                                    <label for="prefix">Prefix</label>
+                                    <input type="text"
+                                           name="prefix" id="prefix"
+                                           data-uib-popover="{{fieldText.prefixToolTip}}"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="right"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="form.prefix"
+                                           data-ng-pattern="regex.prefix"
+                                           class="form-control input-sm"
+                                           maxlength="{{regex.prefix_max}}">
+
+                                    <!-- data-ng-pattern="regex.prefix" -->
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="firstname" class="requiredInputs">First Name</label>
+                                    <input type="text" name="firstname" id="firstname"
+                                           data-ng-model="form.firstname"
+                                           data-uib-popover="Enter your first name as it appears on your current government issued picture ID"
+                                           data-popover-trigger="'focus'" data-popover-placement="right"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           class="form-control input-sm"
+                                           data-validate-on="blur" data-ng-pattern="regex.firstName"
+                                           data-validation-msg-required="Please enter first name" required
+                                           maxlength="{{regex.firstName_max}}">
+
+                                    <!--   data-ng-pattern="regex.firstName" -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="middleInitial">Middle Initial</label>
+                                    <input type="text" name="middleInitial" id="middleInitial"
+                                        data-uib-popover="Enter your middle intial"
+                                        data-popover-trigger="'focus'" data-popover-placement="right"
+                                        data-ng-model="form.mi"
+                                        data-ng-model-options="{ updateOn: 'blur' }"
+                                        data-ng-pattern="regex.middleInitial"
+                                        class="form-control input-sm"
+                                        maxlength="{{regex.middleInitial_max}}">
+
+                                    <!-- data-ng-pattern="regex.middleInitial" -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="requiredInputs">Last Name</label> <input
+                                        type="text" name="lastname" id="lastname"
+                                        data-ng-model="form.lastname"
+                                        data-uib-popover="Enter your last name as it appears on your current government issued picture ID"
+                                        data-popover-trigger="'focus'" data-popover-placement="right"
+                                        class="form-control input-sm"
+                                        data-ng-model-options="{ updateOn: 'blur' }"
+                                        data-validate-on="blur" data-ng-pattern="regex.lastName"
+                                        data-validation-msg-required="Please enter  last name" required
+                                        maxlength="{{regex.lastName_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="suffix">Suffix</label>
+                                    <input type="text" name="suffix" id="suffix"
+                                           data-ng-model="form.suffix"
+                                           data-uib-popover="{{fieldText.suffixToolTip}}"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="right"
+                                           data-ng-pattern="regex.suffix"
+                                           class="form-control input-sm"
+                                           maxlength="{{regex.suffix_max}}">
+                                </div>
+                                <div class="form-group" data-ng-show="role == 1">
+                                    <label for="nameoffirm" class="requiredInputs">Name of Firm</label>
+                                    <input type="text" name="nameoffirm" id="nameoffirm"
+                                           data-uib-popover="{{fieldText.nameOfFirm}}"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'"
+                                           data-ng-pattern="regex.nameOfFirm"
+                                           data-popover-placement="right"
+                                           data-ng-model="form.nameoffirm"
+                                           class="form-control input-sm"
+                                           data-validate-on="blur"
+                                           data-ng-pattern="regex.nameOfFirm"
+                                           data-validation-msg-required="Please enter {{fieldText.nameOfFirm}}"
+                                           data-ng-required="role == 1" maxlength="{{regex.nameOfFirm_max}}">
+                                </div>
+
+                                <agency-drop-down
+                                        data-ng-show="role == 6"
+                                        agencylist="tier1AgencyList"
+                                        tier1-selected-option="tier1SelectedOption"
+                                        tier2-selected-option="tier2SelectedOption"
+                                        tooltip="{{fieldText.nameOfFirm}}" data-ng-model="form.agency">
+                                </agency-drop-down>
+
+                                <div class="form-group">
+                                    <fieldset required>
+                                        <legend class="visually-hidden">Phone Number</legend>
+                                        <label for="phonenumber" class="col-sm-12-offset-2 requiredInputs">Phone
+                                            Number</label>
+                                        <div class="col-sm-12-offset-2">
+                                            <input type="tel" name="phonenumber" id="phonenumber"
+                                                   data-ng-model="form.phonenumber" class="form-control"
+                                                   data-ng-model-options="{ updateOn: 'blur' }"
+                                                   data-validate-on="dirty" data-international-phone-number
+                                                   data-validation-msg-required="Please enter phone number"
+                                                   required maxlength="{{regex.phone_max}}">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group">
+                                    <fieldset>
+                                        <legend class="visually-hidden">Fax Number</legend>
+                                        <label for="faxnumber" class="col-sm-12-offset-2">Fax Number</label>
+                                        <div class="col-sm-12-offset-2">
+                                            <input type="text" name="faxnumber"
+                                                   data-ng-model-options="{ updateOn: 'blur' }" id="faxnumber"
+                                                   data-ng-model="form.faxnumber" class="form-control"
+                                                   data-international-phone-number
+                                                   maxlength="{{regex.phone_max}}">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="panel panel-primary">
+                            <legend class="visually-hidden">{{fieldText.companyAddress}}</legend>
+                            <div class="panel-heading">{{fieldText.companyAddress}}</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="street1" class="requiredInputs">Address Line 1</label>
+                                    <input data-ng-autocomplete type="text" name="street1"
+                                           id="street1" class="form-control input-sm"
+                                           data-uib-popover="Street address, P.O. box, company name"
+                                           data-popover-trigger="'focus'" data-popover-placement="right"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="form.address1" data-ng-pattern="regex.address"
+                                           placeholder=""
+                                           data-validate-on="blur"
+                                           data-validation-msg-required="Please enter street address"
+                                           data-details="representativeAddressDetails"
+                                           data-options="options" required maxlength="{{regex.address_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="street2">Address Line 2</label>
+                                    <input type="text"
+                                           data-uib-popover="Ex:Apartment, suite, unit, building, floor, etc."
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="right"
+                                           data-ng-pattern="regex.address"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           name="street2"
+                                           id="street2"
+                                           class="form-control input-sm"
+                                           data-ng-model="form.address2"
+                                           maxlength="{{regex.address_max}}"
+                                           placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="zipcode" class="requiredInputs">Zip Code</label>
+                                    <input type="text" name="zipcode" id="zipcode"
+                                           class="form-control input-sm" data-ng-model="form.zipcode"
+                                           data-validation-msg-pattern="Please enter valid zipcode"
+                                           data-validate-on="focus"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-pattern="regex.zipcode" maxlength="{{regex.zipcode_max}}"
+                                           data-validation-msg-required="Please enter zipcode" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city" class="requiredInputs">City</label>
+                                    <input type="text" name="city" id="city" class="form-control input-sm"
+                                           data-ng-model="form.city" data-ng-pattern="regex.city"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validate-on="focus"
+                                           data-validation-msg-required="Please enter city"
+                                           maxlength="{{regex.city_max}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state" class="requiredInputs">State</label>
+                                    <input type="text" name="state" id="state"
+                                           class="form-control input-sm" data-ng-model="form.state"
+                                           data-validate-on="focus"
+                                           data-ng-pattern="regex.state"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validation-msg-required="Please enter state" required
+                                           maxlength="{{regex.state_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country" class="requiredInputs">Country</label>
+                                    <input type="text" name="country" id="country"
+                                           class="form-control input-sm" data-ng-model="form.country"
+                                           data-validate-on="focus"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-pattern="regex.country"
+                                           data-validation-msg-required="Please enter country"
+                                           maxlength="{{regex.country_max}}" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!--  <div
+                        vc-recaptcha
+                        theme="recaptchaConfig.theme"
+                        key="recaptchaConfig.sitekey"
+                        on-create="setWidgetId(widgetId)"
+                        on-success="setResponse(response)"
+                        on-expire="cbExpiration()"
+                ></div> -->
+
+
+                        <label class="checkbox-inline">
+                            <input type="checkbox" value="" data-ng-model="terms">
+                            I have reviewed and agree to abide by CBCA's Rules of Procedure and EDS Instructions,
+                            which are available here:
+                            <a data-target-blank href="https://www.cbca.gov/legal/file-a-Case">https://www.cbca.gov/legal/bid-protests/file-a-bid-protest</a>
+                        </label>
+
+                    </div>
+
+                    <!-- data-ng-disabled="!isResponseValid" -->
+                    <!-- data-ng-disabled="!isResponseValid || !terms" -->
+
+                    <div class="footer bg-gray"
+                         data-uib-popover="{{formValidatonMessage}}"
+                         data-popover-trigger="'mouseenter'" data-popover-placement="auto"
+                         data-ng-mouseover="isRegisterFormValid(registrationForm,terms)"
+                         data-ng-mouseleave="isRegisterFormValid(registrationForm,terms)">
+                        <input type="submit" class="btn btn-primary btn-block" value="Register" id="register_buttond_id"
+                               data-ng-disabled="isRegisterFormValid(registrationForm,terms)">
+                        <a href="login" class="text-center">Return to the login page</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--</body>-->

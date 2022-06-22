@@ -1,0 +1,347 @@
+<div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="left-side sidebar-offcanvas">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+
+                <div class=" info">
+                    <p></p>
+                </div>
+            </div>
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li><a href="dashboard"> <i class="fa fa-dashboard"></i> <span>Active
+								Cases</span>
+                </a></li>
+                <li class="">
+                    <a href="javascript:void(0)" data-ng-click="changePassword()">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <span>Change Password</span>
+                    </a>
+                </li>
+                <li data-ng-show="role == 1 || role == 2 || role == 4 || role == 9">
+                    <a href="javascript:void(0)" data-ng-click="changeEmailAddress()">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <span>Change Username</span>
+                    </a>
+                </li>
+                <li data-ng-show="role != 1 && role != 2 && role != 4 && role != 9">
+                    <a href="javascript:void(0)" data-ng-click="changeSecurityQuestions()">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <span>Change Security Questions</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Profile</h1>
+            <ol class="breadcrumb">
+                <li><a href="dashboard" id="focus_start"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li class="active">profile</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container">
+                <div class="col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                    <form name="profileForm" class="form-horizontal" role="form">
+                        <fieldset class="box box-primary">
+                            <legend class="visually-hidden">Profile</legend>
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Profile</h3>
+                                <div class="box-tools pull-right">
+                                    <button data-ng-click="edit()"
+                                            class="btn btn-info uppercase" data-ng-show="!showUpdateUserForm">Edit
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-lg-12 col-md-12" for="prefix">Prefix</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="prefix" id="prefix" data-ng-model="form.prefix"
+                                                       class="form-control input-sm"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-pattern="regex.prefix" maxlength="{{regex.prefix_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">First
+                                                Name</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="firstname" id="firstname"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       class="form-control input-sm"
+                                                       data-validate-on="dirty" data-ng-model="form.first_Name"
+                                                       data-default-="us"
+                                                       data-validation-msg-required="Please enter first name"
+                                                       required
+                                                       data-ng-pattern="regex.firstName" maxlength="{{regex.firstName_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="middleInitial" class="col-sm-12 col-lg-12 col-md-12">Middle Initial</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="middleInitial" id="middleInitial"
+                                                       data-ng-model="form.middle_initial"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       class="form-control input-sm"
+                                                       maxlength="{{regex.middleInitial}}"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-pattern="regex.middleInitial"
+                                                       maxlength="{{regex.middleInitial_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                Last Name</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="lastname" id="lastname"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       class="form-control input-sm" data-validate-on="dirty"
+                                                       data-ng-model="form.last_Name"
+                                                       data-validation-msg-required="Please enter last name"
+                                                       required data-ng-pattern="regex.lastName"
+                                                       maxlength="{{regex.lastName_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="suffix" class="col-sm-12 col-lg-12 col-md-12" for="suffix">Suffix</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="suffix" id="suffix" data-ng-model="form.suffix"
+                                                       class="form-control input-sm"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-pattern="regex.suffix" maxlength="{{regex.suffix_max}}">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Email
+                                                Address</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="email" name="email" id="email" class="form-control input-sm"
+                                                       data-ng-disabled="disableEmail"
+                                                       data-ng-model="form.email"
+                                                       data-validation-msg-required="Please enter  email address"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       required lowercase
+                                                       data-ng-pattern="regex.email" maxlength="{{regex.email_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label data-ng-show="!updateAgencyName" for="firmName"
+                                                   class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Name
+                                                of Firm</label>
+                                            <label data-ng-show="role == 6 && updateAgencyName" for="firmName"
+                                                   class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Current Selected
+                                                Agency</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="firmName" id="firmName" class="form-control"
+                                                       data-ng-model="form.firm_Name"
+                                                       data-validation-msg-required="Please enter firm name"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-disabled="(role != 1 && role != 2 && role != 4 && role != 9) || !showUpdateUserForm"
+                                                       required
+                                                       data-ng-pattern="regex.nameOfFirm" maxlength="{{regex.nameOfFirm_max}}">
+
+                                                <div class="pull-right" data-ng-show="role == 6 && showUpdateUserForm">
+                                                    <button class="btn-primary" data-ng-click="updateAgencyName = true"
+                                                            style="margin-top: 5px;">Update Agency
+                                                    </button>
+                                                    <button class="btn-danger" data-ng-click="updateAgencyName = false"
+                                                            aria-label="Update Agency Cancel">Cancel
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-ng-show="role == 6 && updateAgencyName">
+                                            <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                                <legend>Please select Agency to update</legend>
+
+                                                <agency-drop-down class="col-sm-12 col-lg-12 col-md-12"
+                                                                  data-ng-show="role == 6 && updateAgencyName"
+                                                                  agencylist="tier1AgencyList"
+                                                                  tier1-selected-option="tier1SelectedOption"
+                                                                  tier2-selected-option="tier2SelectedOption"
+                                                                  tooltip="{{fieldText.nameOfFirm}}"
+                                                                  data-ng-model="form.agency">
+                                                </agency-drop-down>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <fieldset required>
+                                                <legend class="visually-hidden">Phone Number</legend>
+                                                <label for="phonenumber"
+                                                       class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Phone
+                                                    Number</label>
+                                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                                    <input type="tel" name="phonenumber" id="phonenumber"
+                                                           data-ng-disabled="!showUpdateUserForm"
+                                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                                           data-validate-on="dirty"
+                                                           class="form-control input-sm" data-ng-model="form.phone_No"
+                                                           data-international-phone-number
+                                                           data-validation-msg-required="Please enter phone number"
+                                                           required maxlength="{{regex.phone_max}}">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <fieldset>
+                                                <legend class="visually-hidden">Fax Number</legend>
+                                                <label for="faxnumber" class="col-sm-12 col-lg-12 col-md-12">Fax
+                                                    Number</label>
+                                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                                    <input type="tel" name="faxnumber" id="faxnumber"
+                                                           class="form-control input-sm"
+                                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                                           data-ng-disabled="!showUpdateUserForm"
+                                                           data-validate-on="dirty"
+                                                           data-ng-model="form.fax_No"
+                                                           data-international-phone-number
+                                                           data-validation-msg-required="Please enter fax number"
+                                                           maxlength="{{regex.phone_max}}">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="pstreet" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Address
+                                                Line 1</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input data-ng-autocomplete type="text" name="street"
+                                                       disabled="disabled" class="form-control input-sm" id="pstreet"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       placeholder=""
+                                                       data-ng-model="form.address1"
+                                                       data-validation-msg-required="Please enter street address"
+                                                       data-details="representativeAddressDetails"
+                                                       data-options="options"
+                                                       required
+                                                       data-ng-pattern="regex.address" maxlength="{{regex.address_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pstreet2" class="col-sm-12 col-lg-12 col-md-12">Address Line
+                                                2</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input data-ng-autocomplete type="text" name="street2"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       class="form-control input-sm" id="pstreet2"
+                                                       placeholder=""
+                                                       data-ng-model="form.address2"
+                                                       data-details="representativeAddressDetails"
+                                                       data-options="options"
+                                                       data-ng-pattern="regex.address" maxlength="{{regex.address_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pzipcode" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Zip
+                                                Code</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="zipcode"
+                                                       data-validate-on="dirty" class="form-control input-sm zipcode"
+                                                       id="pzipcode"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-model="form.zip_Code"
+                                                       data-validation-msg-pattern="Please enter valid zip code"
+                                                       data-validation-msg-required="Please enter  zipcode"
+                                                       required
+                                                       data-ng-pattern="regex.zipcode" maxlength="{{regex.zipcode_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pcity"
+                                                   class="col-sm-12 col-lg-12 col-md-12 requiredInputs">City</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="city" id="pcity" class="form-control input-sm"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-validate-on="blur"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-model="form.city"
+                                                       data-validation-msg-required="Please enter  city"
+                                                       required
+                                                       data-ng-pattern="regex.city" maxlength="{{regex.city_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pstate" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">State</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="state" id="pstate" class="form-control input-sm"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validate-on="dirty"
+                                                       data-ng-model="form.state"
+                                                       data-validation-msg-required="Please enter  state "
+                                                       required
+                                                       data-ng-pattern="regex.state" maxlength="{{regex.state_max}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pcountry" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Country</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="country" id="pcountry" class="form-control input-sm"
+                                                       data-validate-on="dirty"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-disabled="!showUpdateUserForm"
+                                                       data-ng-model="form.country"
+                                                       data-validation-msg-required="Please enter country "
+                                                       required
+                                                       data-ng-pattern="regex.country" maxlength="{{regex.country_max}}">
+                                            </div>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer text-center">
+                                <input type="button" class="btn btn-success" value="Update"
+                                       data-ng-click="registerUserInfo()"
+                                       data-ng-show="showUpdateUserForm"
+                                       data-ng-disabled="profileForm.$invalid || !profileForm.$dirty">
+                                <input type="button" class="btn btn-danger" value="Cancel" data-ng-click="cancel()"
+                                       data-ng-show="showUpdateUserForm">
+                                <!--							<a data-ng-click="registerUserInfo()" data-ng-disabled="profileForm.$invalid || !profileForm.$dirty"-->
+                                <!--								class="btn btn-m btn-success uppercase" data-ng-show= "showUpdateUserForm">Update</a>-->
+                                <!--							<a data-ng-click="cancel()"-->
+                                <!--								class="btn btn-m btn-danger uppercase" data-ng-show= "showUpdateUserForm">Cancel</a>-->
+
+                            </div>
+                            <!-- /.box-footer -->
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->
+

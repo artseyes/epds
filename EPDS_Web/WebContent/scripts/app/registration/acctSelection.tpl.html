@@ -1,0 +1,51 @@
+<style>
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+
+<!-- Modal content-->
+<div class="modal-content" disableBackBtn>
+	<div class="modal-header modal-header-primary">
+		<h4 class="modal-title">Please Select Account Type</h4>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+			<label for="prefix">Account Type</label> 
+			<select id="prefix"
+				class="form-control" data-ng-model="selectedAcctType"
+				data-ng-options="item as item.name for item in role">
+			</select>
+		</div>
+		<div data-ng-show="message == 'vendor'">
+        <h4>
+			<!--   <strong>Request Protester/Intervenor Access to:</strong> -->
+			<strong>Register as one of the following types of non-agency party representatives:</strong>
+            </h4>
+            <ul>
+				<li>Appellant - Contract Disputes Act, FCIC, or ISDA </li>
+				<li>Claimant - Reimbursable expenses for travel/relocation expenses transportation services rate claims by carriers or freight forwarders</li>
+				<li>Petitioner - Petitions or debt collections by GSA </li>
+				<li>Applicant/Grantee - FEMA arbitrations </li>
+				<li>Motor Carrier - FMCSA arbitrations.</li>
+                <l>Visit CBCA web page for more information user account.</l>
+
+
+            </ul>
+                </div>
+                <div data-ng-show="message == 'agency'">
+            <h4>
+                <strong>Request Agency Representative Access to:</strong>
+            </h4>
+            <ul>
+                <li>Visit an EDS web page that indicates an Agency Representative account is necessary</li>
+                <li>Represent yourself as an agency representative</li>
+                <li>Participate in protests associated with agencies you are representing</li>
+            </ul>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-ng-click="OK(selectedAcctType)">OK</button>
+            <button type="button" class="btn btn-warning" data-ng-click="cancel(selectedAcctType)">Cancel</button>
+        </div>
+    </div>

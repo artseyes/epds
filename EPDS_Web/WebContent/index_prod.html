@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EPDS</title>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js"></script>
+
+
+<script type="text/javascript">
+
+var message = "CBCA endeavors to maintain the availability of EDS during normal business hours, which are ";
+message += "Monday through Friday, 8:00 a.m. to 5:30 p.m. eastern time, excluding Federal holidays or when CBCA's ";
+message += "Headquarters are otherwise closed.<br>The EDS system is not currently available. If you are unable to file ";
+message += "a document in EDS during normal business hours, please refer to the EDS instructions available here: ";
+message += "<br><a href=\"http:\/\/cbca.gov\/legal\/bid-protests\/file-a-bid-protest\">http://cbca.gov/legal/bid-protests/file-a-bid-protest<\/a><br>";
+message += "If you are unable to file a document in EDS during a period other than normal business hours, please ";
+message += "attempt to file the document during the next period of normal business hours.";
+
+
+BootstrapDialog.show({
+	title: 'Server Maintenance',
+    message: message,
+    buttons: [{
+   		label: 'OK',
+        action: function(dialog) {
+        	dialog.close();
+        }
+    }]
+});
+</script>
+</body>
+</html>
+

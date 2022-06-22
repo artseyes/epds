@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+</head>
+<body>
+<div>
+<div data-ng-show="!showDropDownOption">
+        <span><strong>Please briefly describe the document you are filing.(E.g., objection to agency's 5 day letter, motion for an extension, etc.).</strong></span>
+        <input type="text" 
+        class="form-control" 
+        data-ng-model="doc_Type_Desc_Extension" 
+        name="docTypeDescExt" 
+         data-ng-change="onInputChange(doc_Type_Desc_Extension)"
+         required>
+      </div>
+      <div class="buttoncls">
+					<button  class="btn btn-success spacing-between-elements" data-ng-click="OK(defaultOption)"  value="OK">OK</button>&nbsp;&nbsp; 
+					<button  class="btn btn-danger spacing-between-elements" data-ng-click="closeThisDialog(selectedOption.doc_Type_Desc)"   value="Cancel">Cancel</button>
+				</div>
+</div>
+</body>
+</html>

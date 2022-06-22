@@ -1,0 +1,180 @@
+<div class="modal-content">
+    <div class="modal-header modal-header-info">
+        <h4 class="modal-title">
+            <i class="glyphicon glyphicon-thumbs-up"></i> <span></span>
+        </h4>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal" name="interveneProtestRequestForm"
+              role="form" enctype="multipart/form-data" novalidate
+              id="interveneInfo">
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools pull-right"></div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="company_name" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Company
+                                    Name</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input id="company_name" type="text" name="company_name" data-validate-on="dirty"
+                                           class="form-control input-sm"
+                                           data-ng-model="form.companyName"
+                                           data-uib-popover="Enter company Name"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'" data-popover-placement="top"
+                                           data-ng-pattern="regex.nameOfFirm"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-z A-Z 0-9 !,@#&.)(/\\-"
+                                           maxlength="{{regex.nameOfFirm_max}}"
+                                           data-validation-msg-required="Please enter company name"
+                                           required auto-focus>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <fieldset class="box box-primary">
+                <legend class="visually-hidden">Company Address</legend>
+                <div class="box-header with-border">
+                    <h3 class="box-title">Company Address</h3>
+                    <div class="box-tools pull-right"></div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="street1"
+                                       class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Address
+                                    Line 1</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input data-ng-autocomplete type="text" name="street1"
+                                           id="street1" class="form-control "
+                                           data-ng-model="form.address1"
+                                           placeholder=""
+                                           data-validate-on="blur" data-uib-popover="{{toolTip.address}}"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'" data-popover-placement="top"
+                                           data-ng-pattern="regex.address"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
+                                           maxlength="{{regex.address_max}}"
+                                           data-validation-msg-required="Please enter street address"
+                                           data-details="companyAddressDetails" data-options="options"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="street2" class="col-sm-12 col-lg-12 col-md-12">Address
+                                    Line 2</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input type="text" name="street2" id="street2"
+                                           class="form-control " data-ng-model="form.address2"
+                                           data-uib-popover="{{toolTip.address}}"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'" data-popover-placement="top"
+                                           data-ng-pattern="regex.address"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
+                                           maxlength="{{regex.address_max}}"
+                                           placeholder="" auto-focus/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="czipcode" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Zip
+                                    Code</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input type="text" name="zipCode" class="form-control zipcode"
+                                           data-ng-model="form.zipCode" id="czipcode"
+                                           data-validate-on="focus"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-uib-popover="{{toolTip.zipcode}}"
+                                           data-popover-trigger="'focus'" data-popover-placement="top"
+                                           data-ng-pattern="regex.zipcode" maxlength="{{regex.zipcode_max}}"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9- )( "
+                                           data-validation-msg-required="Please enter zipcode" required
+                                           auto-focus>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ccity" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">City</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input type="text" name="city" id="ccity" class="form-control"
+                                           data-ng-model="form.city"
+                                           data-validate-on="focus" data-uib-popover="{{toolTip.city}}"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 &.)(/\\':;-"
+                                           data-popover-placement="top" data-ng-pattern="regex.city"
+                                           maxlength="{{regex.city_max}}"
+                                           data-validation-msg-required="Please enter city address"
+                                           required auto-focus>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cstate" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">State</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input type="text" name="state" id="cstate"
+                                           class="form-control" data-validate-on="focus"
+                                           data-ng-model="form.state"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validation-msg-required="Please enter state name"
+                                           data-uib-popover="{{toolTip.state}}"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 .)(/\\-"
+                                           data-popover-trigger="'focus'" data-popover-placement="top"
+                                           data-ng-pattern="regex.state" maxlength="{{regex.state_max}}" required
+                                           auto-focus>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ccountry"
+                                       class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Country</label>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                    <input type="text" name="country" id="ccountry"
+                                           class="form-control" data-ng-model="form.country"
+                                           data-validate-on="focus"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-uib-popover="{{toolTip.country}}"
+                                           data-popover-trigger="'focus'" data-popover-placement="top"
+                                           data-ng-pattern="regex.country" maxlength="{{regex.country_max}}"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z "
+                                           data-validation-msg-required="Please enter country name"
+                                           required auto-focus>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+
+        <div class="box-footer text-center">
+            <input type="button" class="btn btn-sm  btn-success" value="Update Info"
+                   data-ng-click="updateInfo(interveneProtestRequestForm, form)"
+				   data-ng-disabled="interveneProtestRequestForm.$invalid || !interveneProtestRequestForm.$dirty">
+            <input type="button" class="btn btn-sm  btn-warning" value="Cancel" data-ng-click="cancel()">
+        </div>
+
+    </div>
+</div>
+<!-- /.modal-content -->
+
+
+
+
+
+

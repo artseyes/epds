@@ -1,0 +1,86 @@
+<style>
+/* Fix for Bootstrap 3 with Angular UI Bootstrap */
+.modal {
+	display: block;
+}
+
+/* Custom dialog/modal headers */
+.dialog-header-error {
+	background-color: #d2322d;
+}
+
+.dialog-header-wait {
+	background-color: #428bca;
+}
+
+.dialog-header-notify {
+	background-color: #eeeeee;
+}
+
+.dialog-header-confirm {
+	background-color: #333333;
+}
+
+.dialog-header-error span,.dialog-header-error h4,.dialog-header-wait span,.dialog-header-wait h4,.dialog-header-confirm span,.dialog-header-confirm h4
+	{
+	color: #ffffff;
+}
+
+.custom-modal-bg-color {
+	background-color: lightgray;
+}
+
+/* Ease Display */
+.pad {
+	padding: 25px;
+}
+</style>
+<div class="modal-content" disableBackBtn>
+	<div class="modal-header modal-header-primary">
+		<div data-ng-show="modalOptions.messageType == 'success' ||  modalOptions.messageType == 'reloadCaseDocketSheetInfo'
+			|| modalOptions.messageType == 'paymentSuccess'">
+			<h4 class="modal-title">
+				<i class="glyphicon glyphicon-thumbs-up"></i> {{modalOptions.headerText}}
+				<a data-ng-click="modalOptions.close(modalOptions.bodyText)" class="pull-right" title="Close" alt="Close">
+					<i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+				</a>
+			</h4>
+		</div>
+		<div data-ng-show="modalOptions.messageType == 'error' || modalOptions.messageType == 'paymentFailure' ">
+			<h4 class="modal-title">
+				<i class="glyphicon glyphicon-thumbs-down"></i> {{modalOptions.headerText}}
+				<a data-ng-click="modalOptions.close(modalOptions.bodyText)" class="pull-right" title="Close" alt="Close">
+					<i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+				</a>
+			</h4>
+		</div>
+	</div>
+	<div class="modal-body" style="background-color: lightgray;">
+		<div>
+			<div>{{modalOptions.bodyText}}</div>
+		</div>
+	</div>
+	<div class="modal-footer custom-modal-bg-color">
+		<div>
+			<button name="search"
+				class="btn btn-success spacing-between-elements"
+				data-ng-show="modalOptions.messageType == 'reloadCaseDocketSheetInfo'"
+				data-ng-click="modalOptions.reloadCaseDocetSheetInfo(modalOptions.bodyText)">OK</button>
+			<button name="search"
+				class="btn btn-success  spacing-between-elements"
+				data-ng-show="modalOptions.messageType == 'success'"
+				data-ng-click="modalOptions.ok(modalOptions.bodyText)">OK</button>
+			<button name="search" class="btn btn-danger spacing-between-elements"
+				data-ng-show="modalOptions.messageType == 'error'"
+				data-ng-click="modalOptions.close(modalOptions.bodyText)">OK</button>
+			<button name="search" class="btn btn-danger spacing-between-elements"
+				data-ng-show="modalOptions.messageType == 'paymentSuccess'"
+				data-ng-click="modalOptions.paymentSuccess(modalOptions.bodyText)">OK</button>
+			<button name="search"
+				class="btn btn-warning spacing-between-elements"
+				data-ng-show="modalOptions.messageType == 'paymentFailure'"
+				data-ng-click="modalOptions.paymentFailure(modalOptions.bodyText)">OK</button>
+		</div>
+	</div>
+</div>
+<!-- /.modal-content -->

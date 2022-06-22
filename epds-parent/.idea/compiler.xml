@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="epds-auth" />
+        <module name="EPDS_Web" />
+        <module name="epds-ear" />
+        <module name="epds" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="epds" target="1.8" />
+      <module name="epds-auth" target="1.8" />
+      <module name="epds-ear" target="1.5" />
+      <module name="epds-parent" target="1.5" />
+      <module name="EPDS_Web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="epds" options="-Xlint:all" />
+      <module name="epds-auth" options="-Xlint:all" />
+    </option>
+  </component>
+</project>

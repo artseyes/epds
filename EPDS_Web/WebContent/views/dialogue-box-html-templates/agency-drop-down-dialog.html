@@ -1,0 +1,60 @@
+<style>
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+
+<!-- Modal -->
+      <div class="modal-content" data-ng-controller="agencyDropDownController" disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="fa fa-edit"></i> Edit Agency Info
+               <a data-ng-click="cancel()" class="pull-right" title ="Close" alt="Close">
+                   <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+               </a>
+            </h4>
+         </div>
+         <div class="modal-body custom-modal-bg-color">
+            			<div class="form-group">
+                                <label  class="col-sm-2 col-md-3 control-label ">Agency Tier 1:</label>
+                                <div class="col-sm-10 col-lg-9 col-md-9" id="tiera">
+                                    <select 
+                                    name="agency_tier_1" 
+                                    data-ng-options="item.agency_Name for item in AgencyTier1List track by item.agency_Id"  
+                                    data-ng-model="tier_1_AgencySelectedOption"  
+                                    class="form-control"></select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group" id="t2id" style="display: none">
+                                <label  class="col-sm-2 col-md-3 control-label ">Agency Tier 2 </label>
+                                <div class="col-sm-10 col-lg-9 col-md-9" id="tierb">
+                                     <select 
+                                     name="agency_tier_2" 
+                                     data-ng-options="item.agency_Name for item in AgencyTier2List track by item.agency_Id"  
+                                     data-ng-model="tier_2_AgencySelectedOption"  
+                                     class="form-control"></select>
+                                </div>
+                            </div>
+         </div>
+         <div class="modal-footer custom-modal-bg-color">
+        	<div>
+               <button  name="search" class="btn btn-sm btn-primary" data-ng-click="updateAgencyInfo(tier_1_AgencySelectedOption,tier_2_AgencySelectedOption)">{{buttonText}}</button>
+               <button  name="search" class="btn btn-sm btn-warning " data-ng-click="cancel()">Cancel</button>
+           </div>
+         </div>
+         
+      </div><!-- /.modal-content -->

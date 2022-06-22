@@ -1,0 +1,407 @@
+<div>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Submit New Document</h1>
+            <ol class="breadcrumb" data-ng-show="role != 'GAO ADMIN'">
+                <li><a href="dashboard"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li><a href="case-docketsheet/{{urlEncodedANum}}">Case
+                    Docket Sheet</a></li>
+                <li class="active">Submit New Document</li>
+            </ol>
+            <ol class="breadcrumb" data-ng-show="role == 'GAO ADMIN'">
+                <li><a href="admin-dashboard/unassigned"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li><a href="admin-case-docketsheet/{{urlEncodedANum}}">Case
+                    Docket Sheet</a></li>
+                <li class="active">Submit New Document</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div>
+                            <table class="table table-bordered" role="presentation">
+                                <tbody>
+                                <tr>
+                                    <td><strong>Party</strong></td>
+                                    <td>&nbsp;{{protestInfo.company_Name}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CBCA Number</strong></td>
+                                    <td>&nbsp;{{protestInfo.b_No}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Agency</strong></td>
+                                    <td>&nbsp;{{protestInfo.agency_Name}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contract Number</strong></td>
+                                    <td>&nbsp;{{protestInfo.solicitation_No}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="loginbox" style="margin-top: 50px;"
+                         class="mainbox col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                        <fieldset class="panel panel-info">
+							<legend class="visually-hidden">Submit New Document</legend>
+                            <div class="panel-heading">
+                                <div class="panel-title">Submit New Document</div>
+                            </div>
+                            <div style="padding-top: 30px" class="panel-body">
+                                <form class="form-horizontal" name="submitnewDocForm" role="form"
+                                      enctype="multipart/form-data">
+                                    <div class="form-group" data-ng-show="role != 'GAO ADMIN'">
+                                        <label for="doctype1" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Type of
+                                            document </label>
+                                        <div class="col-sm-12 col-lg-12 col-md-12" id="tiera">
+                                            <div>
+                                                <select id="doctype1"
+                                                        data-ng-options="doc_Info as doc_Info.doc_Type_Desc for doc_Info in doc_InfoList | orderBy: 'filing_Order' track by doc_Info.doc_Type_Id "
+                                                        data-ng-model="selectedOption" class="form-control"></select>
+                                            </div>
+                                            <div class="input-group-btn"
+                                                 data-ng-show="showGenerateDocTempButton">
+                                                <input name="generateDocument" class="btn btn-success"
+                                                       type="button" id="generateDocument"
+                                                       data-ng-click="generateTemplateBasedOnDocumentType(selectedOption)"
+                                                       style="margin-left: 0px; margin-top: 10px;"
+                                                       value="{{generateTempBtnText}}"/>
+                                            </div>
+
+                                            <div data-ng-show="showGenerateDocTempButton
+												&& !deleteTempPdfFile 
+												&& htmlContent != null
+												&& !isNaN(templateCounter)">
+
+                                                <!-- Download Temp Pdf -->
+                                                <a href="javascript:void(0)"
+                                                   data-ng-click="downloadTempPdf(selectedOption)">
+                                                    <i class="fa fa-file-pdf-o fg-text-red"></i>
+                                                    &nbsp;&nbsp;
+                                                    <span data-ng-if="selectedOption.doc_Type_Desc.toLowerCase() === 'protected decision'">
+                                            noticeOfIssuanceOfProtectedDecision.pdf
+                                        </span>
+                                                    <span data-ng-if="selectedOption.doc_Type_Desc.toLowerCase() !== 'protected decision'">
+                                            {{selectedOption.doc_Type_Desc | camelCase}}.pdf
+                                        </span>
+                                                </a>
+
+                                                <!-- Delete Temp Pdf -->
+                                                <a href="javascript:void(0)"
+                                                   data-ng-click="deleteTempPdf()"
+                                                   data-uib-popover="delete file"
+                                                   data-popover-trigger="'mouseenter'"
+                                                   data-popover-placement="right">
+                                                    <i class="fa fa-remove fg-text-red"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-ng-show="role == 'GAO ADMIN'">
+                                        <label for="doctype2" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Type of
+                                            document </label>
+                                        <div class="col-sm-12 col-lg-12 col-md-12" id="tiera">
+                                            <div>
+                                                <select id="doctype2"
+                                                        data-ng-options="doc_Info.doc_Type_Desc group by doc_Info.role for doc_Info in doc_InfoList | orderBy: 'filing_Order' track by doc_Info.doc_Type_Id "
+                                                        data-ng-model="selectedOption" class="form-control">
+                                                    <!-- <option value="">Please Select Document Type</option> -->
+                                                </select>
+                                            </div>
+                                            <div class="input-group-btn"
+                                                 data-ng-show="showGenerateDocTempButton">
+                                                <input name="generateDocument2" class="btn btn-success"
+                                                       type="button" id="generateDocument2"
+                                                       data-ng-click="generateTemplateBasedOnDocumentType(selectedOption)"
+                                                       style="margin-left: 0px; margin-top: 10px;"
+                                                       value="{{generateTempBtnText}}"/>
+                                            </div>
+
+                                            <div data-ng-show="showGenerateDocTempButton
+												&& !deleteTempPdfFile 
+												&& htmlContent != null
+												&& !isNaN(templateCounter)">
+
+                                                <!-- Download Temp Pdf -->
+                                                <a href="javascript:void(0)"
+                                                   data-ng-click="downloadTempPdf(selectedOption)">
+                                                    <i class="fa fa-file-pdf-o fg-text-red"></i>
+                                                    &nbsp;&nbsp;
+                                                    <span data-ng-if="selectedOption.doc_Type_Desc.toLowerCase() === 'protected decision'">
+                                            noticeOfIssuanceOfProtectedDecision.pdf
+                                        </span>
+                                                    <span data-ng-if="selectedOption.doc_Type_Desc.toLowerCase() !== 'protected decision'">
+                                            {{selectedOption.doc_Type_Desc | camelCase}}.pdf
+                                        </span></a>
+
+                                                <!-- Delete Temp Pdf -->
+                                                <a href="javascript:void(0)"
+                                                   data-ng-click="deleteTempPdf()"
+                                                   data-uib-popover="delete file"
+                                                   data-popover-trigger="'mouseenter'"
+                                                   data-popover-placement="right">
+                                                    <i class="fa fa-remove fg-text-red"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-ng-show="showGenerateDocTempButton && (generateTempBtnText != 'Edit Template' || isProtectedDecisionDocType)">
+                                        <h4 data-ng-if="!isProtectedDecisionDocType"><strong>OR</strong></h4>
+                                        <h4 data-ng-if="isProtectedDecisionDocType"><strong>AND</strong></h4>
+                                        <hr>
+                                    </div>
+
+                                    <div class="form-group"
+                                         data-ng-show="(generateTempBtnText != 'Edit Template' || isProtectedDecisionDocType) && !isFileUploadNotRequired">
+                                        <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                            <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+                                                    aria-label="{{primaryBtnText}} {{uploadDocMessage}}, required">
+                                                {{primaryBtnText}} ({{uploadDocMessage}})
+                                            </legend>
+                                            <div class="col-sm-12 col-lg-12 col-md-12"
+                                                 data-flow-init="{
+					       					target: '/epds/upload-epds-documents',
+					       					singleFile: true,
+					       					}"
+                                                 data-flow-file-added="assignSingleFileUploadFlowInstaceToScope( $file, $event, $flow )"
+                                                 data-flow-complete="primaryDocumentIsUploadedToServer($file, $event, $flow)"
+                                                 data-flow-error="fileUploadError( $file, $message, $flow )"
+                                                 data-flow-file-retry="fileUploadRetry( $file, $flow )"
+                                                 data-flow-file-success="fileUploadSuccess( $file, $message, $flow )"
+                                                 data-flow-upload-started="fileUploadStarted( $file, $message, $flow )">
+
+                                                <input type="button" data-flow-btn class="btn btn-info" value="Add File"
+                                                       data-ng-show="$flow.files.length == 0">
+                                                <input type="button" class="btn btn-warning" value="Cancel"
+                                                       data-ng-click="cancelPrimaryDocument($flow)"
+                                                       data-ng-show="!hideCancelButton && !fileUploadInProgress">
+
+                                                <table class="table table-hover table-bordered table-striped"
+                                                       aria-label="List of documents to upload"
+                                                       id="primary-document-table" data-flow-transfers>
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Size</th>
+                                                        <th scope="col">Progress</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr data-ng-repeat="file in transfers | orderBy: 'name'">
+                                                        <td>{{$index+1}}</td>
+                                                        <td>
+                                                            {{file.name}}
+                                                        </td>
+                                                        <td>{{file.size}}</td>
+                                                        <td>
+                                                            <div class="progress progress-striped"
+                                                                 data-ng-class="{active: file.isUploading()}">
+                                                                <div class="progress-bar" role="progressbar"
+                                                                     aria-valuenow="{{file.progress() * 100}}"
+                                                                     aria-valuemin="0" aria-valuemax="100"
+                                                                     data-ng-style="{width: (file.progress() * 100) + '%'}">
+																<span class="sr-only">{{file.progress()}}%
+																	Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <input type="button" class="btn btn-danger"
+                                                                       aria-label="{{file.name}}"
+                                                                       value="Remove" data-ng-click="file.cancel()"
+                                                                       data-ng-show="file.error || !file.isComplete()"/>
+                                                                <input type="button" class="btn btn-info"
+                                                                       aria-label="{{file.name}}"
+                                                                       value="Retry" data-ng-click="file.retry()"
+                                                                       data-ng-show="file.error"/>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-group" id="add-more-yes-or-no"
+                                         data-ng-show="primaryDocumentAdded && (((generateTempBtnText != 'Edit Template' || isProtectedDecisionDocType)) && !isFileUploadNotRequired)">
+                                        <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+                                            <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                Do you want to Upload Associated Documents?
+                                            </legend>
+                                            <div class="col-sm-10 col-lg-9 col-md-9">
+                                                <label>
+                                                    <input type="radio" name="attachAssociatedDoc"
+                                                               data-ng-model="form.attachAssociatedDoc" value="Y">
+                                                    Yes
+                                                </label>
+                                                <label style="margin-left: 100px;">
+                                                    <input type="radio" name="attachAssociatedDoc"
+                                                    data-ng-model="form.attachAssociatedDoc" value="N"
+                                                    data-validation-msg-required="Please choose one "
+                                                    data-ng-required="form.attachAssociatedDoc == null && primaryDocumentAdded">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-group"
+                                         data-ng-show="form.attachAssociatedDoc == 'Y'">
+                                        <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                            <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+                                                    aria-label="Upload Associated Documents, {{uploadDocMessage}}, required">
+                                                Upload Associated Documents ({{uploadDocMessage}})
+                                            </legend>
+                                            <div class="col-sm-12 col-lg-12 col-md-12" data-flow-init
+                                                 data-flow-file-added="assignMultipleFileUploadFlowInstaceToScope( $file, $event, $flow )"
+                                                 data-flow-complete="associatedDocumentsIsUploadedToServer($file, $event, $flow)"
+                                                 data-flow-error="fileUploadError( $file, $message, $flow )"
+                                                 data-flow-file-retry="fileUploadRetry( $file, $flow )"
+                                                 data-flow-file-success="fileUploadSuccess( $file, $message, $flow )"
+                                                 data-flow-upload-started="fileUploadStarted( $file, $message, $flow )">
+
+                                                <input type="button" data-flow-btn class="btn btn-info" value="Add Files">
+                                                <input type="button" class="btn btn-warning" value="Cancel"
+                                                       data-ng-click="cancelAssociatedDocuments($flow)"
+                                                       data-ng-show="!hideCancelButton && !fileUploadInProgress">
+                                                <table class="table table-hover table-bordered table-striped"
+                                                       aria-label="List of associated documents to upload"
+                                                       id="associated-documents-table" data-flow-transfers>
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Size</th>
+                                                        <th scope="col">Progress</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <tr data-ng-repeat="file in transfers | orderBy: 'name'">
+                                                        <td>{{$index+1}}</td>
+                                                        <td>
+                                                            {{file.name}}
+                                                        </td>
+                                                        <td>{{file.size}}</td>
+                                                        <td>
+                                                            <div class="progress progress-striped"
+                                                                 data-ng-class="{active: file.isUploading()}">
+                                                                <div class="progress-bar" role="progressbar"
+                                                                     aria-valuenow="{{file.progress() * 100}}"
+                                                                     aria-valuemin="0" aria-valuemax="100"
+                                                                     data-ng-style="{width: (file.progress() * 100) + '%'}">
+																<span class="sr-only">{{file.progress()}}%
+																	Complete</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <input type="button" class="btn btn-danger"
+                                                                       aria-label="{{file.name}}"
+                                                                       value="Remove" data-ng-click="file.cancel()"
+                                                                       data-ng-show="file.error || !file.isComplete()"/>
+                                                                <input type="button" class="btn btn-info"
+                                                                       aria-label="{{file.name}}"
+                                                                       value="Retry" data-ng-click="file.retry()"
+                                                                       data-ng-show="file.error"/>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="alert alert-danger" data-ng-show="fileUploadErrors.length > 0">
+
+                                        <p>The following files were removed from the upload queue. </p>
+                                        <hr>
+                                        <ol>
+                                            <li>
+                                                <ul class="animated fadeInRight">
+                                                    <li data-ng-repeat="errors in fileUploadErrors track by $index"><i>{{errors.fileError}}</i>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <div class="form-group"
+                                         data-ng-show="!isAlwaysVisisble && !isFileUploadNotRequired && !isAlwaysProtected">
+                                        <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+                                            <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                Do any of these documents contain information that is
+                                                proprietary, confidential, or otherwise not releasable to the public?
+                                            </legend>
+                                            <div class="col-sm-10 col-lg-9 col-md-9">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="isDocConfidential"
+                                                           data-ng-model="form.isDocConfidential" value="Y">
+                                                    Yes
+                                                </label>
+                                                <label class="radio-inline" style="margin-left: 100px;">
+                                                    <input type="radio" name="isDocConfidential" value="N"
+                                                       data-validate-on="blur"
+                                                       data-ng-model="form.isDocConfidential"
+                                                       data-validation-msg-required="Please choose one  "
+                                                       data-ng-required="form.isDocConfidential == null">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comments" class="col-sm-12 col-lg-12 col-md-12">Comments - Please
+                                            provide a description of the document (E.g., objection to agency's 5 day
+                                            letter, request for an extension, etc.).</label>
+                                        <div class="col-sm-12 col-lg-12 col-md-12">
+										<textarea id="comments" name="comments" class="form-control"
+                                                  data-ng-trim="true"
+                                                  data-ng-model="form.comments"
+                                                  data-ng-pattern="regEx.comments"
+                                                  title="Enter comments"
+                                                  maxlength="250" data-char-limit="250"></textarea>
+                                            <span data-ng-class="{'btn-warning': form.comments.length >= 120,
+														'btn-danger': form.comments.length >= 250 }">
+														{{ 250 - form.comments.length }} characters remaining</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+                                        <div class="col-sm-10 col-lg-9 col-md-9">
+                                            <input type="submit" value="Submit" class="btn btn-success start"
+                                                   data-ng-click="registerSubmitNewDocForm(submitnewDocForm,form.isDocConfidential,form.attachAssociatedDoc,form.comments,isAllTimeVisbile)"
+                                                   data-ng-disabled="(isProtectedDecisionDocType && isNaN(templateCounter)) ||
+                                                   ((generateTempBtnText != 'Edit Template' || isProtectedDecisionDocType) && !isFileUploadNotRequired &&
+                                                    (!(singleFileUpload && singleFileUpload.files.length > 0) ||
+                                                    !(form.attachAssociatedDoc == 'N' || multipleFileUpload && multipleFileUpload.files.length > 0)))">
+
+                                            <input type="submit" value="Reset"
+                                                   class="btn btn-danger"
+                                                   data-ng-click="reset()">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->

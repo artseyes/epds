@@ -1,0 +1,893 @@
+<style>
+
+    .numberCircle {
+        display: inline-block;
+        line-height: 0px;
+
+        border-radius: 50%;
+        border: 2px solid;
+
+        font-size: 15px;
+    }
+
+    .numberCircle span {
+        display: inline-block;
+
+        padding-top: 50%;
+        padding-bottom: 50%;
+
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+</style>
+
+
+<div>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>New Case Submission Form</h1>
+            <ol class="breadcrumb">
+                <li><a href="dashboard"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li class="active">File New Protest</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content" id="protestInfoForm" style="display: none">
+            <div class="container">
+                <div id="loginbox" style="margin-top: 50px;"
+                     class="mainbox col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">New Case Information</div>
+
+                        </div>
+                        <div style="padding-top: 30px" class="panel-body">
+                            <form class="form-horizontal" role="form" data-ng-fab-form-options="customFormOptions"
+                                  name="protestInfoForm" enctype="multipart/form-data" id="protest-form">
+                                <fieldset class="box box-primary">
+                                    <legend class="visually-hidden">Protester</legend>
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Filing Party</h3>
+                                        <div class="box-tools pull-right"></div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="company_name"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Filing Party Name
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text"
+                                                               id="company_name"
+                                                               name="company_name"
+                                                               data-validate-on="dirty" class="form-control input-sm"
+                                                               data-uib-popover="{{toolTip.companyName}}"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-ng-pattern="regEx.nameOfFirm"
+                                                               data-ng-model="form.company_name"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-z A-Z 0-9 !,@#&.)(/\\-"
+                                                               maxlength="200"
+                                                               data-validation-msg-required="Please enter company name"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label for="company_status"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Case Type
+                                                    </label>
+                                                        <div class="col-sm-12 col-lg-12 col-md-12">
+                                                                <select
+                                                                        id="company_status"
+                                                                        name="company_status"
+                                                                        data-ng-model="form.company_status"
+                                                                        data-ng-options="s.text as s.text for s in companyStatuses">
+                                                                        class="form-control"></select>
+
+                                                                  <!-- Commented out on 06/09/2022
+                                                            <label class="radio-inline">
+                                                                <input type="radio"
+                                                                       data-validate-on="blur"
+                                                                       name="company_status"
+                                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                                       data-ng-model="form.company_status"
+                                                                       value="small"
+                                                                       data-validation-msg-required="Please select company size  "
+                                                                       data-ng-required="form.company_status == null">
+                                                                Small
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="company_status"
+                                                                       data-ng-model="form.company_status"
+                                                                       value="large">
+                                                                Large
+                                                            </label>-->
+                                                        </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                </fieldset>
+
+                                <fieldset class="box box-primary">
+                                    <legend class="visually-hidden">Company Address</legend>
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Address</h3>
+                                        <div class="box-tools pull-right"></div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="caddress1"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Address Line 1
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input data-ng-autocomplete type="text"
+                                                               name="caddress1" id="caddress1"
+                                                               class="form-control input-sm"
+                                                               data-validate-on="blur"
+                                                               data-uib-popover="{{toolTip.address}}"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-ng-pattern="regEx.address"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
+                                                               placeholder=""
+                                                               data-ng-model="form.company_address1"
+                                                               data-validation-msg-required="Please enter company street address"
+                                                               data-details="companyAddressDetails"
+                                                               data-options="options"
+                                                               maxlength="100"
+                                                               required>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="caddress2" class="col-sm-12 col-lg-12 col-md-12">
+                                                        Address Line 2
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input data-ng-autocomplete type="text"
+                                                               name="caddress2" id="caddress2"
+                                                               class="form-control input-sm"
+                                                               data-validate-on="blur"
+                                                               data-uib-popover="{{toolTip.address}}"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-ng-pattern="regEx.address"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
+                                                               placeholder=""
+                                                               data-ng-model="form.company_address2"
+                                                               data-validation-msg-required="Please enter company street address"
+                                                               data-details="companyAddressDetails"
+                                                               data-options="options"
+                                                               maxlength="100">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="czipcode"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Zip Code</label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="company_zipcode"
+                                                               data-validate-on="blur"
+                                                               class="form-control zipcode input-sm"
+                                                               id="czipcode"
+                                                               data-ng-model="form.company_zipcode"
+                                                               data-uib-popover="{{toolTip.zipcode}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-validation-msg-pattern="Invalid input format"
+                                                               data-ng-pattern="regEx.zipcode"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9- )( "
+                                                               data-validation-msg-required="Please enter company "
+                                                               maxlength="10"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ccity"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        City
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="company_city" id="ccity"
+                                                               class="form-control input-sm"
+                                                               data-ng-model="form.company_city"
+                                                               data-validate-on="focus"
+                                                               data-uib-popover="{{toolTip.city}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-popover-trigger="'focus'"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 &.)(/\\':;-"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.city"
+                                                               data-validation-msg-required="Please enter company city "
+                                                               maxlength="20"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cstate"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        State
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="company_state" id="cstate"
+                                                               data-validate-on="blur" class="form-control input-sm"
+                                                               data-validate-on="focus"
+                                                               data-ng-model="form.company_state"
+                                                               data-uib-popover="{{toolTip.state}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 .)(/\\-"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.state"
+                                                               data-validation-msg-required="Please enter company state "
+                                                               maxlength="20"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ccountry"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Country
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="company_country"
+                                                               data-validate-on="dirty" id="ccountry"
+                                                               class="form-control input-sm"
+                                                               data-ng-model="form.company_country"
+                                                               data-validate-on="focus"
+                                                               data-uib-popover="{{toolTip.country}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.country"
+                                                               maxlength="20"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z "
+                                                               data-validation-msg-required="Please enter company country"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                </fieldset>
+
+                                <fieldset class="box box-primary" data-ng-if="role == 'GAO ADMIN'">
+                                    <legend class="visually-hidden">Protester Representative</legend>
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Protester Representative</h3>
+<!--                                        <div class="box-tools pull-right">-->
+<!--                                            <button class="btn btn-box-tool btn-info" data-box-collapse>-->
+<!--                                                <i class="fa fa-minus"></i> <strong>Collapse</strong>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="firstname"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        First Name</label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text"
+                                                               id="firstname"
+                                                               name="firstname"
+                                                               class="form-control input-sm"
+                                                               data-validate-on="dirty" data-ng-model="form.firstname"
+                                                               data-uib-popover="{{toolTip.firstName}}"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-ng-pattern="regEx.firstName"
+                                                               data-validation-msg-required="Please enter representative first name"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 "
+                                                               maxlength="25"
+                                                               data-ng-disabled="role != 'GAO ADMIN'"
+                                                               data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lastname"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Last Name
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text"
+                                                               id="lastname"
+                                                               name="lastname"
+                                                               class="form-control input-sm" data-validate-on="dirty"
+                                                               data-ng-model="form.lastname"
+                                                               data-uib-popover="{{toolTip.lastName}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 "
+                                                               data-ng-pattern="regEx.lastName"
+                                                               maxlength="25"
+                                                               data-validation-msg-required="Please enter representative last name"
+                                                               data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Email Address
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="email"
+                                                               id="email"
+                                                               name="email" disabled="disabled"
+                                                               class="form-control input-sm"
+                                                               data-ng-model="form.email"
+                                                               data-validation-msg-required="Please enter representative email address"
+                                                               data-uib-popover="{{toolTip.email}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-validation-msg-pattern="Invalid input format."
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.email"
+                                                               maxlength="320"
+                                                               data-validation-msg-userid="Email address is not a valid user account."
+                                                               userid
+                                                               data-ng-disabled="role != 'GAO ADMIN'"
+                                                               data-ng-required="role == 'GAO ADMIN'" lowercase>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <fieldset required>
+                                                        <legend class="visually-hidden">Phone Number</legend>
+                                                        <label for="phonenumber"
+                                                               class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Phone
+                                                            Number</label>
+                                                        <div class="col-sm-12 col-lg-12 col-md-12">
+                                                            <input type="tel"
+                                                                   id="phonenumber"
+                                                                   name="phonenumber"
+                                                                   data-validate-on="dirty"
+                                                                   class="form-control input-sm"
+                                                                   data-ng-model="form.phonenumber"
+                                                                   data-international-phone-number
+                                                                   data-validation-msg-required="Please enter phone number"
+                                                                   data-ng-disabled="role != 'GAO ADMIN'"
+                                                                   data-ng-required="role == 'GAO ADMIN'">
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <fieldset>
+                                                        <legend class="visually-hidden">Fax Number</legend>
+                                                        <label for="faxnumber" class="col-sm-12 col-lg-12 col-md-12">Fax
+                                                            Number</label>
+                                                        <div class="col-sm-12 col-lg-12 col-md-12">
+                                                            <input type="text"
+                                                                   id="faxnumber"
+                                                                   name="faxnumber"
+                                                                   class="form-control input-sm"
+                                                                   data-validate-on="dirty"
+                                                                   data-ng-model="form.faxnumber"
+                                                                   data-international-phone-number
+                                                                   data-validation-msg-required="Please enter fax number"
+                                                                   data-ng-disabled="role != 'GAO ADMIN'">
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="paddress1"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Address Line 1
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input
+                                                                data-ng-autocomplete type="text"
+                                                                id="paddress1"
+                                                                name="paddress1"
+                                                                disabled="disabled" class="form-control input-sm"
+                                                                id="pstreet"
+                                                                placeholder=""
+                                                                data-ng-model="form.address1"
+                                                                data-validation-msg-required="Please enter representative street address"
+                                                                data-uib-popover="{{toolTip.address}}"
+                                                                data-popover-trigger="'focus'"
+                                                                data-ng-model-options="{ updateOn: 'blur' }"
+                                                                data-popover-placement="top"
+                                                                data-ng-pattern="regEx.address"
+                                                                maxlength="100"
+                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
+                                                                data-details="representativeAddressDetails"
+                                                                data-options="options"
+                                                                data-ng-disabled="role != 'GAO ADMIN'"
+                                                                data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="paddress2" class="col-sm-12 col-lg-12 col-md-12">
+                                                        Address Line 2
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input
+                                                                data-ng-autocomplete type="text"
+                                                                id="paddress2"
+                                                                name="paddress2"
+                                                                disabled="disabled" class="form-control input-sm"
+                                                                id="pstreet"
+                                                                placeholder=""
+                                                                data-ng-model="form.address2"
+                                                                data-validation-msg-required="Please enter representative street address"
+                                                                data-uib-popover="{{toolTip.address}}"
+                                                                data-popover-trigger="'focus'"
+                                                                data-ng-model-options="{ updateOn: 'blur' }"
+                                                                data-popover-placement="top"
+                                                                data-ng-pattern="regEx.address"
+                                                                maxlength="100"
+                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
+                                                                data-details="representativeAddressDetails"
+                                                                data-options="options"
+                                                                data-ng-disabled="role != 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pzipcode"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Zip Code
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="zipcode" disabled="disabled"
+                                                               data-validate-on="dirty"
+                                                               class="form-control input-sm zipcode"
+                                                               id="pzipcode"
+                                                               data-ng-model="form.zipcode"
+                                                               data-uib-popover="{{toolTip.zipcode}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.zipcode"
+                                                               maxlength="10"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9- )( "
+                                                               data-validation-msg-required="Please enter representative zipcode"
+                                                               data-ng-disabled="role != 'GAO ADMIN'"
+                                                               data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pcity"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        City
+                                                    </label>
+
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="city"
+                                                               class="form-control input-sm"
+                                                               data-validate-on="dirty" id="pcity"
+                                                               data-uib-popover="{{toolTip.city}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters a-zA-Z0-9 &.)(/\\':;-"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.city"
+                                                               data-validation-msg-required="Please enter representative city"
+                                                               maxlength="20"
+                                                               data-ng-model="form.city"
+                                                               data-ng-disabled="role != 'GAO ADMIN'"
+                                                               data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pstate"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        State:
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text"
+                                                               name="state"
+                                                               class="form-control input-sm"
+                                                               id="pstate"
+                                                               data-validate-on="dirty"
+                                                               data-uib-popover="{{toolTip.state}}"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-z, A-Z, 0-9, .)(/\\-"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.state"
+                                                               maxlength="20"
+                                                               data-ng-model="form.state"
+                                                               data-validation-msg-required="Please enter representative state"
+                                                               data-ng-disabled="role != 'GAO ADMIN'"
+                                                               data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pcountry"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Country
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text"
+                                                               name="country"
+                                                               data-validate-on="dirty"
+                                                               data-uib-popover="{{toolTip.country}}"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-zA-Z "
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-model-options="{ updateOn: 'blur' }"
+                                                               data-ng-pattern="regEx.country"
+                                                               maxlength="20"
+                                                               class="form-control input-sm"
+                                                               id="pcountry"
+                                                               data-ng-model="form.country"
+                                                               data-validation-msg-required="Please enter representative country address"
+                                                               data-ng-disabled="role != 'GAO ADMIN'"
+                                                               data-ng-required="role == 'GAO ADMIN'">
+                                                    </div>
+                                                </div>
+                                                <!-- /.form-group -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <!-- <div class="box-footer clearfix">
+                                        <a data-ng-click="updateProfile()" data-ng-show="role != 'GAO ADMIN'"
+                                            class="btn btn-sm btn-success btn-flat pull-right">Update
+                                            Profile</a>
+                                    </div> -->
+                                    <!-- /.box-footer -->
+
+                                </fieldset>
+                                <!-- /.box -->
+                                <fieldset class="box box-primary">
+                                    <legend class="visually-hidden">Protest Detail</legend>
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Additional Details</h3>
+                                        <div class="box-tools pull-right"></div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="solicitationNumber"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Contract Number
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="solicitationNumber"
+                                                               class="form-control input-sm" id="solicitationNumber"
+                                                               data-ng-model="form.solicitationNumber"
+                                                               data-uib-popover="{{toolTip.solNum}}"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9-_ "
+                                                               data-ng-pattern="regEx.solNum"
+                                                               maxlength="{{regEx.solNum_max}}"
+                                                               data-validate-on="dirty"
+                                                               data-validation-msg-required="Please enter Contract Number"
+                                                               required>
+                                                        <pre><strong>If unknown, please indicate "unknown"</strong></pre>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cfmSolNum"
+                                                           class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                        Confirm Contract Number
+                                                    </label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <input type="text" name="cfmSolicitationNumber"
+                                                               id="cfmSolNum" class="form-control input-sm"
+                                                               data-ng-model="form.cfmSolicitationNumber"
+                                                               data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9-_ "
+                                                               data-uib-popover="{{toolTip.solNum}}"
+                                                               data-popover-trigger="'focus'"
+                                                               data-popover-placement="top"
+                                                               data-ng-pattern="regEx.solNum"
+                                                               maxlength="{{regEx.solNum_max}}"
+                                                               data-validate-on="dirty"
+                                                               data-invalid-message="Contract Number do not match!"
+                                                               data-validation-msg-required="Please confirm contract Number"
+                                                               required match="form.solicitationNumber"
+                                                               match-caseless="true">
+                                                    </div>
+                                                </div>
+
+                                                <agency-drop-down class="col-sm-12 col-lg-12 col-md-12"
+                                                                  agencylist="tier1AgencyList"
+                                                                  tier1-selected-option="tier1SelectedOption"
+                                                                  tier2-selected-option="tier2SelectedOption"
+                                                                  tooltip="{{fieldText.nameOfFirm}}"
+                                                                  data-ng-model="form.agency"
+                                                                  protest-warning="(Failure to designate the correct agency may delay notice of the new case filing)">
+                                                </agency-drop-down>
+
+                                                <div class="form-group">
+                                                    <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+                                                                aria-label="Upload Protest Document, {{uploadDocMessage}}, required">
+                                                            Upload Protest Document ({{uploadDocMessage}})
+                                                        </legend>
+                                                        <div class="col-sm-12 col-lg-12 col-md-12"
+                                                             data-flow-init="{
+											       					target: '/epds/upload-epds-documents',
+											       					singleFile: true,
+											       					}"
+                                                             data-flow-file-added="assignSingleFileUploadFlowInstaceToScope( $file, $event, $flow )"
+                                                             data-flow-complete="protestDocumentIsUploadedToServer($file, $event, $flow)"
+                                                             data-flow-error="fileUploadError( $file, $message, $flow )"
+                                                             data-flow-file-retry="fileUploadRetry( $file, $flow )"
+                                                             data-flow-file-success="fileUploadSuccess( $file, $message, $flow )"
+                                                             data-flow-upload-started="fileUploadStarted( $file, $message, $flow )">
+
+                                                            <input type="button" data-flow-btn class="btn btn-info"
+                                                                   value="Add File"
+                                                                   data-ng-show="$flow.files.length == 0">
+                                                            <input type="button" class="btn btn-warning" value="Cancel"
+                                                                   data-ng-click="cancelPrimaryDocument($flow)"
+                                                                   data-ng-show="!hideCancelButton && !fileUploadInProgress">
+                                                            <table
+                                                                    class="table table-hover table-bordered table-striped"
+                                                                    id="protest-table" data-flow-transfers
+                                                                    title="Table which displays list of attached files">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Name</th>
+                                                                    <th scope="col">Size</th>
+                                                                    <th scope="col">Progress</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr data-ng-repeat="file in transfers | orderBy: 'name'">
+                                                                    <td>{{$index+1}}</td>
+                                                                    <td>{{file.name}}</td>
+                                                                    <td>{{file.size}}</td>
+                                                                    <td>
+                                                                        <div class="progress progress-striped"
+                                                                             data-ng-class="{active: file.isUploading()}">
+                                                                            <div class="progress-bar" role="progressbar"
+                                                                                 aria-valuenow="{{file.progress() * 100}}"
+                                                                                 aria-valuemin="0" aria-valuemax="100"
+                                                                                 data-ng-style="{width: (file.progress() * 100) + '%'}">
+																					<span class="sr-only">{{file.progress()}}%
+																						Complete</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="btn-group">
+                                                                            <input type="button" class="btn btn-danger"
+                                                                                   aria-label="{{file.name}}"
+                                                                                   value="Remove"
+                                                                                   data-ng-click="file.cancel()"
+                                                                                   data-ng-show="file.error || !file.isComplete()">
+                                                                            <input type="button" class="btn btn-info"
+                                                                                   aria-label="{{file.name}}"
+                                                                                   value="Retry"
+                                                                                   data-ng-click="file.retry()"
+                                                                                   data-ng-show="file.error">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+                                                <div class="form-group" id="add-more-yes-or-no"
+                                                     data-ng-show="protestDocumentAdded">
+                                                    <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+                                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                            Do you want to Upload Associated Documents?
+                                                        </legend>
+                                                        <div class="col-sm-12 col-lg-12 col-md-12">
+                                                            <label>
+                                                                <input type="radio" name="attachAssociatedDoc"
+                                                                       data-ng-model="form.attachAssociatedDoc"
+                                                                       value="Y">
+                                                                Yes
+                                                            </label>
+                                                            <label style="margin-left: 100px;">
+                                                                <input type="radio" name="attachAssociatedDoc"
+                                                                       data-ng-model="form.attachAssociatedDoc"
+                                                                       value="N"
+                                                                       data-validation-msg-required="Please choose one "
+                                                                       data-ng-required="form.attachAssociatedDoc == null && protestDocumentAdded">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="form-group" data-ng-show="form.attachAssociatedDoc == 'Y'">
+                                                    <fieldset class="col-sm-12 col-lg-12 col-md-12">
+                                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
+                                                                aria-label="Upload Associated Documents, {{uploadDocMessage}}, required">
+                                                            Upload Associated Documents ({{uploadDocMessage}})
+                                                        </legend>
+                                                        <div class="col-sm-12 col-lg-12 col-md-12" data-flow-init
+                                                             data-flow-file-added="assignMultipleFileUploadFlowInstaceToScope( $file, $event, $flow)"
+                                                             data-flow-complete="associatedDocumentsIsUploadedToServer($file, $event, $flow)"
+                                                             data-flow-error="fileUploadError( $file, $message, $flow )"
+                                                             data-flow-file-retry="fileUploadRetry( $file, $flow )"
+                                                             data-flow-file-success="fileUploadSuccess( $file, $message, $flow )"
+                                                             data-flow-upload-started="fileUploadStarted( $file, $message, $flow )">
+
+                                                            <input type="button" data-flow-btn class="btn btn-info"
+                                                                   value="Add Files">
+                                                            <input type="button" class="btn btn-warning" value="Cancel"
+                                                                   data-ng-click="cancelAssociatedDocuments($flow)"
+                                                                   data-ng-show="!hideCancelButton && !fileUploadInProgress">
+                                                            <table
+                                                                    class="table table-hover table-bordered table-striped"
+                                                                    id="associated-documents-table"
+                                                                    title="Table which displays list of attached files"
+                                                                    data-flow-transfers>
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Name</th>
+                                                                    <th scope="col">Size</th>
+                                                                    <th scope="col">Progress</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr data-ng-repeat="file in transfers | orderBy: 'name'">
+                                                                    <td>{{$index+1}}</td>
+                                                                    <td>{{file.name}}</td>
+                                                                    <td>{{file.size}}</td>
+                                                                    <td>
+                                                                        <div class="progress progress-striped"
+                                                                             data-ng-class="{active: file.isUploading()}">
+                                                                            <div class="progress-bar" role="progressbar"
+                                                                                 aria-valuenow="{{file.progress() * 100}}"
+                                                                                 aria-valuemin="0" aria-valuemax="100"
+                                                                                 data-ng-style="{width: (file.progress() * 100) + '%'}">
+																					<span class="sr-only">{{file.progress()}}%
+																						Complete</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="btn-group">
+                                                                            <input type="button" class="btn btn-danger"
+                                                                                   aria-label="{{file.name}}"
+                                                                                   value="Remove"
+                                                                                   data-ng-click="file.cancel()"
+                                                                                   data-ng-show="file.error || !file.isComplete()">
+                                                                            <input type="button" class="btn btn-info"
+                                                                                   aria-label="{{file.name}}"
+                                                                                   value="Retry"
+                                                                                   data-ng-click="file.retry()"
+                                                                                   data-ng-show="file.error">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+                                                <div class="alert alert-danger"
+                                                     data-ng-show="fileUploadErrors.length > 0">
+
+                                                    <p>The following files were removed from the upload queue. </p>
+                                                    <hr>
+                                                    <ol>
+                                                        <li>
+                                                            <ul class="animated fadeInRight">
+                                                                <li data-ng-repeat="errors in fileUploadErrors track by $index">
+                                                                    <i>{{errors.fileError}}</i></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ol>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
+                                                        <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
+                                                            {{docConfidentialLabel}} (Selection brings up legal information)
+                                                        </legend>
+                                                        <div class="col-sm-10 col-lg-9 col-md-9"
+                                                             style="margin-left: 200px;">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="isDocConfidential"
+                                                                       data-ng-model="form.isDocConfidential" value="Y">
+                                                                Yes
+                                                            </label>
+                                                            <label class="radio-inline" style="margin-left: 100px;">
+                                                                <input type="radio" name="isDocConfidential" value="N"
+                                                                       data-validate-on="blur"
+                                                                       data-ng-model="form.isDocConfidential"
+                                                                       data-validation-msg-required="Please choose one  "
+                                                                       data-ng-required="form.isDocConfidential == null">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-12 col-lg-12 col-md-12">Comments</label>
+                                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                                        <textarea name="comments" class="form-control input-lg"
+                                                                  data-ng-trim="true"
+                                                                  data-uib-popover="{{toolTip.comments}}"
+                                                                  data-popover-trigger="'focus'"
+                                                                  data-popover-placement="top"
+                                                                  title="Enter additional comments"
+                                                                  data-ng-pattern="regEx.comments"
+                                                                  data-validation-msg-required="Please enter comments"
+                                                                  data-validation-msg-pattern="Invalid input format. Allowed characters and symbols in this input field are a-zA-Z0-9!. "
+                                                                  data-ng-model="form.comments"
+                                                                  maxlength="250">
+                                                        </textarea>
+
+                                                        <span data-ng-class="{'btn-warning': form.comments.length >= 120,
+														'btn-danger': form.comments.length >= 250 }">
+														{{ 250 - form.comments.length }} characters remaining</span>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+                                    <div class="col-sm-10 col-lg-9 col-md-9">
+                                        <input type="submit" value="Submit"
+                                               data-ng-click="registerProtestInfo(protestInfoForm.$valid,
+                                                    form.attachAssociatedDoc, form,tier1SelectedOption,
+                                                    tier2SelectedOption,protestInfoForm)"
+                                               class="btn btn-success"
+                                               data-ng-disabled="protestInfoForm.$invalid || !protestInfoForm.$dirty ||
+                                                    !(singleFileUpload && singleFileUpload.files.length > 0) ||
+                                                    !(form.attachAssociatedDoc == 'N' || multipleFileUpload && multipleFileUpload.files.length > 0)">
+
+                                        <input type="button" value="Cancel" data-ng-click="cancel()"
+                                               class="btn btn-warning">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->

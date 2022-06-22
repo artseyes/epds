@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:tns="http://fms.treas.gov/services/tcsonline" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cns="http://fms.treas.gov/services/common" version="1.0"
+           targetNamespace="http://fms.treas.gov/services/tcsonline">
+
+
+    <!-- VERSION: 2.2 07/23/2018 -->
+
+    <!-- Note: Version 2.2 added shipping addresses in response of force and complete collection -->
+
+
+    <xs:import namespace="http://fms.treas.gov/services/common"
+               schemaLocation="TCSOnlineService_xsd3.xsd"/>
+
+    <xs:include schemaLocation="TCSOnlineService_xsd4.xsd"/>
+
+
+    <xs:element name="createForceWithDetailsResponse2" type="tns:CreateForceWithDetailsResponse2Type"/>
+
+    <xs:element name="completeOnlineCollectionWithDetailsResponse2"
+                type="tns:CompleteOnlineCollectionWithDetailsResponse2Type"/>
+
+    <xs:element name="getDetailsResponse2" type="tns:GetDetailsResponse2Type"/>
+
+
+    <xs:complexType name="CreateForceWithDetailsResponse2Type">
+
+        <xs:sequence>
+
+            <xs:element name="CreateForceWithDetailsResponse2" type="tns:CreateForceWithDetailsResponse2"
+                        minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="CreateForceWithDetailsResponse2">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:CreateForceWithDetailsResponse">
+
+                <xs:sequence>
+
+                    <xs:element name="shipping_address" type="cns:ShippingAddress" minOccurs="0"/>
+
+                    <xs:element name="shipping_address2" type="cns:ShippingAddress" minOccurs="0"/>
+
+                    <xs:element name="shipping_city" type="cns:ShippingCity" minOccurs="0"/>
+
+                    <xs:element name="shipping_state" type="cns:ShippingState" minOccurs="0"/>
+
+                    <xs:element name="shipping_zip" type="cns:ShippingZip" minOccurs="0"/>
+
+                    <xs:element name="shipping_country" type="cns:AddressCountryCode" minOccurs="0"/>
+
+                    <xs:element name="address_return_message" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="CompleteOnlineCollectionWithDetailsResponse2Type">
+
+        <xs:sequence>
+
+            <xs:element name="completeOnlineCollectionWithDetailsResponse2"
+                        type="tns:CompleteOnlineCollectionWithDetailsResponse2" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="CompleteOnlineCollectionWithDetailsResponse2">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:CompleteOnlineCollectionWithDetailsResponse">
+
+                <xs:sequence>
+
+                    <xs:element name="shipping_address" type="cns:ShippingAddress" minOccurs="0"/>
+
+                    <xs:element name="shipping_address2" type="cns:ShippingAddress" minOccurs="0"/>
+
+                    <xs:element name="shipping_city" type="cns:ShippingCity" minOccurs="0"/>
+
+                    <xs:element name="shipping_state" type="cns:ShippingState" minOccurs="0"/>
+
+                    <xs:element name="shipping_zip" type="cns:ShippingZip" minOccurs="0"/>
+
+                    <xs:element name="shipping_country" type="cns:AddressCountryCode" minOccurs="0"/>
+
+                    <xs:element name="address_return_message" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="GetDetailsResponse2Type">
+
+        <xs:sequence>
+
+            <xs:element name="getDetailsResponse" type="tns:GetDetailsResponse2" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="GetDetailsResponse2">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:GetDetailsResponse">
+
+                <xs:sequence>
+
+                    <xs:element name="transactions2" type="tns:Transactions2" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="Transactions2">
+
+        <xs:sequence>
+
+            <xs:element name="transaction2" type="tns:TransactionData2" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="TransactionData2">
+
+        <xs:complexContent>
+
+            <xs:extension base="tns:transactionData">
+
+                <xs:sequence>
+
+                    <xs:element name="shipping_address" type="cns:ShippingAddress" minOccurs="0"/>
+
+                    <xs:element name="shipping_address2" type="cns:ShippingAddress" minOccurs="0"/>
+
+                    <xs:element name="shipping_city" type="cns:ShippingCity" minOccurs="0"/>
+
+                    <xs:element name="shipping_state" type="cns:ShippingState" minOccurs="0"/>
+
+                    <xs:element name="shipping_zip" type="cns:ShippingZip" minOccurs="0"/>
+
+                    <xs:element name="shipping_country" type="cns:AddressCountryCode" minOccurs="0"/>
+
+                    <xs:element name="address_return_message" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>

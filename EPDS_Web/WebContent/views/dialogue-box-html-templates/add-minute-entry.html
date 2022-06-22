@@ -1,0 +1,25 @@
+<div class="modal-content" disableBackBtn>
+    <div class="modal-header modal-header-primary">
+        <h4 class="modal-title">
+            <i class="glyphicon glyphicon-plus-sign"></i> Add Minute Entry
+            <a data-ng-click="cancel()" class="pull-right" title="Close" alt="Close">
+                <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+            </a>
+        </h4>
+    </div>
+    <div class="modal-body custom-modal-bg-color">
+        <div>
+            <label for="comments">Minute Entry</label>
+            <textarea id="comments" data-ng-trim="true" name="comments" class="form-control" data-ng-model="comments"></textarea>
+            <span data-ng-class="{'btn-warning': comments.length >= 120, 'btn-danger': comments.length > 250 }">{{ 250 - comments.length }} characters remaining</span>
+        </div>
+    </div>
+    <div>
+        <div class="modal-footer custom-modal-bg-color buttoncls">
+            <button class="btn btn-success " data-ng-click="addMinuteEntry(comments)"
+                    data-ng-disabled="comments.length < 1 || comments.length > 250">Add
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-danger  pull-right" data-ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

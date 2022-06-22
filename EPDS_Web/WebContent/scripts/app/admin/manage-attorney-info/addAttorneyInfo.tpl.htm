@@ -1,0 +1,158 @@
+<form id="addAttorneyForm" data-ng-fab-form-options="customFormOptions"
+      name="addAttorneyForm">
+    <fieldset class="panel panel-primary">
+        <legend class="visually-hidden">Add CBCA User</legend>
+        <div class="panel-heading">Add CBCA User</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="email" class="requiredInputs">Email</label>
+                <input type="email" name="email"
+                       id="email" class="form-control input-sm"
+                       data-uib-popover="{{fieldText.emailToolTip}}"
+                       data-popover-trigger="'focus'" data-ng-model="form.email"
+                       data-popover-placement="right"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-validation-msg-required="Please enter email address"
+                       data-validation-msg-authorized="please enter an email with .gov"
+                       lowercase role="role" required authorized uniqueid
+                       data-ng-pattern="regEx.email" maxlength="{{regEx.email_max}}">
+            </div>
+
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" class="form-control input-sm"
+                       data-ng-model="form.title" data-ng-model-options="{ updateOn: 'blur' }"
+                       data-ng-pattern="regEx.gaoTitle" maxlength="{{regEx.gaoTitle_max}}">
+            </div>
+            <div class="form-group">
+                <label for="prefix">Prefix</label>
+                <input type="text" name="prefix" id="prefix" class="form-control input-sm"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-ng-model="form.prefix"
+                       data-ng-pattern="regEx.prefix" maxlength="{{regEx.prefix_max}}">
+            </div>
+            <div class="form-group">
+                <label for="firstname" class="requiredInputs">First Name</label>
+                <input type="text" name="firstname" id="firstname" class="form-control input-sm"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-ng-model="form.firstname"
+                       data-validate-on="blur"
+                       data-validation-msg-required="Please enter first name" required
+                       data-ng-pattern="regEx.firstName" maxlength="{{regEx.firstName_max}}">
+            </div>
+            <div class="form-group">
+                <label for="middleInitial">Middle Initial</label>
+                <input type="text" name="middleInitial" id="middleInitial" class="form-control input-sm"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-uib-popover="Enter middle intial"
+                       data-popover-trigger="'focus'"
+                       data-popover-placement="center"
+                       data-ng-model="form.mi"
+                       data-ng-pattern="regEx.middleInitial" maxlength="{{regEx.middleInitial_max}}">
+            </div>
+            <div class="form-group">
+                <label for="lastname" class="requiredInputs">Last Name</label>
+                <input type="text" name="lastname" id="lastname" class="form-control input-sm"
+                       data-ng-model="form.lastname"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-uib-popover="Enter last name as it appears on your current government issued picture ID"
+                       data-popover-trigger="'focus'"
+                       data-popover-placement="center"
+                       data-validate-on="blur"
+                       data-validation-msg-required="Please enter  last name"
+                       required
+                       data-ng-pattern="regEx.lastName" maxlength="{{regEx.lastName_max}}">
+            </div>
+            <div class="form-group">
+                <label for="suffix">Suffix</label>
+                <input type="text" name="suffix" id="suffix" class="form-control input-sm"
+                       data-ng-model="form.suffix"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-ng-pattern="regEx.suffix" maxlength="{{regEx.suffix_max}}">
+            </div>
+
+            <div class="form-group">
+                <fieldset>
+                    <legend class="visually-hidden">Phone Number</legend>
+                    <label for="phonenumber" class="col-sm-6-offset-3 requiredInputs">Phone Number</label>
+                    <div class="col-sm-12-offset-2">
+                        <input type="tel" name="phonenumber" id="phonenumber" class="form-control"
+                               data-ng-model="form.phonenumber"
+                               data-ng-model-options="{ updateOn: 'blur' }"
+                               data-validate-on="dirty"
+                               data-international-phone-number
+                               data-validation-msg-required="Please enter phone number"
+                               required maxlength="{{regEx.phone_max}}">
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <fieldset>
+                    <legend class="visually-hidden">Fax Number</legend>
+                    <label for="faxnumber" class="col-sm-6-offset-3">Fax Number</label>
+                    <div class="col-sm-12-offset-2">
+                        <input type="tel" name="faxnumber" id="faxnumber" class="form-control"
+                               data-ng-model-options="{ updateOn: 'blur' }"
+                               data-ng-model="form.faxnumber"
+                               data-international-phone-number
+                               maxlength="{{regEx.phone_max}}">
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <label for="selectGroup" class="requiredInputs">Select Group </label>
+                <div>
+                    <select id="selectGroup" class="form-control" required
+                            data-ng-options="option as option.label for option in groups"
+                            data-ng-model="form.groupId">
+                        <option value="">Please Select Group</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="selectRoles" class="requiredInputs">Select Role </label>
+                <div>
+                    <select id="selectRoles" class="form-control" required
+                            data-ng-options="option as option.label for option in gaoRoles"
+                            data-ng-model="form.role">
+                        <option value="">Please Select Role</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gaoId" class="requiredInputs">CBCA ID</label>
+                <input type="text" name="gaoId" id="gaoId" class="form-control input-sm"
+                       data-ng-model="form.gaoId"
+                       data-ng-model-options="{ updateOn: 'blur' }"
+                       data-validation-msg-required="Please enter CBCA ID"
+                       data-validation-msg-gaoid="CBCA Id already exists"
+                       required gaoid data-ng-pattern="regEx.gaoId" maxlength="{{regEx.gaoId_max}}">
+            </div>
+            <div class="form-group">
+                <label for="confirmGaoId" class="requiredInputs">Confirm CBCA ID</label>
+                <input type="text" name="confirmGaoId" id="confirmGaoId" class="form-control input-sm"
+                       data-ng-model="form.confirmGaoId"
+                       data-ng-cut="$event.preventDefault()"
+                       data-ng-copy="$event.preventDefault()"
+                       data-ng-paste="$event.preventDefault()"
+                       data-ng-model="form.confirmGaoId"
+                       data-ng-fab-match="form.gaoId"
+                       data-validate-on="dirty"
+                       data-invalid-message="CBCA ID should match!"
+                       data-validation-msg-required="Please confirm CBCA ID"
+                       required>
+            </div>
+            <div class="form-group">
+                <!--                <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>-->
+                <div class="col-sm-10 col-lg-9 col-md-9">
+                    <input type="submit" value="Register" class="btn btn-success"
+                           ng-disabled="addAttorneyForm.$invalid || addAttorneyForm.$pending"
+                           data-ng-click="registerAttorneyInfo(form)">
+                    <input type="submit" value="Cancel" class="btn btn-warning"
+                           data-ng-click="registerAttorneyCancel()">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,87 @@
+<div>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Edit Templates</h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="admin-dashboard/unassigned">
+                        <i class="fa fa-dashboard"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="active">Edit Templates</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div style="margin-top:50px;" class="mainbox col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title"></div>
+                        </div>
+                        <div style="padding-top:30px" class="panel-body">
+                            <form class="form-horizontal" name="submitnewDocForm" role="form"
+                                  enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="doctype" class="col-sm-2 col-md-3 control-label ">Type of
+                                        document </label>
+                                    <div class="col-sm-8 col-lg-8 col-md-8" id="tiera">
+                                        <div>
+                                            <select id="doctype"
+                                                    data-ng-options="doc_Info.doc_Type_Desc group by doc_Info.case_Type for doc_Info in docInfoList track by doc_Info.doc_Type_Id "
+                                                    data-ng-model="selectedOption" class="form-control">
+                                                <!-- <option value="">Please Select Document Type</option> -->
+                                            </select>
+                                        </div>
+                                        <div class="input-group-btn" data-ng-show="selectedOption.doc_Type_Id != '0'">
+                                            <input name="generateDocument" class="btn btn-success"
+                                                   type="button" id="generateDocument"
+                                                   data-ng-click="generateTemplateBasedOnDocumentType(selectedOption)"
+                                                   style="margin-left: 0px; margin-top: 10px;"
+                                                   value="{{generateTempBtnText}}"/>
+                                        </div>
+                                        <div data-ng-show="!deleteTempPdfFile
+												&& htmlContent != null
+												&& !isNaN(templateCounter)">
+
+                                            <!-- Download Temp Pdf -->
+                                            <a href="javascript:void(0)"
+                                               data-ng-click="downloadTempPdf(selectedOption)">
+                                                <i class="fa fa-file-pdf-o fg-text-red"></i>
+                                                &nbsp;&nbsp;
+                                                <span data-ng-if="selectedOption.doc_Type_Desc.toLowerCase() === 'protected decision'">
+                                            noticeOfIssuanceOfProtectedDecision.pdf
+                                        </span>
+                                                <span data-ng-if="selectedOption.doc_Type_Desc.toLowerCase() !== 'protected decision'">
+                                            {{selectedOption.doc_Type_Desc | titleCase}}.pdf
+                                        </span></a>
+
+                                            <!-- Delete Temp Pdf -->
+                                            <a href="javascript:void(0)"
+                                               data-ng-click="deleteTempPdf()"
+                                               data-uib-popover="Clear edits"
+                                               data-popover-trigger="'mouseenter'"
+                                               data-popover-placement="right">
+                                                <i class="fa fa-remove fg-text-red"></i>Clear Edits</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-ng-show="generateTempBtnText == 'Edit Template'">
+                                    <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+                                    <div class="col-sm-10 col-lg-9 col-md-9">
+                                        <input type="submit" value="Save Edits"
+                                               class="btn btn-success"
+                                               data-ng-click="saveEdit()">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.content -->
+    </aside><!-- /.right-side -->
+</div><!-- ./wrapper -->

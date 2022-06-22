@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="epds-auth:war">
+    <output-path>$PROJECT_DIR$/../epds-auth/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>epds-auth</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="epds-auth.war">
+      <element id="artifact" artifact-name="epds-auth:war exploded" />
+    </root>
+  </artifact>
+</component>

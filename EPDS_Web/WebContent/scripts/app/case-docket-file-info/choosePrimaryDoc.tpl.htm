@@ -1,0 +1,30 @@
+<style>
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+<div class="modal-content">
+	<div class="modal-header modal-header-primary">
+		<h4 class="modal-title">
+			<i class="glyphicon glyphicon-plus-sign"></i>Choose existing document as primary
+			<a data-ng-click="cancel()" class="pull-right" title="Close" alt="Close">
+				<i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+			</a>
+		</h4>
+	</div>
+	<div class="modal-body custom-modal-bg-color">
+		<div>
+			<select data-ng-options="file_Info as file_Info.fileName for file_Info in fileInfoList track by file_Info.file_Id"
+					data-ng-model="selectedOption" class="form-control"></select>
+		</div>
+	</div>
+	<div>
+		<div class="modal-footer custom-modal-bg-color buttoncls">
+			<button class="btn btn-success "
+				data-ng-click="markThisDocumentAsPrimary(selectedOption)">Mark Document as Primary</button>
+			&nbsp;&nbsp;
+			<button class="btn btn-danger  pull-right" data-ng-click="cancel()">Cancel</button>
+		</div>
+	</div>
+</div>
+<!-- /.modal-content -->

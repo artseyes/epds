@@ -1,0 +1,247 @@
+
+<div>
+	<aside class="right-side">
+		<section class="content-header">
+			<h1>Audit Reports</h1>
+			<ol class="breadcrumb">
+				<li><a href="dashboard"><i class="fa fa-dashboard"></i>
+						Dashboard</a></li>
+				<li class="active">Audit Reports</li>
+			</ol>
+		</section>
+		<section class="content" id="advanceSearchForm" style="display: none;">
+			<div class="row">
+				<div class="col-md-6">
+
+					<fieldset class="box box-danger">
+						<legend class="visually-hidden">Filters</legend>
+						<div class="box-header">
+							<h3 class="box-title">Filters</h3>
+						</div>
+						<div class="box-body">
+							<div class="form-group">
+								<label for="bNumber">File/B#</label>
+								<div>
+									<input class="form-control input-sm" type="text" id="bNumber"
+									data-ng-model-options="{ updateOn: 'blur' }"
+										data-ng-model="b_No" value="{{b_No}}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="aNumber">&nbsp;<strong>EPDS Ctrl #&nbsp;&nbsp;</strong></label>
+								<div>
+									<input class="form-control input-sm" type="text" id="aNumber"
+										data-ng-model-options="{ updateOn: 'blur' }"
+										data-ng-model="a_No" value="{{a_No}}"/>
+								</div>
+								<!-- /.input group -->
+							</div>
+
+						</div>
+						<!-- /.box-body -->
+					</fieldset>
+					<!-- /.box -->
+				</div>
+				<!-- /.col (left) -->
+				<div class="col-md-6">
+					<fieldset class="box box-info">
+						<legend class="visually-hidden">Date</legend>
+						<div class="box-header">
+							<h3 class="box-title">Date</h3>
+						</div>
+
+						<div class="box-body">
+							<fieldset>
+								<legend>Submission Date</legend>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="submissionFromDate">From </label>
+											<p class="input-group">
+												<input type="date" id="submissionFromDate" class="form-control"
+													   ng-model="startSubmissionDate">
+<!--												<input id="submissionFromDate" type="text" class="form-control"-->
+<!--													   datepicker-append-to-body="true"-->
+<!--													   data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--													   is-open="startSubmissionDatePickerIsOpen"-->
+<!--													   ng-click="startSubmissionDatePickerOpen()"-->
+<!--													   ng-model="startSubmissionDate">-->
+<!--												<span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--														ng-click="startSubmissionDatePickerOpen()"-->
+<!--														title="Select Submission Date From">-->
+<!--													<i class="glyphicon glyphicon-calendar"></i>-->
+<!--												</button>-->
+<!--											</span>-->
+											</p>
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="submissionToDate">To </label>
+											<p class="input-group">
+												<input type="date" id="submissionToDate" class="form-control"
+													   ng-model="endSubmissionDate">
+<!--												<input id="submissionToDate" type="text" class="form-control"-->
+<!--													   datepicker-append-to-body="true"-->
+<!--													   data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--													   is-open="endSubmissionDatePickerIsOpen"-->
+<!--													   ng-click="endSubmissionDatePickerOpen()"-->
+<!--													   ng-model="endSubmissionDate">-->
+<!--												<span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--															ng-click="endSubmissionDatePickerOpen()"-->
+<!--															title="Select Submission Date To">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--													</button>-->
+<!--												</span>-->
+											</p>
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+								</div>
+							</fieldset>
+
+							<fieldset>
+								<legend>Due Date</legend>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="dueFromDate">From </label>
+											<p class="input-group">
+												<input type="date" id="dueFromDate" class="form-control"
+													   ng-model="startDueDate">
+<!--												<input id="dueFromDate" type="text" class="form-control"-->
+<!--													   data-datepicker-append-to-body="true"-->
+<!--													   data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--													   data-is-open="startDueDatePickerIsOpen"-->
+<!--													   data-ng-click="startDueDatePickerOpen()"-->
+<!--													   data-ng-model="startDueDate">-->
+<!--												<span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--															data-ng-click="startDueDatePickerOpen()"-->
+<!--															title="Select Due Date From">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--													</button>-->
+<!--												</span>-->
+											</p>
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="dueToDate">To </label>
+											<p class="input-group">
+												<input type="date" id="dueToDate" class="form-control"
+													   ng-model="endDueDate">
+<!--												<input id="dueToDate" type="text" class="form-control"-->
+<!--													   data-datepicker-append-to-body="true"-->
+<!--													   data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--													   data-is-open="endDueDatePickerIsOpen"-->
+<!--													   data-ng-click="endDueDatePickerOpen()"-->
+<!--													   data-ng-model="endDueDate">-->
+<!--												<span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--															ng-click="endDueDatePickerOpen()"-->
+<!--															title="Select Due Date To">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--													</button>-->
+<!--												</span>-->
+											</p>
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+								</div>
+							</fieldset>
+						</div>
+						<!-- /.box-body -->
+					</fieldset>
+				</div>
+				<!-- /.row -->
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<div class="box box-info">
+					<div class="box-footer">
+						<div style="text-align: center;">
+							<input id="searchSubmit" type="button" value="Search "
+								class="btn btn-success"
+								data-ng-click="searchProtestInfo(b_No,a_No,selectedCaseType,company_Name,selectedLawGroup,
+												selectedAttorney,solicitation_No,selectedCaseStatus,tier1SelectedOption,tier2SelectedOption,
+												startSubmissionDate,endSubmissionDate,startDueDate,endDueDate,partyInfo,intervenorCompName, true)">
+							<input id="searchReset" type="button" value="Reset "
+								class="btn btn-danger" data-ng-click="resetFilters()">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="col-md-12 col-lg-12" data-ng-show="showProtestInfo">
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Search Results</h3>
+						<!-- Minimal style -->
+ 								<!-- <a class="btn btn-success btn-sm btn3d clearfix" href="/epds/export-to-excel">
+									<i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;&nbsp;<strong>Export To Excel</strong>
+							</a> -->
+					</div>
+					<div class="box-body">
+						<!-- href="/epds/export-to-excel" -->
+						<div>
+							<a class="dataTables_filter btn btn-success btn-sm btn3d pull-left excel_export" href="/epds/export-to-excel" target="_blank">
+								<i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;&nbsp;<strong>Export To Excel</strong>
+							</a>
+						
+						</div>
+						<div>
+							<table data-datatable="ng"
+								   data-dt-options="dashboardInfo.dtOptions" id="protestTable"
+								   class="table table-bordered table-striped" width="100%"
+								   aria-label="Data table showing list of cases">
+								<thead>
+									<tr>
+										<th scope="col" class="span120">A-Number</th>
+										<th scope="col">Case Number</th>
+										<th scope="col">Case Type</th>
+										<th scope="col" class="span120">Pay.gov Tracking Id</th>
+										<th scope="col">Transaction Date</th>
+										<th scope="col">Transaction Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="protestInfo in protestInfoList">
+										<td>{{protestInfo.a_No}}</td>
+										<td>
+											<tree protest="protestInfo" path="{{path}}"></tree>
+										</td>
+										<td>{{protestInfo.case_Type}}</td>
+										<td>{{protestInfo.pay_dot_gov_id}}</td>
+										<td>{{protestInfo.submission_Date}}</td>
+										<td><span data-ng-show="protestInfo.pay_dot_gov_id != null">$350</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+                                   
+                                </div>
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+		</section>
+		<!-- /.content -->
+	</aside>
+	<!-- /.right-side -->
+</div>
+<!-- ./wrapper -->

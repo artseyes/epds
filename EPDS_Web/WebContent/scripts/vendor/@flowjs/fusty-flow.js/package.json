@@ -1,0 +1,61 @@
+{
+  "_from": "@flowjs/fusty-flow.js",
+  "_id": "@flowjs/fusty-flow.js@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-zMFTwd3ZIaggTvGwilpVcqpcXiM=",
+  "_location": "/@flowjs/fusty-flow.js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@flowjs/fusty-flow.js",
+    "name": "@flowjs/fusty-flow.js",
+    "escapedName": "@flowjs%2ffusty-flow.js",
+    "scope": "@flowjs",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@flowjs/fusty-flow.js/-/fusty-flow.js-1.2.0.tgz",
+  "_shasum": "ccc153c1ddd921a8204ef1b08a5a5572aa5c5e23",
+  "_spec": "@flowjs/fusty-flow.js",
+  "_where": "/home/vmuser1/work/EPDS/git/epds_npm/EPDS_Web/src/main",
+  "author": {
+    "name": "Aidas Klimas"
+  },
+  "bugs": {
+    "url": "https://github.com/flowjs/fusty-flow.js/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Flow.js html5 file upload support for older browsers based on iframe upload.",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-uglify": "~0.11.0"
+  },
+  "homepage": "https://github.com/flowjs/fusty-flow.js#readme",
+  "keywords": [
+    "flow",
+    "flow.js",
+    "resumable",
+    "resumable.js",
+    "uploader",
+    "file upload"
+  ],
+  "license": "MIT",
+  "main": "src/fusty-flow-factory.js",
+  "name": "@flowjs/fusty-flow.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flowjs/fusty-flow.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.2.0"
+}

@@ -1,0 +1,57 @@
+
+
+# Make sure we have some input
+if [ "$#" != "1" ]; then
+  #echo "File or dir argument required, $# provided"
+  exit
+fi
+
+dirorfile=$1
+
+# Some basic checks to make sure were not doing something stupid, like rm /, ., or ..
+if [[ "$dirorfile" =~ ^(\/|\.|\.\.)$ ]]; then
+  echo exiting, shred would have destroyed my universe
+  exit
+fi
+
+# On DB server, all files/dirs should have a valid path, check for paths that would delete all
+if [[ "$dirorfile" =~ ^\/app\/epds\/*$ ]]; then
+  echo exiting, shred would have deleted all DB files
+  exit
+fi
+
+if [[ "$dirorfile" =~ ^\/app\/backups\/*$ ]]; then
+  echo exiting, shred would have deleted all DB backup files
+  exit
+fi
+
+
+# Function to handle file level shredding and deletion
+function shred_file {
+  file=$1
+  #echo deleting $file
+  shred -n1 $file
+  sync
+  shred -zun0 $file
+}
+
+# Only do something if file/dir exists
+if [ -e $dirorfile ]; then
+  # Handle directory or single file
+  if [ -d $dirorfile ]; then
+    #echo needs to recurse del files, then dir
+    # Get list of all files in directory structure
+    listoffiles=`find $dirorfile -depth -type f`
+    # Then loop over and shred each file
+    for i in $listoffiles; do
+      shred_file "$i"
+    done
+    # All files shredded, now delete remaining directory
+    #echo removing $dirorfile
+    rm -rf $dirorfile
+  else
+    #echo need to delete one file
+    shred_file $dirorfile
+  fi
+fi
+

@@ -1,0 +1,17 @@
+<div class="modal-content">
+	<div class="modal-header modal-header-primary">
+		<h4 class="modal-title">Mailbox</h4>
+	</div>
+	<div class="modal-body">
+	<div class="form-group">
+		<label for="subject">Subject</label>
+		<input id="subject" class="form-control" data-ng-model="subject">
+      </div>
+		<label for="message">Message</label>
+		<textarea id="message" class="ck-editor notification" data-ng-model="data"></textarea>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" data-ng-click="ok(subject,data)">Send</button>
+		<button class="btn btn-warning" data-ng-click="cancel(subject,data)">Cancel</button>
+	</div>
+</div>

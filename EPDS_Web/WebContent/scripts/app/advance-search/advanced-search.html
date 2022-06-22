@@ -1,0 +1,475 @@
+<div>
+    <aside class="right-side">
+        <section class="content-header">
+            <h1>Advanced Search</h1>
+            <ol class="breadcrumb">
+                <li><a href="dashboard"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+                <li class="active">Advanced Search</li>
+            </ol>
+        </section>
+        <section class="content" id="advanceSearchForm" style="display: none;">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <fieldset class="box box-danger">
+                        <legend class="visually-hidden">Filters</legend>
+                        <div class="box-header">
+                            <h3 class="box-title">Filters</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="bNumber">Case Number</label>
+                                <div>
+                                    <input class="form-control input-sm"
+                                           type="text" id="bNumber"
+                                           data-uib-popover="{{toolTip.protestId1}}"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="top"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-pattern="regEx.protestId"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters are a-zA-Z0-9-."
+                                           maxlength="{{regEx.protestId_max}}"
+
+                                           data-ng-model="b_No" value="{{b_No}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="aNumber">&nbsp;<strong>EDS Ctrl #&nbsp;&nbsp;</strong></label>
+                                <div>
+                                    <input class="form-control input-sm"
+                                           type="text" id="aNumber"
+                                           data-uib-popover="{{toolTip.protestId2}}"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="top"
+                                           data-ng-pattern="regEx.protestId"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters are a-zA-Z0-9-."
+                                           maxlength="{{regEx.protestId_max}}"
+                                           data-ng-model="a_No" value="{{a_No}}">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                            <div class="form-group">
+                                <label for="solNum">Contract Number</label>
+                                <div>
+                                    <input class="form-control input-sm"
+                                           type="text"
+                                           id="solNum"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-uib-popover="{{toolTip.solNum}}"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="top"
+                                           data-ng-pattern="regEx.solNum"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9-_ "
+                                           maxlength="{{regEx.solNum_max}}"
+                                           data-ng-model="solicitation_No">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="company_Name">&nbsp;<strong>Party&nbsp;&nbsp;</strong></label>
+                                <div>
+                                    <input class="form-control input-sm" type="text"
+                                           id="company_Name"
+                                           data-uib-popover="{{toolTip.companyName}}"
+                                           data-popover-trigger="'focus'"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-placement="top"
+                                           data-ng-pattern="regEx.nameOfFirm"
+                                           data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 !,@#&.)(/\\- "
+                                           maxlength="200"
+                                           data-ng-model="company_Name">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+
+                        </div>
+                        <!-- /.box-body -->
+                    </fieldset>
+                    <!-- /.box -->
+
+                    <fieldset class="box box-info collapsed-box" id="dateFilters">
+                        <legend class="visually-hidden">Date</legend>
+                        <div class="box-header">
+                            <h3 class="box-title">Date</h3>
+                            <div class="box-tools pull-right"
+                                 data-uib-popover="Click expand and filter by Submission Date or Due Date"
+                                 data-popover-trigger="'mouseenter'"
+                                 data-popover-placement="top">
+                                <button class="btn btn-sm btn-success dateSection"
+                                        data-box-collapse>
+                                    <i class="fa fa-plus"></i><strong> Expand</strong>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body" style="display: none;">
+                            <fieldset>
+                                <legend>Submission Date</legend>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="submissionFromDate">From </label>
+                                            <p class="input-group">
+                                                <input type="date" id="submissionFromDate" class="form-control"
+                                                       ng-model="startSubmissionDate">
+<!--                                                <input type="text"-->
+<!--                                                       id="submissionFromDate"-->
+<!--                                                       class="form-control"-->
+<!--                                                       datepicker-append-to-body="true"-->
+<!--                                                       data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--                                                       is-open="startSubmissionDatePickerIsOpen"-->
+<!--                                                       ng-click="startSubmissionDatePickerOpen()"-->
+<!--                                                       ng-model="startSubmissionDate">-->
+<!--                                                <span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--                                                            ng-click="startSubmissionDatePickerOpen()"-->
+<!--                                                            title="Select Submission Date From">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--														Calendar-->
+<!--													</button>-->
+<!--												</span>-->
+                                            </p>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="submissionToDate">To </label>
+                                            <p class="input-group">
+                                                <input type="date" id="submissionToDate" class="form-control"
+                                                       ng-model="endSubmissionDate">
+<!--                                                <input type="text"-->
+<!--                                                       id="submissionToDate"-->
+<!--                                                       class="form-control"-->
+<!--                                                       datepicker-append-to-body="true"-->
+<!--                                                       data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--                                                       is-open="endSubmissionDatePickerIsOpen"-->
+<!--                                                       ng-click="endSubmissionDatePickerOpen()"-->
+<!--                                                       ng-model="endSubmissionDate">-->
+<!--                                                <span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--                                                            ng-click="endSubmissionDatePickerOpen()"-->
+<!--                                                            title="Select Submission Date To">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--														Calendar-->
+<!--													</button>-->
+<!--												</span>-->
+                                            </p>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Due Date</legend>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dueFromDate">From </label>
+                                            <p class="input-group">
+                                                <input type="date" id="dueFromDate" class="form-control"
+                                                       ng-model="startDueDate">
+<!--                                                <input type="text"-->
+<!--                                                       id="dueFromDate"-->
+<!--                                                       class="form-control"-->
+<!--                                                       data-datepicker-append-to-body="true"-->
+<!--                                                       data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--                                                       data-is-open="startDueDatePickerIsOpen"-->
+<!--                                                       data-ng-click="startDueDatePickerOpen()"-->
+<!--                                                       data-ng-model="startDueDate">-->
+<!--                                                <span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--                                                            data-ng-click="startDueDatePickerOpen()"-->
+<!--                                                            title="Select Due Date From">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--														Calendar-->
+<!--													</button>-->
+<!--												</span>-->
+                                            </p>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dueToDate">To </label>
+                                            <p class="input-group">
+                                                <input type="date" id="dueToDate" class="form-control"
+                                                       ng-model="endDueDate">
+<!--                                                <input type="text"-->
+<!--                                                       id="dueToDate"-->
+<!--                                                       class="form-control"-->
+<!--                                                       data-datepicker-append-to-body="true"-->
+<!--                                                       data-uib-datepicker-popup="MM/dd/yyyy"-->
+<!--                                                       data-is-open="endDueDatePickerIsOpen"-->
+<!--                                                       data-ng-click="endDueDatePickerOpen()"-->
+<!--                                                       data-ng-model="endDueDate">-->
+<!--                                                <span class="input-group-btn">-->
+<!--													<button type="button" class="btn btn-default"-->
+<!--                                                            ng-click="endDueDatePickerOpen()"-->
+<!--                                                            title="Select Due Date To">-->
+<!--														<i class="glyphicon glyphicon-calendar"></i>-->
+<!--														Calendar-->
+<!--													</button>-->
+<!--												</span>-->
+                                            </p>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- /.box-body -->
+                    </fieldset>
+                    <!-- /.box -->
+
+                    <fieldset class="box box-info collapsed-box" id="partyInfoFilters">
+                        <legend class="visually-hidden">Party Information</legend>
+                        <div class="box-header">
+                            <h3 class="box-title">Party Information</h3>
+                            <div class="box-tools pull-right"
+                                 data-uib-popover="Click expand and filter by Party Information"
+                                 data-popover-trigger="'mouseenter'"
+                                 data-popover-placement="top">
+                                <button class="btn btn-sm btn-success"
+                                        data-box-collapse>
+                                    <i class="fa fa-plus"></i><strong> Expand</strong>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body" style="display: none;">
+
+                            <div class="form-group">
+                                <label for="partyInfo">Party Information</label>
+                                <div>
+                                    <input class="form-control input-sm"
+                                           type="text" id="partyInfo"
+                                           data-uib-popover="Enter Party Information Ex: email,phone number, first name, last name, firm Name"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="top"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="partyInfo" value="{{partyInfo}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="intervenorCompName">&nbsp;<strong>Intervenor Company
+                                    Name&nbsp;&nbsp;</strong></label>
+                                <div>
+                                    <input class="form-control input-sm"
+                                           type="text" id="intervenorCompName"
+                                           data-uib-popover="Enter Intervenor Comp Name"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-trigger="'focus'"
+                                           data-popover-placement="top"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           maxlength="320"
+                                           data-ng-model="intervenorCompName" value="{{intervenorCompName}}">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </fieldset>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col (left) -->
+                <div class="col-md-6">
+                    <fieldset class="box box-success">
+                        <legend class="visually-hidden">Additional Filters</legend>
+                        <div class="box-header">
+                            <h3 class="box-title">Filters</h3>
+                        </div>
+                        <div class="box-body">
+                            <!-- Minimal style -->
+
+                            <div class="form-group">
+                                <label for="attorneyDropDown">Judge</label>
+                                <div>
+                                    <select
+                                            id="attorneyDropDown"
+                                            data-ng-options="user_Info.user_Id as  user_Info.last_Name + '  ,  ' + user_Info.first_Name  group by ('Group ' + user_Info.group_No)   for user_Info in attorneyInfoList | orderBy: ['group_No','last_Name']"
+                                            data-ng-model="selectedAttorney" class="form-control">
+                                        <option value="">Please Select Judge</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="caseStatusDropDown" class="">Case Status</label>
+                                <div class="">
+                                    <select
+                                            id="caseStatusDropDown"
+                                            data-ng-options="s.value as s.text for s in caseStatuses"
+                                            data-ng-model="selectedCaseStatus" class="form-control input-sm">
+                                        <option value="">Please Select Case Status</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lawGroupDropDown" class="">Law Group</label>
+                                <div class="">
+                                    <select
+                                            id="lawGroupDropDown"
+                                            data-ng-options="item.group_No as  'Group' + ' ' + item.group_No for item in attorneyInfoList  | unique:'group_No'  | orderBy: ['group_No']"
+                                            data-ng-model="selectedLawGroup" class="form-control input-sm">
+                                        <option value="">Please Select Law Group</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="caseTypeDropDown" class="">Case Type</label>
+                                <div class="">
+                                    <select
+                                            id="caseTypeDropDown"
+                                            data-ng-options="s.text as s.value for s in caseTypes"
+                                            data-ng-model="selectedCaseType" class="form-control">
+                                        <option value="">Please Select Case Type</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <!-- <div class="box-footer">
+                                    Many more skins available.
+                                </div> -->
+                    </fieldset>
+                    <!-- /.box -->
+                    <fieldset class="box box-primary collapsed-box">
+                        <legend class="visually-hidden">Agency</legend>
+                        <div class="box-header">
+                            <h3 class="box-title">Agency</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-sm btn-success agencySection"
+                                        data-uib-popover="Click here to expand and filter by Agency"
+                                        data-popover-trigger="'mouseenter'"
+                                        data-popover-placement="auto"
+                                        data-box-collapse>
+                                    <i class="fa fa-plus"></i><strong> Expand</strong>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="box-body" style="display: none;">
+
+                            <agency-drop-down
+                                    agencylist="tier1AgencyList"
+                                    tier1-selected-option="tier1SelectedOption"
+                                    tier2-selected-option="tier2SelectedOption"
+                                    tooltip="{{fieldText.nameOfFirm}}"
+                                    source="advance-search"
+                                    data-ng-model="form.agency">
+                            </agency-drop-down>
+                        </div>
+                        <!-- /.box-body -->
+                    </fieldset>
+                    <!-- /.col (right) -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <div class="box box-info">
+                    <div class="box-footer">
+                        <div style="text-align: center;">
+                            <input id="searchSubmit" type="button" value="Search "
+                                   class="btn btn-success"
+                                   data-ng-model-options="{ updateOn: 'blur' }"
+                                   data-ng-click="searchProtestInfo(b_No,a_No,selectedCaseType,company_Name,selectedLawGroup,
+												selectedAttorney,solicitation_No,selectedCaseStatus,tier1SelectedOption,tier2SelectedOption,
+												startSubmissionDate,endSubmissionDate,startDueDate,endDueDate,partyInfo,intervenorCompName, false)">
+                            <input id="searchReset" type="button" value="Reset "
+                                   class="btn btn-danger" data-ng-click="resetFilters()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-12" data-ng-show="showProtestInfo">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">Search Results</h3>
+                    </div>
+                    <div class="box-body">
+                        <!-- Minimal style -->
+                        <div>
+                            <a class="dataTables_filter btn btn-success btn-sm btn3d pull-left excel_export"
+                               href="/epds/advanceSearch-export-to-excel" target="_blank">
+                                <i class="fa fa-file-excel-o" aria-hidden="true">&nbsp;&nbsp;<strong>Export To
+                                    Excel</strong></i>
+                            </a>
+
+                        </div>
+                        <div>
+                            <table data-datatable="ng"
+                                   data-dt-options="dashboardInfo.dtOptions" id="protestTable"
+                                   class="table table-bordered table-striped" width="100%"
+                                   aria-label="Data table showing list of cases">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="span120">CBCA Number</th>
+                                    <th scope="col">Party</th>
+                                    <th scope="col" class="span120">Date Filed</th>
+                                    <th scope="col">Agency</th>
+                                    <th scope="col">Contract Number</th>
+                                    <th scope="col">Due Date</th>
+                                    <th scope="col">
+                                        <div style="width:50px;">Group #</div>
+                                    </th>
+                                    <th scope="col">Judge Name</th>
+                                    <th scope="col"> Case Type</th>
+                                    <th scope="col"> Case Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="protestInfo in protestInfoList">
+                                    <td>
+                                        <tree protest="protestInfo" path="{{path}}"></tree>
+                                    </td>
+                                    <td>{{protestInfo.company_Name}}</td>
+                                    <td data-order="{{protestInfo.submission_Date | stringDate:'yyyyMMddHHmmss'}}">
+                                        {{protestInfo.submission_Date}}
+                                    </td>
+                                    <td>{{protestInfo.agency_Name}}</td>
+                                    <td>{{protestInfo.solicitation_No}}</td>
+                                    <td data-order="{{protestInfo.due_Date | stringDate:'yyyyMMdd'}}">
+                                        {{protestInfo.due_Date}}
+                                    </td>
+                                    <td>
+                                        <div style="width:50px;">Group {{protestInfo.attorney_Group_Id}}</div>
+                                    </td>
+                                    <td>{{protestInfo.attorney_Name}}</td>
+                                    <td>{{protestInfo.company_Status}}</td>
+                                    <td>{{protestInfo.case_Status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <!-- <div class="box-footer">
+                                    Many more skins available.
+                                </div> -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<!-- ./wrapper -->

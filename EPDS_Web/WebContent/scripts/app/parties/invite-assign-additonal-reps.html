@@ -1,0 +1,58 @@
+<style>
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+
+
+<div class="modal-content" disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="glyphicon glyphicon-thumbs-up"></i> {{options.headerText}}
+               <!-- <a data-ng-click="cancel()" class="pull-right bg-red" title ="Close" alt="Close" ><i class="glyphicon glyphicon-remove-circle"></i></a> -->
+               <a data-ng-click="cancel()" class="pull-right" title ="Close" alt="Close">
+                   <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+               </a>
+            </h4>
+         </div>
+         <div class="modal-body custom-modal-bg-color">
+                  	<div>
+                        <label for="repEmail">{{options.placeHolder}}</label>
+                        <input id="repEmail" name="repEmail" type="text" class="form-control input-sm"
+                        data-ng-model= "repEmail"
+                        auto-focus lowercase>
+                    </div>
+         </div>
+         <div>
+         <div class="modal-footer custom-modal-bg-color">
+		         <div class="buttoncls">
+			         <button data-ng-show="options.requestType == 'addSecondaryRep'" class="btn btn-sm btn-primary"
+                             data-ng-click="sendInvite(repEmail)"
+                             data-ng-disabled="repEmail.length == 0">
+                         <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Invite
+                     </button>
+			         <button  data-ng-show="options.requestType == 'assignAttorney'"  class="btn btn-sm btn-primary"
+                              data-ng-click="assignAttorney(repEmail,options.buttonText)"
+                              data-ng-disabled="repEmail.length == 0">
+                         <i class="fa fa-envelope"></i>&nbsp;&nbsp;{{options.buttonText}}
+                     </button>
+			         <button class="btn btn-sm btn-danger"  data-ng-click="cancel()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Cancel</button>
+						
+				</div>
+         </div>
+         </div>
+</div>
+<!-- /.modal-content -->

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html data-ng-app="mainApp">
+<head>
+<meta charset="utf-8">
+<title>Case Docket Sheet</title>
+<!-- styles -->
+<link href="data/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="data/styles/custom.css">
+<script type="text/javascript" src="data/vendor/angular/angular.js"></script>
+<script type="text/javascript"
+	src="data/vendor/angular/angular-route.js"></script>
+
+<script type="text/javascript" src="data/data.json"></script>
+<script type="text/javascript" src="data/script.js"></script>
+<script type="text/javascript" src="data/filters/angular-filter.min.js"></script>
+<script type="text/javascript"
+	src="data/scripts/angular-local-storage.js"></script>
+<script type="text/javascript" src="data/scripts/angular-cookies.js"></script>
+
+<style></style>
+
+</head>
+<body class="skin-blue  pace-done"
+	data-ng-controller="caseDocketSheetController">
+	<header class="header">
+		<a href="javascript:void(0)" class="logo"> 
+		<img src="data/img/GAO_logo.png">
+		</a>
+		<nav class="navbar navbar-static-top" role="navigation"></nav>
+	</header>
+	<!-- Main content -->
+	<div class="wrapper row-offcanvas row-offcanvas-left">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>Case Docket Sheet</h1>
+		</section>
+
+
+		<section class="content">
+			<section>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<div>
+						<table class="table table-bordered" role="presentation">
+							<tbody>
+								<tr>
+									<td><strong>Case Type</strong></td>
+									<td>&nbsp;{{protestInfo.case_Type | uppercase}}</td>
+								</tr>
+								<tr>
+									<td><strong>Company Status</strong></td>
+									<td>&nbsp;{{protestInfo.company_Status | uppercase }}</td>
+								</tr>
+								<tr>
+									<td><strong>Protester</strong></td>
+									<td>&nbsp;{{protestInfo.company_Name | uppercase }}</td>
+								</tr>
+
+								<tr>
+									<td><strong>B-Number</strong></td>
+									<td>&nbsp;{{protestInfo.b_No}}&nbsp;</td>
+								</tr>
+
+								<tr>
+									<td><strong>Agency</strong></td>
+									<td>&nbsp;{{protestInfo.agency_Name}}</td>
+								</tr>
+
+								<tr>
+										<td><strong>Intervenor(s)&nbsp;</strong></td>
+										<td>
+
+										<span
+											data-ng-repeat="intervenorCompanyName in intervenorCompanyNameList | remove: null | uniq: 'intervenorCompanyName'">
+												<span data-ng-if="$index == 0">
+													{{intervenorCompanyName | uppercase}} </span> 
+										<span
+												data-ng-if="$index > 0">
+													&nbsp;{{intervenorCompanyName | uppercase}};&nbsp; </span>
+										</span>
+										</td>
+									</tr>
+								<tr>
+									<td><strong>Contract Number</strong></td>
+									<td>&nbsp;{{protestInfo.solicitation_No}}</td>
+								</tr>
+								<tr>
+									<td><strong>Consolidated Protests</strong></td>
+									<td><span
+										data-ng-repeat='childProtestInfo in consolidatedProtests'>
+											<span data-ng-if="$index == 0">
+												{{childProtestInfo.company_Name | uppercase
+												}}&nbsp;&nbsp;,&nbsp;&nbsp;{{childProtestInfo.b_No}} 
+											</span> 
+										     <span data-ng-if="$index > 0">
+												;&nbsp;&nbsp;{{childProtestInfo.company_Name |
+												uppercase}}&nbsp;&nbsp;,&nbsp;&nbsp;{{childProtestInfo.b_No}};
+												&nbsp;&nbsp; 
+											</span>
+									</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<table id="gaoInfoTable" class="table table-bordered" role="presentation">
+							<tr>
+								<td><strong>GAO Attorney Name</strong></td>
+								<td>&nbsp;{{attorneyInfo.first_Name}} {{attorneyInfo.middle_initial}} {{attorneyInfo.last_Name}}</td>
+							</tr>
+							<tr>
+								<td><strong>GAO Attorney Email</strong></td>
+								<td>&nbsp;{{attorneyInfo.email}}</td>
+							</tr>
+							<tr>
+								<td><strong>GAO Attorney Phone Number</strong></td>
+								<td>&nbsp;{{attorneyInfo.phone_No}}</td>
+							</tr>
+							<tr>
+								<td><strong>Protective Order Issued?</strong></td>
+								<td>
+									<span>{{protestInfo.po.trim()}}</span>
+								</td>
+							</tr>
+
+						</table>
+					</div>
+			</section>
+			<section>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 "
+					id="protestinfoviewid" style="margin-top: 100px;">
+
+					<div>
+						<table id="protestTable"
+							   aria-label="Table of docket entries"
+							class="table table-bordered table-striped" width="100%">
+							<thead>
+								<tr>
+									<th scope="col">Index</th>
+									<th scope="col">Type of Filing</th>
+									<th scope="col">Protected</th>
+									<th scope="col">Filer</th>
+									<th scope="col">Date</th>
+									<th scope="col">Comments</th>
+									<th scope="col">GAO Notes</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="fileInfo in fileInfoList | unique: 'submission_Date'">
+									<td>{{$index + 1}}</td>
+									<td>
+										<!-- href="data/views/case-docket-file-info-view.html#{{protestInfo.a_No}}#{{fileInfo.originalSubmissionDate}}#{{fileInfo.doc_Type_Id}}" -->
+										<a href="data/views/case-docket-file-info-view.html"
+										     data-ng-click="storeFilingInformationInSession
+										     						(protestInfo.a_No,
+										     						fileInfo.originalSubmissionDate,
+										     						fileInfo.doc_Type_Id,
+										     						fileInfo.file_Path)">
+										 <span>{{fileInfo.docTypeName.split("_")[0]}}</span>
+										 <span>{{fileInfo.filler}}</span>
+										</a>
+									</td>
+									<td>
+											<div
+												data-ng-if="fileInfo.submitter_Role == 'PROTESTER' || fileInfo.submitter_Role == 'INTERVENOR'">
+												<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+												<span class="text-center">
+													({{fileInfo.company_Name}}) </span>
+											</div>
+											<div data-ng-if="fileInfo.submitter_Role == 'GAO'">
+												<span class="text-center">GAO</span><br>
+											</div>
+											<div data-ng-if="fileInfo.submitter_Role == 'AGENCY'">
+												<span class="text-center">AGENCY</span><br>
+											</div>
+									</td>
+									<td>
+											<div data-ng-if="fileInfo.is_Confidential == 'Y'">
+												<span class="text-center">YES</span><br>
+											</div>
+											<div data-ng-if="fileInfo.is_Confidential == 'N' || fileInfo.is_Confidential == null">
+												<span class="text-center">NO</span><br>
+											</div>
+									</td>
+									<td>{{fileInfo.transient_Date}}<br>{{fileInfo.transient_Time}}</td>
+									<td>{{fileInfo.comments}}</td>
+									<td><span class="text-left">
+											{{fileInfo.transient_Note}} </span> <br>
+									<strong><em data-ng-show="fileInfo.transient_Note.length > 0"
+											class="pull-right spacing-between-elements">{{fileInfo.transient_Attorney_Note_Date}}</em></strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+		</section>
+	</div>
+</body>
+</html>

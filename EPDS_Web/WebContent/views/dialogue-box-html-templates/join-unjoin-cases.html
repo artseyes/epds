@@ -1,0 +1,84 @@
+<style>
+    .modal {
+        display: block;
+    }
+
+    .modal-body:before,
+    .modal-body:after {
+        display: table;
+        content: " ";
+    }
+
+    .modal-header:before,
+    .modal-header:after {
+        display: table;
+        content: " ";
+    }
+
+    .custom-modal-bg-color {
+        background-color: lightgray;
+    }
+</style>
+
+
+<div class="modal-content" disableBackBtn>
+    <div class="modal-header modal-header-primary">
+        <h4 class="modal-title">
+            <i class="glyphicon glyphicon-thumbs-up"></i><span> Join / Unjoin Cases</span>
+            <a data-ng-click="cancel()" class="pull-right" title="Close" alt="Close">
+                <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+            </a>
+        </h4>
+    </div>
+    <div class="modal-body custom-modal-bg-color">
+        <form name="mainForm" data-ng-fab-form-options="customFormOptions">
+
+            <div data-ng-repeat="elemnt in listOfbNumbers">
+                <div class="form-group">
+                    <label for="bno" class="col-sm-2">B#</label>
+                    <div class="col-sm-6">
+                        <input id="bno" type="text"
+                               class="form-control"
+                               data-validation-msg-required="Please enter B# EX: XXXXXX.XX"
+                               data-validation-msg-uniqueb="B# does not exist"
+                               name="elemnt.bNumber"
+                               data-ng-model="elemnt.bNumber"
+                               data-join parent-b-num="{{protestInfo.b_No}}" required/>
+                    </div>
+                    <!-- ng-only-number data-max-length=8
+                                    data-max-decimal-points=2 -->
+                    <div>
+                        <button data-ng-show="$index == 0"
+                                data-ng-click="newItem($event,listOfbNumbers)"
+                                class="btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>Add</button>
+
+                        <button data-ng-show="$index != 0"
+                                data-ng-click="listOfbNumbers.splice($index, 1)" class="btn-sm btn-danger">
+                            <i class="glyphicon glyphicon-remove-circle show-pointer"></i>Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <br>
+        <span>
+                        </span>
+        <pre><strong>*Enter the Case Number (EX:B-XXXXXX.XX)<br> which you need to join/unjoin to current case</strong></pre>
+    </div>
+
+    <div>
+        <div class="modal-footer custom-modal-bg-color">
+            <button class="btn btn-success spacing-between-elements"
+                    ng-disabled="mainForm.$invalid || mainForm.$pending"
+                    data-ng-click="join_UnjoinCases(bNumber,'joined')">Join
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-success spacing-between-elements"
+                    ng-disabled="mainForm.$invalid || mainForm.$pending"
+                    data-ng-click="join_UnjoinCases(bNumber,'unjoined')">Unjoin
+            </button>&nbsp;&nbsp;
+            <button class="btn btn-danger spacing-between-elements" data-ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</div><!-- /.modal-content -->

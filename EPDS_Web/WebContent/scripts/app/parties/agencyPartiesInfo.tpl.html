@@ -1,0 +1,100 @@
+<!-- <div class="row" >
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+
+
+</div>
+<div class="col-md-4">
+</div>
+</div> -->
+<div class="row">
+	<div class="col-md-6 col-sm-12 col-xs-12" data-ng-repeat="userInfo in partiesList | orderBy: 'role'">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<i class="fa fa-info-circle"></i>
+				<h3 class="box-title">
+				<span>Agency Representative</span>
+				</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div>
+					<!-- Name for both primary and secondary representative -->
+					<span>
+						{{userInfo.first_Name}}&nbsp;{{userInfo.middle_initial}}&nbsp;{{userInfo.last_Name}} </span>
+					<br> <span>{{userInfo.phone_No}} &nbsp;</span><br> <span>{{userInfo.email}}&nbsp;</span><br>
+					<span>{{userInfo.firm_Name}}</span><br> <span>{{userInfo.address1}}&nbsp;<br>
+							<span data-ng-if="userInfo.address2">{{userInfo.address2}}&nbsp;<br></span>
+						&nbsp;{{userInfo.city}}&nbsp;{{userInfo.state}}&nbsp;&nbsp;{{userInfo.zip_Code}}<br>
+						&nbsp;{{userInfo.country}}
+					</span>
+				</div>
+			</div>
+			<div class="box-footer clearfix">
+				
+				<div data-ng-if="$index == 0">
+					
+					<div  data-ng-if="canAddAgencyBtnBeDisplayed">
+									
+					  <!-- Button for adding Agency Representative: display only for Agency Admin or CBCA Admin -->
+						<button name="addRep" class="btn btn-sm btn-primary"
+							id="addRep"
+							data-ng-click="addPartiesToTheCase('Assign Agency Representative',partyType,'Y','Y')">
+							<i class="fa fa-plus">&nbsp;&nbsp;Add Agency
+								Representative</i>
+						</button>
+					</div>
+					
+				</div>
+				<!-- Delete Agency Representative -->
+					<button name="deleteRep_{{$index}}"
+							class="btn btn-sm btn-danger pull-right deleteButton"
+							id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+							data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,'Agency Attorney')"
+							data-ng-if="canDeleteAgencyBtnBeDisplayed">
+							<i class="fa fa-times"></i>&nbsp; Delete
+					</button>
+				
+			</div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+<div class="row" data-ng-show="partiesList.length > 2">
+	<div class="col-md-6 col-sm-12 col-xs-12" data-ng-repeat="userInfo in partiesList | limitTo:2:4">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<i class="fa fa-info-circle"></i>
+				<h3 class="box-title">
+				<span>Agency Representative</span>
+				</h3>				
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<span>
+					{{userInfo.first_Name}}&nbsp;{{userInfo.middle_initial}}&nbsp;{{userInfo.last_Name}} </span>
+				<br> <span>{{userInfo.phone_No}} &nbsp;</span><br> <span>{{userInfo.email}}&nbsp;</span><br>
+				<span>{{userInfo.firm_Name}}</span><br> <span>{{userInfo.address1}}&nbsp;<br>
+							<span data-ng-if="userInfo.address2">{{userInfo.address2}}&nbsp;<br></span>
+					&nbsp;{{userInfo.city}}&nbsp;{{userInfo.state}}&nbsp;&nbsp;{{userInfo.zip_Code}}<br>
+					&nbsp;{{userInfo.country}}
+				</span>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer clearfix">
+				
+				<!-- Delete Agency Representative -->
+					<button name="deleteRep_{{$index}}"
+							class="btn btn-sm btn-danger pull-right deleteButton"
+							id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+							data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,'Agency Attorney')"
+							data-ng-if="canDeleteAgencyBtnBeDisplayed">
+							<i class="fa fa-times"></i>&nbsp; Delete
+					</button>
+				
+			</div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>

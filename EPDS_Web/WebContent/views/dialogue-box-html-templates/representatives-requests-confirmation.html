@@ -1,0 +1,35 @@
+<style>
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+</style>
+<div  modaldraggable>
+<div class="modal-content" modaldraggable disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="glyphicon glyphicon-warning-sign"></i> Confirmation
+               <a data-ng-click="cancel()" class="pull-right" title ="Close" alt="Close">
+                   <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+               </a>
+            </h4>
+         </div>
+         <div class="modal-body" style="background-color: lightgray;">
+               <span>Are you sure you want to reject the invitation from &nbsp;&nbsp;<strong>{{protestInformation.companyName}}</strong> &nbsp;&nbsp;to join as a secondary representative?</span>
+            	
+            	<div class="buttoncls">
+					<button class="btn btn-success spacing-between-elements" data-ng-click="yes(protestInformation)" id = "{{$index}} " value="{{$index}}">Yes</button>&nbsp;&nbsp; 
+					<button class="btn btn-danger spacing-between-elements" data-ng-click="cancel()" id = "{{$index}}" value="{{$index}}">No</button>
+				</div>
+         </div>
+</div><!-- /.modal-content -->
+</div>

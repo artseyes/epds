@@ -1,0 +1,272 @@
+<div>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Manage CBCA User Info</h1>
+            <ol class="breadcrumb">
+                <li><a href="admin-dashboard/unassigned"><i
+                        class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Manage CBCA User Info</li>
+            </ol>
+        </section>
+
+        <section class="content">
+
+            <div id="loginbox" style="margin-top: 50px;"
+                 class="mainbox col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1" data-ng-show="!showAddAttorneyForm">
+                <fieldset class="panel panel-info">
+                    <legend class="visually-hidden">Select CBCA User, selection or button displays content below.</legend>
+                    <div class="panel-heading">
+                        <div class="panel-title"></div>
+                    </div>
+                    <div style="padding-top: 30px" class="panel-body">
+                        <div class="form-group">
+                            <label for="gao_user">Select CBCA User </label>
+                            <div>
+                                <div>
+                                    <select id="gao_user" class="form-control"
+                                            data-ng-options="attorneyInfo.user_Id as  attorneyInfo.last_Name + '  ,  ' + attorneyInfo.first_Name
+					                 					group by ('Group ' + attorneyInfo.group_No)   for attorneyInfo in attorneyInfoList | orderBy: ['group_No','last_Name']"
+                                            data-ng-model="selectedOption"
+                                            data-ng-change="displayAttorneyInfo(selectedOption)">
+                                        <option value="">Please Select CBCA User</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group-btn">
+                            <input name="generateDocument" class="btn btn-success pull-right"
+                                   type="button" id="generateDocument"
+                                   data-ng-click="showAttorneyForm()"
+                                   value="Register New CBCA USER">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="box-body table-responsive col-lg-12 col-md-12 col-sm-12"
+                 data-ng-show="attorneyInfo != null && !showAddAttorneyForm">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <fieldset class="box box-success box-solid">
+                                <legend class="visually-hidden">{{attorneyInfo.first_Name}} {{attorneyInfo.last_Name}}
+                                </legend>
+                                <div class="box-header with-border epds-bg-blue">
+                                    <h3 class="box-title">
+                                        <span>{{attorneyInfo.first_Name}}&nbsp;&nbsp;{{attorneyInfo.last_Name}}</span>
+                                        <span data-ng-show="$index_editAgencyContactInfo.$visible">Edit
+											Attorney Info</span>
+                                    </h3>
+                                    <div class="pull-right">
+                                        <h3>
+                                            <span>Group #&nbsp;&nbsp;{{attorneyInfo.group_No}}</span>
+                                        </h3>
+                                    </div>
+                                    <!-- /.box-tools -->
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div data-ng-show="!displayEditAttorneyForm">
+                                        <span class="title"><strong>Phone Number : </strong></span> <span>{{attorneyInfo.phone_No}} &nbsp;</span><br>
+                                        <button class="btn btn-danger pull-right"
+                                                title="update attorney information" data-ng-click="editForm('Y')"
+                                                style="margin-left: 10px;margin-bottom: 10px"
+                                                data-ng-show="!displayEditAttorneyForm">
+                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Update
+                                        </button>
+
+                                        <span class="title"><strong>Email: </strong></span><span>{{attorneyInfo.email}}&nbsp;</span><br>
+                                        <span class="title"><strong>Firm Name : </strong></span> <span>{{attorneyInfo.firm_Name}}</span><br>
+                                        <span class="title"><strong>Address : </strong></span><br>
+                                        <span>{{attorneyInfo.address1}}&nbsp;<br>
+											{{attorneyInfo.address2}}
+											&nbsp;{{attorneyInfo.city}}&nbsp;{{attorneyInfo.state}}&nbsp;{{attorneyInfo.zip_Code}}<br>
+											&nbsp;{{attorneyInfo.country}}
+										</span><br>
+                                        <span class="title"><strong>Group :</strong></span><span>{{attorneyInfo.group_No}}&nbsp; </span><br>
+                                        <span class="title"><strong>CBCA ID :</strong></span> <span>{{attorneyInfo.gao_user_id}}&nbsp; </span><br>
+                                        <span class="title"><strong>Role :</strong> </span> <span>{{attorneyInfo.role}}&nbsp;</span>
+                                    </div>
+                                    <form class="form-horizontal" role="form"
+                                          name="editAttorneyInfoForm" id="protest-form"
+                                          data-ng-show="displayEditAttorneyForm">
+
+                                        <div>
+                                            <label for="a_gaoId" class="requiredInputs">CBCA ID</label>
+                                            <div>
+                                                <input type="text" name="gaoUserId" class="form-control" id="a_gaoId"
+                                                       data-validate-on="dirty"
+                                                       data-ng-model="attorneyInfo.gao_user_id"
+                                                       data-validation-msg-required="Please enter representative CBCA ID"
+                                                       required gaoid data-validation-msg-gaoid="CBCA Id already exists"
+                                                       data-ng-pattern="regEx.gaoId" maxlength="{{regEx.gaoId_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="attorneyTitle">Title</label>
+                                            <div>
+                                                <input type="text" name="attorneyTitle" class="form-control"
+                                                       id="attorneyTitle" data-validate-on="dirty"
+                                                       data-ng-model="attorneyInfo.title"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter title"
+                                                       data-ng-pattern="regEx.gaoTitle" maxlength="{{regEx.gaoTitle_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="a_prefix">Prefix</label>
+                                            <div>
+                                                <input type="text" name="prefix" class="form-control"
+                                                       id="a_prefix" data-validate-on="dirty"
+                                                       data-ng-model="attorneyInfo.prefix"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter representative prefix"
+                                                       data-ng-pattern="regEx.prefix" maxlength="{{regEx.prefix_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="a_firstname" class="requiredInputs">First Name</label>
+                                            <div>
+                                                <input type="text" name="firstname" class="form-control"
+                                                       id="a_firstname" data-validate-on="dirty"
+                                                       data-ng-model="attorneyInfo.first_Name"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter representative first name"
+                                                       required
+                                                       data-ng-pattern="regEx.firstName" maxlength="{{regEx.firstName_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="a_middleInitial">Middle Initial</label>
+                                            <div>
+                                                <input type="text" name="middleInitial" class="form-control"
+                                                       id="a_middleInitial" data-validate-on="dirty"
+                                                       data-ng-model="attorneyInfo.middle_initial"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter representative first name"
+                                                       data-ng-pattern="regEx.middleInitial" maxlength="{{regEx.middleInitial_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="a_lastname" class="requiredInputs">Last Name</label>
+                                            <div>
+                                                <input type="text" name="lastname" class="form-control"
+                                                       data-validate-on="dirty" id="a_lastname"
+                                                       data-ng-model="attorneyInfo.last_Name"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter representative last name"
+                                                       required
+                                                       data-ng-pattern="regEx.lastName" maxlength="{{regEx.lastName_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="a_suffix">Suffix</label>
+                                            <div>
+                                                <input type="text" name="suffix" class="form-control"
+                                                       id="a_suffix" data-validate-on="dirty"
+                                                       data-ng-model="attorneyInfo.suffix"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter representative suffix"
+                                                       data-ng-pattern="regEx.suffix" maxlength="{{regEx.suffix_max}}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="a_email" class="requiredInputs">Email Address</label>
+                                            <div>
+                                                <input type="email" name="email" class="form-control"
+                                                       id="a_email" data-ng-model="attorneyInfo.email"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-required="Please enter representative email address"
+                                                       required disabled="disabled"
+                                                       data-ng-pattern="regEx.email" maxlength="{{regEx.email_max}}">
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <fieldset required>
+                                                <legend class="visually-hidden">Phone Number</legend>
+                                                <label for="a_phonenumber" class="requiredInputs">Phone Number</label>
+                                                <div>
+                                                    <input type="tel" name="phonenumber" id="a_phonenumber"
+                                                           data-validate-on="dirty"
+                                                           class="form-control" data-ng-model="attorneyInfo.phone_No"
+                                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                                           data-international-phone-number
+                                                           data-validation-msg-required="Please enter phone number"
+                                                           required maxlength="{{regEx.phone_max}}">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div>
+                                            <fieldset>
+                                                <legend class="visually-hidden">Fax Number</legend>
+                                                <label for="a_faxnumber">Fax Number</label>
+                                                <div>
+                                                    <input type="tel" name="faxnumber" class="form-control"
+                                                           data-validate-on="dirty" id="a_faxnumber"
+                                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                                           data-ng-model="attorneyInfo.fax_No"
+                                                           data-international-phone-number
+                                                           maxlength="{{regEx.phone_max}}">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label for="a_selectGroup" class="requiredInputs">Select Group </label>
+                                            <div>
+                                                <select id="a_selectGroup" class="form-control" required
+                                                        data-ng-options="option as option.label for option in groups"
+                                                        data-ng-model="selectedAttorneyGroupId">
+                                                    <option value="">Please Select Group</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="a_selectRoles" class="requiredInputs">Select Role </label>
+                                            <div>
+                                                <select id="a_selectRoles" class="form-control" required
+                                                        data-ng-options="option as option.label for option in gaoRoles"
+                                                        data-ng-model="selectedAttorneyRole">
+                                                    <option value="">Please Select Role</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 10px">
+                                            <label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+                                            <div class="col-sm-10 col-lg-9 col-md-9">
+
+                                                <input type="submit" value="Save" class="btn btn-success"
+                                                       ng-disabled="editAttorneyInfoForm.$invalid || editAttorneyInfoForm.$pending"
+                                                       data-ng-click="updateAttorneyInfo(editAttorneyInfoForm,attorneyInfo)">
+                                                <input type="submit" value="Cancel" class="btn btn-warning"
+                                                       data-ng-click="editForm('N')">
+                                                <input type="submit" value="Delete" class="btn btn-danger pull-right"
+                                                       data-ng-click="deleteAttorneyInfo(attorneyInfo.first_Name,attorneyInfo.last_Name,attorneyInfo.user_Id)">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.box-body -->
+                            </fieldset>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+
+                </div>
+            </div>
+            <div class="row" data-ng-show="showAddAttorneyForm">
+                <div class="col-md-6">
+                    <div data-ng-include src="'scripts/app/admin/manage-attorney-info/addAttorneyInfo.tpl.htm'"></div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>

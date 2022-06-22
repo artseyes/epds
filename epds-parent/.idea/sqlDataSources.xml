@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="5c79608c-ae2a-4adc-a680-af5b92555d4e" name="159.142.165.50@localhost Mapping">
+      <data-sources db="e3e547b2-566f-4928-be10-2aaf3538258f" />
+      <scope>
+        <node kind="database">
+          <name qname="EPDS" />
+          <name qname="EPDS_AUTH" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>

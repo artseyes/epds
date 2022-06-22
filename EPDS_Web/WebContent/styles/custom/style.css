@@ -1,0 +1,855 @@
+/* root/global variables to set up a theme of colors to use below */
+:root {
+    --primary: #1758b4;
+    --primary-hov: #1758b4e0;
+    --primary-dark: #012861;
+    --success: #00734d;
+    --success-hov: #00734de0;
+    --warning: #9f4c00;
+    --warning-hov: #9f4c00e0;
+    --info: #2c699c;
+    --info-hov: #2c699ce0;
+    --danger: #cd250d;
+    --danger-hov: #cd250de0;
+}
+
+.colvis-override {
+    margin-right: 8px;
+    border-radius: 3px !important; // Necessary inorder to override the colvis btn-group styles
+}
+
+#protestTable_wrapper .dt-buttons.btn-group {
+    float: left;
+    margin-bottom: 10px;
+}
+
+#protestTable_filter {
+    float: right;
+    margin-right: 15px;
+}
+
+#protestTable_length {
+    float: left;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.excel_export {
+    margin-bottom: 8px;
+}
+
+.dataTable td {
+    /* word-break: break-all; */
+    word-wrap: break-word;
+  	max-width: 400px;
+}
+
+.span120 {
+    width: 150px;
+    word-wrap: break-word;
+}
+
+.span200 {
+    width: 350px;
+    word-wrap: break-word;
+}
+
+/* show cursor on hover */
+
+.show-pointer:hover {
+    cursor: pointer;
+}
+.ui-dialog-titlebar-close {
+    display: none;
+}
+
+/*.ui-widget-header {*/
+/*    border: 1px solid var(--primary);*/
+/*    background: url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% var(--primary);*/
+/*    color: #FFF;*/
+/*    font-weight: bold;*/
+/*}*/
+
+
+ul li ul {
+    display: none;
+}
+
+.list-indentatation{
+    margin-left: 25px;
+}
+
+
+table.dataTable span.highlight {
+    background-color: #FFFF88;
+}
+
+#loaderDiv {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1100;
+    background-color: blue;
+    opacity: .6;
+}
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px; /* -1 * image height / 2 */
+    display: block;
+}
+
+.warning{
+   border:1px solid red;
+ }
+ 
+ 
+
+
+/* form Errors */
+.xt-error {
+    border: 1px solid red;
+    color: red;
+  }
+
+  .xt-error:focus {
+    border: 1px solid red;
+    box-shadow: 0 0 2px red;
+  }
+
+
+  /* Adding spacing between two elements */
+  .spacing-between-elements{
+    margin-top: 20px;
+}
+
+	.tweaked-margin-left {
+	    margin-left: 10px;
+	    margin-top: 30px;
+	}
+
+
+/* making the background transparent in parties table */
+.nested-table{
+background-color: transparent!important;
+}
+
+
+/* For Admin and Supervisor group filter glyphicon padding*/
+.group-filter-dropdown-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* for nested dropdown menu   */
+/* This is being used for create flyout menu in admin dashboard navigation */
+
+ .dropdown-submenu {
+	position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -6px;
+	margin-left: -1px;
+	-webkit-border-radius: 0 6px 6px 6px;
+	-moz-border-radius: 0 6px 6px 6px;
+	border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+	display: block;
+}
+
+.dropdown-submenu>a:after {
+	display: block;
+	content: " ";
+	float: right;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 5px 0 5px 5px;
+	border-left-color: #cccccc;
+	margin-top: 5px;
+	margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+	border-left-color: #ffffff;
+}
+
+.dropdown-submenu.pull-left {
+	float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+	left: -100%;
+	margin-left: 10px;
+	-webkit-border-radius: 6px 0 6px 6px;
+	-moz-border-radius: 6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
+}
+
+
+/*Modal Dialogue Boxes*/
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+
+.modal-header
+{
+    cursor: move;
+}
+
+.modal.ng-enter {
+  transition: opacity .5s ease-out;
+  opacity: 0;
+}
+.modal.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.modal.ng-leave {
+  transition: opacity .5s ease-out;
+  opacity: 1;
+}
+.modal.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.modal-header-success {
+    color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: var(--success);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.modal-header-warning {
+	color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: var(--warning);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.modal-header-danger {
+	color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: var(--danger);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.modal-header-info {
+    color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: var(--info);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.modal-header-primary {
+	color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: var(--primary);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+
+
+
+/*  CSS  angular ui
+Original Bootstrap's CSS depends on empty href attributes to style cursors for several components (pagination, tabs etc.).
+But in AngularJS adding empty href attributes to link tags will cause unwanted route changes.
+This is why we need to remove empty href attributes from directive templates and as a result styling is not applied correctly. 
+The remedy is simple, just add the following styling to your application:
+
+*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.pagination.container{width:100%}
+	
+	
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+/* prevent bootstrap popover content 
+   from overflowing or clipping */
+.popover {
+  font-size: 12px;
+  word-wrap: break-word;
+}
+
+/* IE Typing Problem */
+
+:enabled:focus {
+ outline: 2px inset;
+}
+
+button,
+input[type=button],
+input[type=reset],
+input[type=submit],
+input[type=checkbox],
+input[type=radio],
+textarea,
+input,
+input[type=text],
+input[type=hidden],
+input[type=password],
+input[type=image]
+{
+ display: inline-block;
+ white-space: nowrap;
+}
+
+button
+{
+/* white space handling of BUTTON tags in particular */
+ white-space:normal;
+}
+
+input[type=reset]:lang(en)
+{
+/* default content of HTML input type=reset button, per language */
+ content: "Reset";
+}
+
+input[type=submit]:lang(en)
+{
+/* default content of HTML input type=submit button, per language */
+ content: "Submit";
+}
+
+/* UAs should use language-specific Reset/Submit rules for others. */
+
+input[type=button],
+input[type=reset][value],
+input[type=submit][value]
+{
+/* text content/labels of HTML "input" buttons */
+ content: attr(value);
+}
+
+textarea
+{
+/* white space handling of TEXTAREA tags in particular */
+ white-space:pre-wrap;
+ resize: both;
+}
+
+input[type=hidden]
+{
+/* appearance of the HTML hidden text field in particular */
+ display: none;
+}
+
+input[type=image]
+{
+ display: inline-block;
+ content: attr(src,url);
+ border: none;
+}
+
+select[size]
+{
+/* HTML4/XHTML1 <select> w/ size more than 1 - appearance of list */
+ display: inline-block;
+ height: attr(size,em);
+}
+
+select,select[size=1]
+{
+/* HTML4/XHTML1 <select> without size, or size=1 - popup-menu */
+ display: inline-block;
+ height: 1em;
+ overflow: hidden;
+}
+
+select[size]:active
+{
+/* active HTML <select> w/ size more than 1 - appearance of active list */
+ display: inline-block;
+}
+
+optgroup,option
+{
+ display: block;
+ white-space: nowrap;
+}
+
+optgroup[label],option[label]
+{
+ content: attr(label);
+}
+
+option[selected]::before
+{
+ display: inline;
+ content: check;
+}
+
+.requiredInputs:after {
+			  content: "  ( Required )";
+			  color: var(--danger);
+			  display: inline-block;
+			  font-style: italic;
+              margin-left:5px;
+              font-weight :bold;
+}
+			
+
+.dt-button-collection a.buttons-columnVisibility:before,
+.dt-button-collection a.buttons-columnVisibility.active span:before {
+	display:block;
+	position:absolute;
+	top:1.2em;
+    left:0;
+	width:12px;
+	height:12px;
+	box-sizing:border-box;
+}
+
+.dt-button-collection a.buttons-columnVisibility:before {
+	content:' ';
+	margin-top:-6px;
+	margin-left:10px;
+	border:1px solid black;
+	border-radius:3px;
+}
+
+.dt-button-collection a.buttons-columnVisibility.active span:before {
+	content:'\2714';
+	margin-top:-11px;
+	margin-left:12px;
+	text-align:center;
+	text-shadow:1px 1px #DDD, -1px -1px #DDD, 1px -1px #DDD, -1px 1px #DDD;
+}
+
+.dt-button-collection a.buttons-columnVisibility span {
+    margin-left:20px;    
+}
+
+/* angular UI-modal is showing this flickering effect when we try to open it known bug in angularUi
+https://github.com/angular-ui/bootstrap/issues/5183
+body > [uib-modal-window]:not([modal-render]) {
+    display: none;
+}*/
+
+
+/*
+adding delay to side bar navigation 
+
+ 
+ 
+ #sideBarNavigation {
+  -vendor-animation-duration: 6s;
+  -vendor-animation-delay: 1s;
+ }*/
+ 
+ 
+ /* Styles for Large Modal
+   Removes slide-up animation */
+.modal-dialog.modal-lg {
+  -webkit-transform: translate(0,0) !important;
+  -ms-transform: translate(0,0) !important;
+  transform: translate(0,0) !important;
+}
+
+/* Styles for Small Modal
+   Changes slide-up animation to slide-down */
+.modal-dialog.modal-md {
+  -webkit-transform: translate(0,25%) !important;
+  -ms-transform: translate(0,25%) !important;
+  transform: translate(0,25%) !important;
+}
+.modal.in > .modal-dialog.modal-md {
+	-webkit-animation-duration: 0s !important;
+	-ms-animation-duration: 0s !important;
+  	/* -webkit-animation-delay: 2s !important;
+  	-ms-animation-delay: 2s !important; */
+  	-webkit-animation-name:fadeInDown !important;
+	-moz-animation-name:fadeInDown !important;
+	-ms-animation-name:fadeInDown !important;
+	-o-animation-name:fadeInDown !important;
+	animation-name:fadeInDown !important;
+  	-webkit-transform: translate(0,0) !important;
+  	-ms-transform: translate(0,0) !important;
+  	transform: translate(0,0) !important;
+}
+
+.login-content {
+    height: calc(100vh - 50px);
+    top: 50px;
+    overflow: auto;
+    /*background: #f9f9f9;*/
+}
+
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus,
+.treeview-menu li > a:hover, .treeview-menu li > a:focus {
+    background-color: var(--primary) !important;
+    color:#fff!important;
+    font-weight: bold;
+}
+
+.treeview-menu {
+    margin-left: 16px;
+}
+
+.treeview > a:after {
+    content: "\25B6";
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.treeview.active > a:after {
+    transform: rotate(90deg);
+}
+
+/* new ckeditor has some 508/aria stuff that creates a 1px absolute positioned element below page */
+/* On Chrome this was causing a scrollbar. Setting a bottom fixes */
+.cke_screen_reader_only {
+    bottom: 0;
+}
+
+/* adjustments to editable controls so buttons wrap and have a slight margin from input box */
+.editable-controls {
+    white-space: pre-wrap;
+}
+
+.editable-buttons {
+    margin-top: 2px;
+}
+
+/* AdminLTE.css overrides instead of modifying file directly */
+a {
+    color: var(--primary);
+}
+
+a:hover, a:focus {
+    color: var(--primary-hov);
+}
+
+a:focus {
+    outline: 2px inset;
+}
+
+/* Limit height to the view height minus the header to eliminate scrollbar. */
+/* Right side content will now scroll within itself */
+.right-side,
+.left-side {
+    height: calc(100vh - 50px);
+    min-height: unset;
+}
+
+/* Limit height to the view height minus the header and titles bars to eliminate scrollbar */
+aside .content {
+    height: calc(100vh - 101px);
+    overflow: auto;
+}
+
+@media screen and (max-width: 767px) {
+    aside .content {
+        height: calc(100vh - 137px);
+        overflow: auto;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .row-offcanvas-left.active {
+        width: calc(100vw - 220px);;
+    }
+}
+
+.small-box h3,
+.small-box p {
+    z-index: 5;
+}
+
+.box .box-header {
+    background-color: #f1f1f1;
+}
+
+.box.box-solid.box-primary > .box-header {
+    background-color: var(--primary);
+}
+
+.box.box-solid.box-info > .box-header {
+    background-color: var(--info);
+}
+
+.box.box-solid.box-danger > .box-header {
+    background-color: var(--danger);
+}
+
+.box.box-solid.box-warning > .box-header {
+    background-color: var(--warning);
+}
+
+.box.box-solid.box-success > .box-header {
+    background-color: var(--success);
+}
+
+.btn.btn-primary {
+    background-color: var(--primary);
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary.hover {
+    background-color: var(--primary-hov);
+}
+
+.btn.btn-success {
+    background-color: var(--success);
+}
+
+.btn.btn-success:hover,
+.btn.btn-success:active,
+.btn.btn-success.hover {
+    background-color: var(--success-hov);
+}
+
+.btn.btn-warning {
+    background-color: var(--warning);
+}
+
+.btn.btn-warning:hover,
+.btn.btn-warning:active,
+.btn.btn-warning.hover {
+    background-color: var(--warning-hov);
+}
+
+.btn.btn-info {
+    background-color: var(--info);
+}
+
+.btn.btn-info:hover,
+.btn.btn-info:active,
+.btn.btn-info.hover {
+    background-color: var(--info-hov);
+}
+
+.btn.btn-danger {
+    background-color: var(--danger);
+}
+
+.btn.btn-danger:hover,
+.btn.btn-danger:active,
+.btn.btn-danger.hover {
+    background-color: var(--danger-hov);
+}
+
+.nav.nav-pills.nav-stacked > li.active > a,
+.nav.nav-pills.nav-stacked > li.active > a:hover {
+    background-color: #357db7;
+}
+
+.form-box .header, .skin-blue .navbar, .skin-blue .logo {
+    background-image: linear-gradient(to top, var(--primary), var(--primary-dark));
+    /*background-image: linear-gradient(to top , #1758b4, #012861);*/
+    background-color: var(--primary);
+}
+
+/*@supports (--foo: green) {*/
+/*    .form-box .header, .skin-blue .navbar, .skin-blue .logo {*/
+/*        background-image: linear-gradient(to top, var(--primary), var(--primary-dark));*/
+/*    }*/
+/*}*/
+
+
+.skin-blue .navbar .nav > li > a:hover,
+.skin-blue .navbar .nav > li > a:active,
+.skin-blue .navbar .nav > li > a:focus,
+.skin-blue .navbar .nav .open > a,
+.skin-blue .navbar .nav .open > a:hover,
+.skin-blue .navbar .nav .open > a:focus {
+    background: var(--primary);
+}
+
+.skin-blue .navbar .sidebar-toggle:hover .icon-bar {
+    background: var(--primary) !important;
+}
+
+
+.skin-blue .sidebar > .sidebar-menu > li > a:hover,
+.skin-blue .sidebar > .sidebar-menu > li.active > a {
+    color: #000000;
+    background: #00BFFF;
+}
+
+.nav-tabs-custom > .nav-tabs {
+    margin: 1px;
+}
+
+.nav-tabs-custom > .nav-tabs > li {
+    background-color: #d4d2d9 !important;
+    color:#000 !important;
+}
+
+.nav-tabs-custom > .nav-tabs > li a{
+
+    color:#000 !important;
+}
+
+.nav-tabs > li {
+    border-radius: 10px 10px 0px 0px !important;
+
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #fff !important;
+    font-weight: bold;
+    background-color: #357db7 !important;
+    border-radius: 5px 5px 0px 0px !important;
+}
+/* End of AdminLTE.css overrides */
+
+/* bootstrap overrides for 508 */
+.breadcrumb>.active {
+    color: #666;
+}
+
+.pagination > li > a {
+    color: #555;
+}
+
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #666;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.hover, .btn-primary.focus {
+    background-color: var(--primary-hov);
+}
+
+.btn-success {
+    background-color: var(--success);
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.hover, .btn-success.focus {
+    background-color: var(--success-hov);
+}
+
+.btn-warning {
+    background-color: var(--warning);
+}
+
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.hover, .btn-warning.focus {
+    background-color: var(--warning-hov);
+}
+
+.btn-info {
+    background-color: var(--info);
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.hover, .btn-info.focus {
+    background-color: var(--info-hov);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.hover, .btn-danger.focus {
+    background-color: var(--danger-hov);
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    color: #fff;
+}
+
+.dropdown-header {
+    color: #666;
+}
+
+.form-control {
+    color: #000;
+}
+
+::placeholder {
+    color: #666 !important;
+}
+
+/* End of bootstrap overrides for 508 */
+
+/*Datatables 508*/
+table.dataTable thead .sorting:after {
+ opacity: .7 !important;
+}
+
+/* 508 classes */
+.fg-text-red {
+    color: var(--danger);
+}
+
+.modal-title, .modal-title > a {
+    color: beige;
+}
+
+.epds-bg-blue {
+    background-color: var(--primary) !important;
+}
+
+.epds-bg-green {
+    background-color: var(--success) !important;
+}
+
+
+legend {
+    font-size: unset;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}

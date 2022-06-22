@@ -1,0 +1,55 @@
+{
+  "name": "epds-test",
+  "version": "0.0.1",
+  "description": "epds gulp project",
+  "main": "app.js",
+  "devDependencies": {
+    "chalk": "^0.4.0",
+    "dateformat": "^1.0.7-1.2.3",
+    "glob": "~3.2.9",
+    "gulp": "^3.5.5",
+    "gulp-cache": "^0.1.3",
+    "gulp-clean": "^0.2.4",
+    "gulp-concat": "^2.1.7",
+    "gulp-header": "^1.0.2",
+    "gulp-if": "0.0.5",
+    "gulp-imagemin": "^0.1.5",
+    "gulp-jshint": "^1.9.2",
+    "gulp-load-plugins": "^0.4.0",
+    "gulp-load-utils": "^0.0.4",
+    "gulp-minify-css": "^0.3.0",
+    "gulp-notify": "^1.1.0",
+    "gulp-size": "^0.1.3",
+    "gulp-uglify": "^0.2.1",
+    "jshint-stylish": "^1.0.0",
+    "minimist": "0.0.8",
+    "gulp-mocha-phantomjs": "0.8.1",
+    "mocha-phantomjs": "^3.6.0",
+    "phantomjs": "1.9.7-15"
+  },
+  "author": "Mohammed Amer Hussaini",
+  "webroot": "../",
+  "webapp": "../",
+  "dest": "../build/dev/",
+  "paths": {
+    "source": {
+      "css": [
+        "../styles/**/*.css"
+      ],
+
+      "js": [
+        "../scripts/**/*.js"
+      ],
+      "images": [
+        "../img/**/*"
+      ]
+    },
+    "dest": {
+      "base": "./dev/",
+      "css": "./dev/app/styles/",
+      "js": "./dev/app/scripts/",
+      "images": "./dev/app/images"
+    },
+    "production": "./prod/"
+  }
+}

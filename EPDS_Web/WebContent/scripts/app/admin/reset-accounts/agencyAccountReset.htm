@@ -1,0 +1,63 @@
+<!-- <div class="modal fade"> -->
+<!-- <div class="modal-dialog"> -->
+<div class="modal-content">
+	<div class="modal-header modal-header-warning">
+		<h4><i class="glyphicon glyphicon-warning-sign"> </i>&nbsp;&nbsp;Agency Account Reset</h4>
+	</div>
+	<div class="modal-body">
+		<form role="form" name="resetform">
+			<agency-drop-down
+					agencylist="tier1AgencyList"
+					tier1-selected-option="tier1SelectedOption"
+					tier2-selected-option="tier2SelectedOption"
+					tooltip="Please Select agency"
+					protest-warning=" ">
+			</agency-drop-down>
+
+			<div>
+				<label for="email" class="requiredInputs">Email Address</label>
+				<div>
+					<input type="email" class="form-control" data-ng-model-options="{ updateOn: 'blur' }"
+						   data-ng-model="form.email" id="email" lowercase required>
+				</div>
+			</div>
+			<div style="margin-top: 10px">
+				<fieldset required>
+					<legend class="requiredInputs">Update agency role?</legend>
+					<div>
+						<label>
+							<input type="radio" name="attachAssociatedDoc" data-ng-model="form.selectRole" value="Y">
+							Yes
+						</label>
+						<label style="margin-left: 100px;">
+							<input type="radio" name="updateRole" data-ng-model="form.selectRole" value="N">
+							No
+						</label>
+					</div>
+				</fieldset>
+			</div>
+
+			<div data-ng-show="form.selectRole == 'Y'">
+				<label for="selectDropDownId" class="requiredInputs" aria-label="Select Role required">Select Role</label>
+				<div id="selectRoles">
+					<div>
+						<select id="selectDropDownId"
+								data-ng-options="option as option.label for option in agencyRoles"
+								data-ng-model="form.selectedAgencyRole" class="form-control">
+							<option value="">Please Select Role</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" ng-click="reset(form)" class="btn btn-success"
+				data-ng-disabled="resetform.$invalid || !resetform.$dirty ||
+				((tier1SelectedOption && tier1SelectedOption.agency_Id == 0) || (tier2SelectedOption && tier2SelectedOption.agency_Id == 0)) ||
+				(form.selectRole == 'Y' && !form.selectedAgencyRole)">Reset</button>
+		<button type="button" ng-click="cancel()" class="btn btn-warning">Cancel</button>
+	</div>
+</div>
+<!-- </div> -->
+<!-- </div> -->

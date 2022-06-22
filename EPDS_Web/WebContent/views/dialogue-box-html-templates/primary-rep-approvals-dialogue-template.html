@@ -1,0 +1,59 @@
+<style>
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+.custom-modal-bg-color {
+background-color: lightgray;
+}
+</style>
+
+<!-- Modal -->
+      <div class="modal-content" disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="glyphicon glyphicon-thumbs-up"></i> Final Confirmation
+            </h4>
+         </div>
+         <div class="modal-body">
+            <div>Please provide final confirmation to the following user(s) </div>
+				<table id="approvalRequests" class="table table-bordered table-striped"
+						aria-label="Approve Secondary Representatives">
+					<thead>
+						<tr>
+							<th scope="col">B-Number</th>
+							<th scope="col">Protester</th>
+							<th scope="col">Information</th>
+							<th scope="col">Add these Secondary Representatives?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="secondaryInfo in secondaryRepApprovalList">
+							<td data-ng-show="secondaryInfo.b_No != null ">{{secondaryInfo.b_No}}</td>
+							<td data-ng-show="secondaryInfo.b_No == null ">{{secondaryInfo.a_No}}</td>
+							<td>{{secondaryInfo.protesterCompanyName}}</td>
+							<td>
+							{{secondaryInfo.inviterOrInviteeName}}
+							<br>{{secondaryInfo.inviterFirmName}}
+							<br>{{secondaryInfo.invitee_Email}}
+							</td>
+							<td>
+							<div class="buttoncls">
+							<button class="btn btn-success" data-ng-click="respondToSecondaryRepReq($index,'Y',secondaryInfo.invitee_Id,secondaryInfo.a_No)" id = "{{$index}} " value="{{$index}}">Yes</button>&nbsp;&nbsp;
+							<button class="btn btn-danger" data-ng-click="respondToSecondaryRepReq($index,'N',secondaryInfo.invitee_Id,secondaryInfo.a_No)" id = "{{$index}}" value="{{$index}}">No</button>
+							</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+         </div>
+      </div><!-- /.modal-content -->

@@ -1,0 +1,106 @@
+<div class="modal-content">
+    <div class="modal-header modal-header-primary">
+        <!-- <h4 class="modal-title">
+            <i class="glyphicon glyphicon-thumbs-up"></i> <span>Confirm
+                Info</span>
+        </h4> -->
+    </div>
+
+    <div class="modal-body" style="background-color: lightgray;">
+        <form id="register-form" data-ng-fab-form-options="customFormOptions"
+              name="registrationForm">
+            <fieldset class="panel panel-primary">
+				<legend class="visually-hidden">Update Info</legend>
+                <div class="panel-heading">Update Info</div>
+                <div class="panel-body">
+                    <div data-ng-show="role != '8'">
+                        <div class="form-group">
+                            <label for="pwd">Password</label>
+                            <input id="pwd" type="password" class="form-control"
+                                   data-validate-on="blur"
+                                   data-ng-model="form.password"
+                                   data-validation-msg-required="Password is not valid"
+                                   complex-password
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpwd">Confirm Password</label>
+                            <input id="cpwd" type="password" class="form-control"
+                                   data-ng-model="form.retypepassword"
+                                   data-ng-fab-match="form.password" data-validate-on="blur" required>
+                        </div>
+                    </div>
+                    <div data-ng-show="role != '1' && role != '8'">
+                        <div class="form-group">
+                            <label for="secq1">Security Question 1</label>
+                            <select id="secq1" class="form-control"
+                                    data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id"
+                                    data-ng-model="selectedOption1"
+                                    data-ng-change="onQuestion1Selected(selectedOption1,selectedOption2,selectedOption3)">
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <input id="asecq1" type="text"
+                                   data-ng-model="form.answer1"
+                                   class="form-control"
+                                   placeholder="" data-ng-required="role != '1' && role != '8'">
+                        </div>
+                        <div class="form-group">
+                            <label for="secq2">Security Question 2</label>
+                            <select id="secq2" class="form-control"
+                                    data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id"
+                                    data-ng-model="selectedOption2"
+                                    data-ng-change="onQuestion2Selected(selectedOption1,selectedOption2,selectedOption3)">
+
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <input id="asecq2" type="text" class="form-control"
+                                   data-ng-model="form.answer2"
+                                   placeholder=" " data-ng-required="role != '1' && role != '8'">
+                        </div>
+                        <div class="form-group">
+                            <label for="secq3">Security Question 3</label>
+                            <select id="secq3"
+                                    data-ng-options="item.security_question for item in listOfSecurityQuestions track by item.security_q_id"
+                                    data-ng-model="selectedOption3"
+                                    data-ng-change="onQuestion3Selected(selectedOption1,selectedOption2,selectedOption3)"
+                                    class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <input id="asecq3" type="text" class="form-control"
+                                   data-ng-model="form.answer3"
+                                   placeholder=" " data-ng-required="role != '1' && role != '8'">
+                        </div>
+                    </div>
+                    <div data-ng-show="role == '8'">
+                        <div class="form-group">
+                            <label>Security Question</label>
+                            <pre>{{Question.id}}</pre>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   data-ng-model="secAnswer"
+                                   id="inputError"
+                                   placeholder=" " data-ng-required="role == '8'">
+                            <input type="hidden" data-ng-model="numberOfAttempts">
+                        </div>
+                    </div>
+
+                    <div class="box-footer text-center" data-ng-show="role != '8'">
+                        <input type="button" class="btn btn-sm  btn-success" value="Update Info"
+                               data-ng-click="updateInfo(form,selectedOption1,selectedOption2,selectedOption3)"/>
+                    </div>
+                    <div class="box-footer text-center" data-ng-show="role == '8'">
+                        <input type="button" class="btn btn-sm  btn-success" value="Submit"
+                               data-ng-click="checkifThisAnswerIsCorrect(Question.ques,secAnswer,numberOfAttempts)"/>
+                    </div>
+
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<!-- /.modal-content -->
+

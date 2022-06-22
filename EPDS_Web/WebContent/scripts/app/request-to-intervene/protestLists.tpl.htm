@@ -1,0 +1,55 @@
+<div class="col-md-12 col-lg-12">
+    <div class="box box-success">
+        <div class="box-header">
+            <h3 class="box-title">Search Results</h3>
+        </div>
+        <div class="box-body">
+            <!-- Minimal style -->
+
+            <div>
+                <table data-datatable="ng" data-dt-options="dtOptions"
+                       id="protestTable" class="table table-bordered table-striped"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="span120">CBCA Number</th>
+                        <th scope="col">Protester</th>
+                        <th scope="col" class="span120">Date Filed</th>
+                        <th scope="col">Agency</th>
+                        <th scope="col">Contract Number</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col">
+                            <span data-ng-show="role == 'INTERVENOR'">Do you want to request to intervene in this case ?</span>
+                            <span data-ng-show="role == 'AGENCY ATTORNEY'">Do you want to enter an appearance in this case ?</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="protestInfo in protestInfoList">
+                        <td>
+                            <tree protest="protestInfo" path="case-docketsheet" disable-case-docket="Y">
+                        </td>
+                        <td>{{protestInfo.company_Name}}</td>
+                        <td>{{protestInfo.submission_Date}}</td>
+                        <td>{{protestInfo.agency_Name}}</td>
+                        <td>{{protestInfo.solicitation_No}}</td>
+                        <td>{{protestInfo.due_Date}}</td>
+                        <td>
+                            <div class="form-group" id="requestToIntervene">
+                                <div class="buttoncls_$index">
+                                    <button class="btn btn-success " id="{{$index}} " value="{{$index}}"
+                                            data-ng-click="submitNoticeOfAppearance({uid : protestInfo})">Yes
+                                    </button>
+                                    &nbsp;&nbsp;
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</div>

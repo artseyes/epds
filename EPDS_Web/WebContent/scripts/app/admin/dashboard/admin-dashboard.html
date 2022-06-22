@@ -1,0 +1,132 @@
+<div>
+	<aside class="right-side">
+		<section class="content-header">
+			<h1>Dashboard</h1>
+			<ol class="breadcrumb">
+				<li><a href="admin-dashboard/unassigned" id="focus_start">
+					<i class="fa fa-dashboard"></i> Dashboard</a></li>
+				<li data-ng-show="dashboardInfo.viewType == 'unassigned'"
+					class="active">Unassigned Cases</li>
+				<li data-ng-show="dashboardInfo.viewType == 'assigned'"
+					class="active">Assigned Cases</li>
+			</ol>
+		</section>
+		<section class="content">
+		
+		<div class="row">
+			<div class="pull-right">
+				<div class="dataTables_filter pull-left" style="margin-right: 12px">
+					<button data-ng-show= "userProfileInfo.role_id == 7" class="btn btn-info" data-ng-click="clearEmailNotifications()"> Clear Email Notifications</button>
+				</div>
+
+				<div
+					data-ng-dropdown-multiselect=""
+					data-options="caseStatusList"
+					data-selected-model="selectedCaseStatus"
+					data-extra-settings="selectByCaseStatusSettings"
+					data-events="caseStatusFilterEvents"
+					data-vm="dashboardInfo" data-translation-texts="caseStatusBtnText"
+					class="dataTables_filter pull-left" style="margin-right: 12px"></div>
+
+				<div
+					data-ng-show="dashboardInfo.viewType == 'assigned' && dashboardInfo.displayDashboard "
+					data-ng-dropdown-multiselect=""
+					data-options="groupList"
+					data-selected-model="selectedGroup"
+					data-events="plcgGroupFilterEvents"
+					data-group-by="groupId"
+					data-extra-settings="selectByGroupSettings"
+					data-vm="dashboardInfo" data-translation-texts="buttonText"
+					class="dataTables_filter pull-right" style="margin-right: 12px"></div>
+
+			</div>
+						
+		</div>
+		
+		
+		<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 dashboardTable">
+			<div class="box-body" id="protestinfoviewid">
+				<div
+					data-ng-show="!dashboardInfo.displayDashboard && dashboardInfo.viewType == 'unassigned'">
+					There are no new pending cases. If you want to view assigned cases
+					click here <a href="admin-dashboard/assigned"> <i
+						class="fa fa-dashboard"></i> <span>Assigned Cases</span></a>
+				</div>
+				<div
+					data-ng-show="!dashboardInfo.displayDashboard && dashboardInfo.viewType == 'assigned'">
+					There are no assigned cases. If you want to view unassigned cases
+					click here <a href="admin-dashboard/unassigned"> <i
+						class="fa fa-dashboard"></i> <span>Unassigned Cases</span></a>
+				</div>
+			</div>
+			<div
+				data-ng-show="dashboardInfo.viewType == 'unassigned' && dashboardInfo.displayDashboard">
+				<h4>
+					<strong>Unassigned Cases</strong>
+				</h4>
+			</div>
+			<div
+				data-ng-show="dashboardInfo.viewType == 'assigned' && dashboardInfo.displayDashboard ">
+				<h4>
+					<strong>Assigned Cases</strong>
+				</h4>
+			</div>
+			
+			<!-- data-double-scroll-bar-horizontal --> 
+			  
+			
+			<div id="dashboardTable" data-ng-show="dashboardInfo.displayDashboard" class="animated fadeInRight">
+
+			<!-- <slidebox speed="25" content-width="100%"></slidebox> -->
+			<div>
+				<table  data-datatable="ng"  data-dt-options="dashboardInfo.dtOptions"
+					data-dt-column-defs="dashboardInfo.dtColumnDefs" id="protestTable"
+					class="table table-bordered table-striped" width="100%" aria-label="Data table showing list of cases">
+					<thead>
+						<tr>
+							<!-- <th>Alerts</th> -->
+							<th scope="col" class="span120">Case Number</th>
+							<th scope="col">Party</th>
+							<th scope="col" class="span120">Date Filed</th>
+							<th scope="col">Agency</th>
+							<th scope="col">Due Date</th>
+							<th scope="col">EDS Cntrl #</th>
+							<th scope="col"><div style="width:50px;">Group #</div></th>
+							<th scope="col">Judge Name</th>
+							<th scope="col">Case Type</th>
+							<th scope="col">Case Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="protestInfo in dashboardInfo.protest_Info_List">
+							<td>
+								<tree protest="protestInfo" path="{{path}}"></tree>
+							</td>
+							<td>{{protestInfo.company_Name}}</td>
+							<td data-order="{{protestInfo.submission_Date | stringDate:'yyyyMMddHHmmss'}}">{{protestInfo.submission_Date}}</td>
+							<td>{{protestInfo.agency_Name}}</td>
+							<td>{{protestInfo.due_Date}}</td>
+							<td>
+								<a title="link to {{protestInfo.a_No}} case docketsheet" href="javascript:void(0)"
+									data-ng-click="redirectToCaseDocket(protestInfo,
+										protestInfo.role,
+										protestInfo.a_No,
+										protestInfo.caseAccessRequestStatus,
+										protestInfo.deniedIndicatingDocTypeId,
+										protestInfo.deniedDate)" >{{protestInfo.a_No}}</a>
+							</td>
+							<td><div style="width:50px;">Group {{protestInfo.attorney_Group_Id}}</div></td>
+							<td>{{protestInfo.attorney_Name}}</td>
+							<td>{{protestInfo.company_Status}}</td>
+							<td>{{protestInfo.case_Status}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+			</div>
+			</div>
+		</section>
+	</aside>
+</div>

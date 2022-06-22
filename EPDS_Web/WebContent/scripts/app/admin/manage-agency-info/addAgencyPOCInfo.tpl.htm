@@ -1,0 +1,174 @@
+<!--  <form id="addAgencyForm" data-ng-fab-form-options="customFormOptions"
+      name="addAgencyForm">
+<div class="panel panel-primary">
+          <div class="panel-heading">Add Agency User</div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="email">Email</label> 
+              <input type="email" name="email"
+                id="email" class="form-control input-sm"
+                data-uib-popover="{{fieldText.emailToolTip}}"
+                data-popover-trigger="'focus'" data-ng-model="form.email"
+                data-popover-placement="right"
+                placeholder="Email" id="email_id"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                data-validation-msg-required="Please enter email address" 
+                
+                data-validation-msg-authorized="please enter an email with .gov or .mil"
+              	lowercase email 
+                role ="role" 
+                required  uniqueid/>
+            </div>
+          
+            <div class="form-group">
+              <label for="prefix">Prefix</label>
+              <input 
+              	type="text"
+                name="prefix" id="prefix" data-ng-model="form.prefix"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                class="form-control input-sm" 
+                placeholder="Prefix"/>
+            </div>
+            <div class="form-group">
+              <label for="firstname">First Name</label> 
+              <input type="text"
+                name="firstname" id="firstname" 
+                data-ng-model="form.firstName"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                class="form-control input-sm" placeholder="First Name"
+                data-validate-on="blur"
+                data-validation-msg-required="Please enter first name" required />
+            </div>
+            <div class="form-group">
+              <label for="middleInitial">Middle Initial</label> <input
+                type="text" name="middleInitial" id="middleInitial"
+                data-uib-popover="Enter middle intial"
+                data-popover-trigger="'focus'"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                data-popover-placement="center"
+                data-ng-model="form.middle_initial" 
+                class="form-control input-sm"
+                placeholder="Middle Initial" maxlength="1" />
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last Name</label> <input type="text"
+                name="lastname" id="lastname" data-ng-model="form.lastName"
+                data-uib-popover="Enter last name as it appears on your current government issued picture ID"
+                data-popover-trigger="'focus'"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                data-popover-placement="center"
+                class="form-control input-sm" placeholder="Last Name"
+                data-validate-on="blur"
+                data-validation-msg-required="Please enter  last name" required />
+            </div>
+            <div class="form-group">
+              <label for="suffix">Suffix</label>
+               <input type="text"
+                name="suffix" id="suffix" data-ng-model="form.suffix"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                class="form-control input-sm" 
+                placeholder="Suffix"/>
+            </div>
+           
+            <div class="form-group">
+              <label for="phonenumber" class="col-sm-6-offset-3">Phone Number</label>
+              <div class="col-sm-12-offset-2">
+              <input type="text" 
+                name="phonenumber"
+                id="phonenumber"
+                data-ng-model="form.phoneNo" 
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                class="form-control"
+                placeholder="Phone Number"
+                data-validate-on="dirty"
+                data-international-phone-number
+                data-validation-msg-required="Please enter phone number"
+                required />
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="faxnumber" class="col-sm-6-offset-3">Fax Number</label>
+              <div class="col-sm-12-offset-2">
+              <input type="text" 
+                name="faxnumber"
+                id="faxnumber"
+                data-ng-model="form.faxNo" 
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                class="form-control"
+                placeholder="Fax Number"
+                data-international-phone-number/>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="street1">Address Line 1</label>
+              <input 
+                type="text" name="street1"
+                id="street1"
+                class="form-control input-sm"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                data-ng-model="form.address1"
+                placeholder="Street address, P.O. box, company name"
+                data-ng-change = addressChangeFunc(representativeAddressDetails2)
+                data-ng-autocomplete
+				data-details="representativeAddressDetails2"
+       			data-options="options" />
+            </div>
+            <div class="form-group">
+              <label for="street2">Address Line 2</label>
+              <input type="text" 
+                data-uib-popover="Ex:Apartment, suite, unit, building, floor, etc."
+                name="street2" id="street2"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                class="form-control input-sm" data-ng-model="form.address2"
+                placeholder="Ex:Building#, Suite#,Room #, APT#" />
+            </div>
+            <div class="form-group">
+              <label for="zipcode">Zip Code</label> 
+              <input type="text"
+                name="zipcode" 
+                id="zipcode" 
+                class="form-control input-sm"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                data-ng-model="form.zipCode" placeholder="ZIP Code"
+                data-ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/"
+                data-validation-msg-pattern="Please enter valid zipcode"
+                data-validate-on="focus"/>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label> <input type="text" name="city"
+                id="city" class="form-control input-sm" data-ng-model="form.city"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                placeholder="City" data-validate-on="focus"
+                data-validation-msg-required="Please enter city"/>
+            </div>
+            <div class="form-group">
+              <label for="state">State</label> <input type="text" name="state"
+                id="state" class="form-control input-sm" data-ng-model="form.state"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                placeholder="State" data-validate-on="focus"
+                data-validation-msg-required="Please enter state" />
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label> <input type="text"
+                name="country" id="country" class="form-control input-sm"
+                data-ng-model-options="{ updateOn: 'blur' }" 
+                data-ng-model="form.country" placeholder="Country"
+                data-validate-on="focus"
+                data-validation-msg-required="Please enter country"/>
+            </div>
+            <div class="form-group">
+				<label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>
+				<div class="col-sm-10 col-lg-9 col-md-9">
+					<input type="submit" value="Register"
+						data-ng-disabled="addAgencyForm.$invalid || addAgencyForm.$pending"
+						data-ng-click="registerAgencyInfo(form,tier1SelectedOption,tier2SelectedOption)"
+						class="btn btn-success"> 
+				  <input type="submit"
+						value="Cancel" data-ng-click="registerAgencyCancel()"
+						class="btn btn-warning" />
+				</div>
+			</div>
+          </div>
+   </div>
+   </form> -->

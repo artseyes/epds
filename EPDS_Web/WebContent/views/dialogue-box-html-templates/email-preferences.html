@@ -1,0 +1,30 @@
+<div ng-cloak  class="modal-content ng-cloak" disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="fa fa-envelope"></i> 
+               <span> Email Preferences</span>
+               <a data-ng-click="cancel()" class="pull-right" title ="Close" alt="Close">
+                   <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+               </a>
+            </h4>
+         </div>
+         
+         <div class="modal-body" style="background-color: lightgray;">
+            <div class="form-group">
+                                <p> <strong>{{text}}</strong></p>
+                                
+                       </div>
+            	
+         </div>
+          <div class="modal-footer" style="background-color: lightgray;">
+         <div class="buttoncls pull-right">
+					<button class="btn btn-success " 
+							data-ng-click="updateEmailPreferences(emailPreference)" id = "{{$index}} " value="{{$index}}">
+						<span data-ng-if="emailPreference === 'Y'">Yes</span>
+						<span data-ng-if="emailPreference === 'N'">Yes</span>
+					</button>&nbsp;&nbsp; 
+					<button class="btn btn-danger " data-ng-click="cancel()" id = "{{$index}}" value="{{$index}}">No</button>
+				</div>
+				</div>
+</div><!-- /.modal-content -->
+

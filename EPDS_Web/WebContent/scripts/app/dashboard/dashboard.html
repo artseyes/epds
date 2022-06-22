@@ -1,0 +1,149 @@
+<aside class="right-side">
+    <section class="content-header">
+        <h1>Dashboard</h1>
+        <ol class="breadcrumb">
+            <li><a href="dashboard" id="focus_start"><i class="fa fa-dashboard"></i>
+                Dashboard</a></li>
+            <li class="active">Active Cases</li>
+        </ol>
+    </section>
+    <section class="content" style="width: 100%;">
+        <div class="row" style="margin-bottom: 12px">
+            <input id="groupfilter" type="hidden">
+            <input id="caseStatusfilter" type="hidden">
+            <div data-ng-show="dashboardInfo.role == 'GAO SUPERVISOR'"
+                 data-ng-dropdown-multiselect=""
+                 data-options="groupList"
+                 data-selected-model="selectedGroup"
+                 data-events="plcgGroupFilterEvents"
+                 data-group-by="groupId"
+                 data-extra-settings="selectByGroupSettings"
+                 data-vm="dashboardInfo" data-translation-texts="buttonText"
+                 class="dataTables_filter pull-right" style="margin-right: 12px"></div>
+
+            <div
+                    data-ng-dropdown-multiselect=""
+                    data-options="caseStatusList"
+                    data-selected-model="selectedCaseStatus"
+                    data-extra-settings="selectByCaseStatusSettings"
+                    data-events="caseStatusFilterEvents"
+                    data-vm="dashboardInfo" data-translation-texts="caseStatusBtnText"
+                    class="dataTables_filter pull-right" style="margin-right: 12px"></div>
+            <div class="dataTables_filter pull-right" style="margin-right: 12px">
+                <button data-ng-show="userProfileInfo.role_id == 8" class="btn btn-primary"
+                        data-ng-class="{
+      				   'btn-danger' : userProfileInfo.globalEmailPref == 'Y',
+      				  'btn-info' : userProfileInfo.globalEmailPref != 'Y' || !userProfileInfo.globalEmailPref
+      				}" data-ng-click="toggleEmailPreferences(userProfileInfo.globalEmailPref == 'Y' ? 'N' : 'Y')">
+                    Turn
+                    <span data-ng-if="userProfileInfo.globalEmailPref == 'Y'"> ON</span>
+                    <span data-ng-if="userProfileInfo.globalEmailPref != 'Y' || !userProfileInfo.globalEmailPref"> OFF</span>
+                    Email Notifications
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="box-body" id="protestinfoviewid">
+                    <div data-ng-show="!dashboardInfo.displayDashboard">
+                        You don't have any Active Cases. <span
+                            data-ng-show="dashboardInfo.role == 'PROTESTER'"> Please
+							click here to file a new Protest <a href="javascript:void(0)"
+                                                                data-ng-click="fileNewProtest()"> <i
+                                class="fa fa-file"></i> <span>File New Case</span></a>
+						</span>
+                    </div>
+                </div>
+                <div data-ng-show="dashboardInfo.displayDashboard">
+                    <div>
+                        <table data-datatable="ng"
+                               data-dt-options="dashboardInfo.dtOptions"
+                               data-dt-column-defs="dashboardInfo.dtColumnDefs" id="protestTable"
+                               aria-label="Data table showing list of cases"
+                               class="table table-bordered table-striped animated fadeInRightBig"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <!-- <th>Alerts</th> -->
+                                <th scope="col">
+                                    <div style="width: 100px;">CBCA Number</div>
+                                </th>
+                                <th scope="col">Party</th>
+                                <th scope="col" class="span120">Date Filed</th>
+                                <th scope="col">Agency</th>
+                                <th scope="col" data-ng-if="role === 'AGENCY ADMIN'">Agency Reps</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col"><span
+                                        data-ng-show="dashboardInfo.hideOtherOptions !='AT'">EDS
+										Cntrl #</span> <span
+                                        data-ng-show="dashboardInfo.hideOtherOptions =='AT'">PO</span>
+                                </th>
+                                <th scope="col" data-ng-show="dashboardInfo.hideOtherOptions =='S'">Group
+                                    #
+                                </th>
+                                <th scope="col" data-ng-show="dashboardInfo.hideOtherOptions =='S'">Attorney
+                                    Name
+                                </th>
+                                <th scope="col">Case Type</th>
+                                <th scope="col">Case Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="protestInfo in dashboardInfo.protest_Info_List">
+                                <td>
+                                    <tree protest="protestInfo" path="{{path}}"></tree>
+                                </td>
+                                <td>{{protestInfo.company_Name}}</td>
+                                <td data-order="{{protestInfo.submission_Date | stringDate:'yyyyMMddHHmmss'}}">
+                                    {{protestInfo.submission_Date}}
+                                </td>
+                                <td>{{protestInfo.agency_Name}}</td>
+                                <td data-ng-if="role === 'AGENCY ADMIN'">
+								    <span data-ng-if="!protestInfo.agencyRepInfos">
+										Agency Reps. not yet assigned </span>
+                                    <div data-ng-repeat="agencyRepInfo in protestInfo.agencyRepInfos">
+                                        <span>{{agencyRepInfo.lastName}} , {{agencyRepInfo.firstName}}  </span>
+                                    </div>
+                                </td>
+                                <td>{{protestInfo.due_Date}}</td>
+                                <td>
+                                    <div data-ng-show="dashboardInfo.hideOtherOptions != 'AT'">
+                                        <!-- href="/case-docketsheet/{{protestInfo.a_No}}" -->
+                                        <a title="Link to {{protestInfo.a_No}} case docketsheet"
+                                           href="javascript:void(0)"
+                                           data-ng-click="redirectToCaseDocket(protestInfo,
+												protestInfo.role,
+												protestInfo.a_No,
+												protestInfo.caseAccessRequestStatus,
+												protestInfo.deniedIndicatingDocTypeId,
+												protestInfo.deniedDate)">{{protestInfo.a_No}}</a>
+                                    </div>
+                                    <div data-ng-show="dashboardInfo.hideOtherOptions == 'AT'">
+                                        <input type="radio" id="PO1_{{$index}}" value="Y"
+                                               data-ng-checked="protestInfo.po == 'Y'" disabled="disabled"/>
+                                        <label for="PO1_{{$index}}">Y</label>
+                                        <input type="radio" id="PO2_{{$index}}" value="N"
+                                               data-ng-checked="protestInfo.po == 'N'" disabled="disabled"/>
+                                        <label for="PO2_{{$index}}">N</label>
+                                    </div>
+                                </td>
+                                <td data-ng-show="dashboardInfo.hideOtherOptions =='S'">Group
+                                    {{protestInfo.attorney_Group_Id}}
+                                </td>
+                                <td data-ng-show="dashboardInfo.hideOtherOptions =='S'">{{protestInfo.attorney_Name}}
+                                </td>
+                                <td>&nbsp;{{protestInfo.company_Status | uppercase }}</td>
+                                <!-- Commented out on 04/28/2022 -->
+                                <!--     <td>{{protestInfo.case_Type | uppercase}}</td> -->
+                                    <td>{{protestInfo.case_Status}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>

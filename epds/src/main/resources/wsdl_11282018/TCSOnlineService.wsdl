@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                  xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                  xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy"
+                  xmlns:ns0="http://fms.treas.gov/services/tcsonline"
+                  targetNamespace="http://fms.treas.gov/services/tcsonline">
+    <wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:schema>
+            <xsd:import schemaLocation="TCSOnlineService_xsd2.xsd" namespace="http://fms.treas.gov/services/tcsonline"/>
+            <xsd:import schemaLocation="TCSOnlineService_xsd4.xsd" namespace="http://fms.treas.gov/services/tcsonline"/>
+            <xsd:import schemaLocation="TCSOnlineService_xsd5.xsd" namespace="http://fms.treas.gov/services/tcsonline"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="closeAuthorization">
+        <wsdl:part name="parameters" element="xsns:closeAuthorization"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="closeAuthorizationResponse">
+        <wsdl:part name="parameters" element="xsns:closeAuthorizationResponse"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="completeOnlineCollection">
+        <wsdl:part name="parameters" element="xsns:completeOnlineCollection"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="completeOnlineCollectionResponse">
+        <wsdl:part name="parameters" element="xsns:completeOnlineCollectionResponse"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="completeOnlineCollectionWithDetails">
+        <wsdl:part name="parameters" element="xsns:completeOnlineCollectionWithDetails"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="completeOnlineCollectionWithDetailsResponse2">
+        <wsdl:part name="parameters" element="xsns:completeOnlineCollectionWithDetailsResponse2"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="createForce">
+        <wsdl:part name="parameters" element="xsns:createForce" xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="createForceResponse">
+        <wsdl:part name="parameters" element="xsns:createForceResponse"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="createForceWithDetails">
+        <wsdl:part name="parameters" element="xsns:createForceWithDetails"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="createForceWithDetailsResponse">
+        <wsdl:part name="parameters" element="xsns:createForceWithDetailsResponse"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="createForceWithDetailsResponse2">
+        <wsdl:part name="parameters" element="xsns:createForceWithDetailsResponse2"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="getDetails">
+        <wsdl:part name="parameters" element="xsns:getDetails" xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="getDetailsResponse2">
+        <wsdl:part name="parameters" element="xsns:getDetailsResponse2"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="startOnlineCollection">
+        <wsdl:part name="parameters" element="xsns:startOnlineCollection"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="startOnlineCollectionResponse">
+        <wsdl:part name="parameters" element="xsns:startOnlineCollectionResponse"
+                   xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:message name="TCSServiceFault">
+        <wsdl:part name="fault" element="xsns:TCSServiceFault" xmlns:xsns="http://fms.treas.gov/services/tcsonline"/>
+    </wsdl:message>
+    <wsdl:portType name="TCSOnlineService_v2_2">
+        <wsdl:operation name="closeAuthorization">
+            <wsdl:input name="closeAuthorizationRequest" message="ns0:closeAuthorization"/>
+            <wsdl:output name="closeAuthorizationResponse" message="ns0:closeAuthorizationResponse"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="completeOnlineCollection">
+            <wsdl:input name="completeOnlineCollectionRequest" message="ns0:completeOnlineCollection"/>
+            <wsdl:output name="completeOnlineCollectionResponse" message="ns0:completeOnlineCollectionResponse"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="completeOnlineCollectionWithDetails">
+            <wsdl:input name="completeOnlineCollectionWithDetailsRequest"
+                        message="ns0:completeOnlineCollectionWithDetails"/>
+            <wsdl:output name="completeOnlineCollectionWithDetailsResponse"
+                         message="ns0:completeOnlineCollectionWithDetailsResponse2"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="createForce">
+            <wsdl:input name="createForceRequest" message="ns0:createForce"/>
+            <wsdl:output name="createForceResponse" message="ns0:createForceResponse"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="createForceWithDetails">
+            <wsdl:input name="createForceWithDetailsRequest" message="ns0:createForceWithDetails"/>
+            <wsdl:output name="createForceWithDetailsResponse" message="ns0:createForceWithDetailsResponse2"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDetails">
+            <wsdl:input name="getDetailsRequest" message="ns0:getDetails"/>
+            <wsdl:output name="getDetailsResponse" message="ns0:getDetailsResponse2"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="startOnlineCollection">
+            <wsdl:input name="startOnlineCollectionRequest" message="ns0:startOnlineCollection"/>
+            <wsdl:output name="startOnlineCollectionResponse" message="ns0:startOnlineCollectionResponse"/>
+            <wsdl:fault name="TCSServiceFault" message="ns0:TCSServiceFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="TCSOnlineServiceV2_2_PortBinding" type="ns0:TCSOnlineService_v2_2">
+        <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="closeAuthorization">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="closeAuthorizationRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="closeAuthorizationResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="completeOnlineCollection">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="completeOnlineCollectionRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="completeOnlineCollectionResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="completeOnlineCollectionWithDetails">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="completeOnlineCollectionWithDetailsRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="completeOnlineCollectionWithDetailsResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createForce">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="createForceRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createForceResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createForceWithDetails">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="createForceWithDetailsRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createForceWithDetailsResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getDetails">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="getDetailsRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getDetailsResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="startOnlineCollection">
+            <soap11:operation soapAction="" style="document"/>
+            <wsdl:input name="startOnlineCollectionRequest">
+                <soap11:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="startOnlineCollectionResponse">
+                <soap11:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="TCSServiceFault">
+                <soap11:fault name="TCSServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="TCSOnlineService_v2_2">
+        <wsdl:port name="TCSOnlineServicePort22" binding="ns0:TCSOnlineServiceV2_2_PortBinding">
+            <soap11:address location="https://qa.tcs.pay.gov:443/services/TCSOnlineService/2.2/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

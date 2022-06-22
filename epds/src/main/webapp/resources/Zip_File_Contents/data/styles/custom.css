@@ -1,0 +1,95 @@
+/* Adding spacing between two elements */
+.spacing-between-elements {
+	margin-top: 20px;
+}
+
+img {
+	max-width: 100% !important;
+}
+
+body>.header .logo {
+	float: left;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	padding: 0 10px;
+	width: 220px;
+	font-family: 'Kaushan Script', cursive;
+	font-weight: 500;
+	height: 50px;
+	display: block;
+}
+
+.skin-blue .logo {
+	background: #1758b4;
+	background: -moz-linear-gradient(top, #1758b4 0%, #012861 99%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1758b4),
+		color-stop(99%, #012861));
+	background: -webkit-linear-gradient(top, #1758b4 0%, #012861 99%);
+	background: -o-linear-gradient(top, #1758b4 0%, #012861 99%);
+	background: -ms-linear-gradient(top, #1758b4 0%, #012861 99%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1758b4',
+		endColorstr='#012861', GradientType=0);
+	background: linear-gradient(top, #1758b4 0%, #012861 99%);
+	color: #f9f9f9;
+}
+
+a {
+	color: #3c8dbc;
+}
+
+body>.header .navbar {
+	height: 50px;
+	margin-bottom: 0;
+	margin-left: 220px;
+}
+
+.skin-blue .navbar {
+	background: #1758b4;
+	background: -moz-linear-gradient(top, #1758b4 0%, #012861 99%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1758b4),
+		color-stop(99%, #012861));
+	background: -webkit-linear-gradient(top, #1758b4 0%, #012861 99%);
+	background: -o-linear-gradient(top, #1758b4 0%, #012861 99%);
+	background: -ms-linear-gradient(top, #1758b4 0%, #012861 99%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1758b4',
+		endColorstr='#012861', GradientType=0);
+	background: linear-gradient(top, #1758b4 0%, #012861 99%);
+}
+
+html, body {
+	overflow-x: hidden !important;
+	font-family: 'Source Sans Pro', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	min-height: 100%;
+	background: #f9f9f9;
+}
+
+.skin-blue>.content-header {
+	background: #fbfbfb;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.content-header {
+	position: relative;
+	padding: 15px 15px 10px 20px;
+}
+
+.content-header>h1 {
+	margin: 0;
+	font-size: 24px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.skin-blue>.content-header {
+	background: #fbfbfb;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.content-header {
+	position: relative;
+	padding: 15px 15px 10px 20px;
+}

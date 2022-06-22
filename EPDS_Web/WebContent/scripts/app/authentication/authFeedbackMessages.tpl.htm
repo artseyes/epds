@@ -1,0 +1,38 @@
+<div class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"
+				data-ng-class="{
+      				   'modal-header-info' : data.modalType =='info',
+      				  'modal-header-danger' : data.modalType =='error',
+      				  'modal-header-success' : data.modalType =='success',
+      				  'modal-header-warning' : data.modalType =='warning',
+      				}">
+
+				<h4>
+					<i class="glyphicon"
+						data-ng-class="{
+      				   'glyphicon-info-sign' : data.modalType =='info',
+      				  'glyphicon-thumbs-down' : data.modalType =='error',
+      				  'glyphicon-thumbs-up' : data.modalType =='success',
+      				  'glyphicon-warning-sign' : data.modalType =='warning',
+      				}">
+					</i>&nbsp;&nbsp;{{data.headerText}}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!-- <p>{{data.bodyText}}</p> -->
+				<div dynamic="data.bodyText"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" 
+						data-ng-click="close(data.actionType)"
+					    class="btn btn-success" data-remove-modal>OK</button>
+				<button type="button" 
+					data-ng-click="close(data.cancelBtnActionType)"
+					data-ng-show="data.cancelBtnReq == 'Y'"
+					class="btn btn-warning" data-remove-modal>Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

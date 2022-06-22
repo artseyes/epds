@@ -1,0 +1,21 @@
+.btn-file {
+	position: relative !important;
+	overflow: hidden !important;
+	background-color: #00C0EF !important;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+    top: 0px;
+    right: 0px;
+    min-width: 100%;
+    font-size: 100px;
+    text-align: right;
+    opacity: 0;
+    outline: medium none;
+    background: none repeat scroll 0% 0% #00C0EF;
+    cursor: inherit;
+    display: block;
+    min-height: 100%;
+    margin-top: 7px;
+}

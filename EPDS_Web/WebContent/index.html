@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en" data-ng-app="epdsApp">
+<head lang="en">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8"
+	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+	name='viewport'>
+<!-- <base href="/EPDS_Web/"/> -->
+<base href="/" />
+<title>EPDS</title>
+
+<!--Jqery ui.CSS-->
+
+<link href="scripts/vendor/jquery-ui-dist/jquery-ui.min.css"
+	rel="stylesheet" type="text/css" />
+
+<!--bootstrap.CSS-->
+<link href="scripts/vendor/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
+
+<!--Font awesome.CSS-->
+
+<link href="scripts/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+
+
+
+<!-- animation.css -->
+<link rel="stylesheet" type="text/css" href="styles/templates/animate.css">
+
+<link rel='stylesheet' href="scripts/vendor/angular-loading-bar/build/loading-bar.css" type='text/css' />
+<link rel='stylesheet' href="styles/custom/spinners.css" type='text/css' />
+
+
+<!--Themes-->
+<link rel="stylesheet" type="text/css" href="styles/templates/AdminLTE.css">
+<link rel="stylesheet" type="text/css" href="styles/custom/style.css">
+<link rel="stylesheet" type="text/css" href="styles/custom/form-validation.css">
+
+
+
+
+<!-- Jquery -->
+<script	src="scripts/vendor/jquery/dist/jquery.js"></script>
+
+<script	src="scripts/vendor/jquery-migrate/dist/jquery-migrate.js"></script>
+
+
+<!-- Angularjs -->
+
+<script type="text/javascript" src="scripts/vendor/angular/angular.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-aria/angular-aria.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-messages/angular-messages.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-cookies/angular-cookies.js"></script>
+
+<!-- Jquery UI -->
+
+<!--<script src="scripts/vendor/jquery-ui-dist/jquery-ui.js"></script>-->
+<!--	jquery-ui has some errors/warnings when using jquery 3.
+	Some fixes are complete but no new package has been released yet.
+	Started making custom fixes then checked to see if the community had already made a patch.
+	https://github.com/DenisLabrecque/jQuery-UI-Fixed-for-3.5.1
+	CSS is still coming from normal dist -->
+<script src="scripts/cvendor/jquery-ui/jquery-ui-1.12.1-fixed.js"></script>
+
+<!-- Moment -->
+<script type="text/javascript" src="scripts/vendor/moment/moment.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/moment-timezone/moment-timezone.js"></script>
+
+
+<!-- angular ui -js -->
+<!--<script type="text/javascript"-->
+<!--	src="scripts/vendor/angular-ui-dist/angular-ui.js"></script>-->
+
+<!-- angular ui -bootstrap -->
+<script type="text/javascript"
+	src="scripts/vendor/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
+
+<!-- angular fab form -->
+<!--	five years old, have custom version to fix jquery 3 issue-->
+<script type="text/javascript" src="scripts/cvendor/ng-fab-form/ng-fab-form.js"></script>
+
+<!-- fusty flow -->
+<script type="text/javascript"
+	src="scripts/vendor/@flowjs/ng-flow/dist/ng-flow-standalone.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/@flowjs/fusty-flow.js/src/fusty-flow.js"></script>
+
+
+
+<script type="text/javascript"
+	src="scripts/vendor/case/dist/Case.min.js"></script>
+
+<script type="text/javascript"
+	src="scripts/vendor/google-libphonenumber/dist/libphonenumber.js"></script>
+
+
+<!-- Bootstrap -->
+
+<script type="text/javascript"
+	src="scripts/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+
+<script type="text/javascript" src="scripts/vendor/lodash/lodash.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/angular-loading-bar/build/loading-bar.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/stacktrace-js/dist/stacktrace.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/stacktrace-js/dist/stacktrace-with-promises-and-json-polyfills.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/stacktrace-gps/dist/stacktrace-gps.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/stackframe/dist/stackframe.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/error-stack-parser/dist/error-stack-parser.js"></script>
+<!--<script type="text/javascript"-->
+<!--	src="scripts/vendor/error-stack-parser/dist/error-stack-parser-with-polyfills.min.js"></script>-->
+<script type="text/javascript" src="scripts/vendor/file-saver/FileSaver.js"></script>
+<script type="text/javascript" src="scripts/vendor/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+<script type="text/javascript" src="scripts/app/core/ngMeta.js"></script>
+<script type="text/javascript" src="scripts/vendor/jquery-file-download/src/Scripts/jquery.fileDownload.js"></script>
+<!--<script type="text/javascript" src="scripts/vendor/jsSHA/src/sha_dev.js"></script>-->
+<script type="text/javascript" src="scripts/vendor/jssha/dist/sha.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/angular-cache-buster/angular-cache-buster.js"></script>
+<script type="text/javascript" src="scripts/app/core/ocLazyLoad.js"></script>
+<script type="text/javascript"
+	src="scripts/vendor/angular-moment/angular-moment.min.js"></script>
+
+
+<!-- Include the JS ReCaptcha API -->
+<!-- <script
+		  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+		  async defer
+		></script> -->
+
+<!-- Angular Module Definition -->
+
+<script src="scripts/app.js"></script>
+<script src="scripts/app/module-defs.js"></script>
+<script type="text/javascript" src="scripts/app/core/lazyloadFiles.js"></script>
+
+<!-- CORE -->
+<script type="text/javascript" src="scripts/app/core/cacheBusting.js"></script>
+<script type="text/javascript" src="scripts/app/core/core-directives.js"></script>
+<script type="text/javascript" src="scripts/app/core/igCharLimit.js"></script>
+<script type="text/javascript"
+	src="scripts/app/error/global-error-handler.js"></script>
+
+<!-- Authentication -->
+
+<script src="scripts/app/authentication/angular-idle.js"></script>
+<script
+	src="scripts/app/authentication/spring-security-csrf-token-interceptor.js"></script>
+<script src="scripts/app/authentication/angular-jwt.js"></script>
+<script src="scripts/app/authentication/angular-recaptcha.js"></script>
+<script src="scripts/app/authentication/angular-utf8-base64.js"></script>
+<script src="scripts/app/authentication/authentication-service.js"></script>
+<script type="text/javascript"
+	src="scripts/app/authentication/session-config.js"></script>
+
+<script src="scripts/app/authentication/temp-user-controller.js"></script>
+<script src="scripts/app/authentication/reset-password.js"></script>
+<script
+	src="scripts/app/authentication/authentication-feedback-service.js"></script>
+<script src="scripts/app/authentication/auth-login-action-service.js"></script>
+<script src="scripts/app/authentication/security-question-ctrl.js"></script>
+<script type="text/javascript"
+	src="scripts/services/angular-modal-service.js"></script>
+<script type="text/javascript"
+	src="scripts/app/authentication/ng-pattern-restrict.js"></script>
+
+
+
+<!-- Action Messages -->
+
+<script type="text/javascript"
+	src="scripts/app/action-messages/action-messages.js"></script>
+
+
+
+<script type="text/javascript"
+	src="scripts/app/sidebar/navigation-service.js"></script>
+<script src="scripts/app/sidebar/navigation-controller.js"></script>
+
+<!-- Controllers -->
+
+<script src="scripts/app/core/agency-dropdown-controller.js"></script>
+
+<!-- Directive -->
+
+<script type="text/javascript" src="scripts/directives/loader-directive.js"></script>
+<script src="scripts/directives/expand-collapse-navigation-directive.js"></script>
+<script src="scripts/directives/box-collapse-directive.js"></script>
+<script type="text/javascript" src="scripts/directives/numberOnlyDirective.js"></script>
+<script type="text/javascript" src="scripts/directives/AdminLTE.js"></script>
+
+<!-- Filters -->
+<script src="scripts/filters/format-phone-number.js" type="text/javascript"></script>
+<script src="scripts/filters/CaseFilter.js" type="text/javascript"></script>
+<script src="scripts/filters/angular-filter.js" type="text/javascript"></script>
+<script src="scripts/filters/filter-template-document-types.js" type="text/javascript"></script>
+<script src="scripts/filters/stringDate.js" type="text/javascript"></script>
+
+
+<!-- Miscellaneaous -->
+<script src="scripts/misc/ngflow-config.js" type="text/javascript"></script>
+<script src="scripts/misc/validate-filename-extension.js"
+	type="text/javascript"></script>
+<script src="scripts/misc/local-storage-config.js"
+	type="text/javascript"></script>
+
+<!-- services -->
+<script src="scripts/services/loader-service.js"></script>
+<script src="scripts/services/custom-modal-dialogue-service.js"></script>
+<script src="scripts/services/angular-recursion/angular-recursion.js"></script>
+
+
+<script src="scripts/app/user-guides/user-guides.js"></script>
+
+<script src="scripts/services/angular-local-storage.js"></script>
+<script type="text/javascript"
+	src="scripts/app/error/logging-service.js"></script>
+<script type="text/javascript"
+	src="scripts/app/admin/case-docket-sheet/gc-case-docket.js"></script>
+	
+<script type="text/javascript" src="scripts/app/dashboard/dashboard-utils.js"></script>
+<script type="text/javascript" src="scripts/app/core/email-notifications/email-services.js"></script>
+<style>
+
+.pac-container {
+    z-index: 1051 !important;
+}
+</style>
+</head>
+<body class="skin-blue ng-cloak pace-done" id="mainContainer"
+	data-ng-controller="navigationController" style="display: none;"
+	data-autoscroll data-keypress-events data-back-space-not-back-button  ng-strict-di>
+
+	<header class="header" data-ng-show="!loading">
+		<a data-target-blank href="http://www.cbca.gov/" class="logo"> <img
+			src="img/US_GAO_logo.png" alt="CBCA LOGO">
+		</a>
+		<nav class="navbar navbar-static-top" role="navigation">
+			<a href="#" data-ng-show="authenticated" class="sidebar-toggle" data-toggle="offcanvas"role="button">
+				<span class="sr-only" style="color: #fff">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<div class="navbar-right" title="Navigation Menu">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a href="javascript:void(0)"
+						class="dropdown-toggle" data-toggle="dropdown">Help <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="javascript:void(0)" data-ng-click="userGuide()">User Guides</a></li>
+							<li><a href="javascript:void(0)" data-ng-click="userGuide('bestPractices')">Best Practices</a></li>
+							<li><a href="javascript:void(0)" data-ng-click="userGuide('instructions')">Instructions</a></li>
+							<li><a href="javascript:void(0)" data-ng-click="userGuide('faq')">FAQ</a></li>
+							<li><a href="javascript:void(0)" data-ng-click="contactUs()">Contact Us</a></li>
+							<li><a href="javascript:void(0)" data-ng-click="feedBack()">Feedback</a></li>
+						</ul></li>
+					<li class="dropdown user user-menu"><a
+						href="javascript:void(0)" class="dropdown-toggle"
+						data-toggle="dropdown" data-ng-show="authenticated"> <i
+							class="glyphicon glyphicon-user"></i> <span>{{userProfileInfo.first_Name}}&nbsp;{{userProfileInfo.last_Name}}
+								<i class="caret"></i>
+						</span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="profile"
+								title="Click here to view User Profile">Manage User Profile</a></li>
+							<li><a href="javascript:void(0)" data-ng-click="onLogout()">Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+
+		</nav>
+	</header>
+	<div class="wrapper row-offcanvas row-offcanvas-left">
+
+		<aside data-ng-show="authenticated"
+			class="left-side sidebar-offcanvas">
+			<section class="sidebar">
+				<div class="user-panel">
+					<div class=" info">
+						<p></p>
+					</div>
+				</div>
+				<ul id="sideBarNavigation" class="sidebar-menu animated">
+					<li class="treeview" data-ng-show="routes.activeCases.length > 0">
+						<a href="#"><i class="glyphicon glyphicon-briefcase"></i>Active Cases</a>
+						<ul class='treeview-menu'>
+							<li class='active' data-ng-repeat="route in routes.activeCases" data-ng-class="navClass('{{route.href}}')">
+								<a href="{{route.href}}">{{route.title}}</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="" data-ng-repeat="route in routes"
+						data-ng-class="navClass('{{route.href}}')"><a
+						data-ng-if="route.isEmailPreferenceOption != 'Y' 
+						&& route.isJoinOption != 'Y' 
+						&& route.isFileNewProtestOption != 'Y'
+						&& route.isCompleteOption != 'Y'"
+						href="{{route.href}}"> <i class="{{route.menuIconClass}}"></i><span>{{route.title}}</span>
+					</a> <a data-ng-if="route.isEmailPreferenceOption == 'Y'"
+						href="{{route.href}}"
+						data-ng-click="setEmailPreferences(route.protestInfo)"> <i
+							class="{{route.menuIconClass}}"></i><span>{{route.title}}</span>
+					</a> <a data-ng-if="route.isFileNewProtestOption == 'Y'"
+						href="{{route.href}}" data-ng-click="fileNewProtest()"> <i
+							class="{{route.menuIconClass}}"></i><span>{{route.title}}</span>
+					</a> <a data-ng-if="route.isJoinOption == 'Y'" href="{{route.href}}"
+						data-ng-click="joinUnJoinCases(route.protestInfo)"> <i
+							class="{{route.menuIconClass}}"></i><span>{{route.title}}</span>
+					</a> <a data-ng-if="route.isCompleteOption == 'Y'"
+						href="{{route.href}}"
+						data-ng-click="completeOption(route.protestInfo)"> <i
+							class="{{route.menuIconClass}}"></i><span>{{route.title}}</span>
+					</a></li>
+
+					<li class="treeview" data-ng-show="routes[0].submenu.length > 0">
+						<a href="#"><i class="glyphicon glyphicon-briefcase"></i>Admin Tools</a>
+						<ul class='treeview-menu'>
+							<li class='active' data-ng-repeat="route in routes[0].submenu" data-ng-class="navClass('{{route.href}}')">
+								<a data-ng-if="route.href.indexOf('admin/account') == -1  && !route.isRemoveCase && !route.isNotification"
+								   href="{{route.href}}">{{route.title}}</a>
+
+								<a data-ng-if="route.isRemoveCase" href="{{route.href}}" data-ng-click="removeCase()">
+									<i class="{{route.menuIconClass}}"></i>
+									<span>{{route.title}}</span>
+								</a>
+
+								<a data-ng-if="route.isNotification" href="{{route.href}}" data-ng-click="sendNotification()">
+									<i class="{{route.menuIconClass}}"></i>
+									<span>{{route.title}}</span>
+								</a>
+
+								<a data-ng-if="route.href == 'admin/account/reset'" href="#" data-ng-click="resetAccount('reset')">
+									{{route.title}}
+								</a>
+
+								<a data-ng-if="route.href == 'admin/account/delete'" href="#" data-ng-click="resetAccount('delete')">
+									{{route.title}}
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</aside>
+		<div data-ng-view></div>
+	</div>
+	<!-- <div  class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-ng-view>
+	</div>
+	</div> -->
+</body>
+</html>

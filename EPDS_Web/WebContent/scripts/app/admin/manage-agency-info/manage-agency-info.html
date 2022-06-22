@@ -1,0 +1,570 @@
+<aside class="right-side">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>Manage Agency Info</h1>
+        <ol class="breadcrumb">
+            <li><a href="admin-dashboard/unassigned"><i
+                    class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li class="active">Manage Agency Info</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div id="loginbox" style="margin-top: 50px;"
+             class="mainbox col-md-9 col-md-offset-0 col-sm-10 col-sm-offset-1">
+            <fieldset class="panel panel-info">
+                <legend class="visually-hidden">Select Agency Tier, button selection displays content below.</legend>
+                <div class="panel-heading">
+                    <div class="panel-title">Select Agency Tier</div>
+                </div>
+                <div style="padding-top: 30px" class="panel-body">
+                    <form class="form-horizontal" name="submitnewDocForm" role="form">
+                        <agency-drop-down class="col-sm-12 col-lg-12 col-md-12"
+                                          agencylist="tier1AgencyList"
+                                          tier1-selected-option="tier1SelectedOption"
+                                          tier2-selected-option="tier2SelectedOption"
+                                          tooltip="{{fieldText.nameOfFirm}}" data-ng-model="form.agency">
+                        </agency-drop-down>
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+
+                            <button type="button" class="btn btn-primary pull-left"
+                                    data-ng-click="displayAgencyPointOfContacts(tier1SelectedOption,tier2SelectedOption)">
+                                <span>Edit Agency Contact Info</span>
+                            </button>
+
+
+                            <div>
+                                <input name="registerAgency" class="btn btn-success pull-right"
+                                       type="button" id="registerAgencyAttorney"
+                                       data-ng-click="showRegisterAgencyForm()"
+                                       value="Register New Agency User">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+        </div>
+        <div aria-live="polite">
+            <div class="box-body table-responsive col-lg-12 col-md-12 col-sm-12"
+                 data-ng-show="!registerAgencyForm">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-5"
+                             data-ng-repeat="agencyRepInfo in agency_user_Info_List | remove: null track by $index">
+                            <fieldset class="box box-success box-solid">
+                                <legend class="visually-hidden">{{agencyRepInfo.first_Name}} {{agencyRepInfo.last_Name}}
+                                </legend>
+                                <div class="box-header with-border epds-bg-blue">
+                                    <h3 class="box-title">
+                                        <span>{{agencyRepInfo.first_Name}} {{agencyRepInfo.last_Name}}</span>
+                                        <span data-ng-show="$index_editAgencyContactInfo.$visible">Edit Agency Info</span>
+                                    </h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div data-ng-show="!showDetails_$index">
+                                        <span class="title"><strong>Phone Number : </strong></span><span>{{agencyRepInfo.phone_No}}</span><br>
+                                        <button class="btn btn-danger pull-right"
+                                                data-ng-click="showDetails_$index = ! showDetails_$index"
+                                                style="margin-left: 10px;" data-ng-show="!showDetails_$index">
+                                            <i class="fa fa-edit"></i> Update
+                                        </button>
+
+                                        <span class="title"><strong>Email : </strong></span><span>{{agencyRepInfo.email}}&nbsp;</span><br>
+                                        <span class="title"><strong>Firm Name : </strong></span><span>{{agencyRepInfo.firm_Name}}</span><br>
+                                        <span class="title"><strong>Address : </strong></span><br>
+                                        <span>{{agencyRepInfo.address1}}<br>
+										{{agencyRepInfo.address2}}<br>
+										{{agencyRepInfo.city}}&nbsp;{{agencyRepInfo.state}}&nbsp;{{agencyRepInfo.zip_Code}}<br>
+										{{agencyRepInfo.country}}
+									</span>
+
+                                    </div>
+                                    <form class="form-horizontal" role="form"
+                                          name="editagencyRepInfoForm_$index" id="protest-form"
+                                          data-ng-show="showDetails_$index">
+                                        <div class="form-group">
+
+                                            <label for="p_prefix" class="col-sm-12 col-lg-12 col-md-12">Prefix</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="prefix" id="p_prefix"
+                                                       class="form-control input-sm"
+                                                       data-validate-on="blur"
+                                                       data-uib-popover="{{toolTip.prefix}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-pattern="regEx.prefix"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9. "
+                                                       maxlength="{{regEx.prefix_max}}" data-ng-model="agencyRepInfo.prefix">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_firstname" class="col-sm-12 col-lg-12 col-md-12">First
+                                                Name</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="firstname" id="p_firstname"
+                                                       class="form-control input-sm"
+                                                       data-uib-popover="{{toolTip.firstName}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-pattern="regEx.firstName"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters are  a-z, A-Z, 0-9 "
+                                                       maxlength="{{regEx.firstName_max}}" data-ng-model="agencyRepInfo.first_Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_middleInitial" class="col-sm-12 col-lg-12 col-md-12">Middle
+                                                Initial</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="middleInitial" id="p_middleInitial"
+                                                       class="form-control input-sm"
+                                                       data-uib-popover="{{toolTip.middleInitial}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-pattern="regEx.middleInitial"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters are  a-z, A-Z, 0-9 "
+                                                       maxlength="{{regEx.middleInitial_max}}" data-ng-model="agencyRepInfo.middle_initial">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_lastname" class="col-sm-12 col-lg-12 col-md-12">Last
+                                                Name</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="lastname" id="p_lastname"
+                                                       class="form-control input-sm"
+                                                       data-uib-popover="{{toolTip.lastName}}"
+                                                       data-popover-trigger="'focus'"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-popover-placement="top"
+                                                       data-ng-pattern="regEx.lastName"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters are  a-z, A-Z, 0-9 "
+                                                       maxlength="{{regEx.lastName_max}}"
+                                                       data-ng-model="agencyRepInfo.last_Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_suffix" class="col-sm-12 col-lg-12 col-md-12">Suffix</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="suffix" id="p_suffix"
+                                                       class="form-control input-sm"
+                                                       data-uib-popover="{{toolTip.suffix}}"
+                                                       data-popover-trigger="'focus'"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-popover-placement="top" data-ng-pattern="regEx.suffix"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters are  a-z, A-Z, 0-9, .  "
+                                                       maxlength="{{regEx.suffix_max}}" data-ng-model="agencyRepInfo.suffix">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_email" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Email
+                                                Address</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="email" name="email" id="p_email"
+                                                       class="form-control input-sm"
+                                                       data-uib-popover="{{toolTip.email}}"
+                                                       data-popover-trigger="'focus'"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-popover-placement="top" data-ng-pattern="regEx.email"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters are  a-z, A-Z, 0-9, .  "
+                                                       maxlength="{{regEx.email_max}}"
+                                                       data-validation-msg-required="Please enter email address"
+                                                       lowercase email data-ng-model="agencyRepInfo.email"
+                                                       required disabled>
+                                                <!-- data-validation-msg-authorized="Please enter an email with .gov or .mil" -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nameOfFirm" class="col-sm-12 col-lg-12 col-md-12 ">
+                                                Name of Firm</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="nameOfFirm"
+                                                       id="nameOfFirm"
+                                                       class="form-control"
+                                                       data-ng-model="agencyRepInfo.firm_Name"
+                                                       data-uib-popover="{{toolTip.nameOfFirm}}"
+                                                       data-popover-trigger="'focus'"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-popover-placement="top"
+                                                       data-ng-pattern="regEx.nameOfFirm"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-z, A-Z, 0-9, ! , @ ,#, &, ., ), (, /, \,- "
+                                                       maxlength="{{regEx.nameOfFirm_max}}"
+                                                       data-validation-msg-required="Please enter firm name"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <fieldset>
+                                                <legend class="visually-hidden">Phone Number</legend>
+                                                <label for="p_phonenumber" class="col-sm-12 col-lg-12 col-md-12">Phone
+                                                    Number</label>
+                                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                                    <input type="tel" name="phonenumber" id="p_phonenumber"
+                                                           data-validate-on="dirty"
+                                                           class="form-control input-sm"
+                                                           data-ng-model="agencyRepInfo.phone_No"
+                                                           data-international-phone-number
+                                                           required maxlength="{{regEx.phone_max}}">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <fieldset>
+                                                <legend class="visually-hidden">Fax Number</legend>
+                                                <label for="p_faxnumber" class="col-sm-12 col-lg-12 col-md-12">Fax
+                                                    Number</label>
+                                                <div class="col-sm-12 col-lg-12 col-md-12">
+                                                    <input type="tel" name="faxnumber" id="p_faxnumber"
+                                                           class="form-control input-sm"
+                                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                                           data-ng-model="agencyRepInfo.fax_No"
+                                                           data-international-phone-number
+                                                           data-validation-msg-required="Please enter fax number"
+                                                           maxlength="{{regEx.phone_max}}">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="form-group">
+                                            <!--										<label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>-->
+                                            <div class="col-sm-10 col-lg-9 col-md-9">
+                                                <input type="submit" value="Save" class="btn btn-success"
+                                                       data-ng-click="updateAgencyInfo(editagencyRepInfoForm,agencyRepInfo,tier1SelectedOption,tier2SelectedOption)">
+                                                <input type="submit" value="Cancel" class="btn btn-warning"
+                                                       data-ng-click="showDetails_$index = !showDetails_$index;cancelUpdate()">
+                                                <input type="submit" value="Delete" class="btn btn-danger pull-right"
+                                                       data-ng-click="deleteAgencyInfo(agencyRepInfo.first_Name,agencyRepInfo.last_Name,agencyRepInfo.user_Id)">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.box-body -->
+                            </fieldset>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+
+                    <div class="row" data-ng-show="showUpdateAgencyAddForm">
+                        <div class="col-md-5">
+                            <fieldset class="box box-success box-solid">
+                                <legend class="visually-hidden">Agency Address</legend>
+                                <div class="box-header with-border epds-bg-green">
+                                    <h3 class="box-title">
+                                        <span>Agency Address</span>
+                                    </h3>
+                                </div>
+                                <div class="box-body">
+                                    <div data-ng-show="!updateAgencyAddForm">
+                                        <button class="btn btn-danger  pull-right"
+                                                data-ng-click="updateAgencyAddForm = !updateAgencyAddForm"
+                                                style="margin-left: 10px;" data-ng-show="!updateAgencyAddForm">
+                                            <i class="fa fa-edit"></i> Update Agency Address
+                                        </button>
+
+                                        <span class="title"><strong>Address : </strong></span><br>
+                                        <span>{{agencyRepAddressForm.address1}}<br>
+										{{agencyRepAddressForm.address2}}<br>
+										{{agencyRepAddressForm.city}}&nbsp;{{agencyRepAddressForm.state}}&nbsp;{{agencyRepAddressForm.zipCode}}<br>
+										{{agencyRepAddressForm.country}}
+									</span>
+
+                                    </div>
+
+                                    <form class="form-horizontal" role="form"
+                                          name="updateAgencyAddressForm" id="updateAgencyAddressForm"
+                                          data-ng-show="updateAgencyAddForm">
+
+                                        <div class="form-group">
+                                            <label for="p_street1" class="col-sm-12 col-lg-12 col-md-12">Address Line
+                                                1</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="street1"
+                                                       class="form-control input-sm" id="p_street1"
+                                                       placeholder=""
+                                                       data-ng-model="agencyRepAddressForm.address1"
+                                                       data-uib-popover="{{toolTip.address}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-pattern="regEx.address"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-z, A-Z, 0-9, ! , @ ,#, &, ., ), (, /, \,- "
+                                                       maxlength="{{regEx.address_max}}"
+                                                       data-validation-msg-required="Please enter street address"
+                                                       data-ng-autocomplete
+                                                       data-details="representativeAddressDetails1"
+                                                       data-options="options">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_street2" class="col-sm-12 col-lg-12 col-md-12">Address Line
+                                                2</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="street2"
+                                                       class="form-control input-sm" id="p_street2"
+                                                       data-uib-popover="{{toolTip.address}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-pattern="regEx.address"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-z, A-Z, 0-9, ! , @ ,#, &, ., ), (, /, \,- "
+                                                       maxlength="{{regEx.address_max}}"
+                                                       placeholder=""
+                                                       data-ng-model="agencyRepAddressForm.address2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_zipcode" class="col-sm-12 col-lg-12 col-md-12">Zip
+                                                Code</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="zipCode" data-validate-on="dirty"
+                                                       class="form-control input-sm zipcode" id="p_zipcode"
+                                                       data-ng-model="agencyRepAddressForm.zipCode"
+                                                       data-uib-popover="{{toolTip.zipcode}}"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-pattern="regEx.zipcode"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-z, A-Z, 0-9,-,  ), ( "
+                                                       maxlength="{{regEx.zipcode_max}}"
+                                                       data-validation-msg-required="Please enter  zipcode">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_city" class="col-sm-12 col-lg-12 col-md-12">City</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="city" class="form-control input-sm"
+                                                       data-validate-on="dirty" id="p_city"
+                                                       data-ng-model="agencyRepAddressForm.city"
+                                                       data-uib-popover="{{toolTip.city}}"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-pattern="regEx.city"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-z, A-Z, 0-9,  &, ., ), (, /, \\, ', :, ;, -"
+                                                       maxlength="{{regEx.city_max}}"
+                                                       data-validation-msg-required="Please enter  city">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_state" class="col-sm-12 col-lg-12 col-md-12">State</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="state" class="form-control input-sm"
+                                                       id="p_state" data-validate-on="dirty"
+                                                       data-uib-popover="{{toolTip.state}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-ng-pattern="regEx.state"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are  a-z, A-Z, 0-9,  ., ), (, /, \\, -"
+                                                       maxlength="{{regEx.state_max}}" data-ng-model="agencyRepAddressForm.state"
+                                                       data-validation-msg-required="Please enter  state ">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="p_country" class="col-sm-12 col-lg-12 col-md-12">Country</label>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <input type="text" name="country" data-validate-on="dirty"
+                                                       data-uib-popover="{{toolTip.country}}"
+                                                       data-popover-trigger="'focus'" data-popover-placement="top"
+                                                       data-ng-pattern="regEx.country"
+                                                       data-ng-model-options="{ updateOn: 'blur' }"
+                                                       data-validation-msg-pattern="Invalid input format. Allowed characters are a-z, A-Z "
+                                                       maxlength="{{regEx.country_max}}" class="form-control input-sm"
+                                                       id="p_country"
+                                                       data-ng-model="agencyRepAddressForm.country"
+                                                       data-validation-msg-required="Please enter country ">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <!--										<label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>-->
+                                            <div class="col-sm-10 col-lg-9 col-md-9">
+                                                <input type="submit" value="Update" class="btn btn-success"
+                                                   data-ng-click="updateAgencyAddress(form,tier1SelectedOption,tier2SelectedOption)">
+                                                <input type="submit" value="Cancel" class="btn btn-warning"
+                                                       data-ng-click="updateAgencyAddForm = !updateAgencyAddForm; cancelUpdate()">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.box-body -->
+                            </fieldset>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" data-ng-show="registerAgencyForm">
+                <div class="col-md-6">
+                    <!-- <div data-ng-include src="'scripts/app/admin/manage-agency-info/addAgencyPOCInfo.tpl.htm'"></div> -->
+
+                    <form id="addAgencyForm" data-ng-fab-form-options="customFormOptions" name="addAgencyForm">
+                        <fieldset class="panel panel-primary">
+                            <legend class="visually-hidden">Add Agency User</legend>
+                            <div class="panel-heading">Add Agency User</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="email" class="requiredInputs">Email</label>
+                                    <input type="email" name="email" id="email" class="form-control input-sm"
+                                           data-uib-popover="{{fieldText.emailToolTip}}"
+                                           data-popover-trigger="'focus'" data-ng-model="form.email"
+                                           data-popover-placement="right"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validation-msg-required="Please enter email address"
+                                           authorized role="role = 6"
+                                           data-validation-msg-authorized="please enter an email with .gov or .mil"
+                                           lowercase required uniqueid data-validation-msg-uniqueid="Invalid Email"
+                                           data-ng-pattern="regEx.email" maxlength="{{regEx.email_max}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="prefix">Prefix</label>
+                                    <input type="text" name="prefix" id="prefix" data-ng-model="form.prefix"
+                                           data-ng-model-options="{ updateOn: 'blur' }" class="form-control input-sm"
+                                           data-ng-pattern="regEx.prefix" maxlength="{{regEx.prefix_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstname" class="requiredInputs">First Name</label>
+                                    <input type="text" name="firstname" id="firstname" data-ng-model="form.firstName"
+                                           data-ng-model-options="{ updateOn: 'blur' }" class="form-control input-sm"
+                                           data-validate-on="blur"
+                                           data-validation-msg-required="Please enter first name"
+                                           required
+                                           data-ng-pattern="regEx.firstName" maxlength="{{regEx.firstName_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="middleInitial">Middle Initial</label>
+                                    <input type="text" name="middleInitial" id="middleInitial"
+                                           data-uib-popover="Enter middle initial"
+                                           data-popover-trigger="'focus'"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-placement="center"
+                                           data-ng-model="form.middle_initial"
+                                           class="form-control input-sm"
+                                           data-ng-pattern="regEx.middleInitial" maxlength="{{regEx.middleInitial_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="requiredInputs">Last Name</label>
+                                    <input type="text" name="lastname" id="lastname" data-ng-model="form.lastName"
+                                           data-uib-popover="Enter last name as it appears on your current government issued picture ID"
+                                           data-popover-trigger="'focus'"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-popover-placement="center" class="form-control input-sm"
+                                           data-validate-on="blur"
+                                           data-validation-msg-required="Please enter last name" required
+                                           data-ng-pattern="regEx.lastName" maxlength="{{regEx.lastName_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="suffix">Suffix</label>
+                                    <input type="text" name="suffix" id="suffix" data-ng-model="form.suffix"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           class="form-control input-sm"
+                                           data-ng-pattern="regEx.suffix" maxlength="{{regEx.suffix_max}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <fieldset required>
+                                        <legend class="visually-hidden">Phone Number</legend>
+                                        <label for="phonenumber" class="col-sm-12-offset-2 requiredInputs">Phone
+                                            Number</label>
+                                        <div class="col-sm-12-offset-2">
+                                            <input type="tel" name="phonenumber" id="phonenumber"
+                                                   data-ng-model="form.phoneNo"
+                                                   data-ng-model-options="{ updateOn: 'blur' }"
+                                                   class="form-control"
+                                                   data-validate-on="dirty"
+                                                   data-international-phone-number
+                                                   data-validation-msg-required="Please enter phone number"
+                                                   required maxlength="{{regEx.phone_max}}">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group">
+                                    <fieldset>
+                                        <legend class="visually-hidden">Fax Number</legend>
+                                        <label for="faxnumber" class="col-sm-6-offset-3">Fax Number</label>
+                                        <div class="col-sm-12-offset-2">
+                                            <input type="tel" name="faxnumber" id="faxnumber"
+                                                   data-ng-model="form.faxNo"
+                                                   data-ng-model-options="{ updateOn: 'blur' }"
+                                                   class="form-control"
+                                                   data-international-phone-number
+                                                   maxlength="{{regEx.phone_max}}">
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="street1">Address Line 1</label>
+                                    <input type="text" name="street1" id="street1" class="form-control input-sm"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="form.address1" placeholder="" data-ng-autocomplete
+                                           data-details="representativeAddressDetails2"
+                                           data-options="options"
+                                           data-ng-pattern="regEx.address" maxlength="{{regEx.address_max}}">
+
+                                    <pre><strong>Please use Agency Address and not Agency POC address</strong></pre>
+                                </div>
+                                <div class="form-group">
+                                    <label for="street2">Address Line 2</label>
+                                    <input type="text" name="street2" id="street2" class="form-control input-sm"
+                                           data-uib-popover="Ex:Apartment, suite, unit, building, floor, etc."
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="form.address2"
+                                           placeholder=""
+                                           data-ng-pattern="regEx.address" maxlength="{{regEx.address_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="zipcode">Zip Code</label>
+                                    <input type="text" name="zipcode" id="zipcode" class="form-control input-sm"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="form.zipCode"
+                                           data-validation-msg-pattern="Please enter valid zipcode"
+                                           data-validate-on="focus"
+                                           data-ng-pattern="regEx.zipcode" maxlength="{{regEx.zipcode_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" id="city" class="form-control input-sm"
+                                           data-ng-model="form.city"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validate-on="focus"
+                                           data-validation-msg-required="Please enter city"
+                                           data-ng-pattern="regEx.city" maxlength="{{regEx.city_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" name="state" id="state" class="form-control input-sm"
+                                           data-ng-model="form.state" data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-validate-on="focus"
+                                           data-validation-msg-required="Please enter state"
+                                           data-ng-pattern="regEx.state" maxlength="{{regEx.state_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" name="country" id="country" class="form-control input-sm"
+                                           data-ng-model-options="{ updateOn: 'blur' }"
+                                           data-ng-model="form.country" data-validate-on="focus"
+                                           data-validation-msg-required="Please enter country"
+                                           data-ng-pattern="regEx.country" maxlength="{{regEx.country_max}}">
+                                </div>
+                                <div class="form-group">
+                                    <!--								<label class="col-sm-2 col-md-3 control-label ">&nbsp;</label>-->
+                                    <div class="col-sm-10 col-lg-9 col-md-9">
+                                        <input type="submit" value="Register" class="btn btn-success"
+                                               data-ng-disabled="addAgencyForm.$invalid || addAgencyForm.$pending"
+                                               data-ng-click="registerAgencyInfo(form,tier1SelectedOption,tier2SelectedOption)">
+                                        <input type="submit" value="Cancel" class="btn btn-warning"
+                                               data-ng-click="registerAgencyCancel()">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</aside>
+<!-- /.right-side -->

@@ -1,0 +1,58 @@
+<div class="modal-content">
+	<div class="modal-header"
+		data-ng-class="{
+      				   'modal-header-info' : data.modalType =='info',
+      				  'modal-header-danger' : data.modalType =='error',
+      				  'modal-header-success' : data.modalType =='success',
+      				  'modal-header-warning' : data.modalType =='warning',
+      				}">
+
+		<h4>
+			<i class="glyphicon"
+				data-ng-class="{
+      				   'glyphicon-info-sign' : data.modalType =='info',
+      				  'glyphicon-thumbs-down' : data.modalType =='error',
+      				  'glyphicon-thumbs-up' : data.modalType =='success',
+      				  'glyphicon-warning-sign' : data.modalType =='warning',
+      				}">
+			</i>&nbsp;&nbsp;{{data.headerText}}
+		</h4>
+	</div>
+	<div class="modal-body">
+		<div dynamic="data.bodyText"></div>
+		
+		<div class="row" data-ng-show="showFileInfo">
+				<div class="col-md-12">
+					
+					<!-- /.box -->
+				<a href="/epds/downloaddashboardfile?fileId={{data.fileInfo.file_InfoList[0].file_Id}}" target="_blank">{{data.fileInfo.file_InfoList[0].fileName}}</a>
+				</div>
+		</div>
+		
+		<div  data-ng-show="showErrors">
+    		There were errors in the form. Please correct these errors and submit the form.
+    		<ul class="animated fadeInRight">                            
+               
+               <li data-ng-repeat="error in listOfErrorMessages">
+               
+               <i>Error here! property: [{{error.fieldName}}], value: [{{error.invalidValue}}], message: [{{error.message}}]</i>
+               
+               </li>
+               
+           	</ul>
+ 		</div>
+		
+	</div>
+	<div class="modal-footer">
+		<button type="button" ng-click="ok(data)"
+			class="btn btn-success">
+			<span data-ng-show="data.okAndCancelText != 'Y'">OK</span>
+			<span data-ng-show="data.okAndCancelText == 'Y'" >{{data.okBtnText}}</span>
+			</button>
+		<button type="button" ng-click="cancel(data)"
+			data-ng-show="data.cancelBtnReq == 'Y'" class="btn btn-warning">
+			<span data-ng-show="data.okAndCancelText != 'Y'">Cancel</span>
+			<span data-ng-show="data.okAndCancelText == 'Y'" >{{data.cancelBtnText}}</span>
+			</button>
+	</div>
+</div>

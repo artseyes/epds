@@ -1,0 +1,187 @@
+<pre data-ng-show="isAssignPrimaryRepBtnDisplayed">
+<!-- Assign Primary Representative Only for CBCA Admin -->
+			<button 
+				name="assignAttorney"
+				class="btn btn-sm btn-primary btn-flat"
+				id="assignAttorney"
+				data-ng-click="addPartiesToTheCase('Assign Primary Representative',partyType,intervenorCompanyName,intervenorCompanyAddr)">
+				<i class="fa fa-plus"></i>&nbsp;&nbsp; Assign Primary Rep
+			</button>
+</pre>
+<div class="row" data-ng-show="isOrphanIntervenor == 'N'">
+	<div class="col-md-6 col-sm-12 col-xs-12" data-ng-repeat="userInfo in partiesList | orderBy: 'role'">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<i class="fa fa-info-circle"></i>
+				<h3 class="box-title">
+				<span data-ng-if="userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR'">
+				Primary Representative</span>
+				<span data-ng-if="userInfo.role == 'SECONDARY PROTESTER' || userInfo.role == 'SECONDARY INTERVENOR'">
+				Secondary Representative</span>
+				<span data-ng-if="userInfo.invitationStatus == 'INVITED'">
+				<strong>(Pending)</strong>
+				</span>
+				</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div>
+					<!-- Name for both primary and secondary representative -->
+					<span>
+						{{userInfo.first_Name}}&nbsp;{{userInfo.middle_initial}}&nbsp;{{userInfo.last_Name}}</span>
+						
+				<!-- Button for admitting to PO : display only for CBCA User's and if protective order has been issued on this case -->
+				<button  
+						data-ng-show="protestInfo.po == 'Y' 
+						&& (userRole == 'GAO ATTORNEY' || userRole == 'GAO SUPERVISOR' || userRole == 'GAO ADMIN') 
+						&& !protestInfo.viewOnly"
+						name="admitToPO"
+							class="btn btn-sm pull-right"
+							data-ng-class="{
+		      				   'btn-success' : userInfo.po.trim() == 'N',
+		      				  'btn-danger' : userInfo.po.trim() == 'Y'
+		      				}"
+							id="assignAttorney"
+							data-ng-click="updateProtectiveOrder(userInfo.user_Id,userInfo.po.trim())">
+						<i class="fa fa-plus" 
+								data-ng-class="{
+		      				   'fa-plus' : userInfo.po.trim() == 'N',
+		      				  'fa-minus' : userInfo.po.trim() == 'Y'
+		      				}">&nbsp;&nbsp; 
+		      				<span data-ng-show="userInfo.po.trim() == 'N'">Admit to PO</span>
+		      				<span data-ng-show="userInfo.po.trim() == 'Y'">Remove from PO</span>
+		      				</i>
+				</button>	
+				
+					<br> <span>{{userInfo.phone_No}} &nbsp;</span><br> <span>{{userInfo.email}}&nbsp;</span><br>
+					<span>{{userInfo.firm_Name}}</span><br> 
+					<span>
+							{{userInfo.address1}}&nbsp;<br>
+							<span data-ng-if="userInfo.address2">{{userInfo.address2}}&nbsp;<br></span>
+						&nbsp;{{userInfo.city}}&nbsp;{{userInfo.state}}&nbsp;&nbsp;{{userInfo.zip_Code}}<br>
+						&nbsp;{{userInfo.country}}
+					</span>
+				</div>
+			</div>
+			<div class="box-footer clearfix">
+				
+				
+				<!-- Button for adding secondary representative: display only for primary protester or CBCA admin -->
+				
+				<button name="addRep" class="btn btn-sm btn-primary pull-left"
+					id="addRep"
+					data-ng-click="addPartiesToTheCase('Secondary Representative',partyType,intervenorCompanyName,intervenorCompanyAddr)"
+					data-ng-show="(userRole == 'GAO ADMIN' && (userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR')) || ((userRole == 'PROTESTER' || userRole == 'INTERVENOR')
+									 && userInfo.user_Id == loggedInUserInfo.user_Id) 
+									&& (userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR') 
+									&& (partiesList.length <= 3)">
+					<i class="fa fa-plus"></i> Add 2nd Rep
+				</button>
+				
+				<!-- Delete for Primary Representative -->
+				<button name="deleteRep_{{$index}}"
+						class="btn btn-sm btn-danger pull-right deleteButton"
+						id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+						data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,userInfo.role)"
+						data-ng-show="(userRole == 'GAO ADMIN') && (userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR')">
+						<i class="fa fa-times"></i> Delete
+				</button>
+				<!-- Button for deleting secondary representative: display only for primary protester or CBCA admin -->
+				<button name="deleteRep_{{$index}}"
+						class="btn btn-sm btn-danger pull-right deleteButton"
+						id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+						data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,userInfo.role)"
+						data-ng-show="(userRole == 'GAO ADMIN' && userInfo.role == 'SECONDARY PROTESTER') 
+						|| (userRole == 'PROTESTER' && partiesList[0].user_Id == loggedInUserInfo.user_Id && userInfo.role == 'SECONDARY PROTESTER')">
+						<i class="fa fa-times"></i>&nbsp; Delete
+				</button>
+				
+				<!-- Button for deleting secondary representative: display only for primary intervenor or CBCA admin -->
+				<button name="deleteRep_{{$index}}"
+						class="btn btn-sm btn-danger pull-right deleteButton"
+						id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+						data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,userInfo.role)"
+						data-ng-show="(userRole == 'GAO ADMIN' && (userInfo.role == 'SECONDARY INTERVENOR')) || 
+								((userRole == 'INTERVENOR' && partiesList[0].user_Id == loggedInUserInfo.user_Id) && (userInfo.role == 'SECONDARY INTERVENOR'))">
+						<i class="fa fa-times"></i>&nbsp; Delete
+				</button> 
+				
+			</div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+<div class="row" data-ng-show="partiesList.length > 2">
+	<div class="col-md-6 col-sm-12 col-xs-12" data-ng-repeat="userInfo in partiesList | limitTo:2:4">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<i class="fa fa-info-circle"></i>
+				<h3 class="box-title">
+				<span data-ng-if="userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR'">
+				Primary Representative</span>
+				<span data-ng-if="userInfo.role == 'SECONDARY PROTESTER' || userInfo.role == 'SECONDARY INTERVENOR'">
+				Secondary Representative</span>
+				</h3>				
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<span>
+					{{userInfo.first_Name}}&nbsp;{{userInfo.middle_initial}}&nbsp;{{userInfo.last_Name}} </span>
+				
+					<!-- Button for admitting to PO : display only for CBCA User's and if protective order has been issued on this case -->
+				<button  data-ng-show="protestInfo.po == 'Y' 
+						&& (userRole == 'GAO ATTORNEY' || userRole == 'GAO SUPERVISOR' || userRole == 'GAO ADMIN') 
+						&& !protestInfo.viewOnly"
+						name="admitToPO"
+							class="btn btn-sm pull-right"
+							data-ng-class="{
+		      				   'btn-success' : userInfo.po.trim() == 'N',
+		      				  'btn-danger' : userInfo.po.trim() == 'Y'
+		      				}"
+							id="assignAttorney"
+							data-ng-click="updateProtectiveOrder(userInfo.user_Id,userInfo.po.trim())">
+						<i class="fa fa-plus" 
+								data-ng-class="{
+		      				   'fa-plus' : userInfo.po.trim() == 'N',
+		      				  'fa-minus' : userInfo.po.trim() == 'Y'
+		      				}">&nbsp;&nbsp; 
+		      				<span data-ng-show="userInfo.po.trim() == 'N'">Admit to PO</span>
+		      				<span data-ng-show="userInfo.po.trim() == 'Y'">Remove from PO</span>
+		      				</i>
+				</button>	
+				<br> <span>{{userInfo.phone_No}} &nbsp;</span><br> <span>{{userInfo.email}}&nbsp;</span><br>
+				<span>{{userInfo.firm_Name}}</span><br> <span>{{userInfo.address1}}&nbsp;<br>
+							<span data-ng-if="userInfo.address2">{{userInfo.address2}}&nbsp;<br></span>
+					&nbsp;{{userInfo.city}}&nbsp;{{userInfo.state}}&nbsp;&nbsp;{{userInfo.zip_Code}}<br>
+					&nbsp;{{userInfo.country}}
+				</span>
+			</div>
+			
+			<div class="box-footer clearfix">
+				
+				<!-- Button for deleting secondary representative: display only for primary protester or CBCA admin -->
+				<button name="deleteRep_{{$index}}"
+						class="btn btn-sm btn-danger pull-right deleteButton"
+						id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+						data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,userInfo.role)"
+						data-ng-show="(userRole == 'GAO ADMIN' && userInfo.role == 'SECONDARY PROTESTER') 
+						|| (userRole == 'PROTESTER' && partiesList[0].user_Id == loggedInUserInfo.user_Id && userInfo.role == 'SECONDARY PROTESTER')">
+						<i class="fa fa-times"></i>&nbsp; Delete
+				</button>
+				
+				<!-- Button for deleting secondary representative: display only for primary intervenor or CBCA admin -->
+				<button name="deleteRep_{{$index}}"
+						class="btn btn-sm btn-danger pull-right deleteButton"
+						id="deleteRep_{{$index}}" value="{{userInfo.user_Id}}"
+						data-ng-click="deletePartiesFromTheCase(userInfo.user_Id,userInfo.first_Name,userInfo.last_Name,userInfo.role)"
+						data-ng-show="(userRole == 'GAO ADMIN' && (userInfo.role == 'SECONDARY INTERVENOR')) || 
+								((userRole == 'INTERVENOR' && partiesList[0].user_Id == loggedInUserInfo.user_Id) && (userInfo.role == 'SECONDARY INTERVENOR'))">
+						<i class="fa fa-times"></i>&nbsp; Delete
+				</button> 
+				
+			</div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+

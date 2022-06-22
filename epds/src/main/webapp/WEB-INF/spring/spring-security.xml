@@ -1,0 +1,104 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<beans:import resource="dispatcher-servlet.xml" />
+	<!--uncomment this when csrf filter is fully tested and is working  -->
+	<!-- <http pattern="/user/login" use-expressions="true" auto-config="false" 
+	entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+	<intercept-url pattern="/user/login" access="permitAll()" />
+	<custom-filter ref="customCSRFHeaderFilter" after="CSRF_FILTER" />
+	<csrf token-repository-ref="csrfTokenRepository" />
+	</http> -->
+	<http pattern="/user/**" security="none"/>
+	<http pattern="/user-guides" security="none"/>
+	<http pattern="/getcsrf" security="none"/>
+	<http pattern="/rest/**" security="none"/>
+	<http pattern="/get-tier_1-agency-list/**" security="none"/>
+	<http pattern="/tier2/**" security="none"/>
+	<!-- <http pattern="/logout" security="none"/> -->
+	<http pattern="/logger/**" security="none"/>
+
+	<http auto-config="false" 
+		use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+		<intercept-url pattern="/**" access="isAuthenticated()" /><!-- requires-channel="https" -->
+		<access-denied-handler ref="accessDeniedHandler" />
+		<custom-filter position="PRE_AUTH_FILTER" ref="customAuthenticationFilter" />
+		<!--uncomment this when csrf filter is fully tested and is working  -->
+		 <custom-filter ref="customCSRFHeaderFilter" after="CSRF_FILTER" />
+		<csrf token-repository-ref="csrfTokenRepository" />
+		<csrf />
+		<!-- <csrf disabled="true"/> -->
+		
+	</http>
+
+
+
+
+	<beans:bean id="csrfTokenRepository"
+		class="org.springframework.security.web.csrf.CookieCsrfTokenRepository">
+		<beans:property name="headerName" value="X-XSRF-TOKEN"></beans:property>
+		<beans:property name="cookieHttpOnly" value="false"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="csrfMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+        <beans:constructor-arg>
+            <util:list value-type="org.springframework.security.web.util.matcher.RequestMatcher">
+                <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="/user/login"/>
+                    <beans:constructor-arg name="httpMethod" value="POST"/>
+                </beans:bean>
+                 <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="/**"/>
+                    <beans:constructor-arg name="httpMethod" value="POST"/>
+                </beans:bean>
+               <!--  <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="/**"/>
+                    <beans:constructor-arg name="httpMethod" value="PUT"/>
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="/rest/**"/>
+                    <beans:constructor-arg name="httpMethod" value="DELETE"/>
+                </beans:bean> -->
+            </util:list>
+        </beans:constructor-arg>
+    </beans:bean>
+	
+	<!-- <bean name="csrfTokenRepository" class="org.springframework.security.web.csrf.CookieCsrfTokenRepository">
+    <property cookieHttpOnly="false"/>
+</bean> -->
+
+	<beans:bean id="customAuthenticationFilter"
+		class="gov.gao.epds.filters.CustomPreAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="customCSRFHeaderFilter" class="gov.gao.epds.filters.CsrfHeaderFilter" />
+	
+	<beans:bean id="restAuthenticationEntryPoint"
+		class="gov.gao.epds.security.RestAuthenticationEntryPoint" />
+	<beans:bean id="accessDeniedHandler"
+		class="gov.gao.epds.security.CustomAccessDeniedHandler" />
+
+	<beans:bean id="restAuthenticationProvider"
+		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+		<beans:property name="preAuthenticatedUserDetailsService"
+			ref="customUserDetailsService"></beans:property>
+	</beans:bean>
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="restAuthenticationProvider" />
+	</authentication-manager>
+
+	<beans:bean id="customUserDetailsService"
+		class="gov.gao.epds.service.CustomUserDetailsService" />
+		
+			
+
+</beans:beans>

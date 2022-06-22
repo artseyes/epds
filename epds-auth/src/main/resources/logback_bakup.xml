@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+	<contextListener class="gov.gao.epds.auth.listeners.LoggerStartupListener"/>
+	
+	
+ 	<appender name="TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+ 		<file>${DEV_HOME}/timeBasedlogFile.log</file>
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">    	
+      		<!-- daily rollover -->
+      		<fileNamePattern>${DEV_HOME}/timeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+      		<!-- <maxHistory>30</maxHistory> -->
+    	</rollingPolicy>
+
+    	<encoder>
+      		<pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    	</encoder>
+  	</appender>
+  	 	
+ 	<appender name="FIX_WINDOW_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+ 		<file>${DEV_HOME}/fixWindowBasedlogFile.log</file>
+    	<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      		<fileNamePattern>${DEV_HOME}/fixWindowBasedlogFile%i.log.zip</fileNamePattern>
+      		<minIndex>1</minIndex>
+      		<maxIndex>10</maxIndex>
+    	</rollingPolicy>
+
+  		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      		<maxFileSize>1KB</maxFileSize>
+    	</triggeringPolicy>
+    	
+    	<encoder>
+      		<pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    	</encoder>
+  	</appender>
+  	 	
+ 	<appender name="SIZE_AND_TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+ 		<file>${DEV_HOME}/epds-auth.log</file>
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      		<fileNamePattern>${DEV_HOME}/sizeAndTimeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.%i.log</fileNamePattern>
+      		<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        		<maxFileSize>100MB</maxFileSize>
+      		</timeBasedFileNamingAndTriggeringPolicy>
+    	</rollingPolicy>
+    	
+    	<encoder>
+      		<pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    	</encoder>
+  	</appender> 	
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>		
+ 	</appender>
+	
+	<logger name="timeBased" level="DEBUG">
+		<appender-ref ref="TIME_BASED_FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="fixWindowBased" level="DEBUG">
+		<appender-ref ref="FIX_WINDOW_BASED_FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="sizeAndTimeBased" level="DEBUG">
+		<appender-ref ref="SIZE_AND_TIME_BASED_FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+</configuration>

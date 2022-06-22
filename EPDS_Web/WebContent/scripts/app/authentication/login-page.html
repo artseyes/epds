@@ -1,0 +1,154 @@
+
+<div class="wrapper">
+	<!-- Full Width Column -->
+	<div class="login-content">
+		<div class="container">
+			<!-- Main content -->
+			<section class="content animated bounceInLeft">
+
+				<div class="callout callout-info" style="margin-top: 5px;">
+				    <div style="font-size: 30px; text-align: center;" class="animated infinite pulse fg-text-red"
+				        data-ng-show="!isProd">PRE-PRODUCTION TEST SYSTEM</div>
+				    <div style="font-size: 30px; text-align: center;" class="animated infinite pulse fg-text-red"
+				        data-ng-show="!isProd">DO NOT REGISTER, SIGN IN, OR FILE A FILING!</div>
+				    <div class="fg-text-red" style="font-size: 30px; text-align: center;"
+				        data-ng-show="!isProd">To File Or Access An Actual Filing, please go to <a href="https://eds.cbca.gov" title="Link to eds.cbca.gov" >https://eds.cbca.gov</a></div>
+				    
+					<div
+						style="font-size: 26px; margin-right: -24px; text-align: center;">Welcome
+						to CBCA's Electronic Docketing System (EDS).</div>
+					<div
+						style="font-size: 26px; margin-right: -24px; padding-bottom: 5px; text-align: center;">Please
+						sign in below or register as a new User.</div>
+
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="fg-text-red" style="font-size: 20px; text-align: center;">{{loginError}}</div>
+						<div class="fg-text-red" style="font-size: 20px; text-align: center;"
+							data-ng-show="redirectMessage.length > 0">{{redirectMessage}}
+						</div>
+
+						<div class="form-box" id="login-box">
+
+							<div class="header"><strong>EDS</strong></div>
+							<form method="post" id="loginform" name="loginform" data-ng-fab-form-options="customFormOptions" autocomplete="off">
+								<div class="body bg-gray">
+									<div class="form-group">
+									<label for="userId" class="requiredInputs">Email</label>
+										<input 
+											type="email" 
+											name="userId"
+											id="userId" class="form-control"
+											data-ng-model-options="{ updateOn: 'blur' }"
+											data-validate-on="blur"
+											data-ng-pattern="regEx.email"
+											data-ng-model="credentials.userId"
+											data-validation-msg-required="Please enter email address" 
+											required lowercase>
+									</div>
+									<div class="form-group">
+									<label for="userPwd" class="requiredInputs">Password</label>
+										<input type="password" name="userPwd" id="userPwd" class="form-control"
+											data-ng-model="credentials.userPwd"
+											data-validation-msg-required="Please enter Password"
+											data-ng-trim="true"
+											data-ng-minlength ="12"
+											required>
+									</div>
+									<!-- <div vc-recaptcha theme="recaptchaConfig.theme"
+										data-key="recaptchaConfig.sitekey"
+										data-on-create="setWidgetId(widgetId)"
+										data-on-success="setResponse(response)" data-on-expire="cbExpiration()"></div> -->
+								</div>
+								<!-- data-ng-disabled="!isResponseValid" -->
+								<div class="footer bg-gray">
+									<input type="submit" class="btn btn-primary" name="sbmit"
+										value="Sign me in" title="Sign In"
+										data-ng-click="onLogin(credentials)"/> &nbsp; &nbsp; &nbsp;
+									&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <input type="button"
+										class="btn btn-primary" name="register"
+										value="Register as a new User" title="Register as a new user"
+										data-ng-click="onRegister()" />
+									<p>
+										<a href="forgot-password" title="Link to forgot my password" >I
+											forgot my password</a>
+									</p>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="callout callout-danger" style="margin-top: 30px;">
+					<h4>Warning!</h4>
+					<p
+						style="font-size: 14px; font-style: italic; margin-top: 5px; margin-bottom: 0px; font-weight: bold;">
+						Upon Login You Agree to the Following Information:</p>
+					<ul style="padding-top: 0px;">
+						<li>You are accessing a U.S. Government information system,
+							which includes (1) this computer, (2) this computer network, (3)
+							all computers connected to this network, and (4) all devices and
+							storage media attached to this network or to a computer on this
+							network. This information system is provided for U.S.
+							Government-authorized use only.</li>
+						<li>Unauthorized or improper use of this system may result in
+							disciplinary action, as well as civil and criminal penalties.</li>
+						<li><p>Subject to the provisions in 4 C.F.R. &sect;&sect; 21.1(g)
+							and 21.4 and 4 C.F.R. part 81, which include procedures for
+							protecting proprietary, confidential, and other procurement
+							sensitive information, by using this information system, you
+							understand and consent to the following:</p></li>
+					</ul>
+					<ol style="margin-left: 50px;">
+						<ol>
+							<li>You have no reasonable expectation of privacy regarding
+								any communications or data transiting or stored on this
+								information system. At any time, the government may for any
+								lawful government purpose monitor, intercept, search and seize
+								any communication or data transiting or stored on this
+								information system. Accordingly, pursuant to CBCA's
+								<a  data-ng-click="userGuide()"
+									title= "Link to User Guides" 
+									href="javascript:void(0)">
+									Electronic Docketing System Instructions</a>, the following personal identifiers should be excluded, or
+								redacted when inclusion is necessary, from all filings, unless
+								otherwise directed by CBCA:
+								<ul>
+										<li><strong>Social Security Numbers.</strong> If an individual&rsquo;s Social
+											Security number must be included in a filing, only the last four
+											digits of the numbers should be used.</li>
+									</ul>
+									<p>&nbsp;</p>
+									<ul>
+										<li><strong>Dates of Birth.</strong> If an individual&rsquo;s date of birth
+											must be included in a filing, only the year should be used.</li>
+									</ul>
+									<p>&nbsp;</p>
+									<ul>
+										<li><strong>Financial Account Numbers.</strong> If a financial account number
+											is relevant to a filing, only the last four digits of the number
+											should be used.</li>
+									</ul>
+								
+								</li>
+						</ol>
+						<ol start="2">
+							<li>Any communications or data transiting or stored on this
+								information system may be disclosed or used for any lawful
+								government purpose.</li>
+							<li>Your consent is final and irrevocable. You may not rely
+								on any statements or informal policies purporting to provide you
+								with any expectation of privacy regarding communications on this
+								system, whether oral or written, by your supervisor or any other
+								official, except CBCA's Chief Information Officer.</li>
+						</ol>
+					</ol>
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.container -->
+	</div>
+	<!-- /.login-content -->
+</div>
+<!-- ./wrapper -->

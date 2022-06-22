@@ -1,0 +1,342 @@
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{mso-style-link:"Footnote Text Char";
+	margin-top:3.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-link:"Header Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-link:"Footer Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Arial","sans-serif";}
+span.MsoFootnoteReference
+	{font-family:"Arial","sans-serif";
+	vertical-align:super;}
+span.MsoPageNumber
+	{font-family:"Arial","sans-serif";
+	text-decoration:none;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{mso-style-link:"Body Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+span.HeaderChar
+	{mso-style-name:"Header Char";
+	mso-style-link:Header;
+	font-family:"Times New Roman","serif";}
+p.RegAddress, li.RegAddress, div.RegAddress
+	{mso-style-name:RegAddress;
+	margin:0in;
+	margin-bottom:.0001pt;
+	line-height:10.0pt;
+	font-size:9.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+span.FooterChar
+	{mso-style-name:"Footer Char";
+	mso-style-link:Footer;
+	font-family:"Times New Roman","serif";}
+p.DecisionBold, li.DecisionBold, div.DecisionBold
+	{mso-style-name:"Decision Bold";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:58.3pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.UnitedStatesGeneralAccountingOffice, li.UnitedStatesGeneralAccountingOffice, div.UnitedStatesGeneralAccountingOffice
+	{mso-style-name:"United States General Accounting Office";
+	margin:0in;
+	margin-bottom:.0001pt;
+	line-height:11.0pt;
+	font-size:10.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.DivisionName, li.DivisionName, div.DivisionName
+	{mso-style-name:"Division Name";
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:right;
+	line-height:11.0pt;
+	font-size:10.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+span.FootnoteTextChar
+	{mso-style-name:"Footnote Text Char";
+	mso-style-link:"Footnote Text";
+	font-family:"Times New Roman","serif";}
+p.Protection, li.Protection, div.Protection
+	{mso-style-name:Protection;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	line-height:13.0pt;
+	background:white;
+	border:none;
+	padding:0in;
+	font-size:11.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.Decision, li.Decision, div.Decision
+	{mso-style-name:Decision;
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:24.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.Protestors, li.Protestors, div.Protestors
+	{mso-style-name:Protestors;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:58.3pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.ProtectionTitle, li.ProtectionTitle, div.ProtectionTitle
+	{mso-style-name:ProtectionTitle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	line-height:13.0pt;
+	font-size:10.0pt;
+	font-family:"Arial","sans-serif";
+	text-transform:uppercase;
+	font-weight:bold;}
+p.Warning, li.Warning, div.Warning
+	{mso-style-name:Warning;
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:9.0pt;
+	font-family:"Arial","sans-serif";}
+p.DecisionText, li.DecisionText, div.DecisionText
+	{mso-style-name:"Decision Text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:58.3pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.NumberList1, li.NumberList1, div.NumberList1
+	{mso-style-name:"Number List 1";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.NumberList2, li.NumberList2, div.NumberList2
+	{mso-style-name:"Number List 2";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.NumberList3, li.NumberList3, div.NumberList3
+	{mso-style-name:"Number List 3";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.75in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.NumberList4, li.NumberList4, div.NumberList4
+	{mso-style-name:"Number List 4";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.NumberList5, li.NumberList5, div.NumberList5
+	{mso-style-name:"Number List 5";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.Digest, li.Digest, div.Digest
+	{mso-style-name:Digest;
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.Decision1, li.Decision1, div.Decision1
+	{mso-style-name:Decision1;
+	margin:0in;
+	margin-bottom:.0001pt;
+	border:none;
+	padding:0in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.MatterOf, li.MatterOf, div.MatterOf
+	{mso-style-name:MatterOf;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0in;
+	margin-bottom:.0001pt;
+	text-indent:-1.0in;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.File, li.File, div.File
+	{mso-style-name:File;
+	margin:0in;
+	margin-bottom:.0001pt;
+	line-height:13.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.NonDigest, li.NonDigest, div.NonDigest
+	{mso-style-name:NonDigest;
+	margin:0in;
+	margin-bottom:.0001pt;
+	border:none;
+	padding:0in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+p.Parties, li.Parties, div.Parties
+	{mso-style-name:Parties;
+	margin:0in;
+	margin-bottom:.0001pt;
+	border:none;
+	padding:0in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+span.BodyTextChar
+	{mso-style-name:"Body Text Char";
+	mso-style-link:"Body Text";
+	font-family:"Times New Roman","serif";}
+p.DecisionT, li.DecisionT, div.DecisionT
+	{mso-style-name:DecisionT;
+	margin:0in;
+	margin-bottom:.0001pt;
+	line-height:24.0pt;
+	font-size:24.0pt;
+	font-family:"Arial","sans-serif";
+	letter-spacing:-1.0pt;
+	font-weight:bold;}
+p.23TableBorder, li.23TableBorder, div.23TableBorder
+	{mso-style-name:"2\/3TableBorder";
+	margin-top:0in;
+	margin-right:2.0pt;
+	margin-bottom:0in;
+	margin-left:1.0pt;
+	margin-bottom:.0001pt;
+	line-height:5.0pt;
+	border:none;
+	padding:0in;
+	font-size:9.0pt;
+	font-family:"Arial","sans-serif";}
+p.Quotation, li.Quotation, div.Quotation
+	{mso-style-name:Quotation;
+	margin-top:0in;
+	margin-right:.5in;
+	margin-bottom:13.0pt;
+	margin-left:.5in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.Date, li.Date, div.Date
+	{mso-style-name:"Date\:";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+.MsoChpDefault
+	{font-size:11.0pt;
+	font-family:"Arial","sans-serif";}
+.MsoPapDefault
+	{margin-bottom:10.0pt;
+	line-height:115%;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+@page WordSection2
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection2
+	{page:WordSection2;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+
+.table {
+  display: table;
+  width: 100%;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  width: 50%;
+  border-bottom: 1px solid black;
+}
+
+.cell-right {
+  display: table-cell;
+  text-align: right;
+  width: 50%;
+  border-bottom: 1px solid black;
+}
+
+.cell-left {
+  display: table-cell;
+  text-align: left;
+  width: 50%;
+  border-bottom: 1px solid black;
+}

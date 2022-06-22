@@ -1,0 +1,346 @@
+
+<style>
+.table th, .table td {
+	border-top: none !important;
+}
+
+</style>
+<div>
+	<aside class="right-side">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>Document View</h1>
+			<ol class="breadcrumb" data-ng-show="role != 'GAO ADMIN'">
+				<li><a href="dashboard"><i class="fa fa-dashboard"></i>
+						Dashboard</a></li>
+				<li><a href="case-docketsheet/{{urlEncodedAnum}}">Case
+						Docket Sheet</a></li>
+				<li class="active">Document View</li>
+			</ol>
+			<ol class="breadcrumb" data-ng-show="role == 'GAO ADMIN'">
+				<li><a href="admin-dashboard/unassigned"><i class="fa fa-dashboard"></i>
+						Dashboard</a></li>
+				<li><a href="admin-case-docketsheet/{{urlEncodedAnum}}">Case
+						Docket Sheet</a></li>
+				<li class="active">Document View</li>
+			</ol>
+		</section>
+		<section class="content">
+				<div class="row">
+					<div class="col-md-6">
+						<div class=" box box-solid box-info">
+							<div class="box-header with-border">
+								<h3 class="box-title">Case Information</h3>
+								
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table class="table" role="presentation">
+									<tbody>
+										<tr>
+											<td><strong>Party</strong></td>
+											<td>&nbsp;{{protestInfo.company_Name}}</td>
+										</tr>
+										<tr>
+											<td><strong>CBCA Number</strong></td>
+											<td>&nbsp;{{protestInfo.b_No}}</td>
+										</tr>
+
+										<tr>
+											<td><strong>Agency</strong></td>
+											<td>&nbsp;{{protestInfo.agency_Name}}</td>
+										</tr>
+										<tr>
+											<td><strong>Contract Number</strong></td>
+											<td>&nbsp;{{protestInfo.solicitation_No}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<div class="col-md-6">
+						<div class=" box box-solid box-info">
+							<div class="box-header with-border">
+								<h3 class="box-title">Document Information</h3>
+								
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table class="table" role="presentation">
+									<tbody>
+										<tr data-ng-if="docketNumber != null">
+											<td><strong>Docket#</strong></td>
+											<td>&nbsp;{{docketNumber}}</td>
+										</tr>
+										<tr>
+											<td><strong>Document Type</strong></td>
+											<td>&nbsp;{{type_Of_Doc}}</td>
+										</tr>
+
+										<tr>
+											<td><strong>Filer</strong></td>
+											<td>
+												<div
+													data-ng-if="fileInfoList[0].submitter_Role != 'GAO' && fileInfo.submitter_Role != 'AGENCY'">
+													<span class="text-center">{{fileInfoList[0].submitter_Role}}</span><br>
+													<span class="text-center">
+														({{fileInfoList[0].company_Name}}) </span>
+												</div>
+												<div data-ng-if="fileInfoList[0].submitter_Role == 'GAO'">
+													<span class="text-center">CBCA</span><br>
+												</div>
+												<div data-ng-if="fileInfoList[0].submitter_Role == 'AGENCY'">
+													<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+													<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td><strong>Submission Date</strong></td>
+											<td>{{fileInfoList[0].transient_Date | date:'MMM dd yyyy'}}<br>{{fileInfoList[0].transient_Time}}</td>
+										</tr>
+										<tr>
+											<td><strong>Comments</strong></td>
+											<td><span> {{fileInfoList[0].transient_Comments}} </span></td>
+										</tr>
+										<tr>
+											<td><strong>CBCA Notes</strong></td>
+											<td><span> {{fileInfoList[0].transient_Note}} </span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 20px;"
+					data-ng-show="uploadPrimary || displayUploadDoc">
+					<div class="col-md-12">
+						
+						<submit-new-doc 
+									role="role" 
+									request-type="requestType"
+									cancel="cancelUploadPrimary()"
+									primary-doc-file-info="primaryDocFileInfo"
+									replace-doc-file-info="replaceDocFileInfo"
+									show-cancel-btn="Y"
+									type-Of-Doc = "type_Of_Doc"></submit-new-doc>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-lg-8 col-sm-8 ">
+						<fieldset class="box box-solid box-success">
+							<legend class="visually-hidden">{{type_Of_Doc}}</legend>
+							<div class="box-header with-border">
+								<h3 class="box-title">{{type_Of_Doc}}</h3>
+								
+								<!-- /.box-tools -->
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table class="table" role="presentation">
+									<tbody>
+										
+										<tr>
+											<td>Primary Document</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										
+										<tr data-ng-repeat="file_Info in fileInfoList | filterBy: ['file_identifier']: 'P'">
+											<td></td>
+											<td></td>
+											<td data-ng-show="role == 'GAO ADMIN' && showEditButtons">
+											<span>
+											<button name="ChooseExistingDoc"
+													class="btn btn-sm btn-success"
+													id="ChooseExistingDoc" value="Choose Existing Doc"
+													data-ng-click="chooseFromExistingDocs(file_Info.file_Id)"
+													data-ng-show="(replacePrimaryFileId == file_Info.file_Id) && isFileInfoContainsAssociatedDocuments">
+													<i class="fa fa-cloud-upload"></i>&nbsp;Choose from existing documents
+											</button>
+											</span>
+											<span>
+												<button name="uploadPrimaryDoc"
+													class="btn btn-sm btn-info"
+													id="uploadPrimaryDoc" value="Upload Primary Document"
+													data-ng-click="uploadPrimaryDoc(file_Info.file_Id)"
+													data-ng-show="replacePrimaryFileId == file_Info.file_Id">
+													<i class="fa fa-cloud-upload"></i>&nbsp;Upload Primary Document
+												</button>
+											</span>
+											</td>
+											<td>
+											
+												<span data-ng-show="!showEditButtons || (replacePrimaryFileId != file_Info.file_Id)" >
+												<a href="/epds/downloaddashboardfile?fileId={{file_Info.file_Id}}" target="_blank">
+													{{file_Info.fileName}}</a></span>
+													
+													
+											</td>
+											<td data-ng-show="role == 'GAO ADMIN' && showEditButtons">
+
+												<button  name="replacePrimaryFile"
+													class="btn btn-sm btn-success"
+													id="replacePrimaryFile" value="{{file_Info.file_Id}}"
+													data-ng-show="!replacePrimaryFileId || (replacePrimaryFileId != file_Info.file_Id)"
+													data-ng-click="replacePrimaryDoc(file_Info.file_Id,$event)">
+													Replace Primary Document
+												</button>
+												<button name="deleteRep_{{file_Info.file_Id}}"
+													class="btn btn-sm btn-danger deleteButton"
+													id="deleteRep_{{file_Info.file_Id}}" value="{{file_Info.file_Id}}"
+													aria-label="Delete {{file_Info.fileName}}"
+													data-ng-click="updateCaseDocketDocumentView(file_Info.file_Id,'delete','no-change')"
+													data-ng-show="showPrimaryDeleteBtn(replacePrimaryFileId,file_Info)">
+													<i class="fa fa-times"></i>&nbsp;Delete
+												</button>
+												<button  name="cancelReplacePrimary"
+													class="btn btn-sm btn-warning"
+													id="cancelReplacePrimary" value="{{file_Info.file_Id}}"
+													data-ng-show="replacePrimaryFileId == file_Info.file_Id"
+													data-ng-click="cancelReplacePrimaryDoc(file_Info.file_Id,$event)">
+													Cancel
+												</button>
+											</td>
+										</tr>
+										
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+
+										<tr>
+											<td>Associated Documents</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr data-ng-repeat="file_Info in fileInfoList | filterBy: ['file_identifier']: 'A' | orderBy : 'fileName'">
+											<td></td>
+											<td></td>
+											<td>&nbsp;&nbsp; 
+											
+													<a href="/epds/downloaddashboardfile?fileId={{file_Info.file_Id}}" target="_blank">
+													{{file_Info.fileName}}</a>	
+														
+											</td>
+											<td>
+												<button  name="replaceAssociatedDoc{{file_Info.file_Id}}"
+													class="btn btn-sm btn-success"
+													id="replaceAssociatedDoc{{file_Info.file_Id}}" value="{{file_Info.file_Id}}"
+													aria-label="Replace {{file_Info.fileName}}"
+													data-ng-show="role == 'GAO ADMIN' && showEditButtons"
+													data-ng-click="replaceDoc(file_Info.file_Id,$event)">
+													Replace
+												</button>
+												<button name="deleteRep_{{file_Info.file_Id}}"
+													class="btn btn-sm btn-danger deleteButton"
+													id="deleteRep_{{file_Info.file_Id}}" value="{{file_Info.file_Id}}"
+													aria-label="delete {{file_Info.fileName}}"
+													data-ng-click="updateCaseDocketDocumentView(file_Info.file_Id,'delete','no-change')"
+													data-ng-show="role == 'GAO ADMIN' && showEditButtons">
+													<i class="fa fa-times"></i>&nbsp;Delete
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer box-info col-sm-12">
+								<table class="table" role="presentation"
+									data-ng-show="type_Of_Doc != 'Request to Intervene'">
+									<tbody>
+										<tr data-ng-show="!isAlwaysVisisble">
+											<td><strong>Protected</strong></td>
+											<td></td>
+											<td><span data-ng-show="!showEditButtons"><strong>&nbsp;{{PO}}&nbsp;</strong></span>
+												<div data-ng-show="(isGAOUserWithFullAccess) && showEditButtons">
+													<span 
+														data-editable-select="po"
+														data-e-ng-options="s.value as s.text for s in po"
+														data-onbeforesave="updateCaseDocketDocumentView(fileInfoList[0].file_Id,'confidential',$data)"
+														data-e-name="confidentialStatus"
+														data-e-form="editConfidentialStatusForm"> <strong>&nbsp;{{PO}}&nbsp;</strong>
+													</span>
+													<button class="btn-small btn-info"
+														title="Update Confidential Status of Files"
+														data-ng-click="editConfidentialStatusForm.$show()"
+														style="margin-left: 10px;"
+														data-ng-hide="editConfidentialStatusForm.$visible">
+														<i class="fa fa-edit"></i> Edit
+													</button>
+												</div>
+											</td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<div class="form-group" id="requestToIntervene"
+									data-ng-show="isRequestToInterveneQuesNeedsToBeShown">
+									<label class="col-sm-2 col-md-6 control-label"> Do you
+										want to approve request to intervene ?</label>
+									<div class="buttoncls">
+										<button class="btn btn-success "
+											data-ng-click="respondToCaseAccessRequest(fileId,'Y','intervene')">Yes</button>
+										&nbsp;&nbsp;
+										<button class="btn btn-danger "
+											data-ng-click="respondToCaseAccessRequest(fileId,'N','intervene')">No</button>
+									</div>
+								</div>
+								
+								<div class="form-group" id="noticeOfAppearance"
+									data-ng-if="isNoticeOfAppearanceQuesNeedsToBeShown">
+									<label class="col-sm-2 col-md-6 control-label"> Do you want to acknowledge this agency representative ?</label>
+									<div class="buttoncls">
+										<button class="btn btn-success "
+											data-ng-click="respondToCaseAccessRequest(fileId,'Y','agency-rep-access')">Yes</button>
+										&nbsp;&nbsp;
+										<button class="btn btn-danger "
+											data-ng-click="respondToCaseAccessRequest(fileId,'N','agency-rep-access')">No</button>
+									</div>
+								</div>
+
+								<div class="form-group" data-ng-show="isGAOUserWithFullAccess">
+									<div class="buttoncls pull-right">
+										<button class="btn btn-success "
+											data-ng-show="!showEditButtons"
+											data-ng-click="displayEditButtons(true)">Edit</button>
+										&nbsp;&nbsp;
+										<button class="btn btn-danger " data-ng-show="showEditButtons"
+											data-ng-click="displayEditButtons(false)">Cancel</button>
+									</div>
+								</div>
+
+							</div>
+							<!-- box-footer -->
+						</fieldset>
+						<!-- /.box -->
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 20px;"
+					data-ng-show="showSubmitNewDoc">
+					<div class="col-md-12">
+						<submit-new-doc doc-info="docInfo" role="role" 
+									request-type="requestType"
+									denial-doc-info = "denialDocInfo" type-Of-Doc = "type_Of_Doc"></submit-new-doc>
+					</div>
+				</div>
+		</section>
+		<!-- /.content -->
+	</aside>
+	<!-- /.right-side -->
+</div>

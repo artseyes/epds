@@ -1,0 +1,22 @@
+<div class="modal-content" disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="glyphicon glyphicon-thumbs-up"></i> 
+               <span data-ng-show="confirmationType =='attorney'"> Attorney Info</span>
+               <span data-ng-show="confirmationType =='protester'"> Primary Representative Info</span>
+               <a data-ng-click="cancel()" class="pull-right" title ="Close" alt="Close">
+                   <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+               </a>
+            </h4>
+         </div>
+         
+         <div class="modal-body" style="background-color: lightgray;">
+               <span>You are adding &nbsp;<strong>{{attorneyInfo.first_Name}}&nbsp;&nbsp;{{attorneyInfo.last_Name}}</strong>&nbsp;from  <strong>{{attorneyInfo.firm_Name}}</strong></span>
+            	
+            	<div class="buttoncls">
+					<button class="btn btn-success spacing-between-elements" data-ng-click="confirmAttorneyInfo(attorneyInfo.email)" id = "{{$index}} " value="{{$index}}">Confirm</button>&nbsp;&nbsp; 
+					<button class="btn btn-danger spacing-between-elements" data-ng-click="cancel()" id = "{{$index}}" value="{{$index}}">Cancel</button>
+				</div>
+         </div>
+</div><!-- /.modal-content -->
+

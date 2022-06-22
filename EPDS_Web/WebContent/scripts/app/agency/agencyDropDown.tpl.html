@@ -1,0 +1,31 @@
+<div class="form-group">
+	<label for="agency_tier_1">
+		Agency Tier 1
+		<span data-ng-show="protestWarning" class="requiredInputs" aria-label="{{protestWarning}} required">&nbsp;{{protestWarning}}</span>
+	</label>
+	<div>
+		<select name="agency_tier_1" id="agency_tier_1"
+            data-popover-trigger="'focus'"
+            data-popover-placement="right"
+			data-ng-options="item.agency_Name for item in agencylist track by item.agency_Id"
+			data-ng-model="tier1SelectedOption"
+			data-ng-change="loadTier2Agencies(tier1SelectedOption)"
+			class="form-control">
+		</select>
+	</div>
+	<!-- data-uib-popover="{{tooltip}}" -->
+</div>
+
+<div class="form-group" id="t2id" style="display: none">
+	<label for="agency_tier_2">
+		Agency Tier 2
+		<span data-ng-show="protestWarning" class="requiredInputs" aria-label="required"></span>
+	</label>
+	<div  id="tierb">
+		<select name="agency_tier_2" id="agency_tier_2"
+			data-ng-options="item.agency_Name for item in tier2AgencyList track by item.agency_Id"
+			data-ng-model="tier2SelectedOption"
+			class="form-control">
+		</select>
+	</div>
+</div>

@@ -1,0 +1,342 @@
+<div id="caseDocket">
+		<aside class="right-side">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>Case Docket Sheet</h1>
+				<ol class="breadcrumb">
+					<li><a href="dashboard" id="focus_start"><i class="fa fa-dashboard"></i>
+							Dashboard</a></li>
+					<li class="active">Case Docket Sheet</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<section>
+					<div id="caseInfoTable" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div>
+							<table class="table table-bordered"
+								   aria-label="Table with first half of case information" role="presentation">
+								<tbody>
+								<!-- 	<tr>
+										Commented Out 04/27/2022
+										<td><strong>Case Type</strong></td>
+										<td>&nbsp;{{protestInfo.company_Status | uppercase }}</td>
+
+									</tr> -->
+									<tr>
+										<td><strong>Category of Case Code</strong></td>
+										<td>&nbsp;{{protestInfo.company_Status | uppercase }}</td>
+									</tr>
+									<tr>
+										<td><strong>Party</strong></td>
+										<td>&nbsp;{{protestInfo.company_Name | uppercase }}</td>
+									</tr>
+
+									<tr>
+										<td><strong> CBCA Number</strong></td>
+										<td>&nbsp;{{protestInfo.b_No || "pending"}}&nbsp; <span
+											data-ng-show="protestInfo.supplemental_B_Nos != null">{{protestInfo.supplemental_B_Nos | sort}}</span>
+										</td>
+									</tr>
+
+									<tr>
+										<td><strong>Agency</strong></td>
+										<td>&nbsp;{{protestInfo.agency_Name}}</td>
+									</tr>
+
+									<tr>
+										<td><strong>Intervenor(s)&nbsp;</strong></td>
+										<td><span
+											data-ng-repeat="intervenorCompanyName in intervenorCompanyNameList | remove: null | uniq: 'intervenorCompanyName'">
+											<span data-ng-if="$index == 0">
+													{{intervenorCompanyName | uppercase}} 
+											</span>
+											{{$last ? '' : '; '}}
+											<span data-ng-if="$index != 0">
+											
+											{{intervenorCompanyName | uppercase}}
+											</span> 
+										</span>
+										</td>
+									</tr>
+
+									<tr>
+										<td><strong>Contract Number</strong></td>
+										<td>&nbsp;{{protestInfo.solicitation_No}}</td>
+									</tr>
+									<tr>
+										<td><strong>Consolidated Cases</strong></td>
+										<td>
+										<span
+											data-ng-repeat='childProtestInfo in consolidatedProtests'>
+												<a data-ng-if="$index == 0"
+												data-ng-click="redirectToConsolidatedCaseDocketSheet(childProtestInfo.a_No)"
+												href="javascript:void(0)">
+													{{childProtestInfo.company_Name | uppercase
+													}}&nbsp;&nbsp;,&nbsp;&nbsp;{{childProtestInfo.b_No}} </a> 
+													
+											<a
+												data-ng-if="$index > 0"
+												data-ng-click="redirectToConsolidatedCaseDocketSheet(childProtestInfo.a_No)"
+												href="javascript:void(0)">
+													;&nbsp;&nbsp;{{childProtestInfo.company_Name |
+													uppercase}}&nbsp;&nbsp;,&nbsp;&nbsp;{{childProtestInfo.b_No}};
+													&nbsp;&nbsp; </a>
+										</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<table id="gaoInfoTable" class="table table-bordered"
+							   aria-label="Table with first half of case information" role="presentation">
+							<tr>
+								<td><strong>Judge</strong></td>
+								<td>&nbsp;{{attorneyInfo.first_Name}} {{attorneyInfo.middle_initial}} {{attorneyInfo.last_Name}}</td>
+							</tr>
+							<tr>
+								<td><strong>Email</strong></td>
+								<td>&nbsp;{{attorneyInfo.email}}</td>
+							</tr>
+							<tr>
+								<td><strong>Phone Number</strong></td>
+								<td>&nbsp;{{attorneyInfo.phone_No}}</td>
+							</tr>
+							<tr>
+								<td><strong>Days Remaining&nbsp;</strong></td>
+								<td>{{daysRemaining}}</td>
+							</tr>
+							<tr>
+								<td><strong>Case Status </strong></td>
+								<td>&nbsp;{{protestInfo.case_Status}}</td>
+							</tr>
+							<tr>
+								<td><strong>Protective Order Issued?</strong></td>
+								<td>
+									<div data-ng-show="(role.trim() != 'GAO ATTORNEY' && role.trim() != 'GAO SUPERVISOR') ||  protestInfo.viewOnly">
+										<label class="radio-inline"> <input type="radio"
+											name="company_status" value="yes" data-ng-checked="po == 'Y'"
+											disabled="disabled" /> Y
+
+										</label> 
+										<label class="radio-inline"> <input type="radio"
+											name="company_status" data-ng-checked="po == 'N'"
+											checked="checked" value="no" disabled="disabled" />N
+										</label>
+									</div>
+									<div data-ng-show="(role.trim() == 'GAO ATTORNEY' || role.trim() == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
+										<span data-editable-radiolist="po"
+											data-e-form="updateProtectiveOrderForm"
+											data-onbeforesave="updateProtestInfo(po,'Protective Order',$data)"
+											data-e-ng-options="s.value as s.text for s in protectiveOrder">
+											{{po}} </span>
+										<button class="btn-small btn-info"
+											title="update protective order"
+											data-ng-click="updateProtectiveOrderForm.$show()"
+											style="margin-left: 10px;"
+											data-ng-hide="updateProtectiveOrderForm.$visible">
+											<i class="fa fa-edit"></i> Edit
+										</button>
+
+									</div>
+								</td>
+							</tr>
+							<tr data-ng-show="protestInfo.caseCompletionStatus.dmNumber != null 
+								&& protestInfo.caseCompletionStatus.isDmVerfied !== true
+								&& verifyDm != true
+								&&  (role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR')">
+										<td><strong>DM#</strong></td>
+										<td><span
+											data-editable-text="protestInfo.caseCompletionStatus.dmNumber"
+											data-onbeforesave="updateDM(protestInfo.caseCompletionStatus.dmNumber,$data)"
+											data-e-form="editDMNumForm">
+												&nbsp;{{protestInfo.caseCompletionStatus.dmNumber}}&nbsp; </span>
+											<button class="btn-small btn-info"
+												title="Edit Solicitation Number"
+												data-ng-click="editDMNumForm.$show()"
+												style="margin-left: 10px;"
+												data-ng-hide="editDMNumForm.$visible">
+												<i class="fa fa-edit"></i> Edit
+											</button>
+								</td>
+							</tr>
+
+						</table>
+					</div>
+				</section>
+				
+				
+
+				<section>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 "
+						id="fileInfoTable" style="margin-top: 100px;">
+						<div>
+						<slidebox speed="25" content-width="100%">
+						
+						<div>
+							<button class="btn-info pull-left" data-ng-click="downloadOfflineCds()">Download Offline Case Docket</button>
+						</div>
+							<table data-datatable="ng"
+								data-dt-options="caseDocketInfo.dtOptions"
+								data-dt-column-defs="caseDocketInfo.dtColumnDefs"
+								id="protestTable" class="table table-bordered table-striped"
+								width="100%" aria-label="Data table of docket entries">
+								<thead>
+									<tr>
+										<th scope="col" class="span0">Index</th>
+										<th scope="col" class="span0">Alerts</th>
+										<th scope="col" class="span200">Type of Filing</th>
+										<th scope="col" class="span120">Filer</th>
+										<th scope="col" class="span120">Protected ?</th>
+										<th scope="col" class="span100">Date</th>
+										<th scope="col" class="span200">Comments</th>
+										<th scope="col" class="span200">CBCA Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										data-ng-repeat="fileInfo in ::caseDocketInfo.fileInfoList">
+										<td>{{$index + 1}}</td>
+										<td>
+										
+										
+										<div
+											data-ng-hide="(fileInfo.doc_Type_Id == 157 
+													|| fileInfo.doc_Type_Id == 159
+													|| fileInfo.doc_Type_Id == 161
+													|| fileInfo.doc_Type_Id == 162
+													|| ({{ [27,38,12,179,53,100,91,82,67,154,234,233,231,232,215,214,213,212,211,210] | contains: fileInfo.doc_Type_Id }})
+													|| protestInfo.caseCompletionStatus.isZipCreated === true)
+													&& fileInfo.doc_Type_Id != 158">
+													
+											<img tabindex="0" data-ng-show="fileInfo.fileAlert =='Y'"
+												src="img/notification_warning.png" height="22" width="22"
+												title="Unread document">
+										</div>
+										
+										</td>
+
+										<td>
+											<div data-ng-show="(fileInfo.is_Visible == 'N' 
+																|| fileInfo.doc_Type_Id == 157 
+																|| fileInfo.doc_Type_Id == 159
+																|| fileInfo.doc_Type_Id == 161
+																|| fileInfo.doc_Type_Id == 162
+																|| ({{ [27,38,12,179,53,100,91,82,67,154,234,233,231,232,215,214,213,212,211,210] | contains: fileInfo.doc_Type_Id }})
+																|| protestInfo.caseCompletionStatus.isZipCreated === true)
+																&& fileInfo.doc_Type_Id != 158">
+												<span>{{splitString(fileInfo.docTypeName)}}</span> <span data-ng-show="fileInfo.doc_Type_Id != 160 && fileInfo.doc_Type_Id != 161">{{fileInfo.filler}}</span>
+											</div>
+
+											<div
+												data-ng-show="fileInfo.is_Visible == 'Y' 
+													&& fileInfo.doc_Type_Id != 157 
+													&& fileInfo.doc_Type_Id != 158
+													&& fileInfo.doc_Type_Id != 159
+													&& fileInfo.doc_Type_Id != 161
+													&& !({{ [27,38,12,179,53,100,91,82,67,154,234,233,231,232,215,214,213,212,211,210] | contains: fileInfo.doc_Type_Id }})
+													&& fileInfo.doc_Type_Id != 162
+													&& protestInfo.caseCompletionStatus.isZipCreated !== true">
+												<a
+													href="javascript:void(0)"
+													data-ng-click="redirectToCaseDocketFileInfo(fileInfo.a_No,fileInfo.originalSubmissionDate,fileInfo.doc_Type_Id,fileInfo.fileAlert,$index)">
+													{{splitString(fileInfo.docTypeName)}}<span data-ng-show="fileInfo.doc_Type_Id != 160 && fileInfo.doc_Type_Id != 161">{{fileInfo.filler}}</span>
+												</a>
+											</div>
+											
+											<div data-ng-show="fileInfo.doc_Type_Id == 158 && (role.trim() == 'GAO ATTORNEY' || role.trim() == 'GAO SUPERVISOR')">
+												
+												<a
+													href="javascript:void(0)"
+													data-ng-click="redirectToCaseDocketFileInfo(fileInfo.a_No,fileInfo.originalSubmissionDate,fileInfo.doc_Type_Id,fileInfo.fileAlert,$index)"> 
+													<span>{{splitString(fileInfo.docTypeName)}}</span> 
+													<span>{{protestInfo.b_No}}</span>
+
+												</a>
+											</div>
+										</td>
+										<td>
+											<div
+												data-ng-if="fileInfo.submitter_Role != 'GAO' && fileInfo.submitter_Role != 'AGENCY'">
+												<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+												<span class="text-center">
+													({{fileInfo.company_Name}}) </span>
+											</div>
+											<div data-ng-if="fileInfo.submitter_Role == 'GAO'">
+												<span class="text-center">CBCA</span><br>
+											</div>
+											<div data-ng-if="fileInfo.submitter_Role == 'AGENCY'">
+												<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+												<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span>
+											</div>
+										</td>
+										
+										<td>
+											<div data-ng-if="fileInfo.is_Confidential == 'Y'">
+												<span class="text-center">YES</span><br>
+											</div>
+											<div data-ng-if="fileInfo.is_Confidential == 'N' || fileInfo.is_Confidential == null">
+												<span class="text-center">NO</span><br>
+											</div>
+										</td>
+										
+										<td>{{fileInfo.transient_Date | date:'MMM dd yyyy'}}<br>{{fileInfo.transient_Time}}</td>
+										<td>
+											<div>
+												<span> {{fileInfo.transient_Comments}} </span>
+												
+												<br> <br> <strong><em class="pull-right spacing-between-elements"><span data-ng-if="fileInfo.isCommentEdited  && fileInfo.isCommentEdited.trim() == 'Y'">Edited:</span> {{fileInfo.transient_Comments_Date}}</em></strong>
+											</div>
+										</td>
+										<td>
+											<div data-ng-show="fileInfo.attorney_Note == null">
+												<div class="col-sm-12" class="form-group">
+													<button
+														class="btn-small btn-info pull-right spacing-between-elements"
+														data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
+														title="edit attorney notes"
+														data-ng-show="(role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
+														<i class="fa fa-edit"></i>Add Notes
+													</button>
+												</div>
+											</div>
+											<div data-ng-show="fileInfo.attorney_Note != null">
+												<span class="text-left"
+													data-onbeforesave="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
+													data-editable-textarea="fileInfo.transient_Note"
+													data-e-maxlength="200" spellcheck="true" id="txtarea"
+													data-e-placeholder="attorney notes"
+													data-e-form="editTransient_Note">
+													{{fileInfo.transient_Note}} </span>
+
+												<button class="btn-small btn-info pull-right"
+													data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
+													title="edit attorney notes"
+													data-ng-show="(role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
+													<i class="fa fa-edit"></i>Edit Notes
+												</button>
+												<br> <br> <strong><em
+													class="pull-right spacing-between-elements"> <span data-ng-if="fileInfo.isAttorneyNoteEdited  && fileInfo.isAttorneyNoteEdited.trim() == 'Y'">Edited:</span>  {{fileInfo.transient_Attorney_Note_Date}}</em></strong>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</slidebox>
+						</div>
+					</div>
+					<button
+						class="btn btn-large btn-success pull-right spacing-between-elements"
+						data-ng-click="addMinuteEntry()" title="Add Minute Entry"
+						data-ng-show="showAddMinuteEntryButton == 'Y'">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;Add Minute Entry
+					</button>
+				</section>
+			</section>
+			<!-- /.content -->
+		</aside>
+		<!-- /.right-side -->
+	</div>

@@ -1,0 +1,33 @@
+<style>
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}
+</style>
+<div class="modal-content" disableBackBtn>
+         <div class="modal-header modal-header-primary">
+            <h4 class="modal-title">
+               <i class="glyphicon glyphicon-warning-sign"></i> {{headerText}}
+               <a data-ng-click="cancel()" class="pull-right" title ="Close" alt="Close">
+                   <i class="glyphicon glyphicon-remove-circle show-pointer"></i>
+               </a>
+            </h4>
+         </div>
+         <div class="modal-body" style="background-color: lightgray;">
+               <span data-ng-show="partyType.id != '1'" >Are you sure you want to remove <strong>&nbsp;&nbsp;{{firstName}}</strong>&nbsp;<strong>{{lastName}}</strong>&nbsp;&nbsp;from this case ?</span>
+            	<span data-ng-show="partyType.id == '1'">Are you sure you want to permanently delete <strong>&nbsp;&nbsp;{{firstName}}</strong>&nbsp;<strong>{{lastName}}</strong>&nbsp;&nbsp;EPDS user account</span>
+            	<div class="buttoncls">
+					<button class="btn btn-success spacing-between-elements" data-ng-click="deleteUser(userId)" id = "{{$index}} " value="{{$index}}">Yes</button>&nbsp;&nbsp; 
+					<button class="btn btn-danger spacing-between-elements" data-ng-click="cancel()" id = "{{$index}}" value="{{$index}}">No</button>
+				</div>
+         </div>
+</div><!-- /.modal-content -->
