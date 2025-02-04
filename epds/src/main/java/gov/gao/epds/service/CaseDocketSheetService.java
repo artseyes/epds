@@ -134,7 +134,7 @@ public class CaseDocketSheetService {
 		dashboardService.populateAgencyNameForAgencyInFileInfoList(fileInfoList);
 		ZipFile_Util.sortFileInfoListBySubmissionDateAndFileId(fileInfoList);
 		CaseDocketPDFUtil.createPDF(tempPdfFilePath, fileInfoList, this, protestInfo,
-				intervenorCompanyNameList, attorney_Info,true, "Offline Case Docket");
+				intervenorCompanyNameList, attorney_Info,true, "Offline Case Docket Sheet");
 		return inputFile;
 	}
 	
@@ -146,7 +146,7 @@ public class CaseDocketSheetService {
 		if (userDocumentRole.equalsIgnoreCase("GAO ADMIN")) {
 			docInfoList = wholeDoc_InfoList;
 		} else {
-		    Integer [] listOfDocIds = {9,64,151,176 // Notice of Filing of Related Judicial Proceeding (Prot/Int)
+		    Integer [] listOfDocIds = {520,607,434,338 // Close Cases Doc List Notice of Filing of Related Judicial Proceeding (Prot/Int)
 		                              ,7,62,149,174 // Request to Use Protected Material in a Related Proceeding (Prot/Int)
 		                              ,221,222,223,224,228,230 // Request to Modify Protective Order  (Prot/Int)
 		                              };
@@ -236,7 +236,8 @@ public class CaseDocketSheetService {
 		case "request to intervene":
 		case "minute entry":
 		case "zip":
-		case "request to intervene approved":
+//		case "request to intervene approved":
+		case "request of grantee or third party request approved":
 		case "denial of request to intervene":
 		case "denial of notice of appearance":
 		case "notice of appearance acknowledged":
@@ -995,7 +996,7 @@ public class CaseDocketSheetService {
 				boolean join = protest_Info_ToBeJoinedWith.getParent_A_No() == null;
 		
 				if (parentBNumProtestInfo.getA_No().equalsIgnoreCase(protest_Info_ToBeJoinedWith.getA_No())) {
-					response = "Same A#";
+					response = "Same CBCA#";
 				} else if (join && parentBNumProtestInfo.getAgency_Info_Id() != protest_Info_ToBeJoinedWith
 						.getAgency_Info_Id()) {
 					response = "Not Same Agency";
@@ -1005,12 +1006,12 @@ public class CaseDocketSheetService {
 						&& protest_Info_ToBeJoinedWith.getAttorney_Name() != null
 						&& !parentBNumProtestInfo.getAttorney_Name().equalsIgnoreCase(
 								protest_Info_ToBeJoinedWith.getAttorney_Name())) {
-					response = "Not Same Attorney";
+					response = "Not Same Judge";
 				} else {
 					response = "valid";
 				}
 			}else{
-				response = "B# doesn't exist";
+				response = "CBCA# doesn't exist";
 			}
 		
 		}catch (Exception e){

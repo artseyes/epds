@@ -36,7 +36,7 @@ epdsApp.run(function (beforeUnload) {
 /* @ngInject */
 epdsApp.run(function ($rootScope, $anchorScroll, $window, $uibModalStack, $route, $location) {
     $rootScope.setTitle = function (title) {
-        document.title = title + " | EPDS";
+        document.title = title + " | EDS";
     }
 
     $rootScope.$safeApply = function () {
@@ -549,7 +549,7 @@ epdsApp
             },
         })
         .when('/intervene', {
-            title: 'Request To Intervene',
+            title: 'Request To Join',
             templateUrl: 'scripts/app/request-to-intervene/intervene-protest.html',
             controller: 'InterveneCtrl',
             resolve: {
@@ -722,7 +722,7 @@ epdsApp
             }
         })
         .when('/manage-attorneys', {
-            title: 'Manage GAO User Info',
+            title: 'Manage Judge User Info',
             templateUrl: 'scripts/app/admin/manage-attorney-info/manage-attorneys-info.html',
             controller: 'manageAttorneysController',
             resolve: {
@@ -786,7 +786,7 @@ epdsApp
             controller: 'gcDocketSheetController',
         })
         .when('/admin/account-reset', {
-            title: 'Manage GAO User Info',
+            title: 'Manage Judge User Info',
             templateUrl: 'scripts/app/core/blankPage.htm',
             controller: 'accountResetCtrl'
         })

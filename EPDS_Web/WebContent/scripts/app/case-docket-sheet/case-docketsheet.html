@@ -25,11 +25,11 @@
 
 									</tr> -->
 									<tr>
-										<td><strong>Category of Case Code</strong></td>
+										<td><strong>Case Type</strong></td>
 										<td>&nbsp;{{protestInfo.company_Status | uppercase }}</td>
 									</tr>
 									<tr>
-										<td><strong>Party</strong></td>
+										<td><strong>Filing Party</strong></td>
 										<td>&nbsp;{{protestInfo.company_Name | uppercase }}</td>
 									</tr>
 
@@ -46,17 +46,16 @@
 									</tr>
 
 									<tr>
-										<td><strong>Intervenor(s)&nbsp;</strong></td>
+										<td><strong>Grantee or Third Party&nbsp;</strong></td>
 										<td><span
 											data-ng-repeat="intervenorCompanyName in intervenorCompanyNameList | remove: null | uniq: 'intervenorCompanyName'">
 											<span data-ng-if="$index == 0">
-													{{intervenorCompanyName | uppercase}} 
+                                                {{intervenorCompanyName | uppercase}}
 											</span>
-											{{$last ? '' : '; '}}
 											<span data-ng-if="$index != 0">
-											
-											{{intervenorCompanyName | uppercase}}
-											</span> 
+											    {{intervenorCompanyName | uppercase}}
+											</span>
+                                            {{$last ? '' : '; '}}
 										</span>
 										</td>
 									</tr>
@@ -94,21 +93,28 @@
 						<table id="gaoInfoTable" class="table table-bordered"
 							   aria-label="Table with first half of case information" role="presentation">
 							<tr>
-								<td><strong>Judge</strong></td>
+								<td><strong> Presiding Judge</strong></td>
 								<td>&nbsp;{{attorneyInfo.first_Name}} {{attorneyInfo.middle_initial}} {{attorneyInfo.last_Name}}</td>
 							</tr>
 							<tr>
-								<td><strong>Email</strong></td>
+								<td><strong>Chambers Email</strong></td>
 								<td>&nbsp;{{attorneyInfo.email}}</td>
 							</tr>
 							<tr>
-								<td><strong>Phone Number</strong></td>
+								<td><strong> Chambers Phone Number</strong></td>
 								<td>&nbsp;{{attorneyInfo.phone_No}}</td>
 							</tr>
 							<tr>
-								<td><strong>Days Remaining&nbsp;</strong></td>
-								<td>{{daysRemaining}}</td>
+								<td><strong> Date Filed</strong></td>
+								<td>{{fileInfoList[0].transient_Date | date:'MMM dd yyyy'}}<br>{{fileInfoList[0].transient_Time}}</td>
 							</tr>
+							<!--
+							<tr>
+								<td><strong>Final Decision</strong></td>
+								<td>{{protestInfo.public_decision_date | date:'MMM dd yyyy hh:mm:ss'}}</td>
+<!--								<td>{{daysRemaining}}</td>
+							</tr>
+							-->
 							<tr>
 								<td><strong>Case Status </strong></td>
 								<td>&nbsp;{{protestInfo.case_Status}}</td>
@@ -177,7 +183,7 @@
 						<slidebox speed="25" content-width="100%">
 						
 						<div>
-							<button class="btn-info pull-left" data-ng-click="downloadOfflineCds()">Download Offline Case Docket</button>
+							<button class="btn-info pull-left" data-ng-click="downloadOfflineCds()">Download Case Docket Sheet</button>
 						</div>
 							<table data-datatable="ng"
 								data-dt-options="caseDocketInfo.dtOptions"
@@ -190,7 +196,7 @@
 										<th scope="col" class="span0">Alerts</th>
 										<th scope="col" class="span200">Type of Filing</th>
 										<th scope="col" class="span120">Filer</th>
-										<th scope="col" class="span120">Protected ?</th>
+										<th scope="col" class="span120">Protected</th>
 										<th scope="col" class="span100">Date</th>
 										<th scope="col" class="span200">Comments</th>
 										<th scope="col" class="span200">CBCA Notes</th>
@@ -260,83 +266,88 @@
 										</td>
 										<td>
 											<div
-												data-ng-if="fileInfo.submitter_Role != 'GAO' && fileInfo.submitter_Role != 'AGENCY'">
+												data-ng-if="fileInfo.submitter_Role != 'CBCA' && fileInfo.submitter_Role != 'AGENCY' && fileInfo.submitter_Role != 'GranteeOrThirdParty'">
 												<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
-												<span class="text-center">
-													({{fileInfo.company_Name}}) </span>
+                                             <!--       <span class="text-center">Filer Doc</span><br> -->
+                                                    <span class="text-center">
+<!--                                                        ({{fileInfo.company_Name}}) </span>-->
 											</div>
-											<div data-ng-if="fileInfo.submitter_Role == 'GAO'">
-												<span class="text-center">CBCA</span><br>
-											</div>
-											<div data-ng-if="fileInfo.submitter_Role == 'AGENCY'">
-												<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+											<div data-ng-if="fileInfo.submitter_Role == 'GranteeOrThirdParty'">
+    												<span class="text-center"> Grantee or Third Party</span><br>
 												<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span>
 											</div>
-										</td>
-										
-										<td>
-											<div data-ng-if="fileInfo.is_Confidential == 'Y'">
-												<span class="text-center">YES</span><br>
-											</div>
-											<div data-ng-if="fileInfo.is_Confidential == 'N' || fileInfo.is_Confidential == null">
-												<span class="text-center">NO</span><br>
-											</div>
-										</td>
-										
-										<td>{{fileInfo.transient_Date | date:'MMM dd yyyy'}}<br>{{fileInfo.transient_Time}}</td>
-										<td>
-											<div>
-												<span> {{fileInfo.transient_Comments}} </span>
-												
-												<br> <br> <strong><em class="pull-right spacing-between-elements"><span data-ng-if="fileInfo.isCommentEdited  && fileInfo.isCommentEdited.trim() == 'Y'">Edited:</span> {{fileInfo.transient_Comments_Date}}</em></strong>
-											</div>
-										</td>
-										<td>
-											<div data-ng-show="fileInfo.attorney_Note == null">
-												<div class="col-sm-12" class="form-group">
-													<button
-														class="btn-small btn-info pull-right spacing-between-elements"
-														data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
-														title="edit attorney notes"
-														data-ng-show="(role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
-														<i class="fa fa-edit"></i>Add Notes
-													</button>
-												</div>
-											</div>
-											<div data-ng-show="fileInfo.attorney_Note != null">
-												<span class="text-left"
-													data-onbeforesave="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
-													data-editable-textarea="fileInfo.transient_Note"
-													data-e-maxlength="200" spellcheck="true" id="txtarea"
-													data-e-placeholder="attorney notes"
-													data-e-form="editTransient_Note">
-													{{fileInfo.transient_Note}} </span>
 
-												<button class="btn-small btn-info pull-right"
-													data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
-													title="edit attorney notes"
-													data-ng-show="(role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
-													<i class="fa fa-edit"></i>Edit Notes
-												</button>
-												<br> <br> <strong><em
-													class="pull-right spacing-between-elements"> <span data-ng-if="fileInfo.isAttorneyNoteEdited  && fileInfo.isAttorneyNoteEdited.trim() == 'Y'">Edited:</span>  {{fileInfo.transient_Attorney_Note_Date}}</em></strong>
+											<div data-ng-if="fileInfo.submitter_Role == 'CBCA'">
+                                                    <span class="text-center">CBCA</span><br>
+                                                </div>
+											<div data-ng-if="fileInfo.submitter_Role == 'AGENCY'">
+                                                    <span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+                                                    <span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span>
 											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							</slidebox>
-						</div>
-					</div>
-					<button
-						class="btn btn-large btn-success pull-right spacing-between-elements"
-						data-ng-click="addMinuteEntry()" title="Add Minute Entry"
-						data-ng-show="showAddMinuteEntryButton == 'Y'">
-						<i class="fa fa-plus"></i>&nbsp;&nbsp;Add Minute Entry
-					</button>
-				</section>
-			</section>
-			<!-- /.content -->
+                                            </td>
+                                            <td>
+                                                <div data-ng-if="fileInfo.is_Confidential == 'Y'">
+                                                    <span class="text-center">YES</span><br>
+                                                </div>
+                                                <div data-ng-if="fileInfo.is_Confidential == 'N' || fileInfo.is_Confidential == null">
+                                                    <span class="text-center">NO</span><br>
+                                                </div>
+                                            </td>
+
+                                            <td>{{fileInfo.transient_Date | date:'MMM dd yyyy'}}<br>{{fileInfo.transient_Time}}</td>
+                                            <td>
+                                                <div>
+                                                    <span> {{fileInfo.transient_Comments}} </span>
+
+                                                    <br> <br> <strong><em class="pull-right spacing-between-elements"><span data-ng-if="fileInfo.isCommentEdited  && fileInfo.isCommentEdited.trim() == 'Y'">Edited:</span> {{fileInfo.transient_Comments_Date}}</em></strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div data-ng-show="fileInfo.attorney_Note == null">
+                                                    <div class="col-sm-12" class="form-group">
+                                                        <button
+                                                            class="btn-small btn-info pull-right spacing-between-elements"
+                                                            data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
+                                                            title="edit CBCA notes"
+                                                            data-ng-show="(role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
+                                                            <i class="fa fa-edit"></i>Add Notes
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div data-ng-show="fileInfo.attorney_Note != null">
+                                                    <span class="text-left"
+                                                        data-onbeforesave="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
+                                                        data-editable-textarea="fileInfo.transient_Note"
+                                                        data-e-maxlength="200" spellcheck="true" id="txtarea"
+                                                        data-e-placeholder="attorney notes"
+                                                        data-e-form="editTransient_Note">
+                                                        {{fileInfo.transient_Note}} </span>
+
+                                                    <button class="btn-small btn-info pull-right"
+                                                        data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
+                                                        title="edit CBCA notes"
+                                                        data-ng-show="(role == 'GAO ATTORNEY' || role == 'GAO SUPERVISOR') && !protestInfo.viewOnly">
+                                                        <i class="fa fa-edit"></i>Edit Notes
+                                                    </button>
+                                                    <br> <br> <strong><em
+                                                        class="pull-right spacing-between-elements"> <span data-ng-if="fileInfo.isAttorneyNoteEdited  && fileInfo.isAttorneyNoteEdited.trim() == 'Y'">Edited:</span>  {{fileInfo.transient_Attorney_Note_Date}}</em></strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </slidebox>
+                            </div>
+                        </div>
+                        <button
+                            class="btn btn-large btn-success pull-right spacing-between-elements"
+                            data-ng-click="addMinuteEntry()" title="Add Minute Entry"
+                            data-ng-show="showAddMinuteEntryButton == 'Y'">
+                            <i class="fa fa-plus"></i>&nbsp;&nbsp;Add Minute Entry
+                        </button>
+                    </section>
+                </section>
+                <!-- /.content -->
 		</aside>
 		<!-- /.right-side -->
 	</div>

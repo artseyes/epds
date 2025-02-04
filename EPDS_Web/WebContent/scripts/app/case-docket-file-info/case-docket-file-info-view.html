@@ -38,7 +38,7 @@
 								<table class="table" role="presentation">
 									<tbody>
 										<tr>
-											<td><strong>Party</strong></td>
+											<td><strong>Filing Party</strong></td>
 											<td>&nbsp;{{protestInfo.company_Name}}</td>
 										</tr>
 										<tr>
@@ -84,18 +84,40 @@
 											<td><strong>Filer</strong></td>
 											<td>
 												<div
-													data-ng-if="fileInfoList[0].submitter_Role != 'GAO' && fileInfo.submitter_Role != 'AGENCY'">
-													<span class="text-center">{{fileInfoList[0].submitter_Role}}</span><br>
-													<span class="text-center">
-														({{fileInfoList[0].company_Name}}) </span>
+													data-ng-if="fileInfoList[0].submitter_Role != 'CBCA' && fileInfo[0].submitter_Role != 'GranteeOrThirdParty' && fileInfo.submitter_Role != 'AGENCY'">
+													<!-- <span class="text-center">{{fileInfoList[0].submitter_Role}}</span><br>
+													<span class="text-center">({{fileInfoList[0].company_Name}}) </span>-->
 												</div>
-												<div data-ng-if="fileInfoList[0].submitter_Role == 'GAO'">
+												<div data-ng-if="fileInfoList[0].submitter_Role == 'CBCA'">
 													<span class="text-center">CBCA</span><br>
 												</div>
+
 												<div data-ng-if="fileInfoList[0].submitter_Role == 'AGENCY'">
-													<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
-													<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span>
+													<span class="text-center">AGENCY</span><br>
+													<span class="text-center">({{fileInfoList[0].company_Name}}) </span>
+													<!--<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}})</span>-->
+													<!--<span class="text-center">{{fileInfo.submitter_Role}}</span><br>-->
+													<!--<span class="text-center">{{fileInfoList[0].submitter_Role}}</span><br>-->
+													<!--<span class="text-center">{{fileInfo.submitter_Role}}</span><br>-->
+                                                	<!--<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}})-->
+                                                	<!--<span class="text-center">({{fileInfoList[0].company_Name}}) </span>-->
+													<!-- <span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span> -->
 												</div>
+												<div data-ng-if="fileInfoList[0].submitter_Role == 'INTERVENOR'">
+													<span class="text-center">Grantee or Third Party</span><br>
+													<span class="text-center">({{fileInfoList[0].company_Name}}) </span>
+												</div>
+												<div data-ng-if="fileInfoList[0].submitter_Role == 'GranteeOrThirdParty'">
+													<span class="text-center">Grantee or Third Party</span><br>
+													<!-- <span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span> -->
+													<span class="text-center">({{fileInfoList[0].company_Name}}) </span>
+												</div>
+												<div data-ng-if="fileInfoList[0].submitter_Role == 'FILER'">
+													<span class="text-center">FILER</span><br>
+													<!-- <span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}}) </span> -->
+													<span class="text-center">({{fileInfoList[0].company_Name}}) </span>
+												</div>
+
 											</td>
 										</tr>
 										<tr>
@@ -259,7 +281,8 @@
 							<!-- /.box-body -->
 							<div class="box-footer box-info col-sm-12">
 								<table class="table" role="presentation"
-									data-ng-show="type_Of_Doc != 'Request to Intervene'">
+
+									data-ng-show="type_Of_Doc != 'Grantee or Third Party Request'">
 									<tbody>
 										<tr data-ng-show="!isAlwaysVisisble">
 											<td><strong>Protected</strong></td>
@@ -291,7 +314,7 @@
 								<div class="form-group" id="requestToIntervene"
 									data-ng-show="isRequestToInterveneQuesNeedsToBeShown">
 									<label class="col-sm-2 col-md-6 control-label"> Do you
-										want to approve request to intervene ?</label>
+										want to allow Request of Grantee or Third Party Request?</label>
 									<div class="buttoncls">
 										<button class="btn btn-success "
 											data-ng-click="respondToCaseAccessRequest(fileId,'Y','intervene')">Yes</button>

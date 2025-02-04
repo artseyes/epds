@@ -213,7 +213,7 @@ function FileInfoViewCtrl($scope, $filter, $http, $rootScope, $window,
 			$scope.docInfo = {
 					docTypeId : "160",
 					uploadText : "Upload Primary Document",
-					headerText : "Denial of Request to Intervene",
+					headerText : "Denial of Grantee or Third Party Request",
 					a_No : $scope.a_No
 			}
 			

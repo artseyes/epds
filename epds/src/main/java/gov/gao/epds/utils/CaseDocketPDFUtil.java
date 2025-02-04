@@ -78,10 +78,10 @@ public class CaseDocketPDFUtil {
 
 			// document header attributes
 			doc.addLanguage("en-US");
-			doc.addAuthor("EPDS");
+			doc.addAuthor("EDS");
 			doc.addCreationDate();
 			doc.addProducer();
-			doc.addCreator("epds.cbca.gov");
+			doc.addCreator("eds.cbca.gov");
 			doc.addTitle(title);
 			doc.setPageSize(PageSize.LETTER);
 
@@ -106,13 +106,13 @@ public class CaseDocketPDFUtil {
 
 			PdfPTable firstTable = new PdfPTable(2);
 
-			insertCell(firstTable, "Case Type", Element.ALIGN_LEFT, 1, bfBold12, true);
-			insertCell(firstTable, protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH), Element.ALIGN_LEFT, 1, bfBold12);
+//			insertCell(firstTable, "Case Type99", Element.ALIGN_LEFT, 1, bfBold12, true);
+//			insertCell(firstTable, protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH), Element.ALIGN_LEFT, 1, bfBold12);
 			
-			insertCell(firstTable, "Company Status", Element.ALIGN_LEFT, 1, bfBold12, true);
+			insertCell(firstTable, "Case Type", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(firstTable, protest_Info.getCompany_Status().toUpperCase(Locale.ENGLISH), Element.ALIGN_LEFT, 1, bfBold12);
 			
-			insertCell(firstTable, "Party", Element.ALIGN_LEFT, 1, bfBold12, true);
+			insertCell(firstTable, "Filing Party", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(firstTable, protest_Info.getCompany_Name(), Element.ALIGN_LEFT, 1, bfBold12);
 			
 			insertCell(firstTable, "Case Number", Element.ALIGN_LEFT, 1, bfBold12, true);
@@ -121,14 +121,14 @@ public class CaseDocketPDFUtil {
 			insertCell(firstTable, "Agency", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(firstTable, protest_Info.getAgency_Name().toUpperCase(Locale.ENGLISH), Element.ALIGN_LEFT, 1, bfBold12);
 			
-			insertCell(firstTable, "Intervenors", Element.ALIGN_LEFT, 1, bfBold12, true);
+			insertCell(firstTable, "Grantee/Third Party", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(firstTable, ((intervenorCompanyNameList != null ? StringUtils.join(intervenorCompanyNameList,";") : "")), Element.ALIGN_LEFT, 1, bfBold12);
 			
 			insertCell(firstTable, "Contract Number", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(firstTable, protest_Info.getSolicitation_No().toUpperCase(Locale.ENGLISH), Element.ALIGN_LEFT, 1, bfBold12);
 			
-			insertCell(firstTable, "Consolidated Protest", Element.ALIGN_LEFT, 1, bfBold12, true);
-			insertCell(firstTable, StringUtils.join(consolidatedProtests,";"), Element.ALIGN_LEFT, 1, bfBold12);
+			insertCell(firstTable, "Consolidated Cases", Element.ALIGN_LEFT, 1, bfBold12, true);
+			insertCell(firstTable, StringUtils.join(consolidatedProtests,"; "), Element.ALIGN_LEFT, 1, bfBold12);
 
 			firstTableCell.addElement(firstTable);
 
@@ -139,15 +139,15 @@ public class CaseDocketPDFUtil {
 			secondTableCell.setBorder(PdfPCell.NO_BORDER);
 			PdfPTable secondTable = new PdfPTable(2);
 
-			insertCell(secondTable, "JUDGE NAME", Element.ALIGN_LEFT, 1, bfBold12, true);
+			insertCell(secondTable, "Presiding Judge", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(secondTable,  (attorney_Info != null ? attorney_Info.getLast_Name() + ", " +attorney_Info.getFirst_Name() : "pending"), Element.ALIGN_LEFT, 1, bfBold12);
 			
-			insertCell(secondTable, "JUDGE EMAIL", Element.ALIGN_LEFT, 1, bfBold12, true);
+			insertCell(secondTable, "Chambers Email", Element.ALIGN_LEFT, 1, bfBold12, true);
 			insertCell(secondTable, (attorney_Info != null ? attorney_Info.getEmail() : "pending"), Element.ALIGN_LEFT, 1, bfBold12);
 			
 			if (isCaseDocketSheet){
-				insertCell(secondTable, "Days Remaining", Element.ALIGN_LEFT, 1, bfBold12, true);
-				insertCell(secondTable,  Date_Util.getNumberOfDaysRemaining(protest_Info.getDue_Date())+"", Element.ALIGN_LEFT, 1, bfBold12);
+//				insertCell(secondTable, "Days Remaining", Element.ALIGN_LEFT, 1, bfBold12, true);
+//				insertCell(secondTable,  Date_Util.getNumberOfDaysRemaining(protest_Info.getDue_Date())+"", Element.ALIGN_LEFT, 1, bfBold12);
 				
 				insertCell(secondTable, "Case Status", Element.ALIGN_LEFT, 1, bfBold12, true);
 				insertCell(secondTable, (protest_Info.getCase_Status()), Element.ALIGN_LEFT, 1, bfBold12);
@@ -176,7 +176,7 @@ public class CaseDocketPDFUtil {
 			insertCell(fileInfoTable, "Index", Element.ALIGN_LEFT, 1, bfBold12);
 			insertCell(fileInfoTable, "Type Of Filing", Element.ALIGN_LEFT, 1, bfBold12);
 			insertCell(fileInfoTable, "Filer", Element.ALIGN_LEFT, 1, bfBold12);
-			insertCell(fileInfoTable, "Protected?", Element.ALIGN_LEFT, 1, bfBold12);
+			insertCell(fileInfoTable, "Protected", Element.ALIGN_LEFT, 1, bfBold12);
             insertCell(fileInfoTable, "Date", Element.ALIGN_LEFT, 1, bfBold12);
 			insertCell(fileInfoTable, "Comments", Element.ALIGN_LEFT, 1, bfBold12);
 			insertCell(fileInfoTable, "CBCA Notes", Element.ALIGN_LEFT, 1, bfBold12);

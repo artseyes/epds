@@ -230,54 +230,13 @@ angular.module('epdsApp.caseDocketSheet')
 			}, ];
 			
 			vm.companyStatuses = [ {
-				value : 'APPEAL',
-				text : 'APPEAL'
+				value : 'Contract Disputes Act Appeal',
+				text : 'Contract Disputes Act Appeal'
 			},{
-				value : 'APPEAL RECON',
-				text : 'APPEAL RECON'
-			},{
-				value : 'DEBT',
-				text : 'DEBT'
-			},{
-				value : 'EAJA COST',
-				text : 'EAJA COST'
-			},{
-				value : 'FCIC',
-				text : 'FCIC'
-			},{
-				value : 'FCIC RECON',
-				text : 'FCIC RECON'
-			},{
-				value : 'FEMA',
-				text : 'FEMA'
-			},{
-				value : 'FMCSA',
-				text : 'FMCSA'
-			},{
-				value : 'ISDA',
-				text : 'ISDA'
-			},{
-				value : 'ISDA RECON',
-				text : 'ISDA RECON'
-			},{
-				value : 'OTHER',
-				text : 'OTHER'
-			},{
-				value : 'PETITION',
-				text : 'PETITION'
-			},{
-				value : 'RATE',
-				text : 'RATE'
-			},{
-				value : 'RELOCATION',
-				text : 'RELOCATION'
-			},{
-				value : 'TRAVEL',
-				text : 'TRAVEL'
-			},{
-				value : 'TRR RECON',
-				text : 'TRR RECON'
-			}];
+				value : 'FEMA Arbitration',
+				text : 'FEMA Arbitration'
+			}
+			];
 			return $q.when(vm);
 		}
 		
@@ -440,7 +399,22 @@ angular.module('epdsApp.caseDocketSheet')
 					}).then(
 							function(data) {
 								
-								var bodyText = ' You have  successfully updated '+ typeOfchange + ".";
+								var bodyText = ' You have  successfully updated402 '+ typeOfchange + ".";
+								if (typeOfchange === "Attorney Info") {
+									var bodyText = ' You have successfully updated Judge Info.'
+									}else if (typeOfchange === "Company Status") {
+									var bodyText = ' You have successfully updated Case Type Info.'
+								}else if (typeOfchange === "Protester Company Name") {
+									var bodyText = ' You have successfully updated Filing Party Info.'
+								}else if (typeOfchange === "B Number") {
+									var bodyText = ' You have successfully updated CBCA Number.'
+								}else if (typeOfchange === "Agency Name") {
+									var bodyText = ' You have successfully updated Agency Info.'
+								}else if (typeOfchange === "Solicitation Number") {
+									var bodyText = ' You have successfully updated Contact Number.'
+								};
+								// var bodyText = ' You have  successfully updated Judge Info.';
+
 								var customAttr = {
 										headerText : "Success"	,
 										bodyText : bodyText ,
@@ -996,10 +970,10 @@ angular.module('epdsApp.caseDocketSheet')
 			var today = new moment(new Date())
 			var daysPassed  = today.diff(response.protestInfo.public_decision_date,'days');
 			
-			if (daysPassed > 60 
+			if (daysPassed > 120
 					&& (response.protestInfo && response.protestInfo.role.trim().indexOf("GAO") > -1)){
 				
-				response.protestInfo.case_Status =  "PUBLIC DECISION +60 DAYS";
+				response.protestInfo.case_Status =  "PUBLIC DECISION +120 DAYS";
 				
 				if (response.protestInfo.caseCompletionStatus.isZipCreated === true
 						&& response.protestInfo.caseCompletionStatus.isDmEntered === true){
@@ -1152,8 +1126,8 @@ angular.module('epdsApp.caseDocketSheet')
 						changeCaseStatusToComplete(protestInfo).then(function(Completed){
 							
 							if (Completed.isSuccess){
-								var bodyText = "<p>You have successfully created the zipfile. The case has not yet been completed." +
-										" Please follow the instructions in the EPDS GAO user manual under the" +
+								var bodyText = "<p>You have successfully created the zip file. The case has not yet been completed." +
+										" Please follow the instructions in the EDS CBCA user manual under the" +
 										" section <strong>Case Completion Workflow</strong>.</p>"
 									
 									var customAttr = {

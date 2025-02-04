@@ -83,10 +83,10 @@ angular.module('epdsApp.core')
 	state : "State",	
 	country : "Country", 	
 	comments : 'Comments',
-	solNum : "Please enter solicitation #. ",
-	companyName : "Please enter the company name.",
-	protestId1 : "Please enter File/B#",	
-	protestId2 : "Please enter EDS Ctrl#",
+	solNum : "Please enter Contract Number. ",
+	companyName : "Please enter Filing Party name.",
+	protestId1 : "Please enter CBCA Number#",
+	protestId2 : "Please enter EDS Control Number#",
 	typeOfDoc : "Enter document description"
 	
 });

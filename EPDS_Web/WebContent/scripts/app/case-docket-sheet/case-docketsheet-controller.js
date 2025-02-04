@@ -329,7 +329,7 @@ addAttorneyNotesModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http',
 function addAttorneyNotesModalInstanceCtrl($scope, $rootScope, $http,
                                            $uibModalInstance, fileId, comments, modalService, caseDocketDataSvc, $route, actionMessageSvc, regEx, toolTip) {
 
-    $scope.headerText = "Add GAO Notes";
+    $scope.headerText = "Add CBCA Notes";
     $scope.type = "notes";
     $scope.comments = comments;
     $scope.regEx = regEx;
@@ -337,7 +337,7 @@ function addAttorneyNotesModalInstanceCtrl($scope, $rootScope, $http,
 
     if (null !== comments && comments.length > 0) {
 
-        $scope.headerText = "Edit GAO Notes";
+        $scope.headerText = "Edit CBCA Notes";
     }
 
     $scope.addNotes = function (comments) {

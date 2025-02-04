@@ -276,6 +276,7 @@ public class CaseDocketSheetController { // NO_UCD (unused code)
 		List<File_Info> file_InfoList = caseDocketService
 				.getFile_InfoListBasedOnSubmissionDateAndDocumentTypeAndANum(dto.getSubmissionDate(), dto.getDoc_Type_Id(),dto.getProtestId());
 		dashboardService.populateFileInfoTransientAttributes(protest_Info, user_Info.getUser_Id(), false, file_InfoList);
+		dashboardService.populateAgencyNameForAgencyInFileInfoList(file_InfoList);
 
 		file_InfoList = EPDS_FileUtils.fillupEachFile_InfoWithFileName(file_InfoList);
 		caseDocketService.indicateAsViewed(file_InfoList, dto.getFileAlert(), user_Info.getUser_Id());
