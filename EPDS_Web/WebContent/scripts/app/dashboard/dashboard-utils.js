@@ -6,7 +6,17 @@ function dashboardUtils($scope, $filter,$routeParams,dashboardDataService,
 	vm.attorneyGroupIds = [];
 	vm.attorneyNameArray = [];
 	vm.protest_Info_List = DashboardData.protest_Info_List;
-	
+
+//	for (let protest of DashboardData.protest_Info_List) {
+//		protest.searchChildBnos = protest.supplemental_B_Nos + "," + protest.children_Protest_InfoList.map((o) => o.b_No).join() + protest.children_Protest_InfoList.map((o) => o.supplemental_B_Nos).join();
+//	}
+	if (DashboardData.protest_Info_List && DashboardData.protest_Info_List.length) {
+		for (let protest of DashboardData.protest_Info_List) {
+			protest.searchChildBnos = protest.supplemental_B_Nos + "," + protest.children_Protest_InfoList.map((o) =>
+				o.b_No).join() + protest.children_Protest_InfoList.map((o) => o.supplemental_B_Nos).join();
+		}
+	}
+
 	//var selectedCaseStatusObj = localStorage.getItem("caseStatus") && JSON.parse(localStorage.getItem("caseStatus"));
 	$scope.attorneyGrpIds= [];
 	var filterProtestInfoListByUniqueAttorneyGrpId, filterProtestInfoListByUniqueAttorneyName;

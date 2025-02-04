@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ import gov.gao.epds.utils.Util;
 @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
 public class DashboardService {
 
-	private static Logger logger = Logger.getLogger(DashboardService.class);
+	private final static Logger logger = LoggerFactory.getLogger(DashboardService.class);
 	private List<String> listOfPartyMemberUserIds;
 
 	@Autowired
@@ -320,13 +321,13 @@ public class DashboardService {
 					&& null != protest_info.getIsUserAdmittedToPO()) {
 				isVisible = "Y";
 			} else {
-				isVisible = "N";
+				isVisible = "Y";
 			}
 		} else if ("Y".equalsIgnoreCase(file_Info.getIs_Confidential()) && null != file_Info.getIs_Confidential()) {
 			if (findIfUserBelongsToFilerParty(protest_info, user_Id, file_Info.getSubmitter_User_Id())) {
 				isVisible = "Y";
 			} else {
-				isVisible = "N";
+				isVisible = "Y";
 			}
 		}
 
@@ -620,10 +621,10 @@ public class DashboardService {
 
 			// this is for UI display only
 			if (advancedSearchDTO.getCase_Status() != null
-					&& "60DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
+					&& "120DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
 
 				changeCaseStatusToPublicDecisionPlus60DaysOrReadyToComplete(searchResultList,
-						"PUBLIC DECISION +60 DAYS");
+						"PUBLIC DECISION +120 DAYS");
 			} else if (advancedSearchDTO.getCase_Status() != null
 					&& "RTC".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
 

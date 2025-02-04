@@ -50,7 +50,7 @@
                     <div data-ng-show="!dashboardInfo.displayDashboard">
                         You don't have any Active Cases. <span
                             data-ng-show="dashboardInfo.role == 'PROTESTER'"> Please
-							click here to file a new Protest <a href="javascript:void(0)"
+							click here to  <a href="javascript:void(0)"
                                                                 data-ng-click="fileNewProtest()"> <i
                                 class="fa fa-file"></i> <span>File New Case</span></a>
 						</span>
@@ -70,15 +70,15 @@
                                 <th scope="col">
                                     <div style="width: 100px;">CBCA Number</div>
                                 </th>
-                                <th scope="col">Party</th>
+                                <th scope="col">Filing Party</th>
                                 <th scope="col" class="span120">Date Filed</th>
                                 <th scope="col">Agency</th>
                                 <th scope="col" data-ng-if="role === 'AGENCY ADMIN'">Agency Reps</th>
-                                <th scope="col">Due Date</th>
+                                <!-- <th scope="col">Final Decision</th> -->
                                 <th scope="col"><span
-                                        data-ng-show="dashboardInfo.hideOtherOptions !='AT'">EDS
-										Cntrl #</span> <span
-                                        data-ng-show="dashboardInfo.hideOtherOptions =='AT'">PO</span>
+                                        data-ng-show="dashboardInfo.hideOtherOptions !='AT'">
+										Control #</span> <!-- <span
+                                        data-ng-show="dashboardInfo.hideOtherOptions =='AT'">PO</span> -->
                                 </th>
                                 <th scope="col" data-ng-show="dashboardInfo.hideOtherOptions =='S'">Group
                                     #
@@ -92,7 +92,7 @@
                             </thead>
                             <tbody>
                             <tr data-ng-repeat="protestInfo in dashboardInfo.protest_Info_List">
-                                <td>
+                                <td data-order="{{protestInfo.b_No || (protestInfo.submission_Date | stringDate:'yyyyMMddHHmmss')}}" data-search="{{protestInfo.b_No || 'Pending'}} {{protestInfo.searchChildBnos}}">
                                     <tree protest="protestInfo" path="{{path}}"></tree>
                                 </td>
                                 <td>{{protestInfo.company_Name}}</td>
@@ -104,10 +104,10 @@
 								    <span data-ng-if="!protestInfo.agencyRepInfos">
 										Agency Reps. not yet assigned </span>
                                     <div data-ng-repeat="agencyRepInfo in protestInfo.agencyRepInfos">
-                                        <span>{{agencyRepInfo.lastName}} , {{agencyRepInfo.firstName}}  </span>
+                                        <span>{{agencyRepInfo.lastName }} , {{agencyRepInfo.firstName}}  </span>
                                     </div>
                                 </td>
-                                <td>{{protestInfo.due_Date}}</td>
+                                <!-- <td>{{protestInfo.public_decision_date | date:'MMM dd yyyy hh:mm:ss'}}</td> -->
                                 <td>
                                     <div data-ng-show="dashboardInfo.hideOtherOptions != 'AT'">
                                         <!-- href="/case-docketsheet/{{protestInfo.a_No}}" -->

@@ -6,7 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,7 +24,7 @@ public class DataAccess implements Serializable{
 	 */
 	private static final long serialVersionUID = -73350911112355515L;
 
-	private static Logger logger = Logger.getLogger(DataAccess.class);
+	private final static Logger logger = LoggerFactory.getLogger(DataAccess.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;

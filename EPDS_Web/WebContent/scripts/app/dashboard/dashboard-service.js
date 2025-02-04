@@ -134,7 +134,7 @@
 				if (caseInfObj.currentProtestInfo.caseAccessRequestType.toUpperCase().indexOf("INTERVENE") > -1){
 						customAttr = {
 							headerText : "Request Pending " + caseInfObj.currentProtestInfo.b_No,
-							bodyText : "Your request to intervene is pending.  You will only have access to this case's docket if your request is granted by GAO.",
+							bodyText : "Your Grantee or Third Party request is pending.  You will only have access to this case's docket if your request is granted by the CBCA.",
 							modalType : "info",
 							actionType : "",
 						    cancelBtnReq : "N",
@@ -145,7 +145,7 @@
 						customAttr = {
 							headerText : "Request Pending " + caseInfObj.currentProtestInfo.b_No,
 							bodyText : "Your notice of appearance is pending.  You will only have access to " +
-									"this case's docket if your notice of appearance is acknowledged by GAO.",
+									"this case's docket if your notice of appearance is acknowledged by the CBCA.",
 							modalType : "info",
 							actionType : "",
 						    cancelBtnReq : "N",
@@ -171,7 +171,7 @@
 							if (caseInfObj.currentProtestInfo.caseAccessRequestType.toUpperCase().indexOf("INTERVENE") > -1){
 									customAttr = {
 										headerText : "Request Rejected " + caseInfObj.currentProtestInfo.b_No,
-										bodyText : "Your request to intervene is denied.  Please refer to the PDF file included here for additional information.",
+										bodyText : "Your Request of Grantee or Third Party is denied.  Please refer to the PDF file included here for additional information.",
 										modalType : "error",
 										actionType : "",
 									    cancelBtnReq : "N",
@@ -182,7 +182,7 @@
 							}else if (caseInfObj.currentProtestInfo.caseAccessRequestType.toUpperCase().indexOf("APPEARANCE") > -1){
 									customAttr = {
 										headerText : "Request Rejected " + caseInfObj.currentProtestInfo.b_No,
-										bodyText : "Your appearance has not been acknowledged by GAO.  Please refer to the PDF file included here for additional information.",
+										bodyText : "Your appearance has not been acknowledged by the CBCA.  Please refer to the PDF file included here for additional information.",
 										modalType : "error",
 										actionType : "",
 									    cancelBtnReq : "N",

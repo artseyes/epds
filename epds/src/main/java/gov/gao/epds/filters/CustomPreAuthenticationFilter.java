@@ -84,6 +84,7 @@ public class CustomPreAuthenticationFilter extends
 				User_Info  user_Info = userInfoService.getUserInfoByUsername(String.valueOf(userId));
 				
 				if (null != user_Info && user_Info.getRole_id().equals(7)  && !user_Info.getEmail().equalsIgnoreCase("epds@cbca.gov")
+						&& !user_Info.getEmail().equalsIgnoreCase("scott.sylke@cbca.gov") && !user_Info.getEmail().equalsIgnoreCase("charity.barnett@cbca.gov")
 						&& (!ClientInfo.getClientIpAddr(req).startsWith("159.142") && !ClientInfo.getClientIpAddr(req).contains("127.0.0.1"))){
 					// check for bypass file so admin users can login from non-gao network when GAOs network denies access for whatever reason
 					// does not bypass needing valid email and password!
