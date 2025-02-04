@@ -4,3 +4,4 @@
 *.tern-project
 target
 /WebContent/WEB-INF/jboss-web.xml
+/WebContent/scripts/vendor/
