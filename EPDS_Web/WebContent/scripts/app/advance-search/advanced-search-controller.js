@@ -36,9 +36,10 @@ function advanceSearchCtrl ($scope, $location, $http, $filter, DTOptionsBuilder,
 
 	    var b_No = localStorageService.get("b_No");
 	    var a_No = localStorageService.get("a_No");
-	    $scope.b_No = b_No || "B-";
-	    $scope.a_No = a_No || "A-";
-
+		//Changed Arthur 10-16-2023 "B-"
+	    $scope.b_No = b_No || "";
+	    $scope.a_No = a_No || "";
+		//Changed Arthur 03-06-2024 "A-"
 		$scope.dateOptions = {};
 		$scope.selectedCaseStatus = localStorageService.get("selectedCaseStatus");
 		$scope.selectedCaseType = localStorageService.get("selectedCaseType");
@@ -117,8 +118,10 @@ function advanceSearchCtrl ($scope, $location, $http, $filter, DTOptionsBuilder,
 	                 "solicitation_No", "selectedLawGroup", "selectedAttorney", "startSubmissionDate", "endSubmissionDate",
 	                 "startDueDate", "endDueDate", "tier1SelectedOption", "tier2SelectedOption","partyInfo","intervenorCompName");
 
-			$scope.b_No = "B-";
-			$scope.a_No = "A-";
+			// $scope.b_No = "B-";
+			// $scope.a_No = "A-";
+			$scope.b_No = null;
+			$scope.a_No = null;
 			$scope.selectedCaseStatus = null;
 			$scope.selectedCaseType = null;
 			$scope.company_Name = null;
@@ -268,7 +271,10 @@ function advanceSearchCtrl ($scope, $location, $http, $filter, DTOptionsBuilder,
 					$scope.role = data.role;
 					vm.protestInfoList = data.protestInfoList;
 
-					
+					for (let protest of data.protestInfoList) {
+						protest.searchChildBnos = protest.supplemental_B_Nos + "," + protest.children_Protest_InfoList.map( (o)=> o.b_No ).join() + protest.children_Protest_InfoList.map( (o)=> o.supplemental_B_Nos ).join();
+					}
+
 					if (data.role == "GAO SUPERVISOR"
 							|| data.role == "GAO ATTORNEY") {
 						$scope.path = "case-docketsheet"

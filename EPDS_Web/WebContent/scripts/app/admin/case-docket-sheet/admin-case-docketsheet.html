@@ -19,7 +19,7 @@
 						<table id="caseInfoTable" class="table table-bordered"
 							   aria-label="Table with first half of case information" role="presentation">
 							<tbody>
-							/*
+
 							<!--
 								<tr>
 									<td><strong>Case Type</strong></td>
@@ -45,7 +45,7 @@
 										data-onbeforesave="updateProtestInfo(protestInfo.a_No,'Company Status',$data)"
 										data-e-ng-options="s.text as s.value for s in companyStatuses">
 											{{protestInfo.company_Status | uppercase}} </span>
-										<button class="btn-small btn-info" title="Edit Company Status"
+										<button class="btn-small btn-info" title="Edit Case Type"
 											data-ng-click="editCompanyStatusForm.$show()"
 											style="margin-left: 10px;"
 											data-ng-hide="editCompanyStatusForm.$visible">
@@ -54,13 +54,13 @@
 
 								</tr>
 								<tr>
-									<td data-ng-if = "protestInfo.company_Name.toLowerCase() != 'reconsideration'"><strong>Protester</strong></td>
+									<td data-ng-if = "protestInfo.company_Name.toLowerCase() != 'reconsideration'"><strong>Filing Party</strong></td>
 									<td data-ng-if = "protestInfo.company_Name.toLowerCase() == 'reconsideration'"><strong>Requester</strong></td>
 									<td><span data-editable-text="protestInfo.company_Name"
 										data-onbeforesave="updateProtestInfo(protestInfo.company_Name,'Protester Company Name',$data)"
 										data-e-form="editCompanyNameForm">
 											&nbsp;{{protestInfo.company_Name | uppercase}}&nbsp; </span>
-										<button class="btn-small btn-info" title="Edit Company Name"
+										<button class="btn-small btn-info" title="Edit Filing Party"
 											data-ng-click="editCompanyNameForm.$show()"
 											style="margin-left: 10px;"
 											data-ng-hide="editCompanyNameForm.$visible">
@@ -69,14 +69,14 @@
 								</tr>
 
 								<tr>
-									<td><strong>Case Number</strong></td>
+									<td><strong>CBCA Number</strong></td>
 									<td><span data-editable-text="protestInfo.b_No"
 										data-onbeforesave="updateProtestInfo(protestInfo.b_No,'B Number',$data)"
 										data-e-form="editBnumForm" title="{{protestInfo.a_No}}"> {{protestInfo.b_No || "pending"}} </span>
-										<a href="#" class="btn-small" title="Edit B Number"
-										data-ng-click="editBnumForm.$show()"
-										data-ng-hide="editBnumForm.$visible"> <i
-											class="fa fa-edit">&nbsp;Edit</i>
+										<a href="#" class="btn-small" title="Edit CBCA Number"
+										data-ng-click="editBnumForm.$show()" style="margin-left: 10px;"
+										data-ng-hide="editBnumForm.$visible">
+											<i class="fa fa-edit">&nbsp;Edit</i>
 										</a>
 										<span data-ng-show="protestInfo.supplemental_B_Nos != null" title="{{protestInfo.supplemental_A_Nos}}">
 											{{protestInfo.supplemental_B_Nos}}</span>
@@ -94,7 +94,7 @@
 								</tr>
 
 								<tr>
-									<td><strong>Intervenor(s)&nbsp;</strong></td>
+									<td><strong>Grantee or Third Party&nbsp;</strong></td>
 									<td>
 										<div
 											data-ng-repeat="intervenorCompanyName in intervenorCompanyNameList | remove: null | uniq: 'intervenorCompanyName' track by $index">
@@ -103,7 +103,7 @@
 												data-onbeforesave="updateProtestInfo(intervenorCompanyName,'Intervenor Company Name',$data)"
 												data-e-form="editIntervenorNameForm">
 												{{intervenorCompanyName}}&nbsp; {{$last ? '' : '; '}} </span> <a
-												class="btn-small" title="Edit Intervenor Company Name"
+												class="btn-small" title="Edit Grantee or Third Party Name"
 												data-ng-click="editIntervenorNameForm.$show()"
 												data-ng-hide="editIntervenorNameForm.$visible"> <i
 												class="fa fa-edit">&nbsp;Edit</i>
@@ -119,15 +119,17 @@
 										data-e-form="editSolNumForm">
 											&nbsp;{{protestInfo.solicitation_No}}&nbsp; </span>
 										<button class="btn-small btn-info"
-											title="Edit Solicitation Number"
+											title="Edit Contract Number"
 											data-ng-click="editSolNumForm.$show()"
 											style="margin-left: 10px;"
 											data-ng-hide="editSolNumForm.$visible">
 											<i class="fa fa-edit"></i> Edit
 										</button></td>
 								</tr>
+
+							<tr>
 								<tr>
-									<td><strong>Consolidated Protests</strong></td>
+									<td><strong>Consolidated Cases</strong></td>
 									<td><span
 										data-ng-repeat='childProtestInfo in consolidatedProtests'>
 											<a data-ng-if="$index == 0"
@@ -151,14 +153,14 @@
 					<table id="gaoInfoTable" class="table table-bordered"
 						   aria-label="Table with second half of case information" role="presentation">
 						<tr>
-							<td><strong>Judge</strong></td>
+							<td><strong> Presiding Judge</strong></td>
 							<td><span data-editable-select="assignedAttorneyUserId"
 								data-e-form="replaceGAOAttorneyForm"
 								data-onbeforesave="updateProtestInfo(attorneyInfo.user_Id,'Attorney Info',$data)"
 								data-e-ng-options="user_Info.user_Id as  user_Info.last_Name + '  ,  ' + user_Info.first_Name  group by ('Group ' + user_Info.group_No)   for user_Info in attorneyInfoList | orderBy: ['group_No','last_Name']">
 									&nbsp;{{attorneyInfo.first_Name}} {{attorneyInfo.middle_initial}} {{attorneyInfo.last_Name}}
 							</span>
-								<button class="btn btn-success" title="replace attorney"
+								<button class="btn btn-success" title="Edit Judge"
 									data-ng-click="replaceGAOAttorneyForm.$show()"
 									style="margin-left: 10px;"
 									data-ng-hide="replaceGAOAttorneyForm.$visible">
@@ -166,17 +168,23 @@
 								</button></td>
 						</tr>
 						<tr>
-							<td><strong>Judge Email</strong></td>
+							<td><strong>Chambers Email</strong></td>
 							<td>&nbsp;{{attorneyInfo.email}}</td>
 						</tr>
 						<tr>
-							<td><strong>Judge Phone Number</strong></td>
+							<td><strong>Chambers Phone Number</strong></td>
 							<td>&nbsp;{{attorneyInfo.phone_No}}</td>
 						</tr>
 						<tr>
-							<td><strong>Days Remaining&nbsp;</strong></td>
-							<td>{{daysRemaining}}</td>
+							<td><strong> Date Filed</strong></td>
+							<td>{{fileInfoList[0].transient_Date | date:'MMM dd yyyy'}}<br>{{fileInfoList[0].transient_Time}}</td>
 						</tr>
+						<!--
+						<tr>
+							<td><strong>Final Decision</strong></td>
+							<td>{{protestInfo.public_decision_date | date:'MMM dd yyyy hh:mm:ss'}}</td>
+						</tr>
+						--->
 						<tr>
 							<td><strong>Case Status </strong></td>
 							<td><span data-editable-select="protestInfo.case_Status"
@@ -239,8 +247,8 @@
 						<slidebox speed="25" content-width="100%">
 						<div>
 							<button class="btn btn-success pull-left"
-								data-ng-click="downloadOfflineCds()">Download Offline
-								Case Docket</button>
+								data-ng-click="downloadOfflineCds()">Download
+								Case Docket Sheet</button>
 						</div>
 						<table data-datatable="ng"
 							data-dt-options="caseDocketInfo.dtOptions"
@@ -253,7 +261,7 @@
 									<th scope="col" class="span0">Alerts</th>
 									<th scope="col" class="span200">Type of Filing</th>
 									<th scope="col" class="span100">Filer</th>
-									<th scope="col" class="span120">Protected ?</th>
+									<th scope="col" class="span120">Protected</th>
 									<th scope="col" class="span100">Date</th>
 									<th scope="col" class="span200">Comments</th>
 									<th scope="col" class="span200">CBCA Notes</th>
@@ -328,33 +336,33 @@
 									</td>
 									<td>
 										<div
-											data-ng-if="fileInfo.submitter_Role != 'GAO' && fileInfo.submitter_Role != 'AGENCY'">
-											<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
-											<span class="text-center"> ({{fileInfo.company_Name}})
-											</span>
-										</div>
-										<div data-ng-if="fileInfo.submitter_Role == 'GAO'">
-											<span class="text-center">CBCA</span><br>
-										</div>
-										<div data-ng-if="fileInfo.submitter_Role == 'AGENCY'">
-											<span class="text-center">{{fileInfo.submitter_Role}}</span><br>
-											<span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}})
-											</span>
-										</div>
-									</td>
-									<td>
-										<div data-ng-if="fileInfo.is_Confidential == 'Y'">
-											<span class="text-center">YES</span><br>
-										</div>
-										<div
-											data-ng-if="fileInfo.is_Confidential == 'N' || fileInfo.is_Confidential == null">
-											<span class="text-center">NO</span><br>
-										</div>
-									</td>
-									<td>{{fileInfo.transient_Date | date:'MMM dd yyyy' }}<br>
-										{{fileInfo.transient_Time}} <!-- <a href="#" editable-bsdate="fileInfo.transient_Date" e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="dd-MMMM-yyyy">
-											    {{ (fileInfo.transient_Date | date:'MMM dd yyyy') || 'empty' }}
-											  </a> -->
+											data-ng-if="fileInfo.submitter_Role != 'CBCA' && fileInfo.submitter_Role != 'AGENCY'">
+											<!--	<span class="text-center">{{fileInfo.submitter_Role}}</span><br> -->
+                                                <span class="text-center">Filer</span><br><span class="text-center"> ({{fileInfo.company_Name}})
+                                                </span>
+                                            </div>
+                                            <div data-ng-if="fileInfo.submitter_Role == 'CBCA'">
+                                                <span class="text-center">CBCA</span><br>
+                                            </div>
+                                            <div data-ng-if="fileInfo.submitter_Role == 'AGENCY'">
+                                                <span class="text-center">{{fileInfo.submitter_Role}}</span><br>
+                                                <span data-ng-if="fileInfo.company_Name" class="text-center">({{fileInfo.company_Name}})
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-ng-if="fileInfo.is_Confidential == 'Y'">
+                                                <span class="text-center">YES</span><br>
+                                            </div>
+                                            <div
+                                                data-ng-if="fileInfo.is_Confidential == 'N' || fileInfo.is_Confidential == null">
+                                                <span class="text-center">NO</span><br>
+                                            </div>
+                                        </td>
+                                        <td>{{fileInfo.transient_Date | date:'MMM dd yyyy' }}<br>
+                                            {{fileInfo.transient_Time}} <!-- <a href="#" editable-bsdate="fileInfo.transient_Date" e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="dd-MMMM-yyyy">
+                                                    {{ (fileInfo.transient_Date | date:'MMM dd yyyy') || 'empty' }}
+                                                  </a> -->
 										<div class="dropdown">
 											<button class="dropdown-toggle btn-small btn-info pull-right"
 												id="dropdown1" role="button" data-toggle="dropdown">
@@ -405,7 +413,7 @@
 												<button
 													class="btn-small btn-info pull-right spacing-between-elements"
 													data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
-													title="edit attorney notes">
+													title="edit CBCA notes">
 													<i class="fa fa-edit"></i>Add Notes
 												</button>
 											</div>
@@ -430,7 +438,7 @@
 													<button
 														class="btn-small btn-info pull-right spacing-between-elements"
 														data-ng-click="addAttorneyNotes(protestInfo.a_No,fileInfo.doc_Type_Id,fileInfo.file_Id,fileInfo.transient_Note)"
-														title="edit attorney notes">
+														title="edit CBCA notes">
 														<i class="fa fa-edit"></i>Edit Notes
 													</button>
 											</div>

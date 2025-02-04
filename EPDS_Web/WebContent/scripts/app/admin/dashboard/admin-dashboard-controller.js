@@ -23,7 +23,7 @@ function AdminDashboardCtrl($scope, $filter, $routeParams,
 	var vm = this;
 
 	vm.viewType = $routeParams.viewType
-	var title = "EPDS: ";
+	var title = "EDS: ";
 	if(vm.viewType  == 'unassigned') {
 		title += " Unassigned";
 	}

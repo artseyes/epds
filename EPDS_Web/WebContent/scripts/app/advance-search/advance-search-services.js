@@ -126,60 +126,28 @@
 				value : 'CLOSED',
 				text : 'CLOSED'
 
-			},];
+			},{
+				value : 'COMPLETE',
+				text : 'COMPLETE'
+
+			},{
+				value : 'RTC',
+				text : 'READY TO COMPLETE'
+
+			},{
+				value : '120DAYS',
+				text : 'PUBLIC DECISION +120 DAYS'
+
+			}];
 
 			obj.caseTypes = [ {
-				value : 'ALT DISPUTE RESOLU',
-				text : 'ALT DISPUTE RESOLU'
-			}, {
-				value : 'APPEAL',
-				text : 'APPEAL'
-			}, {
-				value : 'DEBT',
-				text : 'DEBT'
-			}, {
-				value : 'EAJA COST',
-				text : 'EAJA COST'
-			}, {
-				value : 'FCIC',
-				text : 'FCIC'
-			}, {
-				value : 'FCIC RECON',
-				text : 'FCIC RECON'
-			}, {
+				value : 'Contract Disputes Act Appeal',
+				text : 'Contract Disputes Act Appeal'
+			},{
 				value : 'FEMA',
-				text : 'FEMA'
-			}, {
-				value : 'FMCSA',
-				text : 'FMCSA'
-			}, {
-				value : 'ISDA',
-				text : 'ISDA'
-			}, {
-				value : 'ISDA RECON',
-				text : 'ISDA RECON'
-			}, {
-				value : 'MEDIATION DOCUMENTS',
-				text : 'MEDIATION DOCUMENTS'
-			}, {
-				value : 'OTHER',
-				text : 'OTHER'
-			}, {
-				value : 'PETITION',
-				text : 'PETITION'
-			}, {
-				value : 'RATE',
-				text : 'RATE'
-			}, {
-				value : 'RELOCATION',
-				text : 'RELOCATION'
-			}, {
-				value : 'TRAVEL',
-				text : 'TRAVEL'
-			}, {
-				value : 'TRR RECON',
-				text : 'TRR RECON'
-			}, ];
+				text : 'FEMA Arbitration'
+			}
+			];
 			
 			return $q.when(obj);
 		}

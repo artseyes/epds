@@ -74,7 +74,7 @@ public class AccountLockUtil {
 		List<String> listOfEmail = new ArrayList<String>();
 
 		for (User_info_epds user_info_epds : listOfUserInfo) {
-			if(!user_info_epds.getEmail().equalsIgnoreCase("protests@cbca.gov"))/*temporary for testing, we need to get rid of this if block for production*/{
+			if(!user_info_epds.getEmail().equalsIgnoreCase("cbca.eds@cbca.gov "))/*temporary for testing, we need to get rid of this if block for production*/{
 				listOfEmail.add(user_info_epds.getEmail());	
 			}
 		}

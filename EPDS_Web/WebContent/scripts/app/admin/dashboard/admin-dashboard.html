@@ -87,11 +87,11 @@
 						<tr>
 							<!-- <th>Alerts</th> -->
 							<th scope="col" class="span120">Case Number</th>
-							<th scope="col">Party</th>
+							<th scope="col">Filing Party</th>
 							<th scope="col" class="span120">Date Filed</th>
 							<th scope="col">Agency</th>
-							<th scope="col">Due Date</th>
-							<th scope="col">EDS Cntrl #</th>
+							<th scope="col">Close Date</th>
+							<th scope="col">Control #</th>
 							<th scope="col"><div style="width:50px;">Group #</div></th>
 							<th scope="col">Judge Name</th>
 							<th scope="col">Case Type</th>
@@ -100,7 +100,7 @@
 					</thead>
 					<tbody>
 						<tr data-ng-repeat="protestInfo in dashboardInfo.protest_Info_List">
-							<td>
+							<td data-order="{{protestInfo.b_No}}" data-search="{{protestInfo.b_No}} {{protestInfo.searchChildBnos}}">
 								<tree protest="protestInfo" path="{{path}}"></tree>
 							</td>
 							<td>{{protestInfo.company_Name}}</td>

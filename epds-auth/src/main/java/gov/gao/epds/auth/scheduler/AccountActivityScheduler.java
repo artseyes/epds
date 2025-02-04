@@ -90,15 +90,15 @@ public class AccountActivityScheduler {
     		DateTime lastSuccessLogin = new DateTime(eachUserLastSuccessfullLoginAttempt.getTime_stamp());
     		Duration duration = new Duration(lastSuccessLogin, currentTime);
     		Long differenceInDays  = duration.getStandardDays();
-    		Long numOfDaysLeft = Math.abs(differenceInDays) - PolicyParam.numberOfDaysToRemoveAccount;
+    		Long numOfDaysLeft = PolicyParam.numberOfDaysToRemoveAccount - Math.abs(differenceInDays) ;
     		
     		
     		if (Math.abs(differenceInDays) >= PolicyParam.numberOfDaysToRemoveAccount){
     			
     			try {
     				//account is permanentaly deleted, the record will still be archived to user Info audit log table
-					user_info_dao.delete(eachUserInfo);
 					user_info_dao.setUserEventLog(eachUserInfo.getUser_id(), 7);
+					user_info_dao.delete(eachUserInfo);
 					emailService.sendAccountDeletionWarningOrConfirmation(eachUserInfo.getEmail(),-1,"confirmation");
 				} catch (Exception e) {
 					e.printStackTrace();

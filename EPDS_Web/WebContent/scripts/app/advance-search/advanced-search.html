@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="aNumber">&nbsp;<strong>EDS Ctrl #&nbsp;&nbsp;</strong></label>
+                                <label for="aNumber">&nbsp;<strong>Control Number #&nbsp;&nbsp;</strong></label>
                                 <div>
                                     <input class="form-control input-sm"
                                            type="text" id="aNumber"
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="company_Name">&nbsp;<strong>Party&nbsp;&nbsp;</strong></label>
+                                <label for="company_Name">&nbsp;<strong>Filing Party&nbsp;&nbsp;</strong></label>
                                 <div>
                                     <input class="form-control input-sm" type="text"
                                            id="company_Name"
@@ -97,7 +97,7 @@
                         <div class="box-header">
                             <h3 class="box-title">Date</h3>
                             <div class="box-tools pull-right"
-                                 data-uib-popover="Click expand and filter by Submission Date or Due Date"
+                                 data-uib-popover="Click expand and filter by Filing Date or Due Date"
                                  data-popover-trigger="'mouseenter'"
                                  data-popover-placement="top">
                                 <button class="btn btn-sm btn-success dateSection"
@@ -108,7 +108,7 @@
                         </div>
                         <div class="box-body" style="display: none;">
                             <fieldset>
-                                <legend>Submission Date</legend>
+                                <legend>Filing Date</legend>
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -169,7 +169,7 @@
                             </fieldset>
 
                             <fieldset>
-                                <legend>Due Date</legend>
+                                <legend>Close Date</legend>
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -262,12 +262,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="intervenorCompName">&nbsp;<strong>Intervenor Company
+                                <label for="intervenorCompName">&nbsp;<strong>Grantee or Third Party
                                     Name&nbsp;&nbsp;</strong></label>
                                 <div>
                                     <input class="form-control input-sm"
                                            type="text" id="intervenorCompName"
-                                           data-uib-popover="Enter Intervenor Comp Name"
+                                           data-uib-popover="Enter Grantee or Third Party  Name"
                                            data-ng-model-options="{ updateOn: 'blur' }"
                                            data-popover-trigger="'focus'"
                                            data-popover-placement="top"
@@ -295,13 +295,13 @@
                             <!-- Minimal style -->
 
                             <div class="form-group">
-                                <label for="attorneyDropDown">Judge</label>
+                                <label for="attorneyDropDown">Presiding Judge</label>
                                 <div>
                                     <select
                                             id="attorneyDropDown"
                                             data-ng-options="user_Info.user_Id as  user_Info.last_Name + '  ,  ' + user_Info.first_Name  group by ('Group ' + user_Info.group_No)   for user_Info in attorneyInfoList | orderBy: ['group_No','last_Name']"
                                             data-ng-model="selectedAttorney" class="form-control">
-                                        <option value="">Please Select Judge</option>
+                                        <option value="">Please Select Presiding Judge</option>
                                     </select>
                                 </div>
                             </div>
@@ -424,7 +424,7 @@
                                     <th scope="col" class="span120">Date Filed</th>
                                     <th scope="col">Agency</th>
                                     <th scope="col">Contract Number</th>
-                                    <th scope="col">Due Date</th>
+                                    <th scope="col">Close Date</th>
                                     <th scope="col">
                                         <div style="width:50px;">Group #</div>
                                     </th>
@@ -435,7 +435,7 @@
                                 </thead>
                                 <tbody>
                                 <tr data-ng-repeat="protestInfo in protestInfoList">
-                                    <td>
+                                    <td data-order="{{protestInfo.b_No || (protestInfo.submission_Date | stringDate:'yyyyMMddHHmmss')}}" data-search="{{protestInfo.b_No || 'Pending'}} {{protestInfo.searchChildBnos}}">
                                         <tree protest="protestInfo" path="{{path}}"></tree>
                                     </td>
                                     <td>{{protestInfo.company_Name}}</td>
