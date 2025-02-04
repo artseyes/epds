@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />-->
+<!--        </Console>-->
+<!--        <File name="MyFile" fileName="${sys:jboss.home.dir}/standalone/log/epds_web_test.log" append="false">-->
+            <!-- alternatively use XmlLayout (requires Jackson, see documentation for dependencies) -->
+<!--            <PatternLayout pattern="[%p] %d %c %M - %m%n"/>-->
+<!--        </File>-->
+        <RollingFile name="RollingFile"
+                     fileName="${sys:jboss.home.dir}/standalone/log/epds-web.log"
+                     filePattern="${sys:jboss.home.dir}/standalone/log/epds-web.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout pattern="[%p] %d %c %M - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+
+        <Root level="INFO">
+<!--            <AppenderRef ref="Console" />-->
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>

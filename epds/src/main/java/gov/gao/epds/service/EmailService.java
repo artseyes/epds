@@ -42,7 +42,7 @@ public class EmailService {
 	/*@Autowired
 	private MailSender mailSender;*/
 //	private final String PLCGEMAIL = "protests@cbca.gov";
-	private final String PLCGEMAIL = "cbca.systemreport@gsa.gov";
+	private final String PLCGEMAIL = "cbca.eds@cbca.gov";
 
 	/* private static Logger logger = Logger.getLogger(EmailSevice.class); */
 
@@ -66,11 +66,16 @@ public class EmailService {
 	        {
 				agencyPOCsEmails[i] = new InternetAddress(listOfAgencyPOCsEmailAddresses.get(i));
 	        }
+
+			InternetAddress[] bccEmails = new InternetAddress[2];
+			bccEmails[0] = new InternetAddress(PLCGEMAIL, "EDS");
+			bccEmails[1] = new InternetAddress("cbca.eds@cbca.gov ");
+
 			message.setFrom(this.getFromAddress());
 			message.setRecipients(Message.RecipientType.TO, agencyPOCsEmails);
 			message.setRecipient(Message.RecipientType.CC, new InternetAddress(protestInfo.getRepresentative_Email()));
-			message.setRecipient(Message.RecipientType.BCC, new InternetAddress(PLCGEMAIL, "EDS"));
-			message.setSubject("EDS:  NOTICE OF NEW PROTEST");
+			message.setRecipients(Message.RecipientType.BCC, bccEmails);
+			message.setSubject("EDS:  NOTICE OF NEW FILING");
 			message.setText(emailBody.toString());
 			message.setContent(emailBody,"text/html");
 
@@ -192,6 +197,8 @@ public class EmailService {
                 toMailAddresses.add(new InternetAddress(PLCGEMAIL));
             }
 
+			toMailAddresses.add(new InternetAddress("cbca.eds@cbca.gov "));
+
 			emailBody = this.getTheContentOfEmailBody(submitNewDocDTO, request, "caseDocketFilings", entry.getKey());
 
 			message.setFrom(this.getFromAddress());
@@ -204,7 +211,7 @@ public class EmailService {
 			}
 
 
-			message.setSubject("EDS :"
+			message.setSubject("EDS: CBCA "
 					+ bNumText
 					+ companyNameAndTypeOfDoc);
 
@@ -336,8 +343,8 @@ public class EmailService {
 			ReplacementMap.put("epds_base_url", "https://eds.cbca.gov");
 			ReplacementMap.put("non_Prod_Warn", "");
 		}else{
-			ReplacementMap.put("epds_base_url", "https://epdstest.edc.usda.gov");
-			ReplacementMap.put("non_Prod_Warn", "<p><strong>MESSAGE GENERATED FROM NON PRODUCTION ENVIRONMENT</strong></p><br />");
+			ReplacementMap.put("epds_base_url", "https://eds.cbca.gov");
+			ReplacementMap.put("non_Prod_Warn", "<p><strong>MESSAGE GENERATED FROM CBCA PRODUCTION ENVIRONMENT</strong></p><br />");
 		}
 
 		}catch (Exception e) {
@@ -369,7 +376,7 @@ public class EmailService {
 			ReplacementMap.put("a_Num", protest_Info.getA_No());
 
 			if (templateName.equalsIgnoreCase("paymentConfirmation")){
-			    String payment_tracking_Num = "Filed by GAO";
+			    String payment_tracking_Num = "Filed by CBCA";
 			    if (protest_Info.getPay_dot_gov_id() != null) {
 			        payment_tracking_Num = protest_Info.getPay_dot_gov_id();
                 }
@@ -380,7 +387,7 @@ public class EmailService {
 			
 			
 			if (submitNewDocDTO.getDocId() == 160){
-				ReplacementMap.put("Docket_Entry_Title", "Denial Of Request To Intervene");
+				ReplacementMap.put("Docket_Entry_Title", "Denial Of Request To Grantee Or Third Party");
 			}else if (submitNewDocDTO.getDocId() == 161){
 				ReplacementMap.put("Docket_Entry_Title", "Denial Of Notice Of Appearance");
 			}else{
@@ -416,11 +423,11 @@ public class EmailService {
 
 		if (protest_Info.getCase_Type() != null){
 			if (protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH).contains("RECON")){
-				ReplacementMap.put("other_protest_para1","GAO is notifying you that the following request for reconsideration has been filed with our Office:");
+				ReplacementMap.put("other_protest_para1","CBCA is notifying you that the following request for reconsideration has been filed with our Office:");
 			}else if (protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH).contains("ENT")){
-				ReplacementMap.put("other_protest_para1","GAO is notifying you that the following request for an entitlement recommendation has been filed with our Office:");
+				ReplacementMap.put("other_protest_para1","CBCA is notifying you that the following request for an entitlement recommendation has been filed with our Office:");
 			}else if (protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH).contains("COST")){
-				ReplacementMap.put("other_protest_para1","GAO is notifying you that the following request for a reimbursement of costs recommendation has been filed with our Office:");
+				ReplacementMap.put("other_protest_para1","CBCA is notifying you that the following request for a reimbursement of costs recommendation has been filed with our Office:");
 			}
 		}
 
@@ -445,6 +452,14 @@ public class EmailService {
                 || "comments added".equalsIgnoreCase(submitNewDocDTO.getTypeofdocument()))){
             String submitterRole = Util.getRoleForDocumentSubmission(submitNewDocDTO.getUser_Role());
             ReplacementMap.put("Doc_Filer", String.valueOf(submitterRole));
+			if (submitterRole == "PROTESTER"){
+				ReplacementMap.put("Doc_Filer", String.valueOf("FILER"));
+			} else if (submitterRole == "GAO"){
+				ReplacementMap.put("Doc_Filer", String.valueOf("CBCA"));
+			} else if (submitterRole == "INTERVENOR"){
+				ReplacementMap.put("Doc_Filer", String.valueOf("Grantee or Third Party"));
+			} ;
+
         } else {
             ReplacementMap.put("Doc_Filer", "");
         }
@@ -461,7 +476,7 @@ public class EmailService {
 
 	public InternetAddress getFromAddress() throws UnsupportedEncodingException{
 
-		return new InternetAddress("cbca.systemreport@gsa.gov","EDS");
+		return new InternetAddress("cbca.eds@cbca.gov","EDS");
 
 	}
 
@@ -477,7 +492,7 @@ public class EmailService {
 			if (accessType.equalsIgnoreCase("agency-rep-access")){
 				dto.setTypeofdocument("AGENCY NOTICE OF APPEARANCE NOT ACKNOWLEDGED ");
 			}else if (accessType.equalsIgnoreCase("intervene")){
-				dto.setTypeofdocument("REQUEST TO INTERVENE DENIED");
+				dto.setTypeofdocument("REQUEST TO GRANTEE OR THIRD PARTY DENIED");
 			}
 			dto.setUser_Role("GAO");
 
@@ -490,7 +505,7 @@ public class EmailService {
 			if (accessType.equalsIgnoreCase("agency-rep-access")){
 				message.setSubject(protestInfo.getB_No() + "--" + "EDS: AGENCY NOTICE OF APPEARANCE NOT ACKNOWLEDGED");
 			}else if (accessType.equalsIgnoreCase("intervene")){
-				message.setSubject(protestInfo.getB_No() + "--" + "EDS:  REQUEST TO INTERVENE DENIED");
+				message.setSubject(protestInfo.getB_No() + "--" + "EDS:  REQUEST TO GRANTEE OR THIRD PARTY DENIED");
 			}
 
 			message.setText(emailBody.toString());

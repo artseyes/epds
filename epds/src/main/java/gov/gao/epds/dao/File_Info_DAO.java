@@ -117,8 +117,9 @@ public class File_Info_DAO {
 
 		} else if (submitter_Role.equalsIgnoreCase("GAO ADMIN")
 				|| submitter_Role.equalsIgnoreCase("GAO SUPERVISOR")
+				|| submitter_Role.equalsIgnoreCase("GAO")
 				|| submitter_Role.equalsIgnoreCase("GAO ATTORNEY")) {
-			submitter_Role = "GAO";
+			submitter_Role = "CBCA";
 		} else if (submitter_Role.equalsIgnoreCase("AGENCY ATTORNEY")
 				|| submitter_Role.equalsIgnoreCase("AGENCY ADMIN")) {
 			submitter_Role = "AGENCY";
@@ -126,6 +127,13 @@ public class File_Info_DAO {
 			submitter_Role = "PROTESTER";
 		} else if (submitter_Role.equalsIgnoreCase("SECONDARY INTERVENOR")) {
 			submitter_Role = "INTERVENOR";
+		}
+
+		if ("PROTESTER".equalsIgnoreCase(submitter_Role)){
+			submitter_Role = "FILER";
+		}
+		if ("INTERVENOR".equalsIgnoreCase(submitter_Role)){
+			submitter_Role = "GranteeOrThirdParty";
 		}
 
 		for (UploadedFileIdentifier eachFileIdentifier : filePathList) {
@@ -149,7 +157,7 @@ public class File_Info_DAO {
 			if (submitNewDocDTO.getTypeofdocument().equalsIgnoreCase(
 					"Minute Entry")
 					|| submitNewDocDTO.getTypeofdocument().equalsIgnoreCase(
-							"Request to Intervene Approved") || submitNewDocDTO.getAttorney_note() != null ) {
+							"Request of Grantee or Third Party Request Approved") || submitNewDocDTO.getAttorney_note() != null ) {
 				file_Info.setAttorney_Note(submitNewDocDTO.getAttorney_note()
 						+ ":::" + Date_Util.getCurrentDate());
 			} else {

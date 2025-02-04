@@ -203,8 +203,7 @@ public class ProtestInfoController { // NO_UCD (unused code)
 				    gc_Service.set_Event_For_New_Protest_Info(protest_Info);
 				   
 					protestInfoService.sendNotificationToPartiesAssociatedWithTheCase(protest_Info,request);
-				} else if (protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH).contains("PROTEST") &&
-				        role == GAO_ADMIN ) {
+				} else if (protest_Info.getCase_Type().toUpperCase(Locale.ENGLISH).contains("PROTEST")) {
 				    gc_Service.set_Event_For_New_Protest_Info(protest_Info);
 				    protestInfoService.sendNotificationToAgencyAdminAndProtester(protest_Info,request,"newProtest");
 				}
@@ -446,7 +445,7 @@ public class ProtestInfoController { // NO_UCD (unused code)
 		
 		
 		if ("intervene".equals(attachmentType)) {
-			typeOfDoc = "Request to Intervene";
+			typeOfDoc = "Grantee or Third Party Request";
 			userProtestRole = "INTERVENOR";
 			companyName = submitNewDocDTO.getIntervenorCompanyName();
 			submitNewDocDTO.setDocId(56);
@@ -457,7 +456,7 @@ public class ProtestInfoController { // NO_UCD (unused code)
 			submitNewDocDTO.setDocId(157);
 			submitNewDocDTO.setIsDocConfidential("N");
 			typeOfDoc = "Minute Entry";
-			userProtestRole = "GAO";
+			userProtestRole = "CBCA";
 			submitNewDocDTO.setDocketEntryTitle("Minute Entry");
 		} else if ("agency-rep-request".equalsIgnoreCase(attachmentType)) {
 			typeOfDoc = "Notice of ";
@@ -985,7 +984,7 @@ public class ProtestInfoController { // NO_UCD (unused code)
 			HttpServletRequest request, ModelMap map,
 			@RequestParam("bNo") String bNo) throws Exception {
 
-		bNo = Util.getBNumberWithBDashPrefix(bNo);
+	//	bNo = Util.getBNumberWithBDashPrefix(bNo);
 
 
 		if (!bNo.matches(DTOValidator.PROTEST_ID_PATTERN)){
@@ -1045,7 +1044,7 @@ public class ProtestInfoController { // NO_UCD (unused code)
 	public @ResponseBody ModelMap getListOfProtestsForIntervenorAccess(
 			HttpServletRequest request, ModelMap map,
 			@RequestParam("bNo") String bNo) throws Exception {
-		bNo = Util.getBNumberWithBDashPrefix(bNo);
+		//bNo = Util.getBNumberWithBDashPrefix(bNo);
 
 		if (!bNo.matches(DTOValidator.PROTEST_ID_PATTERN)){
 			map.addAttribute("inputErrors", new ArrayList<String>(Arrays.asList("protestId is invalid")));
@@ -1054,9 +1053,9 @@ public class ProtestInfoController { // NO_UCD (unused code)
 		}
 
 		
-		if (bNo.length() < 6){
-			return map.addAttribute("inputErrors", new ArrayList<String>(Arrays.asList("B# has to be at least 6 digits B-XXXXXX.")));
-		}
+//		if (bNo.length() < 6){
+//			return map.addAttribute("inputErrors", new ArrayList<String>(Arrays.asList("B# has to be at least 6 digits B-XXXXXX.")));
+//		}
 		if (logger.isDebugEnabled()){
 			logger.debug("/get-list-of-protests-for-intervenor-access b_No = {}",bNo);
 		}

@@ -6,8 +6,8 @@
  */
 
 var oneMBInBytes = (1024 * 1024),
-maximumFileUploadSize = 551,
-singleFileUploadSize = 51,
+maximumFileUploadSize = 420,
+singleFileUploadSize = 20,
 zipFileUploadSize = 551;
 
 
@@ -22,14 +22,21 @@ function checkIfThisUserCanUploadDocumentWithThisFileExtension(modalService,
 	isFileExtensionAllowed = true;
 	
 	//if zip file then it can be upto 550 MB 
-	if ((file.getExtension() === "zip" || file.getExtension() === "zipx") && (file.size >= (oneMBInBytes * zipFileUploadSize))){
+	//if ((file.getExtension() === "zip" || file.getExtension() === "zipx") && (file.size >= (oneMBInBytes * zipFileUploadSize))){
 		
-		isSingleFileUploadSizeAllowed = false;
-	}else if((file.getExtension() !== "zip" && file.getExtension() !== "zipx")   && (file.size >= (oneMBInBytes * singleFileUploadSize))){
-		//all other file types size cannot exceed more than 50 MB
+	//	isSingleFileUploadSizeAllowed = false;
+	//	}
+	//}else if((file.getExtension() !== "zip" && file.getExtension() !== "zipx")   && (file.size >= (oneMBInBytes * singleFileUploadSize))){
+		//all other file types size cannot exceed more than 20 MB
 		
+	//	isSingleFileUploadSizeAllowed = false;
+
+	if((file.getExtension() === "pdf")   && (file.size >= (oneMBInBytes * singleFileUploadSize))){
+		//all other file types size cannot exceed more than 20 MB
+
 		isSingleFileUploadSizeAllowed = false;
 	}
+
 	
 	if (!isSingleFileUploadSizeAllowed){
 		
@@ -48,18 +55,20 @@ function checkIfThisUserCanUploadDocumentWithThisFileExtension(modalService,
 	
 	if ((role == "PROTESTER" || role == "INTERVENOR"
 			|| role.indexOf("INTERVENOR") >= 0 || role.indexOf("PROTESTER") >= 0)
-			&& (file.getExtension() != "pdf" && file.getExtension() != "xls"
-					&& file.getExtension() != "xlt"
-					&& file.getExtension() != "xlm"
-					&& file.getExtension() != "xlsx"
-					&& file.getExtension() != "xltx"
-					&& file.getExtension() != "xltm"
-					&& file.getExtension() != "xlsb"
-					&& file.getExtension() != "xla"
-					&& file.getExtension() != "xlam"
-					&& file.getExtension() != "xll"
-					&& file.getExtension() != "xlw"
-					&& file.getExtension() != "xlsm")) {
+			&& (file.getExtension() != "pdf"
+					//&& file.getExtension() != "xls"
+					//&& file.getExtension() != "xlt"
+					//&& file.getExtension() != "xlm"
+					//&& file.getExtension() != "xlsx"
+					//&& file.getExtension() != "xltx"
+					//&& file.getExtension() != "xltm"
+					//&& file.getExtension() != "xlsb"
+					//&& file.getExtension() != "xla"
+					//&& file.getExtension() != "xlam"
+					//&& file.getExtension() != "xll"
+					//&& file.getExtension() != "xlw"
+					//&& file.getExtension() != "xlsm"
+				)) {
 
 		var customModalOptions = {
 			headerText : 'Error',
@@ -73,27 +82,29 @@ function checkIfThisUserCanUploadDocumentWithThisFileExtension(modalService,
 		 isFileExtensionAllowed = false; 
 	} else if ((role == "AGENCY ADMIN" || role == "AGENCY ATTORNEY" || (role
 			.indexOf("AGENCY") >= 0))
-			&& (file.getExtension() != "pdf" && file.getExtension() != "xls"
-					&& file.getExtension() != "xlt"
-					&& file.getExtension() != "xlm"
-					&& file.getExtension() != "xlsx"
-					&& file.getExtension() != "xltx"
-					&& file.getExtension() != "xltm"
-					&& file.getExtension() != "xlsb"
-					&& file.getExtension() != "xla"
-					&& file.getExtension() != "xlam"
-					&& file.getExtension() != "xll"
-					&& file.getExtension() != "xlw"
-					&& file.getExtension() != "xlsm"
-					&& file.getExtension() != "docx"
-					&& file.getExtension() != "docm"
-					&& file.getExtension() != "dotx"
-					&& file.getExtension() != "dotm"
-					&& file.getExtension() != "docb"
-					&& file.getExtension() != "doc"
-					&& file.getExtension() != "dot"
-					&& file.getExtension() != "zip"
-					&& file.getExtension() != "zipx") ) {
+			&& (file.getExtension() != "pdf"
+					//&& file.getExtension() != "xls"
+					//&& file.getExtension() != "xlt"
+					//&& file.getExtension() != "xlm"
+					//&& file.getExtension() != "xlsx"
+					//&& file.getExtension() != "xltx"
+					//&& file.getExtension() != "xltm"
+					//&& file.getExtension() != "xlsb"
+					//&& file.getExtension() != "xla"
+					//&& file.getExtension() != "xlam"
+					//&& file.getExtension() != "xll"
+					//&& file.getExtension() != "xlw"
+					//&& file.getExtension() != "xlsm"
+					//&& file.getExtension() != "docx"
+					//&& file.getExtension() != "docm"
+					//&& file.getExtension() != "dotx"
+					//&& file.getExtension() != "dotm"
+					//&& file.getExtension() != "docb"
+					//&& file.getExtension() != "doc"
+					//&& file.getExtension() != "dot"
+					//&& file.getExtension() != "zip"
+					//&& file.getExtension() != "zipx"
+			) ) {
 
 		var customModalOptions = {
 			headerText : 'Error',
@@ -107,27 +118,29 @@ function checkIfThisUserCanUploadDocumentWithThisFileExtension(modalService,
 
 		isFileExtensionAllowed = false; 
 	} else if ((role == "GAO ATTORNEY" || role == "GAO SUPERVISOR")
-			&& (file.getExtension() != "pdf" && file.getExtension() != "xls"
-					&& file.getExtension() != "xlt"
-					&& file.getExtension() != "xlm"
-					&& file.getExtension() != "xlsx"
-					&& file.getExtension() != "xltx"
-					&& file.getExtension() != "xltm"
-					&& file.getExtension() != "xlsb"
-					&& file.getExtension() != "xla"
-					&& file.getExtension() != "xlam"
-					&& file.getExtension() != "xll"
-					&& file.getExtension() != "xlw"
-					&& file.getExtension() != "xlsm"
-					&& file.getExtension() != "docx"
-					&& file.getExtension() != "docm"
-					&& file.getExtension() != "dotx"
-					&& file.getExtension() != "dotm"
-					&& file.getExtension() != "docb"
-					&& file.getExtension() != "doc"
-					&& file.getExtension() != "dot"
-					&& file.getExtension() != "zip"
-					&& file.getExtension() != "zipx")) {
+			&& (file.getExtension() != "pdf"
+					//&& file.getExtension() != "xls"
+					//&& file.getExtension() != "xlt"
+					//&& file.getExtension() != "xlm"
+					//&& file.getExtension() != "xlsx"
+					//&& file.getExtension() != "xltx"
+					//&& file.getExtension() != "xltm"
+					//&& file.getExtension() != "xlsb"
+					//&& file.getExtension() != "xla"
+					//&& file.getExtension() != "xlam"
+					//&& file.getExtension() != "xll"
+					//&& file.getExtension() != "xlw"
+					//&& file.getExtension() != "xlsm"
+					//&& file.getExtension() != "docx"
+					//&& file.getExtension() != "docm"
+					//&& file.getExtension() != "dotx"
+					//&& file.getExtension() != "dotm"
+					//&& file.getExtension() != "docb"
+					//&& file.getExtension() != "doc"
+					//&& file.getExtension() != "dot"
+					//&& file.getExtension() != "zip"
+					//&& file.getExtension() != "zipx"
+				)) {
 
 		var customModalOptions = {
 			headerText : 'Error',
@@ -141,27 +154,29 @@ function checkIfThisUserCanUploadDocumentWithThisFileExtension(modalService,
 
 		isFileExtensionAllowed = false;
 	} else if ((role == "GAO ADMIN")
-			&& (file.getExtension() != "pdf" && file.getExtension() != "xls"
-					&& file.getExtension() != "xlt"
-					&& file.getExtension() != "xlm"
-					&& file.getExtension() != "xlsx"
-					&& file.getExtension() != "xltx"
-					&& file.getExtension() != "xltm"
-					&& file.getExtension() != "xlsb"
-					&& file.getExtension() != "xla"
-					&& file.getExtension() != "xlam"
-					&& file.getExtension() != "xll"
-					&& file.getExtension() != "xlw"
-					&& file.getExtension() != "xlsm"
-					&& file.getExtension() != "docx"
-					&& file.getExtension() != "docm"
-					&& file.getExtension() != "dotx"
-					&& file.getExtension() != "dotm"
-					&& file.getExtension() != "docb"
-					&& file.getExtension() != "doc"
-					&& file.getExtension() != "dot"
-					&& file.getExtension() != "zip"
-					&& file.getExtension() != "zipx")) {
+			&& (file.getExtension() != "pdf"
+					//&& file.getExtension() != "xls"
+					//&& file.getExtension() != "xlt"
+					//&& file.getExtension() != "xlm"
+					//&& file.getExtension() != "xlsx"
+					//&& file.getExtension() != "xltx"
+					//&& file.getExtension() != "xltm"
+					//&& file.getExtension() != "xlsb"
+					//&& file.getExtension() != "xla"
+					//&& file.getExtension() != "xlam"
+					//&& file.getExtension() != "xll"
+					//&& file.getExtension() != "xlw"
+					//&& file.getExtension() != "xlsm"
+					//&& file.getExtension() != "docx"
+					//&& file.getExtension() != "docm"
+					//&& file.getExtension() != "dotx"
+					//&& file.getExtension() != "dotm"
+					//&& file.getExtension() != "docb"
+					//&& file.getExtension() != "doc"
+					//&& file.getExtension() != "dot"
+					//&& file.getExtension() != "zip"
+					//&& file.getExtension() != "zipx"
+				)) {
 
 		var customModalOptions = {
 			headerText : 'Error',
@@ -199,7 +214,7 @@ function checkIfTotalUploadSizeExceedsTheMaxSize($scope, modalService) {
 		
 		var customModalOptions = {
 				headerText : 'Error',
-				bodyText : 'Total upload size is exceeded! Please make sure that total upload size of all the files is <= 551MB.',
+				bodyText : 'Total upload size is exceeded! Please make sure that total upload size of all the files is <= 420MB.',
 				closeButtonText : 'OK',
 				messageType : "error"
 			};

@@ -1,0 +1,23 @@
+<jboss-deployment-structure>
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="logging"/>
+        </exclude-subsystems>
+    </deployment>
+
+<!--    <sub-deployment name="EPDS_Web.war">-->
+<!--        <exclude-subsystems>-->
+<!--            <subsystem name="logging"/>-->
+<!--        </exclude-subsystems>-->
+<!--    </sub-deployment>-->
+<!--    <sub-deployment name="epds.war">-->
+<!--        <exclude-subsystems>-->
+<!--            <subsystem name="logging"/>-->
+<!--        </exclude-subsystems>-->
+<!--    </sub-deployment>-->
+<!--    <sub-deployment name="epds-auth.war">-->
+<!--        <exclude-subsystems>-->
+<!--            <subsystem name="logging"/>-->
+<!--        </exclude-subsystems>-->
+<!--    </sub-deployment>-->
+</jboss-deployment-structure>

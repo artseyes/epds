@@ -58,7 +58,7 @@
 	        	$scope.isFirmIdSame = ($scope.loggedInUserInfo.firm_id == $scope.protestInfo.agency_Info_Id)  || $filter('contains')($scope.protestInfo.primaryAgencyInfoIds,$scope.protestInfo.agency_Info_Id);;
 	        	$scope.isGAOUserSupervisorOrAttorney = ($scope.loggedInUserInfo.role_id == '8' || $scope.loggedInUserInfo.role_id == '3')
 	        	$scope.isGAOUserWithFullAccess = ($scope.loggedInUserInfo.role_id == '7' || ($scope.isGAOUserSupervisorOrAttorney && !$scope.protestInfo.viewOnly))
-	        	$scope.canAgencyRepBeAdded = ($scope.partiesList && $scope.partiesList.length <= 3 && $scope.partiesList.length > 0) 
+	        	$scope.canAgencyRepBeAdded = ($scope.partiesList && $scope.partiesList.length <= 9 && $scope.partiesList.length > 0)
 	        	$scope.agencyUser = ($scope.loggedInUserInfo.role_id == '5' || $scope.loggedInUserInfo.role_id == '6');
 	        	$scope.isAgencyPOCUser = ($scope.loggedInUserInfo.role_id == '5');
 	        	$scope.isPrimaryProtesterAssigned = ($scope.partyType == "P") && ($scope.partiesList && $scope.partiesList[0] && $scope.partiesList[0].role == 'PROTESTER');

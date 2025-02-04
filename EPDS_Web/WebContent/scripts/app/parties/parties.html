@@ -30,15 +30,14 @@
 		<div class="box-body table-responsive col-lg-12 col-md-12 col-sm-12"
 			id="partiesView">
 			<div>
-				<button class="btn-info pull-right" data-ng-show="(role == 'GAO ADMIN')" data-ng-click="addIntervenor()" style="margin-bottom:  10px;">Add
-					Intervenor</button>
+				<button class="btn-info pull-right" data-ng-show="(role == 'GAO ADMIN')" data-ng-click="addIntervenor()" style="margin-bottom:  10px;">Add Grantee or Third Party </button>
 			</div>
 			<table id="view_ManageParties"
 				   aria-label="Party Information"
 				   class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th scope="col">Party</th>
+						<th scope="col">Filing Party</th>
 						<th scope="col">Information</th>
 					</tr>
 				</thead>
@@ -49,7 +48,7 @@
 					<tr>
 						<td>
 							<div>
-								<strong>PROTESTER&nbsp;&nbsp;(&nbsp;{{protestInfo.company_Name}}&nbsp;)</strong>  
+								<strong>FILER&nbsp;&nbsp;(&nbsp;{{protestInfo.company_Name}}&nbsp;)</strong>
 								
 								<button name="editProtester"
 										class="btn btn-sm btn-info pull-right editButton"
@@ -91,11 +90,11 @@
 					<tr data-ng-repeat="intervenorInfo in listOfIntervenorList">
 					<td style="word-wrap: break-word;min-width: 20px;max-width: 20px;white-space:normal;">
 						<div>
-							<strong>INTERVENOR &nbsp;&nbsp;(&nbsp;{{intervenorInfo[0].intervenor_Company_Name}}&nbsp;)</strong>
+							<strong>Grantee or Third Party &nbsp;&nbsp;(&nbsp;{{intervenorInfo[0].intervenor_Company_Name}}&nbsp;)</strong>
 							<button name="editProtester"
 										class="btn btn-sm btn-info pull-right editButton"
 										id="editProtester"
-										aria-label="Edit Intervenor Information"
+										aria-label="Edit Grantee or Third Party Information"
 										data-ng-click="editPartyInfo('intervenor',intervenorInfo)"
 										data-ng-show="(role == 'GAO ADMIN')">
 										<i class="fa fa-edit"></i>&nbsp; Edit
@@ -141,7 +140,7 @@
 							<button name="editintervenor"
 										class="btn btn-sm btn-info pull-right editButton"
 										id="editintervenor"
-										aria-label="Edit Intervenor Information"
+										aria-label="Edit Grantee or Third Party Information"
 										data-ng-click="editPartyInfo('intervenor',orphanIntervenorInfo)"
 										data-ng-show="(role == 'GAO ADMIN')">
 										<i class="fa fa-edit"></i>&nbsp; Edit

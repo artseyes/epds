@@ -211,7 +211,7 @@ public class ProtestInfoService {
 		UploadedFileIdentifier upfi = null;
 		switch (typeOfDocment.toLowerCase(Locale.ENGLISH)) {
 		case "minute entry":
-		case "request to intervene approved":
+		case "grantee/third party request approved":
 		case "notice of appearance acknowledged":
 			upfi = new UploadedFileIdentifier();
 			upfi.setFileIdentifierCode("P");
@@ -1124,11 +1124,11 @@ public class ProtestInfoService {
 
 		if (accessType.equalsIgnoreCase("intervene")) {
 			submitNewDocDTO.setDocId(159);
-			submitNewDocDTO.setTypeofdocument("Request to Intervene Approved");
+			submitNewDocDTO.setTypeofdocument("Grantee/Third Party Request Approved");
 			submitNewDocDTO
 					.setAttorney_note(
 							
-							"'Request to Intervene' approved for "
+							"'Grantee or Third Party Request' approved for "
 							+ repUserInfo.getFirst_Name() +"  " + repUserInfo.getLast_Name()
 							+ " from "
 							+ (companyName != null? companyName : ""));

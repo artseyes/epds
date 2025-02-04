@@ -8,7 +8,9 @@ OtherProtestCtrl.$inject = [ '$scope', '$http', '$location', '$window',
 function OtherProtestCtrl ($scope, $http, $location, $window, $rootScope,
 		ngFabForm, $routeParams, protestDataSvc,modalService,$cookies,navigationSvc,fileInfoViewSvc,actionMessageSvc,$filter,base64,csrfService) {
 	$scope.fileUploadErrors = [];
-	$scope.docConfidentialLabel = "Do any of these documents contain information that is proprietary, confidential, or otherwise not releasable to the public?";
+	$scope.docConfidentialLabel = "Do any of these documents contain information that is subject to a protective \n" +
+		"                                                order entered by the judge in this case?  The filer will select Yes if the filing \n" +
+		"                                                includes this type of information AND a Protective Order has been entered in the appeal.";
 	
 	$scope.requestForRecon = [{
 		label : "PROTESTER",

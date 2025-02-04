@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +41,7 @@ import gov.gao.epds.utils.EPDS_FileUtils;
 @Component
 public class ZipFile_Util {
 
-	private static Logger logger = Logger.getLogger(ZipFile_Util.class);
+	private final static Logger logger = LoggerFactory.getLogger(ZipFile_Util.class);
 	@Autowired
 	public static void setIndexNumberForPdfFile(List<File_Info> fileInfoList){
 		setIndexNumbersForUseInCaseIndexPdfFile(fileInfoList);

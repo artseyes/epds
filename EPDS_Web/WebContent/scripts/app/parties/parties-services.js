@@ -534,7 +534,7 @@
 			
 			if (data.validation === "noSuchEmail") {
 				
-				var bodyText = "There is no EPDS user account associated with that email." +
+				var bodyText = "There is no EDS user account associated with that email." +
 						"  Please enter a different email address or check with the user you are attempting to add to see if the user has an account."
 				var customModalOptions = {
 					headerText : 'Error',
@@ -557,7 +557,7 @@
 				});
 			}else if (data.validation === "invalidAgency") {
 				
-				var bodyText = "This is not an EPDS registered agency account. "
+				var bodyText = "This is not an EDS registered agency account. "
 				var customModalOptions = {
 					headerText : 'Error',
 					bodyText : bodyText,
@@ -612,7 +612,7 @@
 
 					var customModalOptions = {
 						headerText : 'Error',
-						bodyText : 'Each party may only have 4 representatives in EPDS.  If you would like to substitute a representative, please remove one of the current representatives and then add the new representative.',
+						bodyText : 'Each party may only have 10 representatives in EDS.  If you would like to substitute a representative, please remove one of the current representatives and then add the new representative.',
 						closeButtonText : 'OK',
 						messageType : "error"
 					};
@@ -622,7 +622,7 @@
 				} else {
 					var customModalOptions = {
 						headerText : 'Error',
-						bodyText : 'Each party may only have 4 representatives in EPDS.  If you would like to substitute a representative, please remove one of the current representatives and then add the new representative.',
+						bodyText : 'Each party may only have 10 representatives in EDS.  If you would like to substitute a representative, please remove one of the current representatives and then add the new representative.',
 						closeButtonText : 'OK',
 						messageType : "error"
 					};

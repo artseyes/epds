@@ -244,12 +244,12 @@ public class RegistrationUtil {
 	private static void populateGaoUserField(User_info_dto userInfoDTO,
 			Cell cell) {
 		
-		userInfoDTO.setAddress1("441 G St., NW");
-		userInfoDTO.setAddress2("");
+		userInfoDTO.setAddress1("1800 M Street, N.W.");
+		userInfoDTO.setAddress2("6th Floor");
 		userInfoDTO.setCity("District of Columbia");
 		userInfoDTO.setState("Washington");
 		userInfoDTO.setCountry("United States");
-		userInfoDTO.setZipCode("20548");
+		userInfoDTO.setZipCode("20036");
 
 		userInfoDTO.setAuth_role_id(3);
 		userInfoDTO.setNameOfFirm("GAO");
@@ -335,12 +335,12 @@ public class RegistrationUtil {
 	}
 	public static void populateGaoUserField(User_info_dto userInfoDTO){
 			
-			userInfoDTO.setAddress1("441 G St., NW");
+			userInfoDTO.setAddress1("1800 M Street, N.W.");
 			//userInfoDTO.setAddress2("");
 			userInfoDTO.setCity("District of Columbia");
 			userInfoDTO.setState("Washington");
 			userInfoDTO.setCountry("United States");
-			userInfoDTO.setZipCode("20548");
+			userInfoDTO.setZipCode("20036");
 			userInfoDTO.setAuth_role_id(3);
 			userInfoDTO.setNameOfFirm("GAO");
 			

@@ -617,9 +617,9 @@ public class UserInfoService {
 		
 		if (inviter_Type.equalsIgnoreCase("protester")
 				|| inviter_Type.equalsIgnoreCase("intervenor")) {
-			totalLimit = 3;
+			totalLimit = 9;
 		} else {
-			totalLimit = 4;
+			totalLimit = 10;
 
 			try {
 				Protest_Info protestInfo = protest_Info_DAO.getProtestByA_no(a_No);
@@ -1239,16 +1239,17 @@ public class UserInfoService {
 		List<String> emailAddresses = new ArrayList<String>();
 		List<String> testEmailAddresses = new ArrayList<String>();
 		int totalLists = 0;
-			//EPDS PRE-PROD GAO 0011 or DEV GAOEPDS 0005
-		if (GlobalParams.IP.toString().contains("10.102.108.136") || GlobalParams.IP.toString().contains("10.102.107.139")) {
-			// for pre-prod, only send to GAO, but appending the list that it would have sent to
+			//EDS PRE-PROD CBCA 0011 or DEV CBCAEDS 0005
+		// if (GlobalParams.IP.toString().contains("10.102.108.136") || GlobalParams.IP.toString().contains("10.102.107.139"))
+		if (GlobalParams.IP.toString().contains("GCOH0W-1G1KMR2/159.142.147.116")) {
+			// for pre-prod, only send to CBCA, but appending the list that it would have sent to
 			this.getListAuthUsersEmail(testEmailAddresses);
 			emailNotification.setEmailBody(emailNotification.getEmailBody() + testEmailAddresses.toString());
 
 //			emailAddresses.add("wessere@cbca.gov");
 //			emailAddresses.add("goldsteine@cbca.gov");
-			emailAddresses.add("charles.otoupalik@usda.gov");
-			//PROD GAO --0012
+			emailAddresses.add("arthur.hawkins@gsa.gov");
+			//PROD CBCA --0012
 		} else if (GlobalParams.IP.toString().contains("159.142.165.49")) {
 			this.getListAuthUsersEmail(emailAddresses);
 //			List<User_Info> listOfAllRegisteredSystemUsers = user_Info_DAO.getListOfAllSystemUsers();
@@ -1259,7 +1260,7 @@ public class UserInfoService {
 			this.getListAuthUsersEmail(testEmailAddresses);
 			emailNotification.setEmailBody(emailNotification.getEmailBody() + testEmailAddresses.toString());
 
-//			emailAddresses.add("mohammed.hussaini@ocio.usda.gov");
+			emailAddresses.add("arthur.hawkins@gsa.gov");
 			emailAddresses.add("charles.otoupalik@usda.gov");
 		}
 		

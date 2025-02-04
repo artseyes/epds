@@ -59,15 +59,15 @@ function removeCaseCtrlModalCtrl($scope, $rootScope, $uibModalStack,
 								bodyText += "<p>You are about to delete the case  ";
 								bodyText += "		<strong>" + $scope.protestInfo.a_No +"<\/strong>";
 								bodyText += "		- ";
-                bodyText += "		<strong>" + ($scope.protestInfo.b_No || "No B#") +"<\/strong>";
+                bodyText += "		<strong>" + ($scope.protestInfo.b_No || "CBCA#") +"<\/strong>";
                 bodyText += "		- ";
-                bodyText += "		<strong>" + $scope.protestInfo.case_Type +"<\/strong>";
+                bodyText += "		<strong>" + $scope.protestInfo.company_status +"<\/strong>";
                 bodyText += "		- ";
                 bodyText += "		<strong>" + $scope.protestInfo.company_Name + "<\/strong>&nbsp;.";
 								bodyText += "		&nbsp;&nbsp;";
 								bodyText += "		<\/p>";
                 bodyText += "   <p>Please note that 'A-XXX' and 'A-XXX.1' are not the same. Be sure to enter the exact ANum.</p>";
-								bodyText += "		<p>Selecting OK will permanently delete this case and its filings from EPDS. Do you want to proceed?<\/p>";
+								bodyText += "		<p>Selecting OK will permanently delete this case and its filings from EDS. Do you want to proceed?<\/p>";
 
 								var customAttr = {
 										headerText : "Warning",

@@ -142,7 +142,7 @@ function ManageAttorneyCtrl($scope, $log, $rootScope, $location, $http, $route, 
 
         var partyType = {
             id: "1",
-            bodyText: "Are you sure you want to permanently delete " + lastName + " ," + firstName + "EPDS user account",
+            bodyText: "Are you sure you want to permanently delete " + lastName + " ," + firstName + "EDS user account",
             isGAOUser: "Y"
 
 
@@ -289,7 +289,7 @@ function ManageAttorneyCtrl($scope, $log, $rootScope, $location, $http, $route, 
         function deleteAttorneyInfo(firstName, lastName, userId) {
             var partyType = {
                 id: "1",
-                bodyText: "Are you sure you want to permanently delete " + lastName + " ," + firstName + "EPDS user account"
+                bodyText: "Are you sure you want to permanently delete " + lastName + " ," + firstName + "EDS user account"
 
             }
             $scope.headerText = "Delete Attorney Info"
@@ -355,7 +355,7 @@ function ManageAttorneyCtrl($scope, $log, $rootScope, $location, $http, $route, 
                     if (data.data.isSuccess) {
                         var customAttr = {
                             headerText: "Success",
-                            bodyText: "You have successfully deleted the user from EPDS",
+                            bodyText: "You have successfully deleted the user from EDS",
                             modalType: "success",
                             actionType: "",
                             cancelBtnReq: "N",

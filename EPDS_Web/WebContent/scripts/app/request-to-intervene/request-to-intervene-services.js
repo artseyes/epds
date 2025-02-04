@@ -179,7 +179,7 @@
 						
 						var customModalOptions = {
 								headerText : 'Success',
-								bodyText : 'You have successfully submitted a request to intervene.',
+								bodyText : 'You have successfully submitted a Grantee or Third Party Request.',
 								closeButtonText : 'OK',
 								messageType : "success"
 							};
@@ -232,7 +232,7 @@
 			} else if (data.response == "request submitted") {
 				var customModalOptions = {
 					headerText : 'Error',
-					bodyText : 'You have already submitted request to intervene in this case. Please wait until you get approved',
+					bodyText : 'You have already submitted Request of Grantee or Third Party Request in this case. Please wait until you get approved',
 					closeButtonText : 'OK',
 					messageType : "error"
 				};
@@ -245,7 +245,7 @@
 
 				var customModalOptions = {
 					headerText : 'Error',
-					bodyText : "You cannot submit Request to Intervene in the case which you have submitted",
+					bodyText : "You cannot submit Grantee or Third Party Request in the case which you have submitted",
 					closeButtonText : 'OK',
 					messageType : "error"
 				};
@@ -276,7 +276,7 @@
 				if (numberOfPrimaryDocAttached != 1) {
 					var customModalOptions = {
 						headerText : 'Error',
-						bodyText : 'This type of filing requires that you upload a document.  Please upload your document to continue.  Information regarding appropriate file types is included in the EPDS user guides.',
+						bodyText : 'This type of filing requires that you upload a document.  Please upload your document to continue.  Information regarding appropriate file types is included in the EDS CBCA user guides.',
 						closeButtonText : 'OK',
 						messageType : "error"
 					};

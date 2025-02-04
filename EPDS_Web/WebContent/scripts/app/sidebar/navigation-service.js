@@ -54,7 +54,7 @@
                     isFileNewProtestOption: "Y",
                 },
                     {
-                        title: "Request to Intervene",
+                        title: "Grantee or  Third Party Request",
                         href: "intervene",
                         menuIconClass: "fa fa-search"
                     },
@@ -135,7 +135,7 @@
                         menuIconClass: ""
                     },
                     {
-                        title: "Manage GAO Users",
+                        title: "Manage CBCA Users",
                         href: "manage-attorneys",
                         menuIconClass: ""
                     },
@@ -267,27 +267,27 @@
 
                 if (object.protestInfo.case_Status != 'OPEN') {
 
-                    routes.push({
-                        title: "Request for Reconsideration ",
-                        href: "other-protest/reconsideration/" + urlEncodedAnum,
-                        menuIconClass: "fa fa-paperclip"
-                    })
+                    //routes.push({
+                    //  title: "Request for Reconsideration ",
+                   //     href: "other-protest/reconsideration/" + urlEncodedAnum,
+                   //    menuIconClass: "fa fa-paperclip"
+                   // })
                 }
 
                 if (object.protestInfo.case_Status != 'OPEN' &&
                     (object.roleId == "1"
                         || object.roleId == "4")) {
 
-                    routes.push({
-                        title: "Request for Entitlement ",
-                        href: "other-protest/entitlement/" + urlEncodedAnum,
-                        menuIconClass: "fa fa-paperclip"
-                    })
-                    routes.push({
-                        title: "Claim for Costs",
-                        href: "other-protest/cost-claim/" + urlEncodedAnum,
-                        menuIconClass: "fa fa-paperclip"
-                    })
+                    // routes.push({
+                    //     title: "Request for Entitlement ",
+                    //     href: "other-protest/entitlement/" + urlEncodedAnum,
+                    //     menuIconClass: "fa fa-paperclip"
+                    // })
+                    //routes.push({
+                    //    title: "Claim for Costs",
+                    //    href: "other-protest/cost-claim/" + urlEncodedAnum,
+                    //    menuIconClass: "fa fa-paperclip"
+                    //})
                 }
 
 
@@ -341,11 +341,11 @@
 
                 if (object.protestInfo.case_Status != 'OPEN') {
 
-                    routes.push({
-                        title: "Request for Reconsideration ",
-                        href: "other-protest/reconsideration/" + urlEncodedAnum,
-                        menuIconClass: "fa fa-paperclip"
-                    })
+                //    routes.push({
+                //       title: "Request for Reconsideration ",
+                //       href: "other-protest/reconsideration/" + urlEncodedAnum,
+                //        menuIconClass: "fa fa-paperclip"
+                //    })
                 }
 
                 return routes;
@@ -478,23 +478,23 @@
 
                     if (object.protestInfo.case_Status != 'OPEN') {
 
-                        routes.push({
-                            title: "Request for Reconsideration ",
-                            href: "other-protest/reconsideration/" + urlEncodedAnum,
-                            menuIconClass: "fa fa-paperclip"
-                        })
+                    //    routes.push({
+                    //        title: "Request for Reconsideration ",
+                    //        href: "other-protest/reconsideration/" + urlEncodedAnum,
+                    //        menuIconClass: "fa fa-paperclip"
+                    //    })
 
-                        routes.push({
-                            title: "Request for Entitlement ",
-                            href: "other-protest/entitlement/" + urlEncodedAnum,
-                            menuIconClass: "fa fa-paperclip"
-                        })
+                        // routes.push({
+                        //     title: "Request for Entitlement ",
+                        //     href: "other-protest/entitlement/" + urlEncodedAnum,
+                        //     menuIconClass: "fa fa-paperclip"
+                        // })
 
-                        routes.push({
-                            title: "Claim for Costs",
-                            href: "other-protest/cost-claim/" + urlEncodedAnum,
-                            menuIconClass: "fa fa-paperclip"
-                        })
+                        //routes.push({
+                        //    title: "Claim for Costs",
+                        //    href: "other-protest/cost-claim/" + urlEncodedAnum,
+                        //    menuIconClass: "fa fa-paperclip"
+                        //})
 
                         if (numberOfDays > 60) {
 
@@ -551,23 +551,23 @@
 
                     if (object.protestInfo.case_Status != 'OPEN') {
 
-                        routes.push({
-                            title: "Request for Reconsideration ",
-                            href: "other-protest/reconsideration/" + urlEncodedAnum,
-                            menuIconClass: "fa fa-paperclip"
-                        })
+                    //    routes.push({
+                    //        title: "Request for Reconsideration ",
+                    //        href: "other-protest/reconsideration/" + urlEncodedAnum,
+                    //        menuIconClass: "fa fa-paperclip"
+                    //    })
 
-                        routes.push({
-                            title: "Request for Entitlement ",
-                            href: "other-protest/entitlement/" + urlEncodedAnum,
-                            menuIconClass: "fa fa-paperclip"
-                        })
+                        // routes.push({
+                        //     title: "Request for Entitlement ",
+                        //     href: "other-protest/entitlement/" + urlEncodedAnum,
+                        //     menuIconClass: "fa fa-paperclip"
+                        // })
 
-                        routes.push({
-                            title: "Claim for Costs",
-                            href: "other-protest/cost-claim/" + urlEncodedAnum,
-                            menuIconClass: "fa fa-paperclip"
-                        })
+                        //routes.push({
+                        //    title: "Claim for Costs",
+                       //     href: "other-protest/cost-claim/" + urlEncodedAnum,
+                       //     menuIconClass: "fa fa-paperclip"
+                       // })
 
                         if (numberOfDays > 60) {
 

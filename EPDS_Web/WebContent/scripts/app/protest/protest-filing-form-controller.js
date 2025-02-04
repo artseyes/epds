@@ -41,7 +41,9 @@ function ProtestCtrl($scope, $http, $uibModal, $location, $window,
         "applicable North American Industrial Classification System (NAICS) code and consult the Small Business Administration's size standards in Title 13,  Part 121 of the Code of Federal Regulations.   " +
         "If a protester does not know its applicable size for the procurement at issue, the filer should select \"Large.\"  This information is collected for statistical purposes."
 
-    $scope.docConfidentialLabel = "Do any of these documents contain information that is proprietary, confidential, or otherwise not releasable to the public?"
+    $scope.docConfidentialLabel = "Do any of these documents contain information that is subject to a protective \n" +
+        "                                                order entered by the judge in this case?  The filer will select Yes if the filing \n" +
+        "                                                includes this type of information AND a Protective Order has been entered in the appeal."
 
     // $scope.htmlPopover = $sce.trustAsHtml('<p>'
     // 	+ $scope.sizeStatusTooltip
@@ -99,17 +101,18 @@ function ProtestCtrl($scope, $http, $uibModal, $location, $window,
             if ($scope.form && $scope.form.isDocConfidential) {
                 var bodyText;
 
-                if ($scope.form.isDocConfidential == "N") {
-                    bodyText = "Unless precluded by law, GAO will release any material not marked as protected to a requesting party outside the " +
-                        "government, in accordance with GAO’s disclosure of " +
+                if ($scope.form.isDocConfidential == "X") {
+                    bodyText = "Unless precluded by law, CBCA will release any material not marked as protected to a requesting party outside the " +
+                        "government, in accordance with CBCA’s disclosure of " +
                         "records rules at 4 C.F.R. part 81.";
                 } else if ($scope.form.isDocConfidential == "Y") {
-                    bodyText = "Because you have marked your protest as containing information that should be withheld from public disclosure, " +
-                        "you are required to place a statement advising of that fact on the front page of the submission.  4 C.F.R. § 21.1(g)." +
-                        "  Additionally, you must identify the information to be withheld wherever it appears, and " +
-                        "file a redacted copy of the protest which omits the information, with GAO and the agency, within 1 day" +
-                        " after filing the protest with GAO.  Id.  Unless precluded by law, GAO will release any unmarked material to a" +
-                        " requesting party outside the government, in accordance with GAO’s disclosure of records rules at 4 C.F.R. part 81.";
+                    bodyText = "You must mark the protected information in the document as required by the Protective Order before filing. "
+                //    bodyText = "Because you have marked your filing as containing information that should be withheld from public disclosure, " +
+               //         "you are required to place a statement advising of that fact on the front page of the submission.  4 C.F.R. § 21.1(g)." +
+                 //       "  Additionally, you must identify the information to be withheld wherever it appears, and " +
+                //        "file a redacted copy of the filing which omits the information, with CBCA and the agency, within 1 day" +
+                //        " after filing the filing with CBCA.  Id.  Unless precluded by law, CBCA will release any unmarked material to a" +
+                 //       " requesting party outside the government, in accordance with CBCA’s disclosure of records rules at 4 C.F.R. part 81.";
                 }
 
                 if (bodyText) {
@@ -448,7 +451,7 @@ function ProtestCtrl($scope, $http, $uibModal, $location, $window,
 
         var bodyText = "<p>You will automatically be directed to Pay.gov to pay the filing fee." +
             "  Your protest filing will not be complete until you have successfully made your payment." +
-            "  Upon successfully making your payment, you will automatically be returned to EPDS.gov." +
+            "  Upon successfully making your payment, you will automatically be returned to EDS.CBCA.gov." +
             "  Once payment is made, you will not have the opportunity to edit your filing." +
             "  You will automatically be directed to Pay.gov to pay the filing fee of $350. <\/p>";
 
@@ -542,44 +545,8 @@ function ProtestCtrl($scope, $http, $uibModal, $location, $window,
         value : 'APPEAL',
         text : 'Contract Disputes Act Appeal'
     },{
-        value : 'EAJA COST',
-        text : 'EAJA Application'
-    },{
-        value : 'FCIC',
-        text : 'FCIC Appeal'
-    },{
-        value : 'FCIC RECON',
-        text : 'FCIC RECON'
-    },{
         value : 'FEMA',
         text : 'FEMA Arbitration'
-    },{
-        value : 'FMCSA',
-        text : 'FMCSA Arbitration'
-    },{
-        value : 'ISDA',
-        text : 'ISDA Appeal'
-    },{
-        value : 'ISDA RECON',
-        text : 'ISDA RECON'
-    },{
-        value : 'PETITION',
-        text : 'Petition for Contracting Officer Final Decision'
-     },{
-        value : 'Alternative Dispute Resolution',
-        text : 'Alternative Dispute Resolution'
-    },{
-        value : 'Administrative Wage Garnishment Hearing Request',
-        text : 'Administrative Wage Garnishment Hearing Request '
-    },{
-        value : 'RELOCATION',
-        text : 'Relocation Expenses Reimbursement Claim'
-    },{
-        value : 'TRAVEL',
-        text : 'Transportation Services Rate Claim'
-    },{
-        value : 'TRR RECON',
-        text : 'Travel Expenses Reimbursement Claim'
     }]
 }
 

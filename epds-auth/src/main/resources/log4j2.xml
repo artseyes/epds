@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />-->
+<!--        </Console>-->
+<!--        <File name="MyFile" fileName="${sys:jboss.home.dir}/standalone/log/epds_auth_test.log" append="false">-->
+            <!-- alternatively use XmlLayout (requires Jackson, see documentation for dependencies) -->
+<!--            <PatternLayout pattern="[%p] %d %c %M - %m%n"/>-->
+<!--        </File>-->
+        <RollingFile name="RollingFile"
+                     fileName="${sys:jboss.home.dir}/standalone/log/epds-auth.log"
+                     filePattern="${sys:jboss.home.dir}/standalone/log/epds-auth.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout pattern="[%p] %d %c %M - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+<!--        <Logger name="com.xyz.foo" level="warn" />-->
+<!--        various loggers that we can set independent levels or keep them at INFO when the root is changed-->
+        <Logger name="org.hibernate.SQL" level="OFF" />
+        <Logger name="org.hibernate" level="INFO" />
+        <Logger name="com.sun.xml.internal.bind" level="INFO" />
+        <Logger name="com.sun.xml.bind" level="INFO" />
+        <Logger name="org.springframework" level="INFO" />
+        <Logger name="org.springframework.beans.factory" level="INFO" />
+
+        <Root level="INFO">
+<!--            <AppenderRef ref="Console" />-->
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>

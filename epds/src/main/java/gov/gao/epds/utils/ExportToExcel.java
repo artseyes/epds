@@ -16,15 +16,7 @@ import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Header;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.joda.time.DateTime;
@@ -315,68 +307,69 @@ public class ExportToExcel
 
     	  //Bold Fond
     	  Font bold = wb.createFont();
-    	  bold.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		  bold.setBold(true);
+//    	  bold.setBoldweight(Font.BOLDWEIGHT_BOLD);
     	  bold.setFontHeightInPoints((short) 10);
 
     	  //Bold style 
     	  csBold = wb.createCellStyle();
-    	  csBold.setBorderBottom(CellStyle.BORDER_THIN);
+    	  csBold.setBorderBottom(BorderStyle.THIN);
     	  csBold.setBottomBorderColor(IndexedColors.BLACK.getIndex());
     	  csBold.setFont(bold);
 
     	  //Setup style for Top Border Line
     	  csTop = wb.createCellStyle();
-    	  csTop.setBorderTop(CellStyle.BORDER_THIN);
+    	  csTop.setBorderTop(BorderStyle.THIN);
     	  csTop.setTopBorderColor(IndexedColors.BLACK.getIndex());
     	  csTop.setFont(f);
 
     	  //Setup style for Right Border Line
     	  csRight = wb.createCellStyle();
-    	  csRight.setBorderRight(CellStyle.BORDER_THIN);
+    	  csRight.setBorderRight(BorderStyle.THIN);
     	  csRight.setRightBorderColor(IndexedColors.BLACK.getIndex());
     	  csRight.setFont(f);
 
     	  //Setup style for Bottom Border Line
     	  csBottom = wb.createCellStyle();
-    	  csBottom.setBorderBottom(CellStyle.BORDER_THIN);
+    	  csBottom.setBorderBottom(BorderStyle.THIN);
     	  csBottom.setBottomBorderColor(IndexedColors.BLACK.getIndex());
     	  csBottom.setFont(f);
 
     	  //Setup style for Left Border Line
     	  csLeft = wb.createCellStyle();
-    	  csLeft.setBorderLeft(CellStyle.BORDER_THIN);
+    	  csLeft.setBorderLeft(BorderStyle.THIN);
     	  csLeft.setLeftBorderColor(IndexedColors.BLACK.getIndex());
     	  csLeft.setFont(f);
 
     	  //Setup style for Top/Left corner cell Border Lines
     	  csTopLeft = wb.createCellStyle();
-    	  csTopLeft.setBorderTop(CellStyle.BORDER_THIN);
+    	  csTopLeft.setBorderTop(BorderStyle.THIN);
     	  csTopLeft.setTopBorderColor(IndexedColors.BLACK.getIndex());
-    	  csTopLeft.setBorderLeft(CellStyle.BORDER_THIN);
+    	  csTopLeft.setBorderLeft(BorderStyle.THIN);
     	  csTopLeft.setLeftBorderColor(IndexedColors.BLACK.getIndex());
     	  csTopLeft.setFont(f);
 
     	  //Setup style for Top/Right corner cell Border Lines
     	  csTopRight = wb.createCellStyle();
-    	  csTopRight.setBorderTop(CellStyle.BORDER_THIN);
+    	  csTopRight.setBorderTop(BorderStyle.THIN);
     	  csTopRight.setTopBorderColor(IndexedColors.BLACK.getIndex());
-    	  csTopRight.setBorderRight(CellStyle.BORDER_THIN);
+    	  csTopRight.setBorderRight(BorderStyle.THIN);
     	  csTopRight.setRightBorderColor(IndexedColors.BLACK.getIndex());
     	  csTopRight.setFont(f);
 
     	  //Setup style for Bottom/Left corner cell Border Lines
     	  csBottomLeft = wb.createCellStyle();
-    	  csBottomLeft.setBorderBottom(CellStyle.BORDER_THIN);
+    	  csBottomLeft.setBorderBottom(BorderStyle.THIN);
     	  csBottomLeft.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-    	  csBottomLeft.setBorderLeft(CellStyle.BORDER_THIN);
+    	  csBottomLeft.setBorderLeft(BorderStyle.THIN);
     	  csBottomLeft.setLeftBorderColor(IndexedColors.BLACK.getIndex());
     	  csBottomLeft.setFont(f);
 
     	  //Setup style for Bottom/Right corner cell Border Lines
     	  csBottomRight = wb.createCellStyle();
-    	  csBottomRight.setBorderBottom(CellStyle.BORDER_THIN);
+    	  csBottomRight.setBorderBottom(BorderStyle.THIN);
     	  csBottomRight.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-    	  csBottomRight.setBorderRight(CellStyle.BORDER_THIN);
+    	  csBottomRight.setBorderRight(BorderStyle.THIN);
     	  csBottomRight.setRightBorderColor(IndexedColors.BLACK.getIndex());
     	  csBottomRight.setFont(f);
     	  

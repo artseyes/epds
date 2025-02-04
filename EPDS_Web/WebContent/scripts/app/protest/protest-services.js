@@ -319,7 +319,7 @@
 				if (numberOfPrimaryDocumentsAdded != 1) {
 					var customModalOptions = {
 						headerText : 'Error',
-						bodyText : 'This type of filing requires that you upload a document.  Please upload your document to continue.  Information regarding appropriate file types is included in the EPDS user guides.',
+						bodyText : 'This type of filing requires that you upload a document.  Please upload your document to continue.  Information regarding appropriate file types is included in the EDS user guides.',
 						closeButtonText : 'OK',
 						messageType : "error"
 					};

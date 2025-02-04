@@ -240,7 +240,7 @@
 		function vendorFields(){
 			var obj = {};
 			var fieldText = {}
-			fieldText.headerText = "Register as  Non-Agency Party Representative Representative";
+			fieldText.headerText = "Register as a Non-Agency Party Representative";
 			fieldText.contactInfo = "Non-Agency Party Representative Info";
 			fieldText.nameOfFirm = "Name of Company/Firm";
 			fieldText.companyAddress = "Mailing Address";

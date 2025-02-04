@@ -30,29 +30,20 @@
 				<div class="panel panel-info"
 					data-ng-show="role == 'AGENCY ATTORNEY'">
 					<div class="panel-body">
-						<strong>Please enter the B-number in the box above. If
-							you do not know the B-number for the case you would like to join,
+						<strong>Please enter the CBCA number in the box above. If
+							you do not know the CBCA number for the case you would like to join,
 							please select the search button and a complete list of your agency's
 							open cases will be retrieved.</strong>
 					</div>
 				</div>
 				<div data-ng-show="role != 'AGENCY ATTORNEY'">
-					In order to intervene in a bid protest, you must know the B-number
-					assigned to the case by CBCA. To find the B-number assigned to a
-					case, please check CBCA's docket, where you can search for cases by
-					agency, solicitation number, or protester. CBCA's docket is
-					accessible <a href="http://cbca.gov/legal/bid-protests/search"
-						target-blank>here</a>.
+					In order to intervene in a case, you must know the CBCA number
+					assigned to the case by the CBCA. </a>
 				</div>
 				<br> <br>
 				<div data-ng-show="role != 'AGENCY ATTORNEY'">
 					<p>
-					<strong>
-					Note:  Intervenor means an awardee if the award has been made or, if no award has been made, all bidders or offerors 
-					who appear to have a substantial prospect of receiving an 
-					award if the protest is denied.  
-					To intervene in a case, you will be required to upload a document explaining how you satisfy the above requirements.
-					</strong>
+
 					</p>
 				</div>
 			</div>
@@ -68,7 +59,7 @@
 				<table id="protestInfo" class="table table-bordered" data-ng-show="showProtestInfo" role="presentation">
 					<tbody>
 						<tr>
-							<td><strong>B# </strong></td>
+							<td><strong>CBCA Number</strong></td>
 							<td style="text-align: right;">
 								<div class="b_No">
 									{{protestInfo.b_No}} 
@@ -97,7 +88,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><strong>Protester</strong></td>
+							<td><strong>Filer</strong></td>
 							<td style="text-align: right;"><div id='protesterName'>
 									{{protestInfo.company_Name | uppercase}} <span
 										data-ng-repeat='childProtestInfo in protestInfo.listOf_ConsolidatedProtest_Info'>

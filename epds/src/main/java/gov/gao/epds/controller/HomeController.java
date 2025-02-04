@@ -112,8 +112,9 @@ public class HomeController { // NO_UCD (unused code)
 		
 		caseStatusList.add("CLOSED");
 		caseStatusList.add("OPEN");
-		caseStatusList.add("COMPLETE");
-		if (user_Info.getRole_id().equals(7) || user_Info.getRole_id().equals(6) || user_Info.getRole_id().equals(3)){
+		// caseStatusList.add("COMPLETE");
+		// if (user_Info.getRole_id().equals(7) || user_Info.getRole_id().equals(6) || user_Info.getRole_id().equals(3)){
+		if (user_Info.getRole_id().equals(7)  || user_Info.getRole_id().equals(3)){
 			caseStatusList.add("READY TO COMPLETE");
 		}
 		map.addAttribute("caseStatusList", caseStatusList);
@@ -188,7 +189,7 @@ public class HomeController { // NO_UCD (unused code)
 	}
 
 	/**
-	 * When User Log Out The User Id is removed from the EPDS Session Map Object . 
+	 * When User Log Out The User Id is removed from the EDS Session Map Object .
 	 * Also the access token is remove from the browser.
 	 * @param model
 	 * @param request

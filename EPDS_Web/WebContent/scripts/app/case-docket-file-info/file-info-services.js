@@ -153,7 +153,7 @@
 							},
 							function(error) {
 								console
-										.log("Error occured when loading request to intervene "
+										.log("Error occured when loading Request of Grantee or Third Party "
 												+ JSON.stringify(error));
 								return error;
 							});		
@@ -189,7 +189,7 @@
 									}
 								
 								if (accessType === "intervene" && approve === "Y"){
-									customAttr.bodyText = "You have successfully acknowledged the intervenor. "
+									customAttr.bodyText = "You have successfully acknowledged the Grantee or Third Party. "
 									actionMessageSvc.showModal(customAttr);	
 								} else if (accessType === "agency-rep-access" && approve === "Y"){
 									customAttr.bodyText = "You have successfully acknowledged the agency's representative. "

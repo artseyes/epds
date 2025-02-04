@@ -44,7 +44,7 @@ public class EmailService {
 	private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
 //	private final String plcgEmail = "protests@cbca.gov";
-	private final String plcgEmail = "cbca.systemreport@gsa.gov";
+	private final String plcgEmail = "cbca.eds@cbca.gov";
 
 	@Resource(mappedName="java:jboss/mail/Default")
     private Session mailSession;
@@ -91,7 +91,7 @@ public class EmailService {
 		dto.setEmailBody(emailBody);
 		try {
 			Message message = new MimeMessage(mailSession);
-			Address fromAddress = new InternetAddress("cbca.systemreport@gsa.gov", "EDS");
+			Address fromAddress = new InternetAddress("cbca.eds@cbca.gov", "EDS");
 			message.setFrom(fromAddress);
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 			message.setSubject("EDS:  " + "ACCOUNT " + (!("Temporary Password").equalsIgnoreCase(activityType) ? activityType : " RESET"));
@@ -119,6 +119,7 @@ public class EmailService {
 		//sysAdmsEmail.add("EPDS_Admins@ocio.usda.gov");
 		sysAdmsEmail.add("Charles.Otoupalik@usda.gov");
 		sysAdmsEmail.add("arthur.hawkins@gsa.gov");
+		sysAdmsEmail.add("eds.cbca@cbca.gov");
 		// add Cody Martin?
 //		sysAdmsEmail.add("Beth.Dowsett@ocio.usda.gov");
 //		sysAdmsEmail.add("Kenneth.Moten@ocio.usda.gov");
@@ -139,7 +140,7 @@ public class EmailService {
 		InternetAddress[] toMailAddresses = getListOfInternetEmailAddress(sysAdmsEmail);
 		try {
 			Message message = new MimeMessage(mailSession);
-			Address fromAddress = new InternetAddress("cbca.systemreport@gsa.gov", "EPDS");
+			Address fromAddress = new InternetAddress("cbca.eds@cbca.gov", "EDS");
 			message.setFrom(fromAddress);
 			message.setRecipients(Message.RecipientType.BCC, toMailAddresses);
 			message.setSubject("EDS:  Account Activity");
@@ -209,7 +210,7 @@ public class EmailService {
 
 		try {
 			Message message = new MimeMessage(mailSession);
-			Address fromAddress = new InternetAddress("cbca.systemreport@gsa.gov", "EDS");
+			Address fromAddress = new InternetAddress("cbca.eds@cbca.gov", "EDS");
 			message.setFrom(fromAddress);
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 			message.setSubject("EDS:  ACCOUNT DELETION  " + actionType.toUpperCase(Locale.ENGLISH));
@@ -241,7 +242,7 @@ public class EmailService {
 		     .append("<span><strong>***********Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.**************</strong></span>")
 		     .append("	<p>This email is an automated notification,")
 		     .append("	 which is unable to receive replies.")
-		     .append("	  For assistance, please contact CBCA Clerk at ")
+		     .append("	  For assistance, please contact the CBCA Clerk at ")
 		     .append("	  (202) 606-8800 or clerk@cbca.gov.</p>")
 		     .append("	<br/>")
 		     .append("	<p>The following user's account has been locked. </p>	")
@@ -253,7 +254,7 @@ public class EmailService {
 		     .append("			</tr>")
 		     .append("		</tbody>")
 		     .append("	</table>")
-		     .append("	<p>To unlock the account and have a temporary password sent to <strong>" + user_info.getFirst_name() + "  " + user_info.getLast_name() + "</strong>, an Agency POC must contact GAO at protests@cbca.gov or (202) 512-5436.</p>")
+		     .append("	<p>To unlock the account and have a temporary password sent to <strong>" + user_info.getFirst_name() + "  " + user_info.getLast_name() + "</strong>, an Agency POC must contact CBCA at cbca.eds@cbca.gov  or (202) 606-8800.</p>")
 		     .append("  <br />" + GetFooterText())
              .append("</body>   ")
 		     .append("</html>");
@@ -268,7 +269,7 @@ public class EmailService {
 			boolean isUserAgencyRep = !Util.checkIfElementIsAlreadyInList(user_info.getEmail(), agencyPOCEmails);
 
 			Message message = new MimeMessage(mailSession);
-			Address fromAddress = new InternetAddress("cbca.systemreport@gsa.gov", "EDS");
+			Address fromAddress = new InternetAddress("cbca.eds@cbca.gov", "EDS");
 			message.setFrom(fromAddress);
 			populateToAndCCFieldForAgencyUser(message, isUserAgencyRep, agencyPOCEmails, user_info.getEmail());
 			message.setSubject("EDS:  ACCOUNT LOCKED");
@@ -352,7 +353,7 @@ public class EmailService {
 
 		try {
 			Message message = new MimeMessage(mailSession);
-			Address fromAddress = new InternetAddress("cbca.systemreport@gsa.gov", "EDS");
+			Address fromAddress = new InternetAddress("cbca.eds@cbca.gov", "EDS");
 			message.setFrom(fromAddress);
 			populateToAndCCFieldForGAOUser(message, isUserNonGAOAdmin, gaoAdminUsers, user_info.getEmail());
 			message.setSubject("EDS:  ACCOUNT LOCKED");
@@ -445,7 +446,7 @@ public class EmailService {
     				ReplacementMap.put("non_Prod_Warn", "");
     			}else{
     				ReplacementMap.put("epds_base_url", "https://edstest.edc.usda.gov");
-    				ReplacementMap.put("non_Prod_Warn", "<p><strong>MESSAGE GENERATED FROM NON PRODUCTION ENVIRONMENT</strong></p><br />");
+    				ReplacementMap.put("non_Prod_Warn", "<p><strong>MESSAGE GENERATED FROM CBCA PRODUCTION ENVIRONMENT</strong></p><br />");
     			}
 
     		}catch (Exception e) {
@@ -509,7 +510,7 @@ public class EmailService {
 		toMailAddressesList.add(old_email);
 
 		String emailBody  = "This is to notify you that you have recently updated your user name."
-				+ " If you have not made this change, please contact CBCA at (202) 606-8800 or cbca.it@gsa.gov immediately."
+				+ " If you have not made this change, please contact the CBCA at (202) 606-8800 or cbcaclerk@cbca.gov immediately."
 		        + "<br /><br />"
 				+ GetFooterText();
 
@@ -517,7 +518,7 @@ public class EmailService {
 		InternetAddress[] toMailAddresses = getListOfInternetEmailAddress(toMailAddressesList);
 		try {
 			Message message = new MimeMessage(mailSession);
-			Address fromAddress = new InternetAddress("cbca.systemreport@gsa.gov", "EDS");
+			Address fromAddress = new InternetAddress("cbca.eds@cbca.gov", "EDS");
 			message.setFrom(fromAddress);
 			message.setRecipients(Message.RecipientType.BCC, toMailAddresses);
 			message.setSubject("EDS:  Account Update");

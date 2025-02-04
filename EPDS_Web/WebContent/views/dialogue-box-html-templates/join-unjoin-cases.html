@@ -35,12 +35,12 @@
 
             <div data-ng-repeat="elemnt in listOfbNumbers">
                 <div class="form-group">
-                    <label for="bno" class="col-sm-2">B#</label>
+                    <label for="bno" class="col-sm-2">CBCA Number#</label>
                     <div class="col-sm-6">
                         <input id="bno" type="text"
                                class="form-control"
-                               data-validation-msg-required="Please enter B# EX: XXXXXX.XX"
-                               data-validation-msg-uniqueb="B# does not exist"
+                               data-validation-msg-required="Please enter EX: 1234-RELO"
+                               data-validation-msg-uniqueb="CBCA Number # does not exist"
                                name="elemnt.bNumber"
                                data-ng-model="elemnt.bNumber"
                                data-join parent-b-num="{{protestInfo.b_No}}" required/>
@@ -65,7 +65,7 @@
         <br>
         <span>
                         </span>
-        <pre><strong>*Enter the Case Number (EX:B-XXXXXX.XX)<br> which you need to join/unjoin to current case</strong></pre>
+        <pre><strong>*Enter the CBCA Number (EX:1234-RELO)<br> which you need to join/unjoin to current case</strong></pre>
     </div>
 
     <div>

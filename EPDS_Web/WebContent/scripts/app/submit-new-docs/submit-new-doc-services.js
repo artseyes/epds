@@ -163,7 +163,7 @@
                 }
 
                 if (form.denialDocInfo.accessType == "intervene") {
-                    customAttr.bodyText = "You have successfully denied intervenor's access to this case. "
+                    customAttr.bodyText = "You have successfully denied Grantee or Third Party Request access to this case. "
                 } else if (form.denialDocInfo.accessType == "agency-rep-access") {
                     customAttr.bodyText = "You have successfully denied agency representative access to this case. "
                 }
@@ -202,7 +202,7 @@
             if (numberOfPrimaryDocumentsAdded != 1 && !isThisDocBelongToTemplate) {
                 var customModalOptions = {
                     headerText: 'Error',
-                    bodyText: 'This type of filing requires that you upload a document.  Please upload a document to continue.  Information regarding appropriate file types is included in the EPDS user guides.',
+                    bodyText: 'This type of filing requires that you upload a document.  Please upload a document to continue.  Information regarding appropriate file types is included in the EDS CBCA user guides.',
                     closeButtonText: 'OK',
                     messageType: "error"
                 };
@@ -219,6 +219,17 @@
                 };
 
                 modalService.showModal({}, customModalOptions);
+
+            // } else if (obj.isDocConfidential == "Y") {
+            //
+            //     var customModalOptions = {
+            //         headerText: 'Error',
+            //         bodyText: 'This system does not accept any documents which contains confidential, proprietary, or information otherwise not subject to public release.',
+            //         closeButtonText: 'OK',
+            //         messageType: "error"
+            //     };
+            //
+            //     modalService.showModal({}, customModalOptions);
 
             } else if ((obj.attachAssociatedDocs == null) && (!isThisDocBelongToTemplate)) {
 

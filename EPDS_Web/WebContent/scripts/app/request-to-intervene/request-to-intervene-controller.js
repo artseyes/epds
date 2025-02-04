@@ -32,12 +32,12 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 			
 			if ($scope.role == "AGENCY ATTORNEY") {
 				$scope.headerText = "Join a Case"
-				$rootScope.requestToAccessMessage = "Do you want to enter an appearance in this case ?";	
-				$scope.b_NoWildCardText = "B-* will match B-XXXXXX.X, etc. or B-12* will match B-12XXXX.XX"
+				$rootScope.requestToAccessMessage = "Do you want to enter an appearance in this case?";
+				$scope.b_NoWildCardText = "56* will match 3456, etc."
 			}else if ($scope.role == "INTERVENOR") {
-				$rootScope.requestToAccessMessage = "Do you want to request to intervene in this case ?";
-				$scope.b_NoWildCardText = "B-123456* will match B-123456.1, B-123456.2, B-123456.3, etc."
-				$scope.headerText = "Request to Intervene"
+				$rootScope.requestToAccessMessage = "Do you want to join as a Grantee or Third Party in this case?";
+				$scope.b_NoWildCardText = "56* will match 456, 3456, 23456, etc."
+				$scope.headerText = "Grantee or Third Party Request"
 					
 			}else{
 				$location.path("/dashboard")
@@ -84,7 +84,7 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 	$scope.redirect = function (){
 		$location.path("/intervene")
 	}
-	$scope.b_No = "B-";
+	$scope.b_No = "";
 	$scope.onchange = function(value){};
 	$scope.searchProtestInfo = function(b_No) {
 		$("#protestInfo").show();
@@ -92,23 +92,23 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 		$("#interveneRequestForm").show();
 		$("#caseAccessList").show();
 		
-		var checkIfThisBNumberStartWithPrefix = $filter("startsWith")(b_No,"B-",true);
+//		var checkIfThisBNumberStartWithPrefix = $filter("startsWith")(b_No,"B-",true);
 		var checkNumberOfPlacesBeforeBNumber;
 		var lengthOfbNumberAfterRemovingPrefixAndSuffix;
 		var bNumberAfterRemovingPrefixAndSuffix;
 		
-		if (!checkIfThisBNumberStartWithPrefix){
-			$scope.b_No = "B-" + b_No;
-		}
-		if ($scope.b_No.indexOf(".") >= 0){
-			var bNumBeforeDecimalIfPresent = $scope.b_No.split(".")[0];
-			bNumberAfterRemovingPrefixAndSuffix = bNumBeforeDecimalIfPresent.split("-")[1];
-			lengthOfbNumberAfterRemovingPrefixAndSuffix = bNumberAfterRemovingPrefixAndSuffix.length;
-			
-		}else if ($scope.b_No.indexOf(".") <= 0){
-			bNumberAfterRemovingPrefixAndSuffix = $scope.b_No.split("-")[1];
-			lengthOfbNumberAfterRemovingPrefixAndSuffix = bNumberAfterRemovingPrefixAndSuffix.length;
-		}
+		// if (!checkIfThisBNumberStartWithPrefix){
+		// 	$scope.b_No = "B-" + b_No;
+		// }
+		// if ($scope.b_No.indexOf(".") >= 0){
+		// 	var bNumBeforeDecimalIfPresent = $scope.b_No.split(".")[0];
+		// 	bNumberAfterRemovingPrefixAndSuffix = bNumBeforeDecimalIfPresent.split("-")[1];
+		// 	lengthOfbNumberAfterRemovingPrefixAndSuffix = bNumberAfterRemovingPrefixAndSuffix.length;
+		//
+		// }else if ($scope.b_No.indexOf(".") <= 0){
+		// 	bNumberAfterRemovingPrefixAndSuffix = $scope.b_No.split("-")[1];
+		// 	lengthOfbNumberAfterRemovingPrefixAndSuffix = bNumberAfterRemovingPrefixAndSuffix.length;
+		// }
 		
 		if ($scope.role == "AGENCY ATTORNEY") {
 			interveneDataSvc.getListOfProtestsForAgencyRepAccess(b_No).then(
@@ -124,7 +124,7 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 									bodyText : "We cannot find the case that you are looking for." +
 									"  This might be because you already have access to the case," +
 									" OR you have a pending request to access the case," +
-									" OR the case is closed.  Please check the B# (B-XXXXXX.XX) and try again.",
+									" OR the case is closed.  Please check the CBCA number and try again.",
 									modalType : "info",
 									actionType : "",
 								    cancelBtnReq : "N",
@@ -136,18 +136,18 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 
 					})
 		}else if ($scope.role == "INTERVENOR") {
-			if(lengthOfbNumberAfterRemovingPrefixAndSuffix != 6){
-				var customAttr = {
-						headerText : "Info"	,
-						bodyText : "B# has to be at least 6 digits B-XXXXXX.",
-						modalType : "info",
-						actionType : "",
-					    cancelBtnReq : "N",
-					    cancelBtnActionType : ""
-					}
-				
-				actionMessageSvc.showModal(customAttr);
-			}else{
+			// if(lengthOfbNumberAfterRemovingPrefixAndSuffix != 6){
+			// 	var customAttr = {
+			// 			headerText : "Info"	,
+			// 			bodyText : "B# has to be at least 6 digits B-XXXXXX.",
+			// 			modalType : "info",
+			// 			actionType : "",
+			// 		    cancelBtnReq : "N",
+			// 		    cancelBtnActionType : ""
+			// 		}
+			//
+			// 	actionMessageSvc.showModal(customAttr);
+			// }else{
 				
 				interveneDataSvc.getListOfProtestsForIntervenorRepAccess(b_No).then(function(data){
 
@@ -162,7 +162,7 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 								bodyText : "We cannot find the case that you are looking for." +
 										"  This might be because you already have access to the case," +
 										" you already have a pending request to access the case," +
-										" or the case is closed.  Please check the B# and try again.",
+										" or the case is closed.  Please check the CBCA number and try again.",
 								modalType : "info",
 								actionType : "",
 							    cancelBtnReq : "N",
@@ -173,7 +173,7 @@ function InterveneCtrl ($scope, $location, $rootScope, $http, $filter,
 					}
 				
 				})
-			}
+			//}
 			
 		}
 		

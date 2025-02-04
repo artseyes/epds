@@ -61,10 +61,10 @@ docInfo because we are using docInfo to populate a_no param while uploading file
 							doc_Type_Desc : "Denial of Notice of Appearance",
 							filing_Order : 0
 						});
-					} else if (newVal === "Request to Intervene"){
-						$scope.doc_InfoList.push({
+					} else if (newVal === "Grantee or Third Party Request"){
+							$scope.doc_InfoList.push({
 							doc_Type_Id : 160,
-							doc_Type_Desc : "Denial of Request to Intervene",
+							doc_Type_Desc : "Denial of Grantee or Third Party Request",
 							filing_Order : 0
 						});
 					}

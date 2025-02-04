@@ -945,7 +945,7 @@ public class UserInfoController { // NO_UCD (unused code)
 			userGuideName = "bestPractices.pdf";
 		}else if (null != userGuideType && "faq".equalsIgnoreCase(userGuideType)){
 			userGuideName = "faq.pdf";
-		}else if (null != userGuideType && "instructions".equalsIgnoreCase(userGuideType)){
+			}else if (null != userGuideType && "instructions".equalsIgnoreCase(userGuideType)){
 			userGuideName = "instructions.pdf";
 		}else if (user_Info != null){
             UserRoles role = UserRoles.getByCode(user_Info.getRole_id());

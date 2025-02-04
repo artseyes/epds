@@ -43,7 +43,7 @@ function PayDotGovCtrl($scope, $location, $http, $routeParams, modalService,
 					function(data) {
 
 						var response = data && data.data;
-						var genericErrorMess = "There was an error checking transaction status. Please don't file the protest again. Instead contact PLCG at protests@cbca.gov. ";
+						var genericErrorMess = "There was an error checking transaction status. Please don't file the filing again. Instead contact CBCA at cbca.eds@cbca.gov . ";
 						var isPaymentSuccess = response
 								&& response.isPaymentSuccess;
 

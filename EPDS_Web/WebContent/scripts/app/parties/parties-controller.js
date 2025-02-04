@@ -76,7 +76,7 @@ function PartiesCtrl($rootScope, $scope, $http, $filter, $uibModal, modalService
             intervenorInfo.companyDetail = base64.urlencode(intervenorInfo.companyDetail)
         }
 
-        var bodyText = "<p> Are you sure  you want to remove this intervenor's access from this case? </p>"
+        var bodyText = "<p> Are you sure  you want to remove this Grantee or Third Party's access from this case? </p>"
 
         var customAttr = {
             headerText: "Warning",

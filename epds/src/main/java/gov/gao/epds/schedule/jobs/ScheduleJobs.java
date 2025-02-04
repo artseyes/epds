@@ -123,7 +123,7 @@ public class ScheduleJobs {
 		
 		/**
 		 * Runs the top of every hour of every day. 
-		 *  The cron expression itself will run every hour and it only calls the external script.
+		 *  The cron expression itself will run every hour, and it only calls the external script.
 		 *  The external scripts itself will check for files older than 2 hours and shreds them 
 		 */
 //		@Scheduled(cron = "0 0 * * * *")
@@ -156,7 +156,7 @@ public class ScheduleJobs {
 		/*
 		 * At 01:00:00am, on every Sunday, every month
 		*/
-		@Scheduled(cron = "0 1 1 * * SUN")
+		@Scheduled(cron = "0 1 1 * * *")
 		public void deletedVerifiedCasesOlderThan10Days() {
 
 			try {

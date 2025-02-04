@@ -45,14 +45,14 @@
 							<tbody>
 								<tr>
 									<td><strong>Case Type</strong></td>
-									<td>&nbsp;{{protestInfo.case_Type | uppercase}}</td>
+									<td>&nbsp;{{protestInfo.company_Status | uppercase}}</td>
 								</tr>
 								<tr>
-									<td><strong>Company Status</strong></td>
+									<td><strong>Case Type</strong></td>
 									<td>&nbsp;{{protestInfo.company_Status | uppercase }}</td>
 								</tr>
 								<tr>
-									<td><strong>Protester</strong></td>
+									<td><strong>Filing Party</strong></td>
 									<td>&nbsp;{{protestInfo.company_Name | uppercase }}</td>
 								</tr>
 
@@ -85,7 +85,7 @@
 									<td>&nbsp;{{protestInfo.solicitation_No}}</td>
 								</tr>
 								<tr>
-									<td><strong>Consolidated Protests</strong></td>
+									<td><strong>Consolidated Filings</strong></td>
 									<td><span
 										data-ng-repeat='childProtestInfo in consolidatedProtests'>
 											<span data-ng-if="$index == 0">

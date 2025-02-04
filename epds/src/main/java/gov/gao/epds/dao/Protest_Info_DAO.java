@@ -12,7 +12,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import gov.gao.epds.utils.ZipFile_Util;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -54,7 +55,7 @@ public class Protest_Info_DAO {
 	@Autowired
 	private DashboardService dashboardService;
 
-	private static Logger logger = Logger.getLogger(Protest_Info_DAO.class);
+	private final static Logger logger = LoggerFactory.getLogger(Protest_Info_DAO.class);
 
 	@Transactional
 	public int getSuffixForSecondaryProtestbyAnum(String a_No) {
@@ -885,7 +886,7 @@ public class Protest_Info_DAO {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Protest_Dm_Info> getListOfAllVerifiedCasesOlderThan10Days() throws Exception {
-		String query = "from Protest_Dm_Info where date_verified <= trunc(getdate() - 10,'DD') and dir_Del is null";
+		String query = "from Protest_Dm_Info where date_verified <= CONVERT(DATETIME, CONVERT(DATE, getdate()-10)) and dir_Del is null";
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<?> resultList = access.queryWithParams(query, map);
@@ -1084,30 +1085,34 @@ public class Protest_Info_DAO {
 		}
 		
 
-		map.put("b_id", "%" + advancedSearchDTO.getB_No() + "%");
-
-		
-		if (advancedSearchDTO.getB_No() != null && !advancedSearchDTO.getB_No().trim().equalsIgnoreCase("\"")
-				&& !advancedSearchDTO.getB_No().trim().equalsIgnoreCase("B-")) {
-			query += "  (UPPER(a.b_No) LIKE UPPER(:b_id))";
-			map.put("b_id", "%" + advancedSearchDTO.getB_No() + "%");
-
-		} else if (advancedSearchDTO.getB_No() == null || advancedSearchDTO.getB_No().trim().equalsIgnoreCase("B-")) {
-			query += "  ( (UPPER(a.b_No) LIKE UPPER(:b_id) ) OR (a.b_No is null) )";
-			map.put("b_id", "%" + "B-" + "%");
-
-		}
+//		map.put("b_id", "%" + advancedSearchDTO.getB_No() + "%");
+//
+//
+//		if (advancedSearchDTO.getB_No() != null && !advancedSearchDTO.getB_No().trim().equalsIgnoreCase("\"")
+//				&& !advancedSearchDTO.getB_No().trim().equalsIgnoreCase("B-")) {
+//			query += "  (UPPER(a.b_No) LIKE UPPER(:b_id))";
+//			map.put("b_id", "%" + advancedSearchDTO.getB_No() + "%");
+//
+//		} else if (advancedSearchDTO.getB_No() == null || advancedSearchDTO.getB_No().trim().equalsIgnoreCase("B-")) {
+//			query += "  ( (UPPER(a.b_No) LIKE UPPER(:b_id) ) OR (a.b_No is null) )";
+//			map.put("b_id", "%" + "B-" + "%");
+//
+//		}
 
 		if (advancedSearchDTO.getA_No() != null && !"\"".equalsIgnoreCase(advancedSearchDTO.getA_No())) {
 
-			query += " AND (UPPER(a.a_No) LIKE UPPER(:a_id))";
+			query += " (UPPER(a.a_No) LIKE UPPER(:a_id))";
 			map.put("a_id", "%" + advancedSearchDTO.getA_No() + "%");
 
 		} else {
 
-			query += " AND (UPPER(a.a_No) LIKE UPPER(:a_id))";
+			query += " (UPPER(a.a_No) LIKE UPPER(:a_id))";
 			map.put("a_id", "%" + "A-" + "%");
 
+		}
+		if (advancedSearchDTO.getB_No() != null && advancedSearchDTO.getB_No().length() > 0){
+			query += " AND (UPPER(a.b_No) LIKE UPPER(:b_id))";
+			map.put("b_id", "%" + advancedSearchDTO.getB_No() + "%");
 		}
 
 		if (advancedSearchDTO.getCompany_Name() != null
@@ -1140,29 +1145,29 @@ public class Protest_Info_DAO {
 		 *
 		 */
 		if ((advancedSearchDTO.getCase_Status() != null && advancedSearchDTO.getAttorneyId() == null)
-				&& "60DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
+				&& "120DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
 				&& !"RTC".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
 
-			query += "  AND (a.public_decision_date <= trunc(getdate() - 60,'DD')) ";
+			query += "  AND a.public_decision_date <= CONVERT(DATETIME, CONVERT(DATE, getdate()-120)) ";
 			query += "  AND  b.gc_Track_Dm_No IS null";
-			query += "  AND (UPPER(a.case_Status) LIKE UPPER('CLOSED'))";
+			query += "  AND UPPER(a.case_Status) LIKE UPPER('CLOSED')";
 
 			/*
 			 * ready to complete After public decision is issued and is pending
 			 * verification we only want to retrieve records
 			 */
 		} else if ((advancedSearchDTO.getCase_Status() != null && advancedSearchDTO.getAttorneyId() == null)
-				&& !"60DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
+				&& !"120DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
 				&& "RTC".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
 			query += "  AND (UPPER(a.case_Status) LIKE UPPER('CLOSED'))";
 
 			query += "  AND  b.gc_Track_Dm_No IS NOT null  AND b.verified_By is null";
 
 		} else if ((advancedSearchDTO.getCase_Status() != null && advancedSearchDTO.getAttorneyId() != null)
-				&& "60DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
+				&& "120DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
 				&& !"RTC".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
-
-			query += "  AND (a.public_decision_date <= trunc(getdate() - 60,'DD')) ";
+/* query += "  AND (a.public_decision_date <= CONVERT(DATETIME, CONVERT(DATE, getdate()-60)) "; 20240305 */
+			query += "  AND a.public_decision_date <= CONVERT(DATETIME, CONVERT(DATE, getdate()-120)) ";
 			query += "  AND  d.gc_Track_Dm_No IS null";
 			query += "  AND (UPPER(a.case_Status) LIKE UPPER('CLOSED'))";
 
@@ -1171,14 +1176,14 @@ public class Protest_Info_DAO {
 			 * referred by d
 			 */
 		} else if ((advancedSearchDTO.getCase_Status() != null && advancedSearchDTO.getAttorneyId() != null)
-				&& !"60DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
+				&& !"120DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
 				&& "RTC".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
 			query += "  AND (UPPER(a.case_Status) LIKE UPPER('CLOSED'))";
 
 			query += "  AND  d.gc_Track_Dm_No IS NOT null  AND d.verified_By is null";
 
 		} else if (advancedSearchDTO.getCase_Status() != null
-				&& !"60DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
+				&& !"120DAYS".equalsIgnoreCase(advancedSearchDTO.getCase_Status())
 				&& !"RTC".equalsIgnoreCase(advancedSearchDTO.getCase_Status())) {
 
 			query += "  AND (UPPER(a.case_Status) LIKE UPPER(:caseStatus))";

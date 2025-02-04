@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../EPDS_Web/EPDS_Web.iml" filepath="$PROJECT_DIR$/../EPDS_Web/EPDS_Web.iml" />
       <module fileurl="file://$PROJECT_DIR$/../epds/epds.iml" filepath="$PROJECT_DIR$/../epds/epds.iml" />
       <module fileurl="file://$PROJECT_DIR$/../epds-auth/epds-auth.iml" filepath="$PROJECT_DIR$/../epds-auth/epds-auth.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../epds-ear/epds-ear.iml" filepath="$PROJECT_DIR$/../epds-ear/epds-ear.iml" />
-      <module fileurl="file://$PROJECT_DIR$/epds-parent.iml" filepath="$PROJECT_DIR$/epds-parent.iml" />
     </modules>
   </component>
 </project>

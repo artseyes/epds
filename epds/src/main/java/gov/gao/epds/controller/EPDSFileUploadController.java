@@ -98,8 +98,8 @@ public class EPDSFileUploadController { // NO_UCD (unused code)
 			
 			error.setFileName(dto.getFlowFilename());
 			error.setFileError("File Name : " + dto.getFlowFilename() + ", Error : "+ " :  File name is invalid and will be removed from the upload queue. "
-					+ "Please rename the file and upload it again and then submit the form. "
-					+ "   The only allowed characters in the file name are a-z, A-Z, 0-9, ., _, #,(),&. Make sure the length of the file name do not exceed 250 characters. ");
+					+ "Please rename the file and upload it again. "
+					+ "   The only allowed characters in the file name are a-z, A-Z, 0-9, ., _, #,(),&. Make sure the length of the file name does not exceed 250 characters. ");
 			
 			
 			if (fileNameLength > 250){
@@ -184,7 +184,7 @@ public class EPDSFileUploadController { // NO_UCD (unused code)
 		}else if (avScanResult != null && null != avScanResult.getException()){
 			error.setFileError("File Name : " + info.fileName + ", Error : "+ avScanResult.getException().getMessage() );
 		}else{
-			error.setFileError("File Name : " + info.fileName + ", Error : "+ "There was a problem uploading file. Please try again after some time. If the issue persists...contact GAO at protests@cbca.gov." );
+			error.setFileError("File Name : " + info.fileName + ", Error : "+ "There was a problem uploading file. Please try again after some time. If the issue persists...contact CBCA at cbca.eds@cbca.gov ." );
 		}
 		
 		errorMap.put("error",error);

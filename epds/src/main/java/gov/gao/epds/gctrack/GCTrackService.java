@@ -55,8 +55,8 @@ public class GCTrackService {
 	
 
 	/**
-	 * @return a list of new cases created in EPDS and a list of new
-	 *         developments done on different EPDS cases
+	 * @return a list of new cases created in EDS and a list of new
+	 *         developments done on different EDS cases
 	 */
 	@RolesAllowed("GCTRACK")
 	@GET
@@ -111,7 +111,7 @@ public class GCTrackService {
 		}
 
 		 if(e.getCause() instanceof org.hibernate.exception.GenericJDBCException){
-			 response.setException("Database is down. Please contact EDS support EPDS_Admins@ocio.usda.gov if problem persists. ");
+			 response.setException("Database is down. Please contact EDS support CBCA.IT@CBCA.GOV if problem persists. ");
 			 response.setRetry("Y");
 		 }
 
@@ -122,21 +122,21 @@ public class GCTrackService {
 		 }
 
 		 if(e.getCause() instanceof org.hibernate.exception.JDBCConnectionException){
-			 response.setException("Database is down. Please contact EDS support EPDS_Admins@ocio.usda.gov if problem persists. ");
+			 response.setException("Database is down. Please contact EDS support CBCA.IT@CBCA.GOV if problem persists. ");
 			 response.setRetry("Y");
 		 }
 
 
 		 if(e.getCause() instanceof org.hibernate.exception.SQLGrammarException){
-			 response.setException("Database is down. Please contact EDS support EPDS_Admins@ocio.usda.gov if problem persists. ");
+			 response.setException("Database is down. Please contact EDS support CBCA.IT@CBCA.GOV if problem persists. ");
 			 response.setRetry("N");
 		 }
 	}
 
 
 	/**
-	 * @return a list of new cases created in EPDS and a list of new
-	 *         developments done on different EPDS cases
+	 * @return a list of new cases created in EDS and a list of new
+	 *         developments done on different EDS cases
 	 */
 	@RolesAllowed("GCTRACK")
 	@GET
@@ -179,8 +179,8 @@ public class GCTrackService {
 
 	/**
 	 * @param a_no
-	 *            unique id for an EPDS case
-	 * @return EPDS data for a case used by gc-track while filing a new case
+	 *            unique id for an EDS case
+	 * @return EDS data for a case used by gc-track while filing a new case
 	 * @throws Exception
 	 */
 	@RolesAllowed("GCTRACK")
@@ -231,7 +231,7 @@ public class GCTrackService {
 
 	/**
 	 * @param a_No
-	 *            unique id for an EPDS case
+	 *            unique id for an EDS case
 	 * @return
 	 * @throws Exception
 	 */
@@ -328,7 +328,7 @@ public class GCTrackService {
 
 	/**
 	 * @param a_no
-	 *            unique id for an EPDS case
+	 *            unique id for an EDS case
 	 * @return Rest response that carries GC_Track_Service_Call_Response object.
 	 *         It basically allows user to know whether the call was successful
 	 *         or any exception if it failed
@@ -377,7 +377,7 @@ public class GCTrackService {
 
 	/**
 	 * @param gc_track_case
-	 *            data shared between EPDS case and gc-track case. EPDS syncs
+	 *            data shared between EDS case and gc-track case. EDS syncs
 	 *            with gc-track based on this data
 	 * @return Rest response that carries GC_Track_Service_Call_Response object.
 	 *         It basically allows user to know whether the call was successful
@@ -437,7 +437,7 @@ public class GCTrackService {
 
 	/**
 	 * @param gc_track_case
-	 *            data shared between EPDS case and gc-track case. EPDS syncs
+	 *            data shared between EDS case and gc-track case. EDS syncs
 	 *            with gc-track based on this data
 	 * @return rest response that carries GC_Track_Service_Call_Response object.
 	 *         It basically allows user to know whether the call was successful
@@ -501,7 +501,7 @@ public class GCTrackService {
 
 	/**
 	 * @param jsonArray_of_multipleCaseData
-	 *            an array mulitpse cases pushed by gc-track to update EPDS
+	 *            an array mulitpse cases pushed by gc-track to update EDS
 	 *            cases
 	 * @return Rest response that carries GC_Track_Service_Call_Response object.
 	 *         It basically allows user to know whether the call was successful

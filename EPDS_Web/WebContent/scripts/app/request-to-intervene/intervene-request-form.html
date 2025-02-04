@@ -1,6 +1,6 @@
 <fieldset class="panel panel-primary">
-	<legend class="visually-hidden">New Request to Intervene</legend>
-	<div class="panel-heading">New Request to Intervene</div>
+	<legend class="visually-hidden">New Grantee or Third Party</legend>
+	<div class="panel-heading">Grantee or Third Party</div>
 	<div class="panel-body">
 		<form class="form-horizontal" name="interveneProtestRequestForm"
 			role="form" enctype="multipart/form-data" novalidate
@@ -9,7 +9,7 @@
 			<fieldset class="box box-primary">
 				<legend class="visually-hidden">Intervenor</legend>
 				<div class="box-header with-border">
-					<h3 class="box-title">Intervenor</h3>
+					<h3 class="box-title">Grantee or Third Party</h3>
 					<div class="box-tools pull-right"></div>
 				</div>
 				<!-- /.box-header -->
@@ -17,7 +17,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="company_name" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Company Name</label>
+								<label for="company_name" class="col-sm-12 col-lg-12 col-md-12 requiredInputs">Party</label>
 								<div class="col-sm-12 col-lg-12 col-md-12">
 									<input type="text" name="company_name" id="company_name" data-validate-on="dirty"
 										class="form-control input-sm"
@@ -28,7 +28,7 @@
 										data-ng-pattern="regEx.nameOfFirm"
 										data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-z A-Z 0-9 !,@#&.)(/\\-"
 										maxlength="200"
-										data-validation-msg-required="Please enter company name"
+										data-validation-msg-required="Please enter Party name"
 										required auto-focus>
 								</div>
 							</div>
@@ -56,9 +56,9 @@
 			</fieldset>
 
 			<fieldset class="box box-primary">
-				<legend class="visually-hidden">Company Address</legend>
+				<legend class="visually-hidden">Address</legend>
 				<div class="box-header with-border">
-					<h3 class="box-title">Company Address</h3>
+					<h3 class="box-title">Address</h3>
 					<div class="box-tools pull-right"></div>
 				</div>
 				<!-- /.box-header -->
@@ -178,8 +178,8 @@
 							<div class="form-group">
 								<fieldset class="col-sm-12 col-lg-12 col-md-12">
 									<legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
-											aria-label="Upload Request To Intervene Document, ({{uploadDocMessage}}), required">
-										Upload Request To Intervene Document ({{uploadDocMessage}})
+											aria-label="Upload Grantee or Third Party Document, ({{uploadDocMessage}}), required">
+										Upload Grantee or Third Party Request Document ({{uploadDocMessage}})
 									</legend>
 									<div class="col-sm-12 col-lg-12 col-md-12"
 										 data-flow-init="{

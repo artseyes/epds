@@ -76,7 +76,7 @@
                                                                data-ng-model="form.company_name"
                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-z A-Z 0-9 !,@#&.)(/\\-"
                                                                maxlength="200"
-                                                               data-validation-msg-required="Please enter company name"
+                                                               data-validation-msg-required="Please enter filing party name"
                                                                required>
                                                     </div>
                                                 </div>
@@ -151,7 +151,7 @@
                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
                                                                placeholder=""
                                                                data-ng-model="form.company_address1"
-                                                               data-validation-msg-required="Please enter company street address"
+                                                               data-validation-msg-required="Please enter Street address"
                                                                data-details="companyAddressDetails"
                                                                data-options="options"
                                                                maxlength="100"
@@ -176,7 +176,7 @@
                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 #&,;:'.)(/\\-"
                                                                placeholder=""
                                                                data-ng-model="form.company_address2"
-                                                               data-validation-msg-required="Please enter company street address"
+                                                               data-validation-msg-required="Please enter street address"
                                                                data-details="companyAddressDetails"
                                                                data-options="options"
                                                                maxlength="100">
@@ -200,7 +200,7 @@
                                                                data-validation-msg-pattern="Invalid input format"
                                                                data-ng-pattern="regEx.zipcode"
                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9- )( "
-                                                               data-validation-msg-required="Please enter company "
+                                                               data-validation-msg-required="Please enter zip "
                                                                maxlength="10"
                                                                required>
                                                     </div>
@@ -221,7 +221,7 @@
                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z0-9 &.)(/\\':;-"
                                                                data-popover-placement="top"
                                                                data-ng-pattern="regEx.city"
-                                                               data-validation-msg-required="Please enter company city "
+                                                               data-validation-msg-required="Please enter city "
                                                                maxlength="20"
                                                                required>
                                                     </div>
@@ -242,7 +242,7 @@
                                                                data-popover-trigger="'focus'"
                                                                data-popover-placement="top"
                                                                data-ng-pattern="regEx.state"
-                                                               data-validation-msg-required="Please enter company state "
+                                                               data-validation-msg-required="Please enter state "
                                                                maxlength="20"
                                                                required>
                                                     </div>
@@ -265,7 +265,7 @@
                                                                data-ng-pattern="regEx.country"
                                                                maxlength="20"
                                                                data-validation-msg-pattern="Invalid input format. Allowed characters and symbols are a-zA-Z "
-                                                               data-validation-msg-required="Please enter company country"
+                                                               data-validation-msg-required="Please enter country"
                                                                required>
                                                     </div>
                                                 </div>
@@ -278,9 +278,9 @@
                                 </fieldset>
 
                                 <fieldset class="box box-primary" data-ng-if="role == 'GAO ADMIN'">
-                                    <legend class="visually-hidden">Protester Representative</legend>
+                                    <legend class="visually-hidden">Filing Representative</legend>
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Protester Representative</h3>
+                                        <h3 class="box-title">Filing Representative</h3>
 <!--                                        <div class="box-tools pull-right">-->
 <!--                                            <button class="btn btn-box-tool btn-info" data-box-collapse>-->
 <!--                                                <i class="fa fa-minus"></i> <strong>Collapse</strong>-->
@@ -383,9 +383,9 @@
 
                                                 <div class="form-group">
                                                     <fieldset>
-                                                        <legend class="visually-hidden">Fax Number</legend>
+                                                        <legend class="visually-hidden">Fax Number99</legend>
                                                         <label for="faxnumber" class="col-sm-12 col-lg-12 col-md-12">Fax
-                                                            Number</label>
+                                                            Number99</label>
                                                         <div class="col-sm-12 col-lg-12 col-md-12">
                                                             <input type="text"
                                                                    id="faxnumber"
@@ -591,7 +591,7 @@
                                                                data-validate-on="dirty"
                                                                data-validation-msg-required="Please enter Contract Number"
                                                                required>
-                                                        <pre><strong>If unknown, please indicate "unknown"</strong></pre>
+                                                        <pre><strong>If unknown, please indicate "unknown".  For FEMA arbitrations, please enter the FEMA disaster declaration number.</strong></pre>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -629,8 +629,8 @@
                                                 <div class="form-group">
                                                     <fieldset class="col-sm-12 col-lg-12 col-md-12">
                                                         <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs"
-                                                                aria-label="Upload Protest Document, {{uploadDocMessage}}, required">
-                                                            Upload Protest Document ({{uploadDocMessage}})
+                                                                aria-label="Upload Case Document, {{uploadDocMessage}}, required">
+                                                            Upload Case Document ({{uploadDocMessage}})
                                                         </legend>
                                                         <div class="col-sm-12 col-lg-12 col-md-12"
                                                              data-flow-init="{
@@ -704,7 +704,7 @@
                                                      data-ng-show="protestDocumentAdded">
                                                     <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
                                                         <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
-                                                            Do you want to Upload Associated Documents?
+                                                            Do you want to upload associated documents?
                                                         </legend>
                                                         <div class="col-sm-12 col-lg-12 col-md-12">
                                                             <label>
@@ -812,7 +812,7 @@
                                                 <div class="form-group">
                                                     <fieldset class="col-sm-12 col-lg-12 col-md-12" required>
                                                         <legend class="col-sm-12 col-lg-12 col-md-12 requiredInputs">
-                                                            {{docConfidentialLabel}} (Selection brings up legal information)
+                                                            {{docConfidentialLabel}}
                                                         </legend>
                                                         <div class="col-sm-10 col-lg-9 col-md-9"
                                                              style="margin-left: 200px;">

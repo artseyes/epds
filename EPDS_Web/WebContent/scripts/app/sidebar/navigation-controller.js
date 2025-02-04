@@ -135,7 +135,7 @@ function navigationController($scope, $rootScope, authenticationService, authLog
     $scope.contactUs = function () {
         var customAttr = {
             headerText: "Contact Us",
-            bodyText: "If you have questions or Section 508 needs, please contact GAO at 202-512-5436 or protests@cbca.gov.",
+            bodyText: "If you have questions or Section 508 needs, please contact CBCA at 202-606-8800 or cbcaclerk@cbca.gov.",
             modalType: "info",
             actionType: "",
             cancelBtnReq: "N",
@@ -146,10 +146,10 @@ function navigationController($scope, $rootScope, authenticationService, authLog
 
     $scope.feedBack = function () {
         var bodyText = "";
-        bodyText += "<p>To provide your feedback on how we can improve EPDS, " +
-            "please email us at <a href=\"mailto:epdsfeedback@cbca.gov\" target=\"_top\">" +
-            "epdsfeedback@cbca.gov<\/a>.<strong>  Do not use this email account " +
-            "to communicate with GAO regarding  pending or prospective protests.<strong><\/p>";
+        bodyText += "<p>To provide your feedback on how we can improve EDS, " +
+            "please email us at <a href=\"mailto:cbca.eds@cbca.gov\" target=\"_top\">" +
+            "cbca.eds@cbca.gov<\/a>.<strong>  Do not use this email account " +
+            "to communicate with CBCA regarding  pending Filings.<strong><\/p>";
 
         var customAttr = {
             headerText: "Send Feedback",
@@ -291,7 +291,7 @@ function navigationController($scope, $rootScope, authenticationService, authLog
         if (data && data.data.error === "concurrentLogin") {
             $rootScope.authenticated = false;
             $rootScope.sessionExpired = true;
-            $rootScope.redirectMessage = "You have been logged out because your account has been used to login to EPDS on a different device or browser."
+            $rootScope.redirectMessage = "You have been logged out because your account has been used to login to EDS on a different device or browser."
             $location.path("/").replace();
         } else if (data &&
             (data.data.error === "authentication object not found"
@@ -350,14 +350,15 @@ function navigationController($scope, $rootScope, authenticationService, authLog
             var protestDataSvc = $injector.get("protestDataSvc");
             protestDataSvc.testPayDotGov().then(function (response) {
                 if (response.isSuccess) {
-                    bodyText += "<p>Before filing a matter, you should carefully review our filing Regulations. "
-                        + "The Regulations are accessible by selecting the CBCA logo at the top of the screen,  "
-                        + "which will redirect you to our website. You should first select Bid Protests Appropriations Law, then select Our Process.";
+                    bodyText += "<p>Before filing a document, you should carefully review the CBCA's filing requirements and rules on the CBCA website. "
+                        + "The CBCA logo at the top of the screen will redirect you to the CBCA website. "
+                        + "On our website, you should first select the Filings and Proceedings tab and then select the Filing Documents tab and the Rules tab. "
+                        + "These tabs contain important information regarding what is necessary to include in your filing as well as what filings the CBCA will not accept.";
 
-                    bodyText += "<p>You are strongly encouraged to review the following sections for important information: </p>";
+/*                    bodyText += "<p>You are strongly encouraged to review the following sections for important information: </p>";
 
                     bodyText += "<ul>";
-                    bodyText += "  <li>&#x00a7; 21.1 Filing a protest;<\/li>";
+                    bodyText += "  <li>&#x00a7; 21.1 Filing a case;<\/li>";
                     bodyText += "  <li>&#x00a7; 21.2 Time for filing; and<\/li>";
                     bodyText += "  <li>&#x00a7; 21.5 Protest issues not for consideration.<\/li>";
                     bodyText += "<\/ul>  ";
@@ -365,10 +366,17 @@ function navigationController($scope, $rootScope, authenticationService, authLog
                     bodyText += "<p>These sections include important information regarding what is necessary to include in your protest and what protests our Office will not consider. "
                         + "No refunds of the filing fee will be made in the event a protest is dismissed for failing to comply with or  "
                         + "otherwise does not meet the requirements set forth in our Bid Protest Regulations. <\/p>";
+                */
+                    bodyText += "<p>DO NOT FILE IN EDS: <\/p>";
 
-                    bodyText += "<p>NO CLASSIFIED INFORMATION SHOULD BE FILED IN EDS.<br>"
-                        + "For guidance on protests including classified material, please go to: <a href='https://https://cbca.gov/howto/index.html'>How to File</a> </p>";
+                    bodyText += "1. Documents that contain classified information<br>";
+                    bodyText += "2. Documents to be submitted in camera<br>";
+                    bodyText += "<p>3. Documents subject to a protective order </p>";
 
+/*
+                    bodyText += "<p>NO CLASSIFIED INFORMATION OR INFORMATION TO BE FILED IN CAMERA OR SUBJECT TO A PROTECTIVE ORDER SHOULD BE FILED IN EDS.<br>"
+                        + "For guidance on filing including classified material, please go to: <a href='https://cbca.gov/howto/index.html'>How to File</a> </p>";
+*/
                     bodyText += "<p>Do you want to proceed to file a new filing ?</p>";
 
                     var customAttr = {

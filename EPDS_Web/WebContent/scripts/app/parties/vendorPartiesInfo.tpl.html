@@ -15,9 +15,9 @@
 				<i class="fa fa-info-circle"></i>
 				<h3 class="box-title">
 				<span data-ng-if="userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR'">
-				Primary Representative</span>
+				Non-Agency Party Representative</span>
 				<span data-ng-if="userInfo.role == 'SECONDARY PROTESTER' || userInfo.role == 'SECONDARY INTERVENOR'">
-				Secondary Representative</span>
+				Other Representative</span>
 				<span data-ng-if="userInfo.invitationStatus == 'INVITED'">
 				<strong>(Pending)</strong>
 				</span>
@@ -30,7 +30,7 @@
 					<span>
 						{{userInfo.first_Name}}&nbsp;{{userInfo.middle_initial}}&nbsp;{{userInfo.last_Name}}</span>
 						
-				<!-- Button for admitting to PO : display only for CBCA User's and if protective order has been issued on this case -->
+				<!-- Button for admitting to 'PO : display only for CBCA User's and if protective order has been issued on this case -->
 				<button  
 						data-ng-show="protestInfo.po == 'Y' 
 						&& (userRole == 'GAO ATTORNEY' || userRole == 'GAO SUPERVISOR' || userRole == 'GAO ADMIN') 
@@ -74,7 +74,7 @@
 					data-ng-show="(userRole == 'GAO ADMIN' && (userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR')) || ((userRole == 'PROTESTER' || userRole == 'INTERVENOR')
 									 && userInfo.user_Id == loggedInUserInfo.user_Id) 
 									&& (userInfo.role == 'PROTESTER' || userInfo.role == 'INTERVENOR') 
-									&& (partiesList.length <= 3)">
+									&& (partiesList.length <= 9)">
 					<i class="fa fa-plus"></i> Add 2nd Rep
 				</button>
 				
@@ -112,7 +112,7 @@
 	</div>
 </div>
 <div class="row" data-ng-show="partiesList.length > 2">
-	<div class="col-md-6 col-sm-12 col-xs-12" data-ng-repeat="userInfo in partiesList | limitTo:2:4">
+	<div class="col-md-6 col-sm-12 col-xs-12" data-ng-repeat="userInfo in partiesList | limitTo:2:10">
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<i class="fa fa-info-circle"></i>

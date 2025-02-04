@@ -528,7 +528,7 @@ function SubmitNewDocCtrl($scope, $log, $rootScope, $location, $http, $route, $r
 							
 							var customAttr = {
 									headerText : "Error"	,
-									bodyText : "<p>Please briefly describe the document you are filing (e.g., objection to agency's 5 day letter, motion for an extension).</p>",
+									bodyText : "<p>Please briefly describe the document you are filing (e.g., motion to dismiss, motion for an extension).</p>",
 									modalType : "error",
 									actionType : "",
 								    cancelBtnReq : "N",
@@ -717,7 +717,7 @@ function editDocumentDescriptionsModalInstanceCtrl($scope, $uibModalInstance, it
     $scope.OK = function (docTypeDesc) {
         var customAttr = {
             headerText: "Error",
-            bodyText: "Please briefly describe the document you are filing.(E.g., objection to agency's 5 day letter, request for an extension, etc.).",
+            bodyText: "Please briefly describe the document you are filing.(E.g., motion to dismiss, request for an extension, etc.).",
             modalType: "error",
             actionType: "",
             cancelBtnReq: "N",

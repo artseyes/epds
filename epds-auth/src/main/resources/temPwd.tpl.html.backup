@@ -1,5 +1,5 @@
 
-<p><strong>THIS E-MAIL CONTAINS IMPORTANT INFORMATION PERTAINING TO YOUR ABILITY TO ACCESS THE ELECTRONIC PROTEST DOCKET SYSTEM - DO
+<p><strong>THIS E-MAIL CONTAINS IMPORTANT INFORMATION PERTAINING TO YOUR ABILITY TO ACCESS THE ELECTRONIC DOCKETING SYSTEM - DO
  NOT LOSE THIS MESSAGE!</strong></p>
 
 <table>
@@ -15,7 +15,7 @@ Your EDS account has been reset. Please use the following temporary password to 
 </table>
 
 <p>Log into the <a
-		href="https://epdstest.edc.usda.gov/login">ELECTRONIC DOCKET SYSTEM (EDS)</a> and reset your password as prompted.</p>
+		href="https://eds.cbca.gov/login">ELECTRONIC DOCKET SYSTEM (EDS)</a> and reset your password as prompted.</p>
 <p>
 <table>
 	<tbody><tr></tr><tr></tr></tbody>
@@ -30,7 +30,7 @@ Your EDS account has been reset. Please use the following temporary password to 
         <li id="liHasLower"><i>One lowercase letter</i></li>
         <li id="liHasSpecialChar">One special character ! # $ - % = + : ; ? ~ *</li>
         <li style="display: none;" id="liHasWhiteSpace"><i>No spaces</i></li>
-        <li style="color: Black;">Dictionary words may not be used in passwords</li>
+ <!--       <li style="color: Black;">Dictionary words may not be used in passwords</li> -->
         <li style="color: Black;">The previous 10 passwords may not be re-used</li>
     </ul>
 	</div>  
@@ -42,7 +42,7 @@ Your EDS account has been reset. Please use the following temporary password to 
 <p>
 Tips on copying and pasting the system-generated temporary password:
  Due to the cryptic nature of the system-generated password, it may be easier for you to copy and paste the password from this e-mail into the password field on  
- the EPDS login page. To copy and paste the password from this e-mail:
+ the EDS login page. To copy and paste the password from this e-mail:
 <ol type="1">
   <li>highlight the temporary password with your mouse <strong>(be sure to include ONLY the characters in the password and NOT the blank spaces that precede or follow
     the password);</strong></li>

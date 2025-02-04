@@ -256,7 +256,7 @@ function ManageAgencyCtrl($scope, $log, $rootScope, $location, $http, $route, $r
 
         var partyType = {
             id: "1",
-            bodyText: "Are you sure you want to permanently delete " + lastName + " ," + firstName + "EPDS user account",
+            bodyText: "Are you sure you want to permanently delete " + lastName + " ," + firstName + "EDS user account",
             isGAOUser: "N",
             fullDelete: "Y"
 
@@ -466,7 +466,7 @@ function ManageAgencyCtrl($scope, $log, $rootScope, $location, $http, $route, $r
                     if (data.data.isSuccess) {
                         var customAttr = {
                             headerText: "Success",
-                            bodyText: "You have successfully deleted the user from EPDS",
+                            bodyText: "You have successfully deleted the user from EDS",
                             modalType: "success",
                             actionType: "",
                             cancelBtnReq: "N",

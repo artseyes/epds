@@ -40,14 +40,14 @@ public class ValidationTesting {
 		user.setCity("Glebard Street");
 		user.setCountry("United States of America");
 		user.setDesc("Description");
-		user.setEmail("case.tracking@gsa.gov");
+		user.setEmail("cbca.eds@cbca.gov");
 		user.setEpds_role_id(8);
 		user.setZipCode("5000000001_123ABC()");
 		user.setPhoneNo("(630) 290-6087");
 		
 		LoginDTO loginDTO = new LoginDTO();
 		
-		loginDTO.setEmail("case.tracking@gsa.gov");
+		loginDTO.setEmail("cbca.eds@cbca.gov");
 		List<InputValidationError> constraintViolations = AuthUtil.validateDTO(user);
 		
 		/*for (InputValidationError cv : constraintViolations) {

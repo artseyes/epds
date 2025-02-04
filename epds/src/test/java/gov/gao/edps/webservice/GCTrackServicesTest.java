@@ -31,13 +31,13 @@ public class GCTrackServicesTest {
 	public static final String CIPHER_ALGORITHM = "AES";
 	public static final String KEY_ALGORITHM = "AES";
 	private static final String gctracAuthPassword =  "CBCA_app_pwd123";
-	private static final String gctracDecryptPassword = "CBCA_app_Decrypt123";
+	private static final String gctracDecryptPassword = "CBCA_app_Decrypt";
 
 	public static final String PASSWORD_HASH_ALGORITHM = "SHA-256";
 	public static final String baseUrl = "http://localhost:8080/epds/rest/gc-track-services";
 
 	public static void main(String[] args) throws Exception {
-//		test_get_epdsUpdate();
+		test_get_epdsUpdate();
 //		test_get_protest_info("A-TCK92.3");
 //		test_get_list_of_epds_event("A-3ZTT2");
 //		test_delete_event();

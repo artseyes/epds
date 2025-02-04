@@ -13,27 +13,27 @@
                     <thead>
                     <tr>
                         <th scope="col" class="span120">CBCA Number</th>
-                        <th scope="col">Protester</th>
+                        <th scope="col">Filing Party</th>
                         <th scope="col" class="span120">Date Filed</th>
                         <th scope="col">Agency</th>
                         <th scope="col">Contract Number</th>
-                        <th scope="col">Due Date</th>
+                        <!-- <th scope="col">Close Date</th> -->
                         <th scope="col">
-                            <span data-ng-show="role == 'INTERVENOR'">Do you want to request to intervene in this case ?</span>
+                            <span data-ng-show="role == 'INTERVENOR'">Do you want to join as a Grantee or Third Party in this case?</span>
                             <span data-ng-show="role == 'AGENCY ATTORNEY'">Do you want to enter an appearance in this case ?</span>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr data-ng-repeat="protestInfo in protestInfoList">
-                        <td>
+                        <td data-order="{{protestInfo.b_No || (protestInfo.submission_Date | stringDate:'yyyyMMddHHmmss')}}" data-search="{{protestInfo.b_No || 'Pending'}} {{protestInfo.searchChildBnos}}">
                             <tree protest="protestInfo" path="case-docketsheet" disable-case-docket="Y">
                         </td>
                         <td>{{protestInfo.company_Name}}</td>
                         <td>{{protestInfo.submission_Date}}</td>
                         <td>{{protestInfo.agency_Name}}</td>
                         <td>{{protestInfo.solicitation_No}}</td>
-                        <td>{{protestInfo.due_Date}}</td>
+                        <!-- <td>{{protestInfo.due_Date}}</td> -->
                         <td>
                             <div class="form-group" id="requestToIntervene">
                                 <div class="buttoncls_$index">
