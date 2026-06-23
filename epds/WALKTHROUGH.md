@@ -445,3 +445,123 @@ CROSS APPLY
 WHERE 
     r.blocking_session_id <> 0;
 ```
+---
+
+## 🛡️ Phase 9: Global Transaction Exception Interception Framework
+
+When database transactions or constraint checks fail, raw engine exceptions should never leak out to the AngularJS frontend. The system handles transaction failures cleanly using an enterprise **Global Exception Handler / Filter Controller**.
+
+### 🛠️ The Global Exception Interceptor Blueprint
+Create this class within your web tier (`EPDS_Web`) to intercept thread execution errors automatically:
+
+```java
+package gov.gao.epds.web.infrastructure;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.dao.DataAccessException;
+import javax.transaction.RollbackException;
+import java.util.HashMap;
+import java.util.Map;
+
+@ControllerAdvice // <--- Directs the web engine to intercept all Controller exceptions
+public class GlobalWebExceptionInterceptor {
+
+    /**
+     * Catches atomic database transaction and constraint violation crashes.
+     */
+    @ExceptionHandler({DataAccessException.class, RollbackException.class})
+    public ResponseEntity<Object> handleDatabaseTransactionFailure(Exception ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", java.time.Instant.now().toString());
+        body.put("status", HttpStatus.CONFLICT.value());
+        body.put("error", "Database Transaction Aborted");
+        body.put("message", "The requested data operation could not be completed securely.");
+        
+        // Return a clean JSON response instead of a raw stack trace payload
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    /**
+     * Fallback catcher for standard system nulls or unexpected application crashes.
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGeneralApplicationFailure(Exception ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put("error", "Internal Server Error");
+        body.put("message", "An unexpected system anomaly interrupted processing.");
+        
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+```
+
+---
+
+## 🚀 Phase 10: Continuous Integration & Deployment (CI/CD Pipeline)
+
+To automate compiling, packaging, testing, and building the application, the project uses **GitHub Actions**. This workflow automatically triggers on every code push to ensure your multi-module structure compiles cleanly.
+
+### 📝 1. Pipeline Definition (`.github/workflows/ci-cd.yml`)
+Create a file exactly at this path in your repository: `.github/workflows/ci-cd.yml`
+
+```yaml
+name: EPDS Enterprise Build & Containerization Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    name: Maven Compile & Package Execution
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code Repo
+      uses: actions/checkout@v4
+
+    - name: Configure Java JDK Development Environment
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    - name: Execute Automated Unit Tests & Packaging
+      # Compiles modules and packages epds.ear without opening local database connections
+      run: mvn clean package -DskipITs
+
+    - name: Set up Docker Buildx Context
+      uses: docker/setup-buildx-action@v3
+
+    - name: Verify Docker Image Generation
+      # Simulates local Docker compilation tasks to ensure Dockerfiles are error-free
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: false
+        tags: artseyes/epds:latest
+```
+
+---
+
+### 🛠️ 2. Production Deployment Maintenance Routine
+When your code builds successfully through the automation runner, apply this operational routine to update your live servers:
+
+```bash
+# 1. Fetch updated source versions from the cloud server tracking pool
+git pull origin main
+
+# 2. Compile and package fresh production binaries cleanly across modules
+mvn clean package -DskipTests
+
+# 3. Force Docker Compose to safely rebuild container images and restart services gracefully
+docker-compose up --build -d
+```
