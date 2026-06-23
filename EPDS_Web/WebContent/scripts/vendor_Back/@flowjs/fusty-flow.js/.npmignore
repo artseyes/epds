@@ -1,0 +1,25 @@
+# phpstorm project files
+.idea/*
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# build
+/build
+
+# samples
+/samples/temp/*
+
+# node
+/node_modules/*
+
+# bower
+/bower_components/*

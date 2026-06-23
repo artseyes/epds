@@ -1,0 +1,42 @@
+{
+  "_from": "jquery-file-download",
+  "_id": "jquery-file-download@1.4.6",
+  "_inBundle": false,
+  "_integrity": "sha1-/ly0XUcE+Jflt2I+zoc3EaqLRuo=",
+  "_location": "/jquery-file-download",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "jquery-file-download",
+    "name": "jquery-file-download",
+    "escapedName": "jquery-file-download",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-file-download/-/jquery-file-download-1.4.6.tgz",
+  "_shasum": "fe5cb45d4704f897e5b7623ece873711aa8b46ea",
+  "_spec": "jquery-file-download",
+  "_where": "/home/vmuser1/work/EPDS/git/epds_npm/EPDS_Web/src/main",
+  "author": {
+    "name": "John Culviner"
+  },
+  "bugs": {
+    "url": "https://github.com/johnculviner/jquery.fileDownload/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "jQuery.fileDownload plugin",
+  "homepage": "https://github.com/johnculviner/jquery.fileDownload#readme",
+  "name": "jquery-file-download",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnculviner/jquery.fileDownload.git"
+  },
+  "version": "1.4.6"
+}

@@ -114,7 +114,7 @@ public class PropertyFileEncrypter {
 			try {
 				props.setProperty(key, encrypt(props.getProperty(key)));
 //				props.setProperty(key, decrypt(props.getProperty(key)));
-			} catch (Exception e){
+		} catch (Exception e){
 				System.out.println("En/Decrypt failed with: " + e.toString() + " with " + key + " = " + props.getProperty(key));
 			}
 

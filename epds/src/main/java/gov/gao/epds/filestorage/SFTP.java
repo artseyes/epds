@@ -410,14 +410,42 @@ public class SFTP {
 //		isSuccess = backupFiles(relativePath,getSftpSession(),false);
 
 //		if (isSuccess){
-			System.out.println("removeFile : " + SFTPWORKINGDIR + "/" + relativePath);
+			System.out.println("removeFile : " + SFTPWORKINGDIR +  relativePath);
 			// shred won't work until needed/converted. specifying remote windows command
-//			String cmd = EPDS_SHRED_CMD + SFTPWORKINGDIR + "/" + relativePath;
-			String cmd = "del " + SFTPWORKINGDIR + "/" + relativePath;
-			isSuccess = runRemoteSFTPCommand(cmd, getSftpSession());
+//			String cmd = EPDS_SHRED_CMD + SFTPWORKINGDIR + "/" + relativePath;//		String cmd = "rm " + SFTPWORKINGDIR +  relativePath;
+//			isSuccess = runRemoteSFTPCommand(cmd, getSftpSession());
 //		}
+		Session session = null;
+		Channel channel = null;
+		ChannelSftp channelSftp = null;
+		boolean isConnectionValid = false;
 
-		return isSuccess;
+		try {
+
+			session = getSftpSession();
+			session.connect();
+			channel = session.openChannel("sftp");
+			channel.connect();
+			System.out.println("Shell channel connected...., dir: " + SFTPWORKINGDIR);
+			channelSftp = (ChannelSftp) channel;
+			channelSftp.rm(SFTPWORKINGDIR +  relativePath);
+			isSuccess = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (channelSftp != null) {
+				channelSftp.disconnect();
+				channelSftp.exit();
+			}
+			if (channel != null)
+				channel.disconnect();
+
+			if (session != null)
+				session.disconnect();
+		}
+			return isSuccess;
 	}
 
 	/**
@@ -448,10 +476,10 @@ public class SFTP {
 //		}
 
         if (isSuccess){
-        	System.out.println("secureRemove : " + SFTPWORKINGDIR + "/" + relativeFilePath);
+        	System.out.println("secureRemove : " + SFTPWORKINGDIR + "\\" + relativeFilePath);
 			// shred won't work until needed/converted. specifying remote windows command
 //			String cmd = EPDS_SHRED_CMD + SFTPWORKINGDIR + "/" + relativeFilePath;
-			String cmd = "rmdir /q /s " + SFTPWORKINGDIR + "/" + relativeFilePath;
+			String cmd = "rmdir /q /s " + SFTPWORKINGDIR + "\\" + relativeFilePath;
 			isSuccess = runRemoteSFTPCommand(cmd, getSftpSession());
 		}
 
@@ -547,6 +575,7 @@ public class SFTP {
     	    session.connect();
     	    channel = session.openChannel("exec");
     	    ((ChannelExec)channel).setCommand(cmd);
+			channel.setInputStream(null);
     	    ((ChannelExec) channel).setErrStream(System.err);
             InputStream in = channel.getInputStream();
 

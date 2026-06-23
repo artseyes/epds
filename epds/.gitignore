@@ -5,3 +5,11 @@
 *.tern-project
 *.idea
 target
+# Node dependencies & system files
+**/node_modules/
+.DS_Store
+
+# Temporary backups and archives
+*_Back/
+*_old*
+*.tar
