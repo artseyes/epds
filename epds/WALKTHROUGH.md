@@ -208,3 +208,102 @@ The EPDS project is packaged as an Enterprise Archive (`.ear`) containing `epds-
 ### 📁 1. Module Packaging Structure
 WildFly isolates application dependencies using a modular classloader layout. The enterprise bundle must deploy utilizing the following component hierarchies:
 
+---
+
+## 🔄 Phase 6: Enterprise Transaction Lifecycle & Rollback Mechanics
+
+The EPDS application relies on **Container-Managed Transactions (CMT)** orchestrated by the JBoss/WildFly application server's transaction manager (Arjuna/Narayana JTA) and abstraction components within the Spring Framework. This section outlines the structural pathways for how transactions are initialized, propagated, and rolled back.
+
+### 🗺️ Transaction Flow Architecture
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Web as EPDS_Web / Controller
+    participant Prox as Spring AOP Proxy Context
+    participant TM as WildFly JTA Transaction Manager
+    participant DAO as Account_status_dao
+    participant DB as MS SQL 2022
+
+    Web->>Prox: 1. Invokes method annotated with @Transactional
+    Prox->>TM: 2. Intercepts call; interceptor requests Transaction start
+    TM->>DB: 3. Issues 'BEGIN TRANSACTION' over active JDBC connection
+    Prox->>DAO: 4. Delegates call to physical DAO method execution
+    DAO->>DB: 5. Executes HQL/SQL statements inside thread context
+    alt Success Path
+        DAO-->>Prox: 6a. Method exits normally (no unhandled Exceptions)
+        Prox->>TM: 7a. Interceptor requests execution completion
+        TM->>DB: 8a. Issues 'COMMIT' (Changes finalized to disk)
+    else Failure Path (RuntimeException Thrown)
+        DAO-->>Prox: 6b. Throws unhandled Exception up the execution stack
+        Prox->>TM: 7b. Interceptor catches error; flags transaction as rollback-only
+        TM->>DB: 8b. Issues 'ROLLBACK' (All uncommitted data changes wiped clean)
+    end
+```
+
+---
+
+### 1. Transaction Initialization (The Boundary)
+
+When a service bean or DAO method is flagged with the `@Transactional` annotation (as seen in your `Account_status_dao.java`), Spring utilizes **Aspect-Oriented Programming (AOP) Proxies** to wrap the execution:
+
+```java
+@Repository
+public class Account_status_dao extends DataAccess {
+    
+    @Transactional // <--- Directs the proxy engine to manage database boundaries
+    public List<Account_status> getListOfAccount_status() {
+        String query = "from ACCOUNT_STATUS";
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+        // Statements executed here pass down an active, shared transaction context
+        List<?> resultList = queryWithParams(query, map);
+        
+        if (resultList != null && resultList.size() > 0) {
+            return (List<Account_status>) resultList;
+        }
+        return null;
+    }
+}
+```
+
+* **The Proxy Interception:** When another component invokes `getListOfAccount_status()`, it doesn't call your class directly. It calls an automatically generated proxy object.
+* **The Context Association:** The proxy asks the JTA Transaction Manager if an active database transaction is already bound to the running thread.
+* **The Propagation Default:** By default, it uses `REQUIRED`. If a transaction exists, it joins it. If none exists, it signals the JTA provider to issue an explicit `BEGIN TRANSACTION` instruction down to **MS SQL Server 2022**.
+
+---
+
+### 2. Execution and Resource Locking
+
+While your queries run within the bounds of an open transaction block:
+* All database interactions inherit the server's default **Isolation Level** (typically `READ_COMMITTED` for MS SQL Server).
+* Modified rows, inserts, or specific structural updates are granted local locks within the database engine.
+* These alterations remain invisible to concurrent user threads accessing the system until an explicit completion instruction occurs.
+
+---
+
+### 3. Automated Rollback Mechanisms
+
+The system relies on automatic interception rules to determine whether data changes should be safely discarded.
+
+* **Triggered by Unchecked Exceptions:** By default, if a method wrapped in `@Transactional` throws a `RuntimeException` or an `Error` (such as a `NullPointerException` or a structural database constraint failure) that isn't explicitly caught inside a `try-catch` block, the proxy interceptor catches it.
+* **The Rollback Flag:** The interceptor immediately signals the Transaction Manager by setting the execution state to **`setRollbackOnly()`**.
+* **Database Restoration:** Before terminating the thread, WildFly issues a native T-SQL `ROLLBACK TRANSACTION` instruction over port 1433. MS SQL Server discards all temporary execution buffers, leaving table states exactly as they were before the boundary was pierced.
+
+#### ⚠️ Critical Caveat: Checked Exceptions
+Standard Java checked exceptions (extending `java.lang.Exception`, such as an `IOException`) do **not** trigger an automatic rollback by default. If your application logic requires rolling back on a checked exception, the annotation configuration boundary must be explicitly customized:
+
+```java
+// Forces rollback execution on custom checked application errors
+@Transactional(rollbackFor = MyCustomCheckedException.class)
+```
+
+---
+
+### 4. The Completion Path (Commit)
+
+If the active DAO method runs to completion and exits via a `return` statement without dropping an unhandled error:
+1. The wrapping AOP proxy intercepts the successful exit condition.
+2. It requests the Transaction Manager to finalize the database operation block.
+3. WildFly dispatches a definitive T-SQL `COMMIT` message to the database server.
+4. **MS SQL Server 2022** releases all internal execution table locks and flushes the staging logs permanently to disk storage, making the data visible across the entire platform.
