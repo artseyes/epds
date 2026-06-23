@@ -32,6 +32,12 @@ sequenceDiagram
 1. **User Interface Framework**: The presentation tier is isolated inside **`EPDS_Web`**, utilizing **AngularJS** backed by **UI Bootstrap** styles.
 2. **Client-Side Orchestration**: Script controllers (such as `account-reset.js`) listen for user browser events, capture text input payloads, and handle asynchronous AJAX network communication (`$http`).
 3. **Servlet Routing Context**: The application maps incoming uniform resource identifiers (URIs) to backend handler mappings via standard enterprise deployment contexts (`web.xml`).
+### 📝 Client-Side Data Lifecycle (`account-reset.js`)
+* **Asynchronous Call Handling:** Scripts trigger network actions via Angular's internal `$http` promise layers.
+* **Response Traversal:** The client logic strips out the raw envelope headers, monitors the custom `isSuccess` binary status indicator, and dynamically injects fields like `response.data.data.prefix` straight into the front-end view engine.
+* **Failure Safety:** If the JTA transaction interceptor throws a failure code, the `.catch()` block intercepts it automatically to safeguard user presentation states.
+
+
 
 ---
 
